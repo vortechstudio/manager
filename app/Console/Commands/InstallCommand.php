@@ -41,17 +41,8 @@ class InstallCommand extends Command
         $this->generateAppKey();
         $this->updateEnvVariablesFromOptions();
         $this->info('Env file created successfully.');
-        $this->info('Runnning migrations and seeders...');
-        if (!static::runMigrationsWithSeeders()) {
-            $this->error('Your database credentials are wrong!');
-            return 0;
-        }
         $this->installCoreSystem();
         $this->installOptionnalSystem();
-        if (!static::runMigrationsWithSeeders()) {
-            $this->error('Your database credentials are wrong!');
-            return 0;
-        }
         if($this->confirm("Système visuel ?", true)) {
             $this->installFrontSystem();
         }
@@ -154,8 +145,7 @@ class InstallCommand extends Command
 
     private function installCoreSystem()
     {
-        $flow = confirm('Voulez-vous utiliser git flow ?');
-        if ($flow) {
+        if ($this->confirm("Voulez-vous utiliser git flow ?")) {
             Process::run('git flow init -f -d --feature feature/  --bugfix bugfix/ --release release/ --hotfix hotfix/ --support support/', function (string $type, string $output) {
                 if($type == 'err') {
                     $this->error($output);
@@ -168,43 +158,36 @@ class InstallCommand extends Command
 
         $this->info("Installation des dépendance principal obligatoire");
 
-        $result = Process::pipe(function (Pipe $pipe) {
-            $this->line("-- INSTALLATION DU LOG VIEWER --");
-            $pipe->command('composer install arcanedev/log-viewer');
+        $installLog = Process::run('composer require arcanedev/log-viewer');
+        if($installLog->successful()) {
             $this->updateEnv([
                 'LOG_CHANNEL' => "daily"
             ]);
-            $pipe->command("php artisan log-viewer:publish");
-            $pipe->command("php artisan log-viewer:clear");
-            $this->line("");
-            $this->line("-- INSTALLATION DE VIEWER/EXPORT PDF --");
-            $pipe->command("composer require barryvdh/laravel-dompdf");
-            $this->line("");
-            $this->line("-- ");
-        });
-        if($result->successful()) {
-
         } else {
-            $this->error("Erreur lors de l'installation des dépendance obligatoire");
+            $this->error("Erreur lors de l'installation du système LOG: ".$installLog->errorOutput());
         }
+        Process::run('composer require barryvdh/laravel-dompdf');
     }
 
     private function installOptionnalSystem()
     {
-        $auth = confirm("Voulez-vous utiliser l'authentification ?", 'yes');
-        if($auth) {
-            $r = Process::pipe(function (Pipe $pipe) {
-                $pipe->command("composer require laravel/fortify");
+        $auth = confirm("Voulez-vous utiliser l'authentification ?");
+        if($this->confirm("Voulez-vous utiliser l'authentification ?")) {
+            $installFor = Process::run("composer require laravel/fortify");
+            if($installFor->successful()) {
                 Artisan::call("vendor:publish", ['--provider="Laravel\Fortify\FortifyServiceProvider"']);
+            }
 
-                $pipe->command("composer require rappasoft/laravel-authentication-log");
-                $pipe->command("composer require torann/geoip");
+            $installAuthLog = Process::run("composer require rappasoft/laravel-authentication-log");
+            $installIp = Process::run("composer require torann/geoip");
 
+            if($installAuthLog->successful() && $installIp->successful()) {
                 Artisan::call('vendor:publish', ['--provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider"', '--tag="authentication-log-migrations"']);
                 Artisan::call('vendor:publish', ['--provider="Torann\GeoIP\GeoIPServiceProvider"', '--tag=config']);
-            });
-
-            $r ? $this->alert("Installation de Laravel Fortify Terminer, n'oublier pas d'ajouter l'interface 'AuthenticationLoggable' au model 'User'") : $this->error("Erreur lors de l'installation de laravel Fortify");
+                $this->alert("Installation de Laravel Fortify Terminer, n'oublier pas d'ajouter l'interface 'AuthenticationLoggable' au model 'User'");
+            }  else {
+                $this->error("Erreur lors de l'installation de laravel Fortify");
+            }
         }
 
 
@@ -213,19 +196,16 @@ class InstallCommand extends Command
     private function installFrontSystem()
     {
         $this->info("Installation de livewire");
-        $result = Process::pipe(function (Pipe $pipe) {
-            $pipe->command("composer require livewire/livewire");
-            Artisan::call("livewire:publish", ["--config"]);
-        });
+        $installLive = Process::run("composer require livewire/livewire");
 
-        if ($result->successful()) {
+        if($installLive->successful()) {
+            Artisan::call("livewire:publish", ["--config"]);
             Process::run("npm install");
             Process::run("npm run build");
+            Process::run("composer require jantinnerezo/livewire-alert");
+        } else {
+            $this->error("Erreur lors de l'installation de livewire: ".$installLive->errorOutput());
         }
-
-        $result = Process::pipe(function (Pipe $pipe) {
-            $pipe->command("composer require jantinnerezo/livewire-alert");
-        });
 
     }
 }
