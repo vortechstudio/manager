@@ -7,7 +7,7 @@ on:
       - reopened
       - ready_for_review
     branches:
-      - master
+      - production
 
 jobs:
   attach:
