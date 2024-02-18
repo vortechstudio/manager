@@ -1,13 +1,6 @@
 name: Generate Semantic Version
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-    branches:
-      - production
+  workflow_dispatch:
 
 jobs:
   attach:
@@ -16,32 +9,22 @@ jobs:
     if: github.event.pull_request.draft == false
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Get Next Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
         with:
-          fetch-depth: 0
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: production
 
-      - name: Generate branch diff file
-        if: success()
-        run: |
-          echo "Head branch: ${GITHUB_HEAD_REF}"
-          echo "Base branch: ${GITHUB_BASE_REF}"
-          git log origin/${GITHUB_BASE_REF}..origin/${GITHUB_HEAD_REF} > ./branch-diff.txt
-
-      - name: Extract previous version
-        if: success()
-        run: |
-          export PREVIOUS_VERSION=$(git describe --tags --abbrev=0)
-          echo "Previous version: ${PREVIOUS_VERSION}"
-          echo "PREVIOUS_VERSION=${PREVIOUS_VERSION}" >> $GITHUB_ENV
-
-      - name: Generate version number
-        id: generate
-        if: success()
-        uses: juztcode/generate-semver@1.0.0
+      - name: Create Release
+        uses: ncipollo/release-action@v1.12.0
         with:
-          branch-diff-file: ./branch-diff.txt
-          previous-version: ${{ env.PREVIOUS_VERSION }}
-
-      - name: Print version
-        if: success()
-        run: echo ${{ steps.generate.outputs.generated-version }}
+          allowUpdates: true
+          draft: false
+          makeLatest: true
+          name: ${{ steps.semver.outputs.next }}
+          body: Changelog Contents
+          token: ${{ secrets.ACCESS_TOKEN }}
