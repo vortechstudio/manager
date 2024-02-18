@@ -7,11 +7,11 @@ on:
       - reopened
       - ready_for_review
     branches:
-      - production
+      - master
 
 jobs:
   attach:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     if: github.event.pull_request.draft == false
 
