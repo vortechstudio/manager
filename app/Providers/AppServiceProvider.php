@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Pharaonic\Laravel\Menus\Models\Menu;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \View::share([
+            "menu_head" => Menu::with('translations', 'children')
+                ->section('manager_head')
+                ->get(),
+
+        ]);
     }
 }
