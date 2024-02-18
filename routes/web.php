@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    dd(\Pharaonic\Laravel\Menus\Models\Menu::section('manager_head')->get());
 });
