@@ -20,12 +20,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $menu_head = Menu::with('translations', 'children')
+            ->section('manager_head')
+            ->get();
         \View::share([
             "menu_head" => Menu::with('translations', 'children')
                 ->section('manager_head')
                 ->get(),
-            "version" => \VersionBuildAction::getVersionInfo()
-
+            "version" => \VersionBuildAction::getVersionInfo(),
         ]);
+
     }
 }
