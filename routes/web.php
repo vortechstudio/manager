@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(["auth", "admin"])->group(function () {
     Route::get('/', \App\Livewire\Dashboard::class)->name('home');
+
+    Route::prefix('social')->as('social.')->group(function () {
+        Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
+        Route::get('/articles')->name('articles');
+    });
 });
 
 Route::prefix('auth')->as('auth.')->group(function () {
