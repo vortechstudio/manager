@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
             "menu_head" => Menu::with('translations', 'children')
                 ->section('manager_head')
                 ->get(),
+            "version" => \VersionBuildAction::getVersionInfo()
 
         ]);
     }
