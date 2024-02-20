@@ -13,6 +13,6 @@ class IsAdminMiddleware
             return $next($request);
         }
 
-        return redirect()->intended()->setStatusCode(403);
+        return abort(403);
     }
 }
