@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     dd(\Pharaonic\Laravel\Menus\Models\Menu::section('manager_head')->get());
-})->name('home');
+})->name('home');*/
+
+Route::middleware(["auth", "admin"])->group(function () {
+    Route::get('/', \App\Livewire\Dashboard::class)->name('home');
+});
 
 Route::prefix('auth')->as('auth.')->group(function () {
     Route::get('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
