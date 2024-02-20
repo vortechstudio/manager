@@ -19,10 +19,11 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
         "pharaonic/laravel-menus": "^1.3",
-        "salahhusa9/laravel-updater": "^1.0",
-        "vstudio/versionbuildaction": "^1.0",
         "php-flasher/flasher-laravel": "^1.15",
-        "php-flasher/flasher-toastr-laravel": "^1.15"
+        "php-flasher/flasher-toastr-laravel": "^1.15",
+        "salahhusa9/laravel-updater": "^1.0",
+        "socialiteproviders/google": "^4.1",
+        "vstudio/versionbuildaction": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
