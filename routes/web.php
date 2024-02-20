@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     dd(\Pharaonic\Laravel\Menus\Models\Menu::section('manager_head')->get());
-});
+})->name('home');
 
-Route::prefix('auth')->as('auth')->group(function () {
+Route::prefix('auth')->as('auth.')->group(function () {
     Route::get('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
     Route::get('{provider}/redirect', [\App\Http\Controllers\Auth\AuthController::class, 'redirect'])->name('redirect');
     Route::get('{provider}/callback', [\App\Http\Controllers\Auth\AuthController::class, 'callback'])->name('callback');

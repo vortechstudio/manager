@@ -59,6 +59,33 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
+    public function setupView(string $provider, string $email)
+    {
+        return view('auth.setupView', compact('provider', 'email'));
+    }
+
+    public function setupRegister(Request $request, string $provider, string $email)
+    {
+        $request->validate([
+            "password" => "required|min:8"
+        ]);
+
+
+        try {
+            $user = User::where('email', $email)->first();
+
+            $user->update([
+                "password" => $request->password
+            ]);
+
+            \Auth::login($user);
+        }catch (\Exception $exception) {
+            \Log::emergency($exception->getMessage(), [$exception]);
+        }
+
+        return redirect()->route('home');
+    }
+
     public function logout()
     {
         \Auth::logout();
