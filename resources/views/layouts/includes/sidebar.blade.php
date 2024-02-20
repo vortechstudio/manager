@@ -32,49 +32,42 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
             <!--begin::Menu-->
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
 
-                @if(\Pharaonic\Laravel\Menus\Models\Menu::section("manager_head")->get()->where('title', currentUrlText()) != null)
-                    @foreach(\Pharaonic\Laravel\Menus\Models\Menu::section("manager_head")->get()->where('title', currentUrlText()) as $menu)
-                        <div class="menu-item pt-5">
-                            <!--begin:Menu content-->
-                            <div class="menu-content">
-                                <span class="menu-heading fw-bold text-uppercase fs-7">{{ $menu->title }}</span>
-                            </div>
-                            <!--end:Menu content-->
+                @foreach(\Pharaonic\Laravel\Menus\Models\Menu::section("manager_head")->get() as $menu)
+                    @if(count($menu->children) != 0)
+                    <div class="menu-item pt-5">
+                        <!--begin:Menu content-->
+                        <div class="menu-content">
+                            <span class="menu-heading fw-bold text-uppercase fs-7">{{ $menu->title }}</span>
                         </div>
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <!--end:Menu content-->
+                    </div>
+                    @else
+                        <div class="menu-item">
                             <!--begin:Menu link-->
-                            @if(count($menu->children) != 0)
-                            <span class="menu-link">
-								<span class="menu-title">{{ $menu->title }}</span>
-								<span class="menu-arrow"></span>
-							</span>
-                            @else
-                                <a class="menu-link" href="{{ $menu->url }}">
-                                    <span class="menu-title">{{ $menu->title }}</span>
-                                </a>
-                            @endif
-                            <!--end:Menu link-->
-                            <!--begin:Menu sub-->
-                            <div class="menu-sub menu-sub-accordion">
-                                @foreach($menu->children as $sub)
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="{{ $sub->url }}">
+                            <a class="menu-link" href="{{ $menu->url }}">
 										<span class="menu-bullet">
 											<span class="bullet bullet-dot"></span>
 										</span>
-                                        <span class="menu-title">{{ $sub->title }}</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                @endforeach
-                            </div>
-                            <!--end:Menu sub-->
+                                <span class="menu-title">{{ $menu->title }}</span>
+                            </a>
+                            <!--end:Menu link-->
                         </div>
+                    @endif
+                    @foreach($menu->children as $sub)
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ $sub->url }}">
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
+										</span>
+                                <span class="menu-title">{{ $sub->title }}</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     @endforeach
-                @endif
+                @endforeach
             </div>
             <!--end::Menu-->
         </div>
