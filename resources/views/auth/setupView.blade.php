@@ -68,11 +68,12 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                     <!--begin::Form-->
-                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="#">
+                    <form method="POST" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="{{ route('auth.setup-register', [$provider, $email]) }}">
+                        @csrf
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
-                            <h1 class="text-gray-900 fw-bolder mb-3">Connexion à {{ config('app.name') }}</h1>
+                            <h1 class="text-gray-900 fw-bolder mb-3">Configuration de votre espace</h1>
                             <!--end::Title-->
 
                         </div>
@@ -81,12 +82,14 @@
                         <div class="row g-3 mb-9">
 
                             <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'google') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/google-icon.svg') }}" class="h-15px me-3" />Connexion avec Google
-                                </a>
-                                <!--end::Google link=-->
+                                <x-form.input
+                                    type="password"
+                                    name="password"
+                                    label="Définission du mot de passe"
+                                    required="true" />
                             </div>
+
+                            <x-form.button />
                         </div>
                         <!--end::Login options-->
                     </form>

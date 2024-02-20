@@ -4,7 +4,7 @@
 <!--begin::Head-->
 <head>
     <base href="../../../" />
-    <title>Connexion - {{ config('app.name') }}</title>
+    <title>Accès Refusée - {{ config('app.name') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
@@ -72,7 +72,7 @@
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
-                            <h1 class="text-gray-900 fw-bolder mb-3">Connexion à {{ config('app.name') }}</h1>
+                            <h1 class="text-gray-900 fw-bolder mb-3">Accès refusée</h1>
                             <!--end::Title-->
 
                         </div>
@@ -81,11 +81,11 @@
                         <div class="row g-3 mb-9">
 
                             <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'google') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/google-icon.svg') }}" class="h-15px me-3" />Connexion avec Google
-                                </a>
-                                <!--end::Google link=-->
+                                <x-base.alert
+                                    type="danger"
+                                    icon="fa-solid fa-xmark-circle"
+                                    title="Vous n'avez pas accès à cette interface !"
+                                    content="Vos identifiants et accès actuel ne vous permette pas d'accéder au resources demander.<br>Veuillez contacter un administrateur !" />
                             </div>
                         </div>
                         <!--end::Login options-->
