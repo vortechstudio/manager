@@ -12,6 +12,9 @@
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="{{ asset('/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    @vite(['resources/css/app.css'])
+    @yield("styles")
+    @stack("styles")
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -57,7 +60,11 @@
                     <div id="kt_app_content" class="app-content flex-column-fluid">
                         <!--begin::Content container-->
                         <div id="kt_app_content_container" class="app-container container-fluid">
-                            @yield("content")
+                            @isset($slot)
+                                {{ $slot }}
+                            @else
+                                @yield("content")
+                            @endif
                         </div>
                         <!--end::Content container-->
                     </div>
@@ -101,6 +108,11 @@
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{ asset('/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('/js/scripts.bundle.js') }}"></script>
+@vite(['resources/js/app.js'])
+<x-livewire-alert::scripts />
+<x:pharaonic-select2::scripts />
+@yield("scripts")
+@stack("scripts")
 <!--end::Global Javascript Bundle-->
 
 <!--end::Javascript-->
