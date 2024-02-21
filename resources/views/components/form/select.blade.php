@@ -3,7 +3,7 @@
     <label for="{{ $name }}" class="form-label {{ $required ? 'required' : '' }}">{{ $label }}</label>
     @endif
     @if($selectType == 'select2')
-        <select id="{{ $name }}" wire:model.prevent="{{ $isModel ? $model.'.'.$name : $name }}" class="form-select" data-control="select2" data-placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}">
+        <select id="{{ $name }}" data-pharaonic="select2" wire:model.prevent="{{ $isModel ? $model.'.'.$name : $name }}" data-component-id="{{ $this->name }}" class="form-select" data-placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}">
             <option></option>
             @foreach($options as $option)
                 <option value="{{ $option['id'] }}" {{ $value == $option['id'] ? 'selected' : '' }}>{{ $option['value'] }}</option>
