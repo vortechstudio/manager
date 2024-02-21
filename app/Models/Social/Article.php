@@ -15,14 +15,14 @@ class Article extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'published_at' => 'timestamp',
-        'publish_social_at' => 'timestamp',
+        'published_at' => 'datetime',
+        'publish_social_at' => 'datetime',
         'type' => ArticleTypeEnum::class,
     ];
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author', 'user_id');
+        return $this->belongsTo(User::class, 'author', 'id');
     }
 
     public function cercle()
