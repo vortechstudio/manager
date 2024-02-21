@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0191a20f14f77122b25c72714739113c",
+    "content-hash": "9891c7bb3d447baec8b7b41c66124a33",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -398,6 +398,82 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
+        },
+        {
+            "name": "composer/ca-bundle",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/ca-bundle.git",
+                "reference": "b66d11b7479109ab547f9405b97205640b17d385"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/b66d11b7479109ab547f9405b97205640b17d385",
+                "reference": "b66d11b7479109ab547f9405b97205640b17d385",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "ext-pcre": "*",
+                "php": "^5.3.2 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.55",
+                "psr/log": "^1.0",
+                "symfony/phpunit-bridge": "^4.2 || ^5",
+                "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\CaBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
+            "keywords": [
+                "cabundle",
+                "cacert",
+                "certificate",
+                "ssl",
+                "tls"
+            ],
+            "support": {
+                "irc": "irc://irc.freenode.org/composer",
+                "issues": "https://github.com/composer/ca-bundle/issues",
+                "source": "https://github.com/composer/ca-bundle/tree/1.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-12-18T12:05:55+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -881,6 +957,79 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "embed/embed",
+            "version": "v3.4.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oscarotero/Embed.git",
+                "reference": "fe379f61d3ecca7a0824c4bb3839ebe0a1819520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oscarotero/Embed/zipball/fe379f61d3ecca7a0824c4bb3839ebe0a1819520",
+                "reference": "fe379f61d3ecca7a0824c4bb3839ebe0a1819520",
+                "shasum": ""
+            },
+            "require": {
+                "composer/ca-bundle": "^1.0",
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "ext-mbstring": "*",
+                "php": "^5.6|^7.0|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "^5.7|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Embed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oscar Otero",
+                    "email": "oom@oscarotero.com",
+                    "homepage": "http://oscarotero.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to retrieve page info using oembed, opengraph, etc",
+            "homepage": "https://github.com/oscarotero/Embed",
+            "keywords": [
+                "embed",
+                "embedly",
+                "oembed",
+                "opengraph",
+                "twitter cards"
+            ],
+            "support": {
+                "email": "oom@oscarotero.com",
+                "issues": "https://github.com/oscarotero/Embed/issues",
+                "source": "https://github.com/oscarotero/Embed/tree/v3.4.18"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/oscarotero",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/oscarotero",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/misteroom",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-07-15T09:34:07+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1427,6 +1576,68 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+            "name": "jantinnerezo/livewire-alert",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jantinnerezo/livewire-alert.git",
+                "reference": "52fbb4edf1f143d211aee2b5948eacbe81520163"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jantinnerezo/livewire-alert/zipball/52fbb4edf1f143d211aee2b5948eacbe81520163",
+                "reference": "52fbb4edf1f143d211aee2b5948eacbe81520163",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+                "livewire/livewire": "^3.0",
+                "php": "^8.1|^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.15|^7.0|^8.0",
+                "phpunit/phpunit": "^9.5|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireAlert": "Jantinnerezo\\LivewireAlert\\LivewireAlertFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jantinnerezo\\LivewireAlert\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jantinn Erezo",
+                    "email": "erezojantinn@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This package provides a simple alert utilities for your livewire components.",
+            "homepage": "https://github.com/jantinnerezo/livewire-alert",
+            "keywords": [
+                "jantinnerezo",
+                "livewire-alert"
+            ],
+            "support": {
+                "issues": "https://github.com/jantinnerezo/livewire-alert/issues",
+                "source": "https://github.com/jantinnerezo/livewire-alert/tree/v3.0.1"
+            },
+            "time": "2023-10-14T14:25:50+00:00"
+        },
+        {
             "name": "larabug/larabug",
             "version": "3.0",
             "source": {
@@ -1560,16 +1771,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.44.0",
+            "version": "v10.45.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6"
+                "reference": "dcf5d1d722b84ad38a5e053289130b6962f830bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1199dbe361787bbe9648131a79f53921b4148cf6",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/dcf5d1d722b84ad38a5e053289130b6962f830bd",
+                "reference": "dcf5d1d722b84ad38a5e053289130b6962f830bd",
                 "shasum": ""
             },
             "require": {
@@ -1762,7 +1973,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-13T16:01:16+00:00"
+            "time": "2024-02-21T14:07:36+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2555,16 +2766,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "266ee3dcaef540f666d4eee19a314025aba5c6e4"
+                "reference": "7e7d638183b34fb61621455891869f5abfd55a82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/266ee3dcaef540f666d4eee19a314025aba5c6e4",
-                "reference": "266ee3dcaef540f666d4eee19a314025aba5c6e4",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/7e7d638183b34fb61621455891869f5abfd55a82",
+                "reference": "7e7d638183b34fb61621455891869f5abfd55a82",
                 "shasum": ""
             },
             "require": {
@@ -2618,7 +2829,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.5"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.6"
             },
             "funding": [
                 {
@@ -2626,7 +2837,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-19T14:52:03+00:00"
+            "time": "2024-02-20T14:04:25+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -3263,6 +3474,120 @@
             "time": "2022-06-14T06:56:20+00:00"
         },
         {
+            "name": "pharaonic/laravel-categorizable",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-categorizable.git",
+                "reference": "20ec6df92d928aab81a68232c1e88c0cd0cff84b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-categorizable/zipball/20ec6df92d928aab81a68232c1e88c0cd0cff84b",
+                "reference": "20ec6df92d928aab81a68232c1e88c0cd0cff84b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=6.0",
+                "pharaonic/laravel-sluggable": ">=1.0",
+                "pharaonic/laravel-translatable": ">=1.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Categorizable\\CategorizableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Categorizable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Model Categorizable Management.",
+            "keywords": [
+                "Laravel Categorizable",
+                "categorizable",
+                "laravel",
+                "php",
+                "php categorizable"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-categorizable/issues",
+                "source": "https://github.com/Pharaonic/laravel-categorizable/tree/1.1.0"
+            },
+            "time": "2023-10-14T04:19:56+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-helpers",
+            "version": "2.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-helpers.git",
+                "reference": "ca103af33fc2d910b1ce94e2332fcb0cf64e3403"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-helpers/zipball/ca103af33fc2d910b1ce94e2332fcb0cf64e3403",
+                "reference": "ca103af33fc2d910b1ce94e2332fcb0cf64e3403",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=6.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Helpers.php"
+                ],
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Helpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raggi",
+                    "email": "support@pharaonic.io",
+                    "homepage": "https://pharaonic.io"
+                }
+            ],
+            "description": "Laravel - Classes, Traits, Functions",
+            "keywords": [
+                "helpers",
+                "laravel",
+                "pharaonic",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-helpers/issues",
+                "source": "https://github.com/Pharaonic/laravel-helpers/tree/2.4.3"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/Pharaonic",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-12-25T07:53:06+00:00"
+        },
+        {
             "name": "pharaonic/laravel-menus",
             "version": "1.3.0",
             "source": {
@@ -3320,6 +3645,317 @@
                 "source": "https://github.com/Pharaonic/laravel-menus/tree/1.3.0"
             },
             "time": "2022-04-20T21:06:33+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-modulator",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-modulator.git",
+                "reference": "97e3461dc99a9239bf4de1ee84cb4f0b35dec5bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-modulator/zipball/97e3461dc99a9239bf4de1ee84cb4f0b35dec5bf",
+                "reference": "97e3461dc99a9239bf4de1ee84cb4f0b35dec5bf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=8.0",
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Modulator\\ModulatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Modulator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Laravel Modulator (HMVC) Creator in an easy and simple way.",
+            "keywords": [
+                "laravel",
+                "laravel Modules",
+                "laravel hmvc",
+                "laravel modulator",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-modulator/issues",
+                "source": "https://github.com/Pharaonic/laravel-modulator/tree/1.4.0"
+            },
+            "time": "2024-02-05T21:46:24+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-pages",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-pages.git",
+                "reference": "c4566c34116755187f1b842222c00ce241348492"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-pages/zipball/c4566c34116755187f1b842222c00ce241348492",
+                "reference": "c4566c34116755187f1b842222c00ce241348492",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=8.0",
+                "pharaonic/laravel-helpers": "*",
+                "pharaonic/laravel-sluggable": "*",
+                "pharaonic/laravel-translatable": "*",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Pages\\PagesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers.php"
+                ],
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Pages\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Laravel - Pages & Model's Pages",
+            "keywords": [
+                "laravel",
+                "laravel pages",
+                "pages",
+                "php",
+                "php pages"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-pages/issues",
+                "source": "https://github.com/Pharaonic/laravel-pages/tree/1.2.2"
+            },
+            "time": "2022-04-02T10:14:33+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-settings",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-settings.git",
+                "reference": "9187e89677581c2bd4da901e69e0e4bd86207724"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-settings/zipball/9187e89677581c2bd4da901e69e0e4bd86207724",
+                "reference": "9187e89677581c2bd4da901e69e0e4bd86207724",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=6.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Settings\\SettingsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Settings\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Store and retrieve settings generally or for model objects in Laravel.",
+            "keywords": [
+                "Settings",
+                "info",
+                "laravel",
+                "laravel settings",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-settings/issues",
+                "source": "https://github.com/Pharaonic/laravel-settings/tree/1.2.0"
+            },
+            "time": "2022-12-14T16:38:59+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-sluggable",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-sluggable.git",
+                "reference": "ecab76a30f0dda390baef7518b99dbe7cd0e3012"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-sluggable/zipball/ecab76a30f0dda390baef7518b99dbe7cd0e3012",
+                "reference": "ecab76a30f0dda390baef7518b99dbe7cd0e3012",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "laravel/framework": ">=6.0",
+                "pharaonic/php-slugify": ">=1.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Sluggable\\SluggableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Sluggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny",
+                    "email": "raggi@pharaonic.io"
+                }
+            ],
+            "description": "Simplest Sluggable for Laravel Eloquent/Model",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "model",
+                "php",
+                "slug",
+                "sluggable"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-sluggable/issues",
+                "source": "https://github.com/Pharaonic/laravel-sluggable/tree/1.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://liberapay.com/Pharaonic",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://www.patreon.com/Pharaonic",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-03-08T17:27:28+00:00"
+        },
+        {
+            "name": "pharaonic/laravel-taggable",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/laravel-taggable.git",
+                "reference": "103dd08e24ff741daddb04d435fc3dff689deb12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/laravel-taggable/zipball/103dd08e24ff741daddb04d435fc3dff689deb12",
+                "reference": "103dd08e24ff741daddb04d435fc3dff689deb12",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=6.0",
+                "pharaonic/laravel-translatable": ">=1.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Laravel\\Taggable\\TaggableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pharaonic\\Laravel\\Taggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Model Taggable Management.",
+            "keywords": [
+                "Laravel Taggable",
+                "Taggable",
+                "laravel",
+                "php",
+                "php Taggable"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/laravel-taggable/issues",
+                "source": "https://github.com/Pharaonic/laravel-taggable/tree/1.0.3"
+            },
+            "funding": [
+                {
+                    "url": "https://liberapay.com/Pharaonic",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://www.patreon.com/Pharaonic",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-02-10T20:19:56+00:00"
         },
         {
             "name": "pharaonic/laravel-translatable",
@@ -3383,6 +4019,125 @@
                 "source": "https://github.com/Pharaonic/laravel-translatable/tree/2.0.0"
             },
             "time": "2022-03-02T07:57:27+00:00"
+        },
+        {
+            "name": "pharaonic/livewire-select2",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/livewire-select2.git",
+                "reference": "99b2fc771563501a301ea0ca42e475c66f07238b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/livewire-select2/zipball/99b2fc771563501a301ea0ca42e475c66f07238b",
+                "reference": "99b2fc771563501a301ea0ca42e475c66f07238b",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": ">=2.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pharaonic\\Livewire\\Select2\\Select2ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pharaonic\\Livewire\\Select2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny (Raggi)",
+                    "email": "raggi@raggitech.com"
+                }
+            ],
+            "description": "Simple way to handle the Select2 for livewire components.",
+            "homepage": "https://github.com/pharaonic/livewire-select2",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "livewire select",
+                "livewire select2",
+                "livewire-select2"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/livewire-select2/issues",
+                "source": "https://github.com/Pharaonic/livewire-select2/tree/1.2.0"
+            },
+            "time": "2022-11-30T08:27:44+00:00"
+        },
+        {
+            "name": "pharaonic/php-slugify",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Pharaonic/php-slugify.git",
+                "reference": "a7d59972d19e2f9c7c73a627d83ec4144d33be98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Pharaonic/php-slugify/zipball/a7d59972d19e2f9c7c73a627d83ec4144d33be98",
+                "reference": "a7d59972d19e2f9c7c73a627d83ec4144d33be98",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Helpers.php"
+                ],
+                "psr-4": {
+                    "Pharaonic\\Slugify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moamen Eltouny",
+                    "email": "raggi@pharaonic.io"
+                }
+            ],
+            "description": "Simplest Slugify for PHP",
+            "keywords": [
+                "php",
+                "slug",
+                "sluggable",
+                "slugify"
+            ],
+            "support": {
+                "issues": "https://github.com/Pharaonic/php-slugify/issues",
+                "source": "https://github.com/Pharaonic/php-slugify/tree/1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://liberapay.com/Pharaonic",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://www.patreon.com/Pharaonic",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-10-21T14:23:31+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -7303,6 +8058,55 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "van-ons/laraberg",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VanOns/laraberg.git",
+                "reference": "bdc23df8fb8bed21ad40489ef278e728113b84be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VanOns/laraberg/zipball/bdc23df8fb8bed21ad40489ef278e728113b84be",
+                "reference": "bdc23df8fb8bed21ad40489ef278e728113b84be",
+                "shasum": ""
+            },
+            "require": {
+                "embed/embed": "^3.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": "VanOns\\Laraberg\\LarabergServiceProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "VanOns\\Laraberg\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Maurice Wijnia",
+                    "email": "maurice@van-ons.nl"
+                }
+            ],
+            "description": "A Gutenberg implementation for Laravel",
+            "support": {
+                "issues": "https://github.com/VanOns/laraberg/issues",
+                "source": "https://github.com/VanOns/laraberg/tree/v2.0.4"
+            },
+            "time": "2023-01-24T09:28:27+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.0",
             "source": {
@@ -7782,16 +8586,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.13.11",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "60a163c3e7e3346a1dec96d3e6f02e6465452552"
+                "reference": "6b127276e3f263f7bb17d5077e9e0269e61b2a0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/60a163c3e7e3346a1dec96d3e6f02e6465452552",
-                "reference": "60a163c3e7e3346a1dec96d3e6f02e6465452552",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/6b127276e3f263f7bb17d5077e9e0269e61b2a0e",
+                "reference": "6b127276e3f263f7bb17d5077e9e0269e61b2a0e",
                 "shasum": ""
             },
             "require": {
@@ -7844,20 +8648,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-02-13T17:20:13+00:00"
+            "time": "2024-02-20T17:38:05+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.27.4",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd"
+                "reference": "a05861ca9b04558b1ec1f36cff521a271a259b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
-                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/a05861ca9b04558b1ec1f36cff521a271a259b6c",
+                "reference": "a05861ca9b04558b1ec1f36cff521a271a259b6c",
                 "shasum": ""
             },
             "require": {
@@ -7906,7 +8710,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-02-08T15:24:21+00:00"
+            "time": "2024-02-20T15:11:00+00:00"
         },
         {
             "name": "mockery/mockery",
