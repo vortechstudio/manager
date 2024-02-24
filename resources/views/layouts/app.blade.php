@@ -16,6 +16,7 @@
     @vite(['resources/css/app.css'])
     @yield("styles")
     @stack("styles")
+    <wireui:scripts />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
