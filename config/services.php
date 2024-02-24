@@ -37,4 +37,19 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI')
     ],
 
+    'openai' => [
+        'api_key' => env("OPENAI_API_KEY", null),
+        "state" => env("OPENAI_STATE", null)
+    ],
+
+    'onesignal' => [
+        'app_id' => env('ONESIGNAL_APP_ID'),
+        'rest_api_key' => env('ONESIGNAL_REST_API_KEY')
+    ],
+
+    'facebook_poster' => [
+        'page_id' => env('FACEBOOK_PAGE_ID'),
+        'access_token' => env('FACEBOOK_ACCESS_TOKEN'),
+    ],
+
 ];
