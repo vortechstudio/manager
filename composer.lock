@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fba63ec493c15ea782c6e24bdec7a794",
+    "content-hash": "0302a9170da97652135e67c99a29293f",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -597,16 +597,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "b66d11b7479109ab547f9405b97205640b17d385"
+                "reference": "3ce240142f6d59b808dd65c1f52f7a1c252e6cfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/b66d11b7479109ab547f9405b97205640b17d385",
-                "reference": "b66d11b7479109ab547f9405b97205640b17d385",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/3ce240142f6d59b808dd65c1f52f7a1c252e6cfd",
+                "reference": "3ce240142f6d59b808dd65c1f52f7a1c252e6cfd",
                 "shasum": ""
             },
             "require": {
@@ -653,7 +653,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.4.0"
+                "source": "https://github.com/composer/ca-bundle/tree/1.4.1"
             },
             "funding": [
                 {
@@ -669,7 +669,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-18T12:05:55+00:00"
+            "time": "2024-02-23T10:16:52+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -10375,79 +10375,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "wireui/wireui",
-            "version": "v1.18.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wireui/wireui.git",
-                "reference": "cf49242fa46fdebdb6bf05d50d0cd575b16aaf31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wireui/wireui/zipball/cf49242fa46fdebdb6bf05d50d0cd575b16aaf31",
-                "reference": "cf49242fa46fdebdb6bf05d50d0cd575b16aaf31",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "10.*",
-                "livewire/livewire": "^3.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.9",
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^8.0",
-                "orchestra/testbench-dusk": "^8.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-mock": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "psy/psysh": "@stable"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "WireUi\\Providers\\WireUiServiceProvider"
-                    ],
-                    "aliases": []
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "WireUi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pedro Oliveira",
-                    "email": "pedrolivertwd@gmail.com"
-                }
-            ],
-            "description": "TallStack components",
-            "keywords": [
-                "blade components",
-                "laravel components",
-                "livewire components",
-                "livewire-ui",
-                "wireui"
-            ],
-            "support": {
-                "issues": "https://github.com/wireui/wireui/issues",
-                "source": "https://github.com/wireui/wireui/tree/v1.18.9"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/PH7-Jack",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-10-25T05:18:54+00:00"
         }
     ],
     "packages-dev": [

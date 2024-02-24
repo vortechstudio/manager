@@ -40,8 +40,7 @@
         "spatie/laravel-options": "^1.1",
         "van-ons/laraberg": "^2.0",
         "vstudio/helpers": "^1.0",
-        "vstudio/versionbuildaction": "^1.0",
-        "wireui/wireui": "^1.18"
+        "vstudio/versionbuildaction": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
