@@ -28,6 +28,12 @@
             <div class="col-lg-4 col-sm-12 mb-10">
                 <div class="card shadow-sm">
                     <div class="card-body">
+                        <div class="mb-10 d-flex flex-column">
+                            <label for="img_cover" class="form-label required">Image de couverture</label>
+                            <x-form.image-input
+                                width="w-300px"
+                                name="image" />
+                        </div>
                         <div class="mb-10">
                             <label for="cercle_id" class="form-label required">Cercle</label>
                             <div wire:ignore>
