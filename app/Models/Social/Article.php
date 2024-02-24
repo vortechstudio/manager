@@ -18,6 +18,7 @@ class Article extends Model
         'published_at' => 'datetime',
         'publish_social_at' => 'datetime',
         'type' => ArticleTypeEnum::class,
+        "status" => "string"
     ];
 
     public function author()
