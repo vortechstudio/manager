@@ -23,10 +23,10 @@ Route::middleware(["auth", "admin"])->group(function () {
     Route::prefix('social')->as('social.')->group(function () {
         Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
         Route::prefix('articles')->as('articles.')->group(function () {
-            Route::get('/', \App\Livewire\Social\Articles::class)->name('index')->lazy();
-            Route::get('create', \App\Livewire\Social\ArticleCreate::class)->name('create')->lazy();
-            Route::get('{id}', \App\Livewire\Social\Articles::class)->name('show')->lazy();
-            Route::get('{id}/edit', \App\Livewire\Social\Articles::class)->name('edit')->lazy();
+            Route::get('/', \App\Livewire\Social\Articles::class)->name('index');
+            Route::get('create', \App\Livewire\Social\ArticleCreate::class)->name('create');
+            Route::get('{id}', \App\Livewire\Social\Articles::class)->name('show');
+            Route::get('{id}/edit', \App\Livewire\Social\Articles::class)->name('edit');
         });
 
     });
