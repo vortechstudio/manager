@@ -74,18 +74,18 @@
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     @if($article->published)
-                                        <a href="" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Dépublier l'article">
+                                        <a href="" wire:click="unpublished({{ $article->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Dépublier l'article">
                                             <i class="fa-solid fa-xmark"></i>
                                         </a>
                                     @else
-                                        <a href="" class="btn btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Publier l'article">
+                                        <a href="" wire:click="published({{ $article->id }})" class="btn btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Publier l'article">
                                             <i class="fa-solid fa-check"></i>
                                         </a>
                                     @endif
                                     <a href="" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editer l'article">
                                         <i class="fa-solid fa-edit"></i>
                                     </a>
-                                    <a href="" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer l'article">
+                                    <a href="" wire:click="destroy({{ $article->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer l'article">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
