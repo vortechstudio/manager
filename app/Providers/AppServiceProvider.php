@@ -20,11 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \View::share([
-            "menu_head" => Menu::with('translations', 'children')
-                ->section('manager_head')
-                ->get(),
-
-        ]);
+        \View::composer('*', function ($view) {
+            $view->with('menu_head', Menu::with('translations', 'children')->section('manager_head')->get());
+        });
     }
 }

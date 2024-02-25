@@ -12,6 +12,10 @@ class Cercle extends Model
 
     public $timestamps = false;
 
+    protected $appends = [
+        'cercle_icon'
+    ];
+
     public function events()
     {
         return $this->belongsToMany(Event::class);
@@ -30,5 +34,14 @@ class Cercle extends Model
     public function wiki_categories()
     {
         return $this->hasMany(WikiCategory::class);
+    }
+
+    public function getCercleIconAttribute()
+    {
+        if (\Storage::disk('public')->exists("cercles/{$this->id}/icon.png")) {
+            return asset("/storage/cercles/{$this->id}/icon.png");
+        } else {
+            return asset('/storage/cercles/icon_default.png');
+        }
     }
 }

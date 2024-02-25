@@ -1,5 +1,7 @@
 <?php
 
+use Pharaonic\Laravel\Menus\Models\Menu;
+
 if (! function_exists('eur')) {
     function eur($value): string
     {
@@ -197,5 +199,23 @@ if (! function_exists('storageToUrl')) {
     function storageToUrl(string $uri): string
     {
         return '//s3.'.config('app.domain').'/'.$uri;
+    }
+}
+
+if (! function_exists('currentUrlText')) {
+    function currentUrlText(): string|null
+    {
+        $menu_head = Menu::with('translations', 'children')
+            ->section('manager_head')
+            ->get();
+
+        foreach ($menu_head as $item) {
+            if(Request::is($item->url) == '/') {
+                return $item->translateOrDefault()->title;
+            } elseif (Request::is($item->url.'/*')) {
+                return $item->translateOrDefault()->title;
+            }
+        }
+        return null;
     }
 }

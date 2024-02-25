@@ -79,14 +79,7 @@
                         <!--begin::Heading-->
                         <!--begin::Login options-->
                         <div class="row g-3 mb-9">
-                            <!--begin::Col-->
-                            <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'facebook') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/facebook-1.svg') }}" class="h-15px me-3" />Connexion avec Facebook
-                                </a>
-                                <!--end::Google link=-->
-                            </div>
+
                             <div class="col-md-12">
                                 <!--begin::Google link=-->
                                 <a href="{{ route('auth.redirect', 'google') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
@@ -94,35 +87,6 @@
                                 </a>
                                 <!--end::Google link=-->
                             </div>
-                            <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'steam') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/steam.png') }}" class="h-15px me-3" />Connexion avec Steam
-                                </a>
-                                <!--end::Google link=-->
-                            </div>
-                            <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'battlenet') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/battlenet.png') }}" class="h-15px me-3" />Connexion avec Battle net
-                                </a>
-                                <!--end::Google link=-->
-                            </div>
-                            <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'discord') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/discord.png') }}" class="h-15px me-3" />Connexion avec Discord
-                                </a>
-                                <!--end::Google link=-->
-                            </div>
-                            <div class="col-md-12">
-                                <!--begin::Google link=-->
-                                <a href="{{ route('auth.redirect', 'twitch') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{ asset('/media/svg/brand-logos/twitch.svg') }}" class="h-15px me-3" />Connexion avec Twitch
-                                </a>
-                                <!--end::Google link=-->
-                            </div>
-                            <!--end::Col-->
                         </div>
                         <!--end::Login options-->
                     </form>
@@ -162,7 +126,6 @@
 <!--begin::Custom Javascript(used for this page only)-->
 <script src="assets/js/custom/authentication/sign-in/general.js"></script>
 @livewireScripts
-<x-livewire-alert::scripts />
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

@@ -36,6 +36,14 @@ return [
             'throw' => false,
         ],
 
+        'vortech' => [
+            'driver' => 'local',
+            'root' => "C:\Users\maxim\Documents\Projects\s3.vortechstudio",
+            'throw' => false,
+            'url' => 'https://s3.'.env('APP_DOMAIN').'/',
+            'visibility' => 'public',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
