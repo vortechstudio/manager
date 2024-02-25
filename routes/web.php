@@ -19,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(["auth", "admin"])->group(function () {
     Route::get('/', \App\Livewire\Dashboard::class)->name('home');
+
+    Route::prefix('social')->as('social.')->group(function () {
+        Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
+        Route::prefix('articles')->as('articles.')->group(function () {
+            Route::get('/', \App\Livewire\Social\Articles::class)->name('index');
+            Route::get('create', \App\Livewire\Social\ArticleCreate::class)->name('create');
+            Route::get('{id}', \App\Livewire\Social\Articles::class)->name('show');
+            Route::get('{id}/edit', \App\Livewire\Social\Articles::class)->name('edit');
+        });
+
+    });
 });
 
 Route::prefix('auth')->as('auth.')->group(function () {
@@ -36,3 +47,7 @@ Route::prefix('auth')->as('auth.')->group(function () {
 Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPasswordForm'])
     ->name('password.confirm')
     ->middleware('auth');
+
+Route::get('/test', function () {
+
+});
