@@ -5,18 +5,21 @@ namespace App\Services\Github;
 use Github\AuthMethod;
 use Github\Client;
 use Monolog\LogRecord;
+use Psr\Log\LogLevel;
 
 class Issues
 {
     private $owner;
+
     private $repo;
+
     protected $client;
+
     protected $gpt;
 
     public function __construct(
         public LogRecord $record
-    )
-    {
+    ) {
         $this->owner = config('updater.github_username');
         $this->repo = config('updater.github_repository');
         $this->client = new Client();
@@ -27,9 +30,7 @@ class Issues
     /**
      * Crée un problème à partir d'une exception.
      *
-     * @param bool $gpt
      * @throws void
-     * @return void
      */
     public function createIssueFromException(bool $gpt = false): void
     {
@@ -38,8 +39,8 @@ class Issues
             'message' => $this->record['message'],
             'context' => $this->record['context'],
             'level' => $this->record['level_name'],
-            'time' => $this->record['datetime']->format("Y-m-d H:i:s"),
-            'env' => config('app.env')
+            'time' => $this->record['datetime']->format('Y-m-d H:i:s'),
+            'env' => config('app.env'),
         ]);
 
         if (config('services.openai.state') === true && $gpt === true) {
@@ -96,25 +97,23 @@ class Issues
     /**
      * A function to generate prompt using OpenAI GPT-3.5-turbo model.
      *
-     * @param string $title The title for the prompt
-     * @param \Illuminate\Support\Collection $details The details for the prompt
-     * @return \Illuminate\Support\Collection
+     * @param  string  $title  The title for the prompt
+     * @param  \Illuminate\Support\Collection  $details  The details for the prompt
      */
-
     private function generatePrompt(string $title, \Illuminate\Support\Collection $details): \Illuminate\Support\Collection
     {
         $results = collect();
 
         $describe =
             $this->gpt->chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                [
-                    'role' => 'assistant',
-                    'content' => "Description sous le format issue de GITHUB: \n".$title."\n".$details['message']."\n".$details['context']['exception']->getMessage()."\n".$details['context']['exception']->getTraceAsString(),
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        'role' => 'assistant',
+                        'content' => "Description sous le format issue de GITHUB: \n".$title."\n".$details['message']."\n".$details['context']['exception']->getMessage()."\n".$details['context']['exception']->getTraceAsString(),
+                    ],
                 ],
-            ],
-        ]);
+            ]);
 
         $reproduce = $this->gpt->chat()->create([
             'model' => 'gpt-3.5-turbo',
@@ -157,23 +156,44 @@ class Issues
     /**
      * Envoie un problème vers Github.
      *
-     * @param string $title Le titre du problème
-     * @param string|bool $issueContent Le contenu du problème
-     *
-     * @return void
+     * @param  string  $title  Le titre du problème
+     * @param  string|bool  $issueContent  Le contenu du problème
      */
     private function pushToGithub(string $title, bool|string $issueContent): void
     {
         try {
             $this->client->issues()
                 ->create($this->owner, $this->repo, [
-                    "title" => $title,
-                    "body" => $issueContent,
-                    "labels" => ["bug", 'auto-generated', 'version::'.\VersionBuildAction::getVersionInfo()],
+                    'title' => $title,
+                    'body' => $issueContent,
+                    'labels' => ['bug', 'auto-generated', 'version::'.\VersionBuildAction::getVersionInfo()],
                 ]);
+
             return;
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             \Log::emergency("Impossible de créer une issue sur Github: {$exception->getMessage()}");
         }
+    }
+
+    public static function createIssueMonolog(string $channel, string $message, array $exception, $level = 'error')
+    {
+        $level = match ($level) {
+            'emergency' => LogLevel::EMERGENCY,
+            'alert' => LogLevel::ALERT,
+            'critical' => LogLevel::CRITICAL,
+            'error' => LogLevel::ERROR,
+            'warning' => LogLevel::WARNING,
+            'notice' => LogLevel::NOTICE,
+            'debug' => LogLevel::DEBUG,
+            default => LogLevel::INFO,
+        };
+
+        return new LogRecord(
+            new \DateTimeImmutable('now'),
+            $channel,
+            $level,
+            $message,
+            $exception,
+        );
     }
 }
