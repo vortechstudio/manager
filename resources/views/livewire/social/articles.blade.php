@@ -34,13 +34,11 @@
                         <tr>
                             <td>{{ $article->id }}</td>
                             <td>
-                                <div class="d-flex flex-column">
-                                    <span class="fw-bold">{{ $article->title }}</span>
-                                    <span class="text-muted">
-                                    @foreach($article->categories as $category)
-                                            {{ $category }}
-                                        @endforeach
-                                </span>
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="symbol symbol-70px symbol-2by3 me-5">
+                                        <img src="{{ Storage::disk('vortech')->url("blog/$article->id/default.webp") }}" alt="{{ $article->title }}">
+                                    </div>
+                                    <span class="fw-bolder text-light">{{ $article->title }}</span>
                                 </div>
                             </td>
                             <td >
