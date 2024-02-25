@@ -74,7 +74,15 @@
                 plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visulablocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc inserdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
                 menubar: 'file edit view insert format tools table help',
                 toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample',
-                language: 'fr_FR'
+                language: 'fr_FR',
+                setup: function (editor) {
+                    editor.on('init change', function () {
+                        editor.save();
+                    });
+                    editor.on('change', function (e) {
+                        @this.set('{{ $name }}', editor.getContent());
+                    });
+                }
             }
 
             if ( KTThemeMode.getMode() === "dark" ) {
