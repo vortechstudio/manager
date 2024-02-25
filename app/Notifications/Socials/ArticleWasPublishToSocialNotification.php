@@ -3,12 +3,11 @@
 namespace App\Notifications\Socials;
 
 use App\Models\Social\Article;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Services\Github\Issues;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\FacebookPoster\FacebookPosterChannel;
-use NotificationChannels\FacebookPoster\FacebookPosterPost;
-use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\Twitter\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Twitter\TwitterChannel;
+use NotificationChannels\Twitter\TwitterStatusUpdate;
 
 class ArticleWasPublishToSocialNotification extends Notification
 {
@@ -18,10 +17,20 @@ class ArticleWasPublishToSocialNotification extends Notification
 
     public function via($notifiable): array
     {
-        return [FacebookPosterChannel::class];
+        return [TwitterChannel::class];
     }
 
-    public function toFacebookPoster($notifiable) {
-        return (new FacebookPosterPost('Laravel notifications are awesome!'));
+    public function toTwitter($notifiable)
+    {
+        try {
+            return (new TwitterStatusUpdate($this->article->title))
+                ->withImage(\Storage::url('blog/'.$this->article->id.'/default.png'));
+        } catch (CouldNotSendNotification $e) {
+            \Log::error($e->getMessage(), [$e]);
+            $issue = Issues::createIssueMonolog('article publish to twitter', $e->getMessage(), [$e], 'error');
+            (new Issues($issue))->createIssueFromException(false);
+
+            return null;
+        }
     }
 }

@@ -3,7 +3,7 @@
         title="Création d'un article"
         :breads="array('Social', 'Articles', 'Création d\'un article')" />
 
-    <form wire:submit="store" method="POST">
+    <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-8 col-sm-12 mb-10">
@@ -35,20 +35,21 @@
                                 name="image" />
                         </div>
                         <div class="mb-10">
-                            <label for="cercle_id" class="form-label required">Cercle</label>
+                            <label for="cercle_id" class="form-label required">Type</label>
                             <div wire:ignore>
-                                <select name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model="cercle_id">
+                                <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model="cercle_id">
                                     <option value=""></option>
-                                    @foreach($cercles as $cercle)
-                                        <option value="{{ $cercle->id }}">{{ $cercle->name }}</option>
+                                    @foreach($cercles as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="mb-10">
                             <label for="type" class="form-label required">Type</label>
                             <div wire:ignore>
-                                <select name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model="type">
+                                <select id="type" name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model="type">
                                     <option value=""></option>
                                     @foreach($types as $item)
                                         <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
@@ -59,7 +60,7 @@
                         <div class="mb-10">
                             <label for="type" class="form-label required">Auteur</label>
                             <div wire:ignore>
-                                <select name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model="author">
+                                <select id="author" name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model="author">
                                     <option value=""></option>
                                     @foreach($authors as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -84,12 +85,7 @@
 
                             <div x-show="show_published_at">
                                 <label for="published_at" class="form-label">Publié le:</label>
-                                <div data-format="datetime" class="input-group" id="kt_td_picker_simple" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                    <input id="kt_td_picker_basic_input" wire:model="published_at" type="text" class="form-control" data-td-target="#published_at"/>
-                                    <span class="input-group-text" data-td-target="#published_at" data-td-toggle="datetimepicker">
-                                        <i class="ki-duotone ki-calendar fs-2"><span class="path1"></span><span class="path2"></span></i>
-                                    </span>
-                                </div>
+                                <input data-format="datetime" class="form-control" wire:model="published_at" placeholder="Pick a date"/>
                             </div>
                         </div>
                         <div x-data="{show_published_social_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
@@ -103,12 +99,7 @@
 
                             <div x-show="show_published_social_at">
                                 <label for="publish_social_at" class="form-label">Publié le:</label>
-                                <div data-format="datetime" class="input-group" id="kt_td_picker_simple" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                    <input id="kt_td_picker_basic_input" wire:model="publish_social_at" type="text" class="form-control" data-td-target="#publish_social_at"/>
-                                    <span class="input-group-text" data-td-target="#publish_social_at" data-td-toggle="datetimepicker">
-                                        <i class="ki-duotone ki-calendar fs-2"><span class="path1"></span><span class="path2"></span></i>
-                                    </span>
-                                </div>
+                                <input data-format="datetime" class="form-control" wire:model="publish_social_at" placeholder="Pick a date"/>
                             </div>
                         </div>
                     </div>
@@ -122,3 +113,22 @@
         </div>
     </form>
 </div>
+
+@push("scripts")
+    <script type="text/javascript">
+        $("#cercle_id").on('change', e => {
+            let data = $("#cercle_id").select2("val")
+            @this.set('cercle_id', data)
+        })
+
+        $("#type").on('change', e => {
+            let data = $("#type").select2("val")
+            @this.set('type', data)
+        })
+
+        $("#author").on('change', e => {
+            let data = $("#author").select2("val")
+            @this.set('author', data)
+        })
+    </script>
+@endpush
