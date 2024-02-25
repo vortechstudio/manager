@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         \View::composer('*', function ($view) {
             $view->with('menu_head', Menu::with('translations', 'children')->section('manager_head')->get());
+            $view->with('version', \VersionBuildAction::getVersionInfo());
         });
     }
 }
