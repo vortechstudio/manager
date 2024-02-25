@@ -26,15 +26,12 @@
         @else
             <span class="fs-2 text-dark fw-bold">{{ $title }}</span>
         @endif
-        @isset($actions)
-            @foreach($actions as $action)
-                <x-base.button
-                is-link="true"
-                is-icon="false"
-                :color="$action['color']"
-                :link="$action['link']"
-                :text="$action['text']" />
-            @endforeach
-        @endisset
+        <div class="">
+            @isset($actions)
+                @foreach($actions as $action)
+                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
+                @endforeach
+            @endisset
+        </div>
     </div>
 </div>
