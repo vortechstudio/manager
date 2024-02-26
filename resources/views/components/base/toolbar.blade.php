@@ -1,4 +1,15 @@
-<div class="rounded-top-0 rounded-bottom-3 shadow-lg bg-light mt-0 mb-10 p-5">
+<div class="rounded-top-0 rounded-bottom-3 shadow-lg bg-light mt-0 mb-10 p-5"
+    @if($sticky)
+        data-kt-sticky="true"
+         data-kt-sticky-name="docs-sticky-summary"
+         data-kt-sticky-offset="{default: false, xl: '200px'}"
+         data-kt-sticky-width="{lg: '250px', xl: '75%'}"
+         data-kt-sticky-left="auto"
+         data-kt-sticky-top="auto"
+         data-kt-sticky-animation="false"
+         data-kt-sticky-zindex="95"
+    @endif
+>
     <div class="d-flex flex-row justify-content-between align-items-center">
         @isset($breads)
             <div class="d-flex flex-column">
@@ -26,15 +37,18 @@
         @else
             <span class="fs-2 text-dark fw-bold">{{ $title }}</span>
         @endif
-        @isset($actions)
-            @foreach($actions as $action)
-                <x-base.button
-                is-link="true"
-                is-icon="false"
-                :color="$action['color']"
-                :link="$action['link']"
-                :text="$action['text']" />
-            @endforeach
-        @endisset
+        <div class="">
+            @if($return)
+                <a href="javascript:history.back()" class="btn btn-outline btn-light">
+                    <i class="fa-solid fa-arrow-circle-left fs-3 me-3"></i>
+                    <span>Retour</span>
+                </a>
+            @endif
+            @isset($actions)
+                @foreach($actions as $action)
+                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
+                @endforeach
+            @endisset
+        </div>
     </div>
 </div>
