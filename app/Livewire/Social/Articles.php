@@ -42,39 +42,18 @@ class Articles extends Component
 
     public function published(int $id)
     {
-        $article = Article::find($id);
-        try {
-            $article->update([
-                'published' => true,
-                'publish_social' => true,
-                'published_at' => now(),
-                'publish_social_at' => now(),
-                'status' => 'published',
-            ]);
+        if (Article::publish($id)) {
             $this->alert('success', 'Article publie avec succes');
-        } catch (\Exception $exception) {
-            $issue = Issues::createIssueMonolog('article', "Impossible de publier l'article", [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+        } else {
             $this->alert('error', 'Impossible de publier l\'article');
         }
     }
 
     public function unpublished(int $id)
     {
-        $article = Article::find($id);
-
-        try {
-            $article->update([
-                'published' => false,
-                'publish_social' => false,
-                'published_at' => null,
-                'publish_social_at' => null,
-                'status' => 'draft',
-            ]);
-            $this->alert('success', 'Article dépublie avec succes');
-        } catch (\Exception $exception) {
-            $issue = Issues::createIssueMonolog('article', "Impossible de dépublier l'article", [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+        if (Article::unpublish($id)) {
+            $this->alert('success', 'Article dépublier');
+        } else {
             $this->alert('error', 'Impossible de dépublier l\'article');
         }
     }
