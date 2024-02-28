@@ -2,7 +2,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="{{ route('home') }}">
+        <a href="{{ route('home') }}" wire:navigate>
             <img alt="Logo" src="{{ asset('/storage/logos/logo.png') }}" class="h-25px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('/storage/logos/logo_small.png') }}" class="h-20px app-sidebar-logo-minimize" />
         </a>
@@ -44,7 +44,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                     @else
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ $menu->url }}">
+                            <a class="menu-link" href="{{ $menu->url }}" wire:navigate>
 										<span class="menu-bullet">
 											<span class="bullet bullet-dot"></span>
 										</span>
@@ -57,7 +57,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ $sub->url }}">
+                            <a class="menu-link" href="{{ $sub->url }}" wire:navigate>
 										<span class="menu-bullet">
 											<span class="bullet bullet-dot"></span>
 										</span>
