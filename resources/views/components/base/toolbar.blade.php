@@ -39,14 +39,14 @@
         @endif
         <div class="">
             @if($return)
-                <a href="javascript:history.back()" class="btn btn-outline btn-light">
+                <a wire:navigate href="javascript:history.back()" class="btn btn-outline btn-light">
                     <i class="fa-solid fa-arrow-circle-left fs-3 me-3"></i>
                     <span>Retour</span>
                 </a>
             @endif
             @isset($actions)
                 @foreach($actions as $action)
-                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
+                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" wire:navigate @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
                 @endforeach
             @endisset
         </div>
