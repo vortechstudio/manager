@@ -13,3 +13,12 @@ jobs:
         uses: distributhor/workflow-webhook@v3
         with:
           webhook_url: ${{ secrets.WEBHOOK_URL }}
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: github-action
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/vortechstudio.png?size=48
+          SLACK_TITLE: "Déploiement vers STAGING"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
