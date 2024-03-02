@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Intervention\Image\ImageManager;
 
-class ResizeImageJob implements ShouldQueue
+class FormatImageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,9 +31,7 @@ class ResizeImageJob implements ShouldQueue
 
     private function handleArticle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
-        $file->cover($file->width(), 320, 'center');
-        $file->scale(1024);
         $file->toWebp(60);
-        $file->save($directoryUpload.'/header.webp');
+        $file->save($directoryUpload.'/default.webp');
     }
 }

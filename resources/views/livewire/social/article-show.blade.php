@@ -6,6 +6,11 @@
         sticky="true"
         :actions="[
             [
+                'link' => route('social.articles.edit', $article->id),
+                'text' => 'Editer',
+                'color' => 'info'
+            ],
+            [
                 'wire' => $article->status != 'published' ? 'published('.$article->id.')' : 'unpublished('.$article->id.')',
                 'text' => $article->status != 'published' ? 'Publier' : 'Dépublier',
                 'color' => $article->status != 'published' ? 'success' : 'danger'

@@ -1,7 +1,5 @@
 <div>
-    <x-base.toolbar
-        title="Gestion des articles"
-        :breads="array('Social', 'Gestion des articles')" />
+
 
     <div class="card shadow-sm">
         <div class="card-header">
