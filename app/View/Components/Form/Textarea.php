@@ -21,7 +21,8 @@ class Textarea extends Component
         public string $class = '',
         public bool $noLabel = false,
         public bool $isModel = false,
-        public string $model = ''
+        public string $model = '',
+        public ?string $trixModel = null,
     ) {
         //
     }

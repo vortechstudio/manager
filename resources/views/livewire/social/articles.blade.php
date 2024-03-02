@@ -1,7 +1,5 @@
 <div>
-    <x-base.toolbar
-        title="Gestion des articles"
-        :breads="array('Social', 'Gestion des articles')" />
+
 
     <div class="card shadow-sm">
         <div class="card-header">
@@ -12,7 +10,7 @@
                 </div>
             </div>
             <div class="card-toolbar">
-                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light">
+                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light" wire:navigate>
                     <i class="fa-solid fa-plus me-2"></i> Nouvelle article
                 </a>
             </div>
@@ -70,7 +68,7 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a href="{{ route("social.articles.show", $article->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir l'article">
+                                    <a wire:navigate href="{{ route("social.articles.show", $article->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir l'article">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     @if($article->published)
@@ -82,7 +80,7 @@
                                             <i class="fa-solid fa-check"></i>
                                         </a>
                                     @endif
-                                    <a href="" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editer l'article">
+                                    <a wire:navigate href="{{ route('social.articles.edit', $article->id) }}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editer l'article">
                                         <i class="fa-solid fa-edit"></i>
                                     </a>
                                     <a href="" wire:click="destroy({{ $article->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer l'article">

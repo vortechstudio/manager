@@ -24,6 +24,9 @@
             @endforeach
         </select>
     @endif
+    @error("$name")
+        <span class="text-danger error">{{ $message }}</span>
+    @enderror
     <span class="text-muted">{{ $hint }}</span>
 </div>
 

@@ -8,10 +8,11 @@ use App\Services\Github\Issues;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Pharaonic\Laravel\Categorizable\Traits\Categorizable;
+use Te7aHoudini\LaravelTrix\Traits\HasTrixRichText;
 
 class Article extends Model
 {
-    use Categorizable, HasFactory;
+    use Categorizable, HasFactory, HasTrixRichText;
 
     protected $guarded = [];
 

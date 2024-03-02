@@ -1,0 +1,24 @@
+name: Deploy Staging Env
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  deploy_staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke deployment hook
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.WEBHOOK_PROD_URL }}
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: github-action
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/vortechstudio.png?size=48
+          SLACK_TITLE: "Déploiement vers PRODUCTION"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

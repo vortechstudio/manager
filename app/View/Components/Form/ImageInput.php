@@ -14,9 +14,11 @@ class ImageInput extends Component
     public function __construct(
         public string $name,
         public string $accept = '.png, .jpg, .jpeg, .gif',
-        public string $width = "w-125px"
-    )
-    {
+        public string $width = 'w-125px',
+        public string $default = 'https://placehold.co/600x400',
+        public bool $isModel = false,
+        public ?string $model = null,
+    ) {
         //
     }
 

@@ -1,33 +1,34 @@
 <div>
     <x-base.toolbar
-        title="Création d'un article"
-        :breads="array('Social', 'Articles', 'Création d\'un article')" />
+        :title="$article->title"
+        :breads="array('Social', 'Articles','Edition: '. $article->title)"
+        return="true"
+        sticky="true"
+    />
 
-    <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
+    <form wire:submit.prevent="update" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-8 col-sm-12 mb-10">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <x-form.input
-                            name="title"
+                            name="article.title"
                             label="Titre"
-                            is-model="true"
-                            model="form"
-                            required="true" />
+                            required="true"
+                            :value="$article->title" />
                         <x-form.textarea
                             name="description"
-                            is-model="true"
-                            model="form"
-                            label="Courte description" />
+                            label="Courte description"
+                            :value="$article->description"
+                        />
 
                         <x-form.textarea
-                            type="ckeditor"
+                            type="tinymce"
                             name="contenue"
                             label="Contenue de l'article"
-                            is-model="true"
-                            model="form"
-                            required="true" />
+                            required="true"
+                            :value="$article->contenue" />
                     </div>
                 </div>
             </div>
@@ -38,17 +39,16 @@
                             <label for="img_cover" class="form-label required">Image de couverture</label>
                             <x-form.image-input
                                 width="w-300px"
-                                is-model="true"
-                                model="form"
-                                name="image" />
+                                name="image"
+                                default="{{ $article->image }}" />
                         </div>
                         <div class="mb-10">
-                            <label for="cercle_id" class="form-label required">Type</label>
+                            <label for="cercle_id" class="form-label required">Cercle</label>
                             <div wire:ignore>
-                                <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model="form.cercle_id">
+                                <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model="cercle_id">
                                     <option value=""></option>
                                     @foreach($cercles as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" @if($item->id == $article->cercle_id) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,10 +57,10 @@
                         <div class="mb-10">
                             <label for="type" class="form-label required">Type</label>
                             <div wire:ignore>
-                                <select id="type" name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model="form.type">
+                                <select id="type" name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model="article.type">
                                     <option value=""></option>
                                     @foreach($types as $item)
-                                        <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                                        <option value="{{ $item['value'] }}" @if($item['value'] == $article->type->value) selected @endif>{{ $item['label'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -68,10 +68,10 @@
                         <div class="mb-10">
                             <label for="type" class="form-label required">Auteur</label>
                             <div wire:ignore>
-                                <select id="author" name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model="form.author">
+                                <select id="author" name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model="author">
                                     <option value=""></option>
                                     @foreach($authors as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" @if($item->id == $article->author) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -80,65 +80,47 @@
                         <div class="d-flex flex-row justify-content-between align-items-center mb-10">
                             <x-form.checkbox
                                 name="promote"
-                                is-model="true"
-                                model="form"
+                                :checked="$article->promote ? 'checked' : ''"
                                 label="Promouvoir l'article" />
                         </div>
                         <div x-data="{show_published_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
                             <x-form.switches
-                                name="form.published"
+                                name="published"
                                 label="Publié l'article"
                                 value="1"
+                                :checked="$article->published ? 'checked' : ''"
                                 class-check="primary"
                                 alpine="true"
                                 fun-alpine="show_published_at = ! show_published_at" />
 
                             <div x-show="show_published_at">
                                 <label for="published_at" class="form-label">Publié le:</label>
-                                <input data-format="datetime" class="form-control" wire:model="form.published_at" placeholder="Pick a date"/>
+                                <input data-format="datetime" value="{{ $article->published_at }}" class="form-control" wire:model="published_at" placeholder="Pick a date"/>
                             </div>
                         </div>
                         <div x-data="{show_published_social_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
                             <x-form.switches
-                                name="form.publish_social"
+                                name="article.publish_social"
                                 label="Publié l'article sur les réseaux"
                                 value="1"
                                 class-check="warning"
+                                :checked="$article->publish_social ? 'checked' : ''"
                                 alpine="true"
                                 fun-alpine="show_published_social_at = ! show_published_social_at" />
 
                             <div x-show="show_published_social_at">
                                 <label for="publish_social_at" class="form-label">Publié le:</label>
-                                <input data-format="datetime" class="form-control" wire:model="form.publish_social_at" placeholder="Pick a date"/>
+                                <input data-format="datetime" value="{{ $article->publish_social_at }}" class="form-control" wire:model="publish_social_at" placeholder="Pick a date"/>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <x-form.button
-                            text-submit="Créer un article"
-                            text-loading="Création en cours..." />
+                            text-submit="Mettre à jour"
+                            text-loading="Mise à jour..." />
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-@push("scripts")
-    <script type="text/javascript">
-        $("#cercle_id").on('change', e => {
-            let data = $("#cercle_id").select2("val")
-            @this.set('cercle_id', data)
-        })
-
-        $("#type").on('change', e => {
-            let data = $("#type").select2("val")
-            @this.set('type', data)
-        })
-
-        $("#author").on('change', e => {
-            let data = $("#author").select2("val")
-            @this.set('author', data)
-        })
-    </script>
-@endpush

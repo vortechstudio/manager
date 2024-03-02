@@ -4,6 +4,7 @@ namespace App\Services\Github;
 
 use Github\AuthMethod;
 use Github\Client;
+use Monolog\Level;
 use Monolog\LogRecord;
 use Psr\Log\LogLevel;
 
@@ -175,17 +176,17 @@ class Issues
         }
     }
 
-    public static function createIssueMonolog(string $channel, string $message, array $exception, $level = 'error')
+    public static function createIssueMonolog(string $channel, string $message, array $exception, string $level = 'error')
     {
         $level = match ($level) {
-            'emergency' => LogLevel::EMERGENCY,
-            'alert' => LogLevel::ALERT,
-            'critical' => LogLevel::CRITICAL,
-            'error' => LogLevel::ERROR,
-            'warning' => LogLevel::WARNING,
-            'notice' => LogLevel::NOTICE,
-            'debug' => LogLevel::DEBUG,
-            default => LogLevel::INFO,
+            'emergency' => Level::Emergency,
+            'alert' => Level::Alert,
+            'critical' => Level::Critical,
+            'error' => Level::Error,
+            'warning' => Level::Warning,
+            'notice' => Level::Notice,
+            'debug' => Level::Debug,
+            default => Level::Info,
         };
 
         return new LogRecord(

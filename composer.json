@@ -42,11 +42,13 @@
         "salahhusa9/laravel-updater": "^1.0",
         "socialiteproviders/google": "^4.1",
         "spatie/laravel-options": "^1.1",
+        "te7a-houdini/laravel-trix": "^2.0",
         "van-ons/laraberg": "^2.0",
         "vstudio/helpers": "^1.0",
         "vstudio/versionbuildaction": "^1.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.15",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

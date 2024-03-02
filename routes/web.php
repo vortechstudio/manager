@@ -18,15 +18,16 @@ use Illuminate\Support\Facades\Route;
 })->name('home');*/
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', \App\Livewire\Dashboard::class)->name('home');
+    Route::get('/', \App\Http\Controllers\DashboardController::class)->name('home');
 
     Route::prefix('social')->as('social.')->group(function () {
         Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
         Route::prefix('articles')->as('articles.')->group(function () {
-            Route::get('/', \App\Livewire\Social\Articles::class)->name('index');
-            Route::get('create', \App\Livewire\Social\ArticleCreate::class)->name('create');
+            Route::get('/', [\App\Http\Controllers\Social\ArticleController::class, 'index'])->name('index');
+            Route::get('create', [\App\Http\Controllers\Social\ArticleController::class, 'create'])->name('create');
+            Route::post('create', [\App\Http\Controllers\Social\ArticleController::class, 'store'])->name('store');
             Route::get('{id}', \App\Livewire\Social\ArticleShow::class)->name('show');
-            Route::get('{id}/edit', \App\Livewire\Social\Articles::class)->name('edit');
+            Route::get('{id}/edit', \App\Livewire\Social\ArticleEdit::class)->name('edit');
         });
 
     });
