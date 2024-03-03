@@ -27,7 +27,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('create', [\App\Http\Controllers\Social\ArticleController::class, 'create'])->name('create');
             Route::post('create', [\App\Http\Controllers\Social\ArticleController::class, 'store'])->name('store');
             Route::get('{id}', [\App\Http\Controllers\Social\ArticleController::class, 'show'])->name('show');
-            Route::get('{id}/edit', \App\Livewire\Social\ArticleEdit::class)->name('edit');
+            Route::get('{id}/edit', [\App\Http\Controllers\Social\ArticleController::class, 'edit'])->name('edit');
             Route::put('{id}/edit', \App\Livewire\Social\ArticleEdit::class)->name('update');
             Route::delete('{id}', \App\Livewire\Social\ArticleEdit::class)->name('destroy');
 
