@@ -1,5 +1,9 @@
 @extends("layouts.app")
 
+@section("title")
+    Création d'un article
+@endsection
+
 @section("content")
     <x-base.toolbar
         title="Création d'un article"
@@ -47,7 +51,7 @@
                         <div class="mb-10">
                             <label for="cercle_id" class="form-label required">Type</label>
                             <div wire:ignore>
-                                <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model="form.cercle_id">
+                                <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model.defer="form.cercle_id">
                                     <option value=""></option>
                                     @foreach($cercles as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -59,7 +63,7 @@
                         <div class="mb-10">
                             <label for="type" class="form-label required">Type</label>
                             <div wire:ignore>
-                                <select id="type" name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model="form.type">
+                                <select id="type" name="type" class="form-select" data-control="select2" data-placeholder="-- Selectionner un type d'article --" data-pharaonic="select2"  wire:model.defer="form.type">
                                     <option value=""></option>
                                     @foreach($types as $item)
                                         <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
@@ -70,7 +74,7 @@
                         <div class="mb-10">
                             <label for="type" class="form-label required">Auteur</label>
                             <div wire:ignore>
-                                <select id="author" name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model="form.author">
+                                <select id="author" name="author" class="form-select" data-control="select2" data-placeholder="-- Selectionner un auteur --" data-pharaonic="select2"  wire:model.defer="form.author">
                                     <option value=""></option>
                                     @foreach($authors as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
