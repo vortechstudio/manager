@@ -1,4 +1,4 @@
-name: Deploy Staging Env
+name: Deploy Production Env
 
 on:
   release:
