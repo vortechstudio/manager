@@ -80,12 +80,6 @@ class ArticleController extends Controller
                 sector: 'article'
             ));
 
-            dispatch(new ResizeImageJob(
-                filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
-                directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
-                sector: 'article'
-            ));
-
             dispatch(new FormatImageJob(
                 filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
                 directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
@@ -99,6 +93,36 @@ class ArticleController extends Controller
         }
 
         toastr()->addSuccess("L'article a été créé");
+
         return redirect()->route('social.articles.index');
+    }
+
+    public function show($id)
+    {
+        return view('social.article.show', [
+            'article' => Article::with('author', 'cercle')->find($id),
+        ]);
+    }
+
+    public function publish($id)
+    {
+        if (Article::publish($id)) {
+            toastr()->addSuccess("L'article a été publié");
+        } else {
+            toastr()->addError("Impossible de publier l'article");
+        }
+
+        return redirect()->back();
+    }
+
+    public function unpublish($id)
+    {
+        if (Article::unpublish($id)) {
+            toastr()->addSuccess("L'article a été dépublie");
+        } else {
+            toastr()->addError("Impossible de dépublier l'article");
+        }
+
+        return redirect()->back();
     }
 }
