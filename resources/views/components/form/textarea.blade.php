@@ -10,42 +10,72 @@
             name="{{ $name }}"
             placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}"
             value="{{ $value }}">{{ $value }}</textarea>
+            @error("$name")
+            <span class="text-danger error">{{ $message }}</span>
+            @enderror
 
     </div>
 @endif
 
-@if($type == 'ckeditor')
+@if($type == 'quill')
+    @push("styles")
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    @endpush
     <div class="mb-10" wire:ignore>
         @if(!$noLabel)
             <label for="{{ $name }}" class="form-label {{ $required ? 'required' : '' }}">{{ $label }}</label>
         @endif
-        <div wire:ignore>
+        <div id="{{ $name }}"></div>
+            @error("$name")
+            <span class="text-danger error">{{ $message }}</span>
+            @enderror
+    </div>
+    @push("scripts")
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script type="text/javascript">
+            const quill = new Quill('#{{ $name }}', {
+                theme: 'snow'
+            });
+            quill.on('text-change', function () {
+                let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
+                @this.set('value', value)
+            })
+        </script>
+    @endpush
+@endif
+
+@if($type == 'ckeditor')
+    @push('scripts')
+        <script src="{{ asset('/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
+    @endpush
+    <div class="mb-10">
+        @if(!$noLabel)
+            <label for="{{ $name }}" class="form-label {{ $required ? 'required' : '' }}">{{ $label }}</label>
+        @endif
             <textarea
+                x-data x-init="ClassicEditor
+                .create(document.querySelector('#ckeditor'), {
+
+                })
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        @this.set('ckeditor', editor.getData())
+                    })
+                })
+                .catch(err => {
+                    console.error(err.stack);
+                });"
                 class="form-control {{ $class }} @error("$name") is-invalid @enderror"
-                wire:model.prevent="{{ $isModel ? $model.'.'.$name : $name }}"
-                id="{{ $name }}"
+                wire:model.lazy="{{ $isModel ? $model.'.'.$name : $name }}"
+                id="ckeditor"
                 name="{{ $name }}"
                 placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}"
                 value="{{ $value }}">{{ $value }}</textarea>
-        </div>
+            @error("$name")
+            <span class="text-danger error">{{ $message }}</span>
+            @enderror
 
     </div>
-    @push('scripts')
-        <script src="{{ asset('/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
-        <script type="text/javascript">
-            ClassicEditor
-                .create(document.querySelector('#{{ $name }}'))
-                .then(editor => {
-                    editor.model.document.on('change:data', () => {
-                        @this.set("{{ $name }}", editor.getData())
-                    })
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
-
-    @endpush
 @endif
 
 @if($type == 'tinymce')
@@ -61,6 +91,9 @@
                 name="{{ $name }}"
                 placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}"
                 value="{{ $value }}">{{ $value }}</textarea>
+            @error("$name")
+            <span class="text-danger error">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>
@@ -79,9 +112,6 @@
                     editor.on('init change', function () {
                         editor.save();
                     });
-                    editor.on('change', function (e) {
-                        @this.set('{{ $name }}', editor.getContent());
-                    });
                 }
             }
 
@@ -92,6 +122,14 @@
             tinymce.init(options);
         </script>
     @endpush
+@endif
+
+@if($type == 'trix')
+    <div class="mb-10" wire:ignore>
+        @if(!$noLabel)
+            <label for="{{ $name }}" class="form-label {{ $required ? 'required' : '' }}">{{ $label }}</label>
+        @endif
+    </div>
 @endif
 
 @if($type == 'laraberg')
@@ -110,6 +148,9 @@
                 name="{{ $name }}"
                 placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}"
                 value="{{ $value }}">{{ $value }}</textarea>
+                @error("$name")
+                <span class="text-danger error">{{ $message }}</span>
+                @enderror
             </div>
     </div>
     @push("scripts")

@@ -14,9 +14,10 @@ class Toolbar extends Component
     public function __construct(
         public string $title,
         public ?array $breads = null,
-        public ?array $actions = null
-    )
-    {
+        public ?array $actions = null,
+        public bool $sticky = false,
+        public bool $return = false,
+    ) {
         //
     }
 

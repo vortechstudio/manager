@@ -17,16 +17,17 @@ use Illuminate\Support\Facades\Route;
     dd(\Pharaonic\Laravel\Menus\Models\Menu::section('manager_head')->get());
 })->name('home');*/
 
-Route::middleware(["auth", "admin"])->group(function () {
-    Route::get('/', \App\Livewire\Dashboard::class)->name('home');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', \App\Http\Controllers\DashboardController::class)->name('home');
 
     Route::prefix('social')->as('social.')->group(function () {
         Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
         Route::prefix('articles')->as('articles.')->group(function () {
-            Route::get('/', \App\Livewire\Social\Articles::class)->name('index');
-            Route::get('create', \App\Livewire\Social\ArticleCreate::class)->name('create');
-            Route::get('{id}', \App\Livewire\Social\Articles::class)->name('show');
-            Route::get('{id}/edit', \App\Livewire\Social\Articles::class)->name('edit');
+            Route::get('/', [\App\Http\Controllers\Social\ArticleController::class, 'index'])->name('index');
+            Route::get('create', [\App\Http\Controllers\Social\ArticleController::class, 'create'])->name('create');
+            Route::post('create', [\App\Http\Controllers\Social\ArticleController::class, 'store'])->name('store');
+            Route::get('{id}', \App\Livewire\Social\ArticleShow::class)->name('show');
+            Route::get('{id}/edit', \App\Livewire\Social\ArticleEdit::class)->name('edit');
         });
 
     });
@@ -41,7 +42,7 @@ Route::prefix('auth')->as('auth.')->group(function () {
     Route::get('logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
     Route::post('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPassword'])
         ->name('confirm-password')
-        ->middleware(["auth", "throttle:6,1"]);
+        ->middleware(['auth', 'throttle:6,1']);
 });
 
 Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPasswordForm'])

@@ -4,14 +4,13 @@ namespace App\Livewire\Social;
 
 use App\Enums\Social\ArticleTypeEnum;
 use App\Jobs\ResizeImageJob;
+use App\Livewire\Forms\Social\ArticleForm;
 use App\Models\Social\Article;
 use App\Models\Social\Cercle;
 use App\Models\User\User;
 use App\Services\Github\Issues;
-use Intervention\Image\ImageManager;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Monolog\Level;
@@ -22,34 +21,11 @@ class ArticleCreate extends Component
 {
     use LivewireAlert, WithFileUploads;
 
+    public ArticleForm $form;
+
     public $cercles;
 
     public $authors;
-
-    public $title = '';
-
-    public $description = '';
-
-    public $contenue = '';
-
-    public $published = false;
-
-    public $published_at = null;
-
-    public $publish_social = false;
-
-    public $publish_social_at = null;
-
-    public $promote = false;
-
-    public $author = '';
-
-    public $cercle_id = '';
-
-    public $type = '';
-
-    #[Validate('image|max:2048')]
-    public $image;
 
     public function mount()
     {
@@ -64,29 +40,13 @@ class ArticleCreate extends Component
 
     public function store()
     {
-        $this->validate([
-            'title' => 'required|min:5',
-            'description' => 'max:255',
-            'contenue' => 'required',
-            'cercle_id' => 'required',
-            'author' => 'required',
-            'type' => 'required',
-        ]);
+        dd($this->form->all());
+        $this->validate();
 
         try {
-            $article = Article::create([
-                'title' => $this->title,
-                'description' => $this->description,
-                'type' => $this->type,
-                'contenue' => $this->contenue,
-                'published' => $this->published,
-                'published_at' => $this->published_at ?? null,
-                'publish_social' => $this->publish_social,
-                'publish_social_at' => $this->publish_social_at ?? null,
-                'promote' => $this->promote,
-                'author' => $this->author,
-                'cercle_id' => $this->cercle_id,
-            ]);
+            $article = Article::create(
+                $this->form->all()
+            );
         } catch (\Exception $exception) {
             \Log::emergency($exception->getMessage(), [$exception]);
             $this->alert('error', "Erreur lors de la création de l'article");
@@ -107,13 +67,13 @@ class ArticleCreate extends Component
 
         try {
             // On enregistre l'image dans le dossier blog et on lance un job permettant de structurer les images pour un header
-            $this->image->storeAs(
+            $this->form->image->storeAs(
                 path: 'blog/'.$article->id,
-                name: 'default.'.$this->image->getClientOriginalExtension(),
+                name: 'default.'.$this->form->image->getClientOriginalExtension(),
             );
 
             dispatch(new ResizeImageJob(
-                filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$this->image->getClientOriginalExtension()),
+                filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$this->form->image->getClientOriginalExtension()),
                 directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
                 sector: 'article'
             ));

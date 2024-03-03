@@ -38,7 +38,7 @@ return [
 
         'vortech' => [
             'driver' => 'local',
-            'root' => "C:\Users\maxim\Documents\Projects\s3.vortechstudio",
+            'root' => env('APP_PATH_ROOT'),
             'throw' => false,
             'url' => 'https://s3.'.env('APP_DOMAIN').'/',
             'visibility' => 'public',

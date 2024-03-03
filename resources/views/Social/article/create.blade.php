@@ -1,9 +1,11 @@
-<div>
+@extends("layouts.app")
+
+@section("content")
     <x-base.toolbar
         title="Création d'un article"
         :breads="array('Social', 'Articles', 'Création d\'un article')" />
 
-    <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('social.articles.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-8 col-sm-12 mb-10">
@@ -22,7 +24,7 @@
                             label="Courte description" />
 
                         <x-form.textarea
-                            type="ckeditor"
+                            type="laraberg"
                             name="contenue"
                             label="Contenue de l'article"
                             is-model="true"
@@ -122,23 +124,4 @@
             </div>
         </div>
     </form>
-</div>
-
-@push("scripts")
-    <script type="text/javascript">
-        $("#cercle_id").on('change', e => {
-            let data = $("#cercle_id").select2("val")
-            @this.set('cercle_id', data)
-        })
-
-        $("#type").on('change', e => {
-            let data = $("#type").select2("val")
-            @this.set('type', data)
-        })
-
-        $("#author").on('change', e => {
-            let data = $("#author").select2("val")
-            @this.set('author', data)
-        })
-    </script>
-@endpush
+@endsection
