@@ -1,6 +1,4 @@
 <div>
-
-
     <div class="card shadow-sm">
         <div class="card-header">
             <div class="card-title">
@@ -10,7 +8,7 @@
                 </div>
             </div>
             <div class="card-toolbar">
-                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light" wire:navigate>
+                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light">
                     <i class="fa-solid fa-plus me-2"></i> Nouvelle article
                 </a>
             </div>
