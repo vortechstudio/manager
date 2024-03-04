@@ -45,7 +45,7 @@ class PublishVersionCommand extends Command
     {
         [$major, $minor, $patch] = explode('.', str_replace('v', '', $lastTag));
         $commitsResponse = Http::withToken($this->token)
-            ->get("https://api.github.com/repos/{$this->owner}/{$this->repo}/compare/master...develop")
+            ->get("https://api.github.com/repos/{$this->owner}/{$this->repo}/compare/$lastTag...production")
             ->json();
         $commits = array_map(function ($commit) {
 
@@ -108,7 +108,7 @@ class PublishVersionCommand extends Command
     private function generateReleaseNote($oldTag, $newTag)
     {
         $response = Http::withToken($this->token)
-            ->get("https://api.github.com/repos/$this->owner/$this->repo/compare/master...develop")
+            ->get("https://api.github.com/repos/$this->owner/$this->repo/compare/$oldTag...production")
             ->json();
 
         $commits = $response['commits'] ?? [];
