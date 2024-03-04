@@ -1,4 +1,7 @@
 @extends("layouts.app")
+@section("title")
+    Gestion des articles
+@endsection
 
 @section("content")
     <x-base.toolbar

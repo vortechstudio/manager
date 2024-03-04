@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!--begin::Head-->
 <head><base href=""/>
-    <title>{{ config('app.name') }}</title>
+    <title>@yield("title", "Page") - {{ config('app.name') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="/media/logos/favicon.ico" />
