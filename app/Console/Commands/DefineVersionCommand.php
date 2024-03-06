@@ -12,11 +12,9 @@ class DefineVersionCommand extends Command
 
     protected $description = 'Détermine la prochaine version du programme.';
 
-    private $token;
-
-    private $owner;
-
-    private $repo;
+    private string $token;
+    private string $owner;
+    private string $repo;
 
     public function handle(): void
     {

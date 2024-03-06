@@ -12,11 +12,11 @@ class PublishVersionCommand extends Command
 
     protected $description = 'Publication du dernier TAG';
 
-    private $token;
+    private string $token;
 
-    private $owner;
+    private string $owner;
 
-    private $repo;
+    private string $repo;
 
     public function handle(): void
     {
