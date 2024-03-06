@@ -35,6 +35,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('{id}/unpublish', [\App\Http\Controllers\Social\ArticleController::class, 'publish'])->name('unpublish');
         });
 
+        Route::prefix('pages')->as('pages.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Social\PageController::class, 'index'])->name('index');
+            Route::get('create', [\App\Http\Controllers\Social\PageController::class, 'create'])->name('create');
+            Route::post('create', [\App\Http\Controllers\Social\PageController::class, 'store'])->name('store');
+            Route::get('{id}', [\App\Http\Controllers\Social\PageController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [\App\Http\Controllers\Social\PageController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [\App\Http\Controllers\Social\PageController::class, 'update'])->name('update');
+            Route::delete('{id}', [\App\Http\Controllers\Social\PageController::class, 'destroy'])->name('destroy');
+        });
+
     });
 });
 
