@@ -10,4 +10,9 @@ class PageController extends Controller
     {
         return view('social.pages.index');
     }
+
+    public function create()
+    {
+        return view('social.pages.create');
+    }
 }

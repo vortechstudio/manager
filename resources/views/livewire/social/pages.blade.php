@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="card-toolbar">
-                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light">
+                <a href="{{ route("social.pages.create") }}" class="btn btn-sm btn-light">
                     <i class="fa-solid fa-plus me-2"></i> Nouvelle Page
                 </a>
             </div>
