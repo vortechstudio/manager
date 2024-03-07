@@ -17,6 +17,7 @@ class Toolbar extends Component
         public ?array $actions = null,
         public bool $sticky = false,
         public bool $return = false,
+        public bool $submit = false
     ) {
         //
     }
