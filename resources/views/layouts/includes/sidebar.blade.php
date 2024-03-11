@@ -3,8 +3,8 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{ route('home') }}" wire:navigate>
-            <img alt="Logo" src="{{ asset('/storage/logos/logo.png') }}" class="h-25px app-sidebar-logo-default" />
-            <img alt="Logo" src="{{ asset('/storage/logos/logo_small.png') }}" class="h-20px app-sidebar-logo-minimize" />
+            <img alt="Logo" src="{{ Storage::disk('vortech')->url('logos/logo.png') }}" class="h-25px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ Storage::disk('vortech')->url('logos/logo_small.png') }}" class="h-20px app-sidebar-logo-minimize" />
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->
