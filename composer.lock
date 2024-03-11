@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93c676f816a30fb2d6c9b8718798762c",
+    "content-hash": "0fb7862fb4cc08581c00b417a77b8e70",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1278,6 +1278,90 @@
                 }
             ],
             "time": "2022-07-15T09:34:07+00:00"
+        },
+        {
+            "name": "erlandmuchasaj/laravel-gzip",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erlandmuchasaj/laravel-gzip.git",
+                "reference": "909e06529b3dde627ae1e20156043738867a14a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erlandmuchasaj/laravel-gzip/zipball/909e06529b3dde627ae1e20156043738867a14a8",
+                "reference": "909e06529b3dde627ae1e20156043738867a14a8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-exif": "*",
+                "ext-fileinfo": "*",
+                "ext-json": "*",
+                "illuminate/contracts": "^8|^9|^10",
+                "illuminate/filesystem": "^8|^9|^10",
+                "illuminate/http": "^8|^9|^10",
+                "illuminate/support": "^8|^9|^10",
+                "nesbot/carbon": "^2",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ErlandMuchasaj\\LaravelGzip\\GzipServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ErlandMuchasaj\\LaravelGzip\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erland Muchasaj",
+                    "email": "erland.muchasaj@gmail.com",
+                    "homepage": "https://erlandmuchasaj.tech/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Gzip your responses.",
+            "homepage": "https://github.com/erlandmuchasaj/laravel-gzip",
+            "keywords": [
+                "cms",
+                "emcms",
+                "gzip",
+                "laravel",
+                "library",
+                "optimize",
+                "package",
+                "response"
+            ],
+            "support": {
+                "email": "erland.muchasaj@gmail.com",
+                "irc": "irc://irc.freenode.org/composer",
+                "issues": "https://github.com/erlandmuchasaj/laravel-gzip/issues",
+                "source": "https://github.com/erlandmuchasaj/laravel-gzip"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/erlandmuchasaj",
+                    "type": "Ko-fi"
+                },
+                {
+                    "url": "https://paypal.me/emcms?country.x=AL&locale.x=en_US",
+                    "type": "PayPal"
+                },
+                {
+                    "url": "https://www.patreon.com/erlandmuchasaj",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2023-07-27T08:08:22+00:00"
         },
         {
             "name": "fruitcake/php-cors",
