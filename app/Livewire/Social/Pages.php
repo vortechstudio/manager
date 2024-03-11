@@ -41,8 +41,6 @@ class Pages extends Component
     public function render()
     {
         $pages = Page::with('translations', 'creator')
-            ->join('page_translations', 'pages.id', '=', 'page_translations.page_id')
-            ->where('page_translations.title', 'LIKE', "%{$this->search}%")
             ->orderBy($this->orderField, $this->orderDirection)
             ->paginate(10);
 

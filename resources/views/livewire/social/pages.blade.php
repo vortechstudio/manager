@@ -40,7 +40,7 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a wire:navigate href="{{ route("social.pages.show", $article->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir la page">
+                                    <a wire:navigate href="{{ route("social.pages.show", $page->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir la page">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     @if($page->published)
