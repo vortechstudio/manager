@@ -51,7 +51,7 @@
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
                 <a href="{{ route('home') }}" class="mb-7">
-                    <img alt="Logo" src="{{ asset('/storage/logos/logo_dark.webp') }}" />
+                    <img alt="Logo" src="{{ Storage::disk('vortech')->url('logos/logo_dark.webp') }}" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Title-->
