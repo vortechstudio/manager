@@ -15,6 +15,7 @@ use Spatie\LaravelOptions\Options;
 class ArticleEdit extends Component
 {
     use LivewireAlert;
+
     public Article $article;
 
     public $cercles;

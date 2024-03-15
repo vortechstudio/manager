@@ -10,6 +10,7 @@ use Livewire\Component;
 class ArticleShow extends Component
 {
     use LivewireAlert;
+
     public Article $article;
 
     public function mount(int $id)

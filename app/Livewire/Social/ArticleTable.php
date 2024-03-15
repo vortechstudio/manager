@@ -5,7 +5,6 @@ namespace App\Livewire\Social;
 use App\Livewire\Table\Column;
 use App\Livewire\Table\Table;
 use App\Models\Social\Article;
-use Livewire\Component;
 
 class ArticleTable extends Table
 {

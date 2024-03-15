@@ -203,19 +203,20 @@ if (! function_exists('storageToUrl')) {
 }
 
 if (! function_exists('currentUrlText')) {
-    function currentUrlText(): string|null
+    function currentUrlText(): ?string
     {
         $menu_head = Menu::with('translations', 'children')
             ->section('manager_head')
             ->get();
 
         foreach ($menu_head as $item) {
-            if(Request::is($item->url) == '/') {
+            if (Request::is($item->url) == '/') {
                 return $item->translateOrDefault()->title;
             } elseif (Request::is($item->url.'/*')) {
                 return $item->translateOrDefault()->title;
             }
         }
+
         return null;
     }
 }

@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         SocialiteWasCalled::class => [
-            GoogleExtendSocialite::class.'@handle'
-        ]
+            GoogleExtendSocialite::class.'@handle',
+        ],
     ];
 
     /**

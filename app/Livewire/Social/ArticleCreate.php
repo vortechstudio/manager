@@ -40,7 +40,6 @@ class ArticleCreate extends Component
 
     public function store()
     {
-        dd($this->form->all());
         $this->validate();
 
         try {

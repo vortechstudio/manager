@@ -67,10 +67,12 @@ class Article extends Model
                 'publish_social_at' => now(),
                 'status' => 'published',
             ]);
+
             return true;
         } catch (\Exception $Exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de publier l'article", [$Exception], 'emergency');
             (new Issues($issue))->createIssueFromException(false);
+
             return false;
         }
     }
@@ -87,10 +89,12 @@ class Article extends Model
                 'publish_social_at' => null,
                 'status' => 'draft',
             ]);
+
             return true;
         } catch (\Exception $exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de dépublier l'article", [$exception], 'emergency');
             (new Issues($issue))->createIssueFromException(false);
+
             return false;
         }
     }
