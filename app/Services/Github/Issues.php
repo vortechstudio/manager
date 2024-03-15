@@ -6,7 +6,6 @@ use Github\AuthMethod;
 use Github\Client;
 use Monolog\Level;
 use Monolog\LogRecord;
-use Psr\Log\LogLevel;
 
 class Issues
 {

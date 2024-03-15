@@ -433,6 +433,15 @@
                     <!--end::User account menu-->
                     <!--end::Menu wrapper-->
                 </div>
+
+                <div class="app-navbar-item ms-1 ms-md-3">
+                    <a href="{{ route('auth.logout') }}" class="btn-customs">
+                        <div class="sign">
+                            <i class="fa-solid fa-sign-out-alt text-white fs-2"></i>
+                        </div>
+                        <div class="text ms-3">Logout</div>
+                    </a>
+                </div>
                 <!--end::User menu-->
                 <!--begin::Header menu toggle-->
                 <div class="app-navbar-item d-lg-none ms-2 me-n2" title="Show header menu">

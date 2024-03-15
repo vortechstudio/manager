@@ -24,6 +24,7 @@ class Column
     public function component($component)
     {
         $this->component = $component;
+
         return $this;
     }
 }

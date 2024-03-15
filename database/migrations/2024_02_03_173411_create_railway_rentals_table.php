@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('railway_rentals', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid();
             $table->string('name');
             $table->integer('contract_duration');
             $table->json('type');

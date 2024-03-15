@@ -49,6 +49,9 @@
                     <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" wire:navigate @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
                 @endforeach
             @endisset
+            @if($submit)
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            @endif
         </div>
     </div>
 </div>

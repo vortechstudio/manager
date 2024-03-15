@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Social\Article;
 use App\Models\User\UserProfil;
 use App\Notifications\Socials\ArticleWasPublishToSocialNotification;
+use Exception;
 use Illuminate\Console\Command;
+use Log;
 
 class SocialCommand extends Command
 {
@@ -40,11 +42,11 @@ class SocialCommand extends Command
                         $article->update([
                             'status' => 'published',
                         ]);
-                    } catch (\Exception $e) {
-                        \Log::emergency($e->getMessage(), [$e]);
+                    } catch (Exception $e) {
+                        Log::emergency($e->getMessage(), [$e]);
                     }
-                } catch (\Exception $exception) {
-                    \Log::emergency($exception->getMessage(), [$exception]);
+                } catch (Exception $exception) {
+                    Log::emergency($exception->getMessage(), [$exception]);
                 }
             }
             if ($article->publish_social && $article->publish_social_at->isPast()) {
@@ -52,8 +54,8 @@ class SocialCommand extends Command
                     $article->update([
                         'status' => 'published',
                     ]);
-                } catch (\Exception $e) {
-                    \Log::emergency($e->getMessage(), [$e]);
+                } catch (Exception $e) {
+                    Log::emergency($e->getMessage(), [$e]);
                 }
 
                 // Publication sur les différents canaux

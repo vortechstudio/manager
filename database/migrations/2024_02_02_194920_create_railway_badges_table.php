@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('railway_badges', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid();
             $table->string('name');
             $table->string('function');
             $table->integer('count')->default(1);

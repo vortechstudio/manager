@@ -10,10 +10,14 @@ use App\Models\Social\Article;
 use App\Models\Social\Cercle;
 use App\Models\User\User;
 use App\Services\Github\Issues;
+use DateTimeImmutable;
+use Exception;
 use Illuminate\Http\Request;
+use Log;
 use Monolog\Level;
 use Monolog\LogRecord;
 use Spatie\LaravelOptions\Options;
+use Storage;
 
 class ArticleController extends Controller
 {
@@ -49,11 +53,11 @@ class ArticleController extends Controller
             $article = Article::create(
                 $request->except(['avatar_remove', 'image'])
             );
-        } catch (\Exception $exception) {
-            \Log::emergency($exception->getMessage(), [$exception]);
+        } catch (Exception $exception) {
+            Log::emergency($exception->getMessage(), [$exception]);
             toastr("Erreur lors de la création de l'article", 'error');
             $issue = new Issues(new LogRecord(
-                new \DateTimeImmutable('now'),
+                new DateTimeImmutable('now'),
                 'Article',
                 Level::Error,
                 $exception->getMessage(),
@@ -75,19 +79,19 @@ class ArticleController extends Controller
             );
 
             dispatch(new ResizeImageJob(
-                filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
-                directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
+                filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
+                directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
                 sector: 'article'
             ));
 
             dispatch(new FormatImageJob(
-                filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
-                directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
+                filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
+                directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
                 sector: 'article'
             ));
 
-            \Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension());
-        } catch (\Exception $exception) {
+            Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension());
+        } catch (Exception $exception) {
             $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
             $issue->createIssueFromException();
         }
@@ -138,19 +142,19 @@ class ArticleController extends Controller
                 );
 
                 dispatch(new ResizeImageJob(
-                    filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
-                    directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
+                    filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
+                    directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
                     sector: 'article'
                 ));
 
                 dispatch(new FormatImageJob(
-                    filePath: \Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
-                    directoryUpload: \Storage::disk('vortech')->path('blog/'.$article->id),
+                    filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension()),
+                    directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
                     sector: 'article'
                 ));
 
-                \Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension());
-            } catch (\Exception $exception) {
+                Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension());
+            } catch (Exception $exception) {
                 $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
                 $issue->createIssueFromException();
             }
