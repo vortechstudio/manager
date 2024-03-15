@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
@@ -112,8 +113,8 @@ class InstallCommand extends Command
             try {
                 Artisan::call('migrate:fresh', ['--force' => true]);
                 Artisan::call('db:seed', ['--force' => true]);
-            } catch (\Exception $e) {
-                return false;
+            } catch (Exception $e) {
+                return $e->getMessage();
             }
 
             return true;
@@ -173,7 +174,6 @@ class InstallCommand extends Command
 
     private function installOptionnalSystem()
     {
-        $auth = confirm("Voulez-vous utiliser l'authentification ?");
         if ($this->confirm("Voulez-vous utiliser l'authentification ?")) {
             $installFor = Process::run('composer require laravel/fortify');
             if ($installFor->successful()) {

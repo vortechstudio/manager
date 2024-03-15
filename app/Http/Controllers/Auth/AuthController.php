@@ -4,8 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User\User;
+use Auth;
+use Exception;
+use Hash;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Log;
+use Session;
+use Str;
 
 class AuthController extends Controller
 {
@@ -36,10 +42,10 @@ class AuthController extends Controller
             $user = User::query()->create([
                 'name' => $gUser->name ?? $gUser->nickname,
                 'email' => $gUser->email ?? generateReference(10).'@vst.local',
-                'password' => \Hash::make('password0000'),
+                'password' => Hash::make('password0000'),
                 'email_verified_at' => now(),
                 'admin' => false,
-                'uuid' => \Str::uuid(),
+                'uuid' => Str::uuid(),
             ]);
 
             if (! $user->socials()->where('provider', $provider)->exists()) {
@@ -54,7 +60,7 @@ class AuthController extends Controller
             return redirect()->route('auth.setup-register', [$provider, $user->email]);
         }
 
-        \Auth::login($user);
+        Auth::login($user);
 
         return redirect()->route('home');
     }
@@ -74,12 +80,12 @@ class AuthController extends Controller
             $user = User::where('email', $email)->firstOrFail();
 
             $user->update([
-                'password' => \Hash::make($request->password),
+                'password' => Hash::make($request->password),
             ]);
 
-            \Auth::login($user);
-        } catch (\Exception $exception) {
-            \Log::emergency($exception->getMessage(), [$exception]);
+            Auth::login($user);
+        } catch (Exception $exception) {
+            Log::emergency($exception->getMessage(), [$exception]);
         }
 
         return redirect()->route('home');
@@ -87,8 +93,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        \Auth::logout();
-        \Session::flush();
+        Auth::logout();
+        Session::flush();
 
         return redirect()->route('home');
     }
@@ -100,7 +106,7 @@ class AuthController extends Controller
 
     public function confirmPassword(Request $request)
     {
-        if (! \Hash::check($request->password, $request->user()->password)) {
+        if (! Hash::check($request->password, $request->user()->password)) {
             toastr()
                 ->addError('Mot de passe erronée', "Vérification d'accès !");
         }

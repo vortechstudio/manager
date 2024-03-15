@@ -94,7 +94,7 @@ class PublishVersionCommand extends Command
             ]);
 
         if ($tag->successful()) {
-            $ref = Http::withToken($this->token)
+            Http::withToken($this->token)
                 ->post("https://api.github.com/repos/$this->owner/$this->repo/git/refs", [
                     'ref' => "refs/tags/$newTag",
                 ]);

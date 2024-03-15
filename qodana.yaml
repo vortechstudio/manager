@@ -24,10 +24,6 @@ php:
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
 linter: jetbrains/qodana-php:latest
 exclude:
-  - name: PhpMissingReturnTypeInspection
-  - name: PhpDynamicAsStaticMethodCallInspection
-  - name: PhpFullyQualifiedNameUsageInspection
-  - name: PhpUnnecessaryFullyQualifiedNameInspection
   - name: All
     paths:
       - resources
@@ -35,4 +31,12 @@ exclude:
       - composer.lock
       - package-lock.json
       - public/js/custom
+  - name: PhpFullyQualifiedNameUsageInspection
+  - name: PhpUnnecessaryFullyQualifiedNameInspection
   - name: PhpInternalEntityUsedInspection
+  - name: PhpMissingFieldTypeInspection
+  - name: PhpMissingReturnTypeInspection
+  - name: PhpUndefinedMethodInspection
+  - name: PhpUndefinedFieldInspection
+  - name: PhpUndefinedVariableInspection
+

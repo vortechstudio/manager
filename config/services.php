@@ -38,8 +38,8 @@ return [
     ],
 
     'openai' => [
-        'api_key' => env('OPENAI_API_KEY', null),
-        'state' => env('OPENAI_STATE', null),
+        'api_key' => env('OPENAI_API_KEY'),
+        'state' => env('OPENAI_STATE'),
     ],
 
     'onesignal' => [

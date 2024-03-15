@@ -28,8 +28,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('create', [\App\Http\Controllers\Social\ArticleController::class, 'store'])->name('store');
             Route::get('{id}', [\App\Http\Controllers\Social\ArticleController::class, 'show'])->name('show');
             Route::get('{id}/edit', [\App\Http\Controllers\Social\ArticleController::class, 'edit'])->name('edit');
-            Route::put('{id}/edit', \App\Livewire\Social\ArticleEdit::class)->name('update');
-            Route::delete('{id}', \App\Livewire\Social\ArticleEdit::class)->name('destroy');
+            Route::put('{id}/edit', [\App\Http\Controllers\Social\ArticleController::class, 'update'])->name('update');
+            Route::delete('{id}', [\App\Http\Controllers\Social\ArticleController::class, 'destroy'])->name('destroy');
 
             Route::get('{id}/publish', [\App\Http\Controllers\Social\ArticleController::class, 'publish'])->name('publish');
             Route::get('{id}/unpublish', [\App\Http\Controllers\Social\ArticleController::class, 'publish'])->name('unpublish');

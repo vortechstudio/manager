@@ -10,7 +10,7 @@ class TestSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::factory()->create([
+        User::factory()->create([
             'name' => 'Administrateur',
             'email' => 'admin@admin.com',
             'admin' => true,

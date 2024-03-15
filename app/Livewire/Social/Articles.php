@@ -66,7 +66,7 @@ class Articles extends Component
             $this->alert('success', 'Article supprimé avec succes');
         } catch (\Exception $exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de supprimer l'article", [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+            (new Issues($issue))->createIssueFromException();
             $this->alert('error', 'Impossible de supprimer l\'article');
         }
 
@@ -74,7 +74,7 @@ class Articles extends Component
             \Storage::disk('vortech')->deleteDirectory('blog/'.$article->id);
         } catch (\Exception $exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de supprimer les images de l'article", [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+            (new Issues($issue))->createIssueFromException();
             $this->alert('error', 'Impossible de supprimer les images de l\'article');
         }
     }

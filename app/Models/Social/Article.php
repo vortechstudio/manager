@@ -71,7 +71,7 @@ class Article extends Model
             return true;
         } catch (\Exception $Exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de publier l'article", [$Exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+            (new Issues($issue))->createIssueFromException();
 
             return false;
         }
@@ -93,7 +93,7 @@ class Article extends Model
             return true;
         } catch (\Exception $exception) {
             $issue = Issues::createIssueMonolog('article', "Impossible de dépublier l'article", [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException(false);
+            (new Issues($issue))->createIssueFromException();
 
             return false;
         }
