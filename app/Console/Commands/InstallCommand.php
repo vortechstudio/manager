@@ -2,16 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Process\Pipe;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
+
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\spin;
-use function Laravel\Prompts\text;
 
 class InstallCommand extends Command
 {
@@ -34,6 +33,7 @@ class InstallCommand extends Command
             $this->line('please run');
             $this->line('php artisan app:install --help');
             $this->line('to see the command usage.');
+
             return 0;
         }
         $this->alert('Application is installing...');
@@ -43,17 +43,18 @@ class InstallCommand extends Command
         $this->info('Env file created successfully.');
         $this->installCoreSystem();
         $this->installOptionnalSystem();
-        if($this->confirm("Système visuel ?", true)) {
+        if ($this->confirm('Système visuel ?', true)) {
             $this->installFrontSystem();
         }
 
         $this->alert('Application is installed successfully.');
+
         return 1;
     }
 
     public function missingRequiredOptions(): bool
     {
-        return !$this->option('db-database');
+        return ! $this->option('db-database');
     }
 
     private function updateEnv($data)
@@ -66,34 +67,35 @@ class InstallCommand extends Command
                 $entry = explode('=', $envValue, 2);
                 // Check if exists or not in env file
                 if ($entry[0] == $dataKey) {
-                    $env[$envKey] = $dataKey . '=' . $dataValue;
+                    $env[$envKey] = $dataKey.'='.$dataValue;
                     $alreadyExistInEnv = true;
                 } else {
                     $env[$envKey] = $envValue;
                 }
             }
             // add the variable if not exists in env
-            if (!$alreadyExistInEnv) {
-                $env[] = $dataKey . '=' . $dataValue;
+            if (! $alreadyExistInEnv) {
+                $env[] = $dataKey.'='.$dataValue;
             }
         }
         $env = implode("\n", $env);
         file_put_contents(base_path('.env'), $env);
+
         return true;
     }
 
     public function copyEnvExampleToEnv()
     {
-        if($this->option('env') == 'local') {
-            if (!is_file(base_path('.env')) && is_file(base_path('.env.example'))) {
+        if ($this->option('env') == 'local') {
+            if (! is_file(base_path('.env')) && is_file(base_path('.env.example'))) {
                 File::copy(base_path('.env.example'), base_path('.env'));
             }
         } elseif ($this->option('env') == 'staging' || $this->option('env') == 'testing') {
-            if (!is_file(base_path('.env')) && is_file(base_path('.env.staging'))) {
+            if (! is_file(base_path('.env')) && is_file(base_path('.env.staging'))) {
                 File::copy(base_path('.env.staging'), base_path('.env'));
             }
         } else {
-            if (!is_file(base_path('.env')) && is_file(base_path('.env.production'))) {
+            if (! is_file(base_path('.env')) && is_file(base_path('.env.production'))) {
                 File::copy(base_path('.env.production'), base_path('.env'));
             }
         }
@@ -106,16 +108,18 @@ class InstallCommand extends Command
 
     public static function runMigrationsWithSeeders()
     {
-        $a = confirm("Voulez-vous executer les migration");
+        $a = confirm('Voulez-vous executer les migration');
         if ($a) {
             try {
                 Artisan::call('migrate:fresh', ['--force' => true]);
                 Artisan::call('db:seed', ['--force' => true]);
-            } catch (\Exception $e) {
-                return false;
+            } catch (Exception $e) {
+                return $e->getMessage();
             }
+
             return true;
         }
+
         return true;
     }
 
@@ -128,7 +132,7 @@ class InstallCommand extends Command
             'DB_USERNAME' => $this->option('db-username'),
             'DB_PASSWORD' => $this->option('db-password'),
             'GITHUB_REPOSITORY' => $this->option('github-repository'),
-            'GITHUB_TOKEN' => $this->option('github-token')
+            'GITHUB_TOKEN' => $this->option('github-token'),
         ]);
         $conn = config('database.default', 'mysql');
         $dbConfig = Config::get("database.connections.$conn");
@@ -145,23 +149,22 @@ class InstallCommand extends Command
 
     private function installCoreSystem()
     {
-        if ($this->confirm("Voulez-vous utiliser git flow ?")) {
+        if ($this->confirm('Voulez-vous utiliser git flow ?')) {
             Process::run('git flow init -f -d --feature feature/  --bugfix bugfix/ --release release/ --hotfix hotfix/ --support support/', function (string $type, string $output) {
-                if($type == 'err') {
+                if ($type == 'err') {
                     $this->error($output);
                 } else {
-                    $this->info("Git flow Initilialized !");
+                    $this->info('Git flow Initilialized !');
                 }
             });
         }
 
-
-        $this->info("Installation des dépendance principal obligatoire");
+        $this->info('Installation des dépendance principal obligatoire');
 
         $installLog = Process::run('composer require arcanedev/log-viewer');
-        if($installLog->successful()) {
+        if ($installLog->successful()) {
             $this->updateEnv([
-                'LOG_CHANNEL' => "daily"
+                'LOG_CHANNEL' => 'daily',
             ]);
         } else {
             $this->error("Erreur lors de l'installation du système LOG: ".$installLog->errorOutput());
@@ -171,38 +174,36 @@ class InstallCommand extends Command
 
     private function installOptionnalSystem()
     {
-        $auth = confirm("Voulez-vous utiliser l'authentification ?");
-        if($this->confirm("Voulez-vous utiliser l'authentification ?")) {
-            $installFor = Process::run("composer require laravel/fortify");
-            if($installFor->successful()) {
-                Artisan::call("vendor:publish", ['--provider="Laravel\Fortify\FortifyServiceProvider"']);
+        if ($this->confirm("Voulez-vous utiliser l'authentification ?")) {
+            $installFor = Process::run('composer require laravel/fortify');
+            if ($installFor->successful()) {
+                Artisan::call('vendor:publish', ['--provider="Laravel\Fortify\FortifyServiceProvider"']);
             }
 
-            $installAuthLog = Process::run("composer require rappasoft/laravel-authentication-log");
-            $installIp = Process::run("composer require torann/geoip");
+            $installAuthLog = Process::run('composer require rappasoft/laravel-authentication-log');
+            $installIp = Process::run('composer require torann/geoip');
 
-            if($installAuthLog->successful() && $installIp->successful()) {
+            if ($installAuthLog->successful() && $installIp->successful()) {
                 Artisan::call('vendor:publish', ['--provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider"', '--tag="authentication-log-migrations"']);
                 Artisan::call('vendor:publish', ['--provider="Torann\GeoIP\GeoIPServiceProvider"', '--tag=config']);
                 $this->alert("Installation de Laravel Fortify Terminer, n'oublier pas d'ajouter l'interface 'AuthenticationLoggable' au model 'User'");
-            }  else {
+            } else {
                 $this->error("Erreur lors de l'installation de laravel Fortify");
             }
         }
-
 
     }
 
     private function installFrontSystem()
     {
-        $this->info("Installation de livewire");
-        $installLive = Process::run("composer require livewire/livewire");
+        $this->info('Installation de livewire');
+        $installLive = Process::run('composer require livewire/livewire');
 
-        if($installLive->successful()) {
-            Artisan::call("livewire:publish", ["--config"]);
-            Process::run("npm install");
-            Process::run("npm run build");
-            Process::run("composer require jantinnerezo/livewire-alert");
+        if ($installLive->successful()) {
+            Artisan::call('livewire:publish', ['--config']);
+            Process::run('npm install');
+            Process::run('npm run build');
+            Process::run('composer require jantinnerezo/livewire-alert');
         } else {
             $this->error("Erreur lors de l'installation de livewire: ".$installLive->errorOutput());
         }

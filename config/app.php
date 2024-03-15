@@ -185,6 +185,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
-    'domain' => env("APP_DOMAIN")
+    'domain' => env('APP_DOMAIN'),
 
 ];

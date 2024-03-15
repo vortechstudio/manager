@@ -37,5 +37,4 @@ class ArticleForm extends Form
 
     #[Validate('image|max:2048')]
     public $image;
-
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserService extends Model
 {
     use SoftDeletes;
+
     public $timestamps = false;
 
     protected $guarded = [];

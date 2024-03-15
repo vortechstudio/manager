@@ -31,7 +31,7 @@ class ResizeImageJob implements ShouldQueue
 
     private function handleArticle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
-        $file->cover($file->width(), 320, 'center');
+        $file->cover($file->width(), 320);
         $file->scale(1024);
         $file->toWebp(60);
         $file->save($directoryUpload.'/header.webp');

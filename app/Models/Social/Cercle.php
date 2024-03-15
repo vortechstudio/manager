@@ -13,7 +13,7 @@ class Cercle extends Model
     public $timestamps = false;
 
     protected $appends = [
-        'cercle_icon'
+        'cercle_icon',
     ];
 
     public function events()

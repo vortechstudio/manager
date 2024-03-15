@@ -27,8 +27,8 @@ class ArticleWasPublishToSocialNotification extends Notification
                 ->withImage(\Storage::disk('vortech')->url('blog/'.$this->article->id.'/default.png'));
         } catch (CouldNotSendNotification $e) {
             \Log::error($e->getMessage(), [$e]);
-            $issue = Issues::createIssueMonolog('article publish to twitter', $e->getMessage(), [$e], 'error');
-            (new Issues($issue))->createIssueFromException(false);
+            $issue = Issues::createIssueMonolog('article publish to twitter', $e->getMessage(), [$e]);
+            (new Issues($issue))->createIssueFromException();
 
             return null;
         }

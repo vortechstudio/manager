@@ -1,4 +1,7 @@
 import './bootstrap';
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+
+Livewire.start();
 
 document.querySelectorAll('[data-format="datetime"]').forEach(item => {
     flatpickr(item, {

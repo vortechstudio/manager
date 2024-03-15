@@ -13,6 +13,6 @@ class IsAdminMiddleware
             return $next($request);
         }
 
-        return abort(403);
+        return response(null, 403);
     }
 }

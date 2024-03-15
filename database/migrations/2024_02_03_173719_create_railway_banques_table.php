@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('railway_banques', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid();
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('interest_min');

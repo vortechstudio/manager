@@ -16,7 +16,6 @@ class Image
     {
         $file = new File($this->file);
         $manager = new ImageManager(Driver::class);
-        $directory = dirname($file->getRealPath());
         foreach ($dimensions as $dimension) {
             $sys = $manager->read($file->getRealPath());
             $sys->resize($dimension, $dimension);

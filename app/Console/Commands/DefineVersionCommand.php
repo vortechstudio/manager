@@ -12,11 +12,11 @@ class DefineVersionCommand extends Command
 
     protected $description = 'Détermine la prochaine version du programme.';
 
-    private $token;
+    private string $token;
 
-    private $owner;
+    private string $owner;
 
-    private $repo;
+    private string $repo;
 
     public function handle(): void
     {
@@ -45,7 +45,7 @@ class DefineVersionCommand extends Command
     {
         [$major, $minor, $patch] = explode('.', str_replace('v', '', $lastTag));
         $commitsResponse = Http::withToken($this->token)
-            ->get("https://api.github.com/repos/{$this->owner}/{$this->repo}/compare/master...develop")
+            ->get("https://api.github.com/repos/{$this->owner}/{$this->repo}/compare/$lastTag...production")
             ->json();
         $commits = array_map(function ($commit) {
 
