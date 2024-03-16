@@ -51,6 +51,7 @@ class DefineVersionCommand extends Command
 
             return $commit['commit']['message'];
         }, $commitsResponse['commits']);
+        //dd($commits);
 
         $hasFeature = false;
         $hasFix = false;
@@ -69,8 +70,11 @@ class DefineVersionCommand extends Command
 
             if ($hasBreakingChange) {
                 $major++;
+                $minor = 0;
+                $patch = 0;
             } elseif ($hasFeature) {
                 $minor++;
+                $patch = 0;
             } elseif ($hasFix) {
                 $patch++;
             }
