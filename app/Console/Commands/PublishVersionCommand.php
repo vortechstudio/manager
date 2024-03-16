@@ -69,8 +69,11 @@ class PublishVersionCommand extends Command
 
             if ($hasBreakingChange) {
                 $major++;
+                $minor = 0;
+                $patch = 0;
             } elseif ($hasFeature) {
                 $minor++;
+                $patch = 0;
             } elseif ($hasFix) {
                 $patch++;
             }
