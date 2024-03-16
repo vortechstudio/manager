@@ -39,7 +39,7 @@
         @endif
         <div class="">
             @if($return)
-                <a wire:navigate href="javascript:history.back()" class="btn btn-outline btn-light">
+                <a wire:navigate href="{{ url()->previous() }}" class="btn btn-outline btn-light">
                     <i class="fa-solid fa-arrow-circle-left fs-3 me-3"></i>
                     <span>Retour</span>
                 </a>
