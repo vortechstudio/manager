@@ -52,4 +52,11 @@ class PageController extends Controller
 
         return redirect()->route('social.pages.index');
     }
+
+    public function show(int $id)
+    {
+        return view('social.pages.show', [
+            'page' => Page::findOrFail($id),
+        ]);
+    }
 }
