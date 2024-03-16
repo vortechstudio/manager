@@ -36,6 +36,21 @@ class Cercle extends Model
         return $this->hasMany(WikiCategory::class);
     }
 
+    public static function getImage(int $cercle_id, string $type)
+    {
+        $type = match ($type) {
+            'icon' => 'icon',
+            'header' => 'header',
+            'default' => 'default',
+        };
+
+        if (\Storage::exists('cercles/'.$cercle_id.'/'.$type.'.webp')) {
+            return \Storage::url('cercles/'.$cercle_id.'/'.$type.'.webp');
+        } else {
+            return \Storage::url('cercles/'.$type.'_default.png');
+        }
+    }
+
     public function getCercleIconAttribute()
     {
         if (\Storage::disk('public')->exists("cercles/{$this->id}/icon.png")) {

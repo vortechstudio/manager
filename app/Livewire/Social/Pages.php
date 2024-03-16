@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Social;
 
+use App\Services\Github\Issues;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -47,5 +48,43 @@ class Pages extends Component
         return view('livewire.social.pages', [
             'pages' => $pages,
         ]);
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            $page = Page::findOrFail($id);
+            $page->delete();
+        } catch (\Exception $exception) {
+            $issue = new Issues(Issues::createIssueMonolog('page', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
+    public function published(int $id)
+    {
+        try {
+            $page = Page::findOrFail($id);
+            $page->published = true;
+            $page->save();
+        } catch (\Exception $exception) {
+            $issue = new Issues(Issues::createIssueMonolog('page', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
+    public function unpublished(int $id)
+    {
+        try {
+            $page = Page::findOrFail($id);
+            $page->published = false;
+            $page->save();
+        } catch (\Exception $exception) {
+            $issue = new Issues(Issues::createIssueMonolog('page', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            $this->alert('error', 'Une erreur est survenue');
+        }
     }
 }
