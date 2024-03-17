@@ -48,7 +48,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('cercles', [\App\Http\Controllers\Social\CercleController::class, 'index'])->name('cercles.index');
 
         Route::prefix('services')->as('services.')->group(function () {
-            Route::get('/');
+            Route::get('/', [\App\Http\Controllers\Social\ServiceController::class, 'index'])->name('index');
+            Route::get('{id}', [\App\Http\Controllers\Social\ServiceController::class, 'show'])->name('show');
         });
 
     });
