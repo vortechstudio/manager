@@ -4,6 +4,7 @@ namespace App\Enums\Social;
 
 enum EventStatusEnum: string
 {
+    case DRAFT = 'draft';
     case PROGRESS = 'progress';
 
     case SUBMITTING = 'submitting';
