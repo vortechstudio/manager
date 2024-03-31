@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Social;
 
+use App\Enums\Social\Post\PostTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Config\Service;
 use App\Models\Social\Post\Post;
-use App\Services\Github\Issues;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -55,7 +55,20 @@ class ServiceController extends Controller
                     'post' => $request->get('contenue'),
                     'published' => true,
                     'user_id' => 1,
+                    'type' => PostTypeEnum::IMAGE->value,
                 ]);
+
+                try {
+                    $image = \Storage::putFile('posts/'.now()->month.'/'.now()->day.'/', Service::getImage($serviceId, 'default'), $post->image);
+
+                    $post->images()->create([
+                        'path' => $image,
+                        'post_id' => $post->id,
+                    ]);
+                } catch (\Exception $exception) {
+                    toastr()
+                        ->addError($exception->getMessage());
+                }
 
                 $version->update([
                     'publish_social_at' => now(),
