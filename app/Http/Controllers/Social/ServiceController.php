@@ -78,7 +78,7 @@ class ServiceController extends Controller
             }
 
             if ($version->published && $version->publish_social) {
-                NewVersionPublishedEvent::dispatch();
+                event(new NewVersionPublishedEvent($service));
             }
 
             toastr()
@@ -88,5 +88,7 @@ class ServiceController extends Controller
             toastr()
                 ->addError($exception->getMessage());
         }
+
+        return redirect()->back();
     }
 }

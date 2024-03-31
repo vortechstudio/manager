@@ -52,8 +52,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/', [\App\Http\Controllers\Social\ServiceController::class, 'index'])->name('index');
             Route::get('{id}', [\App\Http\Controllers\Social\ServiceController::class, 'show'])->name('show');
 
-            Route::prefix('version')->as('version.')->group(function () {
-                Route::get('/', [ServiceController::class, 'postVersion'])->name('store');
+            Route::prefix('{id}/version')->as('version.')->group(function () {
+                Route::post('/', [ServiceController::class, 'postVersion'])->name('store');
             });
         });
 
