@@ -7,6 +7,8 @@ use App\Events\NewVersionPublishedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Config\Service;
 use App\Models\Social\Post\Post;
+use App\Models\User\User;
+use App\Notifications\Socials\NewVersionPublishedNotification;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -78,7 +80,7 @@ class ServiceController extends Controller
             }
 
             if ($version->published && $version->publish_social) {
-                event(new NewVersionPublishedEvent($service));
+                \Notification::send(User::all(), new NewVersionPublishedNotification($version));
             }
 
             toastr()

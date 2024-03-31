@@ -17,7 +17,7 @@ class ArticleWasPublishToSocialNotification extends Notification
 
     public function via($notifiable): array
     {
-        return [TwitterChannel::class];
+        return [TwitterChannel::class, 'database'];
     }
 
     public function toTwitter($notifiable)
@@ -32,5 +32,17 @@ class ArticleWasPublishToSocialNotification extends Notification
 
             return null;
         }
+    }
+
+    public function toDatabase($notifiable): array
+    {
+        return [
+            'type' => 'info',
+            'icon' => 'fas fa-newspaper',
+            'title' => $this->article->title,
+            'description' => $this->article->description,
+            'time' => now(),
+            'sector' => 'news',
+        ];
     }
 }
