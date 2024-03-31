@@ -29,7 +29,9 @@ class Handler extends ExceptionHandler
                 app('sentry')->captureException($e);
             }
 
-            (new ErrorDispatchHandle())->handle($e);
+            if (config('app.env') == 'local') {
+                (new ErrorDispatchHandle())->handle($e);
+            }
         });
     }
 }
