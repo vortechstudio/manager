@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
                 app('sentry')->captureException($e);
             }
 
-            if (config('app.env') == 'local') {
+            if (config('app.env') == 'testing') {
                 (new ErrorDispatchHandle())->handle($e);
             }
         });

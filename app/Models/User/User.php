@@ -54,6 +54,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = [
+        'has_notification',
+        'count_notifications',
+    ];
+
     public function logs()
     {
         return $this->hasMany(UserLog::class);
@@ -116,5 +121,15 @@ class User extends Authenticatable
         ]);
 
         return new NewAccessToken($token, $token->id.'|'.$plainTextToken);
+    }
+
+    public function getHasNotificationAttribute()
+    {
+        return $this->unreadNotifications()->count() > 0;
+    }
+
+    public function getCountNotificationsAttribute()
+    {
+        return $this->unreadNotifications()->count();
     }
 }
