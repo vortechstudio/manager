@@ -26,6 +26,8 @@ class Service extends Model
     protected $appends = [
         'type_label',
         'status_label',
+        'latest_version',
+        'other_versions',
     ];
 
     public function users()
@@ -63,6 +65,16 @@ class Service extends Model
             ServiceStatusEnum::DEVELOP => '<span class="badge badge-primary"><i class="fa-solid fa-code text-white me-2"></i> Développement</span>',
             ServiceStatusEnum::PRODUCTION => '<span class="badge badge-success"><i class="fa-solid fa-boxes-stacked text-white me-2"></i> Production</span>',
         };
+    }
+
+    public function getLatestVersionAttribute()
+    {
+        return $this->versions()->where('published', true)->orderBy('version', 'desc')->first();
+    }
+
+    public function getOtherVersionsAttribute()
+    {
+        return $this->versions()->where('published', true)->whereNot('version', $this->latest_version->version)->orderBy('version', 'desc')->get();
     }
 
     public static function getImage(int $cercle_id, string $type)
