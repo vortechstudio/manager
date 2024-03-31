@@ -86,7 +86,7 @@ class Cercle extends Component
         $this->reset('cercle', 'name', 'showModal');
     }
 
-    #[Title('Gestion des Articles')]
+    #[Title('Gestion des Cercles')]
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.social.cercle', [
