@@ -117,6 +117,24 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <x-base.underline
+                                title="Images du service" />
+
+                            <div class="col-sm-12 col-lg-6">
+                                <x-form.image-input
+                                    name="default"
+                                    width="w-250px"
+                                    label="Image par default" />
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <x-form.image-input
+                                    name="icon"
+                                    width="w-50px"
+                                    label="Icone du service" />
+                            </div>
+                        </div>
+
                         <x-form.textarea
                             type="simple"
                             name="description"

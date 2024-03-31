@@ -10,12 +10,13 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Spatie\LaravelOptions\Options;
 
 class Service extends Component
 {
-    use LivewireAlert,WithPagination;
+    use LivewireAlert,WithPagination, WithFileUploads;
 
     #[Rule('required', 'min:3', 'max:255')]
     public string $name = '';
@@ -32,6 +33,9 @@ class Service extends Component
     public string $status = '';
 
     public string $url = '';
+
+    public $default;
+    public $icon;
 
     public string $orderField = 'name';
 
@@ -95,7 +99,7 @@ class Service extends Component
                     'status' => $this->status,
                     'url' => $this->url,
                 ]);
-                dd($service);
+                $this->alert('success', 'Service sauvegardé avec succes');
             } else {
                 $service = $this->service;
                 $service->update([
