@@ -80,9 +80,7 @@ class ServiceController extends Controller
             }
 
             if ($version->published && $version->publish_social) {
-                User::all()->each(function ($user) use ($service) {
-                    $user->notify(new NewVersionPublishedNotification($service));
-                });
+                \Notification::send(User::all(), new NewVersionPublishedNotification($version));
             }
 
             toastr()

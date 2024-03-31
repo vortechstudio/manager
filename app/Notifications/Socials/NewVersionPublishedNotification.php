@@ -3,11 +3,12 @@
 namespace App\Notifications\Socials;
 
 use App\Models\Config\Service;
+use App\Models\Config\ServiceVersion;
 use Illuminate\Notifications\Notification;
 
 class NewVersionPublishedNotification extends Notification
 {
-    public function __construct(public Service $service)
+    public function __construct(public ServiceVersion $version, public Service $service)
     {
     }
 
@@ -21,8 +22,8 @@ class NewVersionPublishedNotification extends Notification
         return [
             'type' => 'info',
             'icon' => 'fas fa-code-fork',
-            'title' => $this->service->versions()->latest()->first()->title,
-            'description' => $this->service->versions()->latest()->first()->description,
+            'title' => $this->service->name.' || '.$this->version->title,
+            'description' => $this->version->description,
             'time' => now(),
             'sector' => 'release',
         ];
@@ -33,8 +34,8 @@ class NewVersionPublishedNotification extends Notification
         return [
             'type' => 'info',
             'icon' => 'fas fa-code-fork',
-            'title' => $this->service->versions()->latest()->first()->title,
-            'description' => $this->service->versions()->latest()->first()->description,
+            'title' => $this->service->name.' || '.$this->version->title,
+            'description' => $this->version->description,
             'time' => now(),
             'sector' => 'release',
         ];

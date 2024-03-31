@@ -59,6 +59,8 @@ class User extends Authenticatable
         'count_notifications',
     ];
 
+    protected ?int $unreadNotificationsCount = null;
+
     public function logs()
     {
         return $this->hasMany(UserLog::class);
@@ -123,13 +125,15 @@ class User extends Authenticatable
         return new NewAccessToken($token, $token->id.'|'.$plainTextToken);
     }
 
-    public function getHasNotificationAttribute()
+    public function getHasNotificationAttribute(): bool
     {
-        return $this->unreadNotifications()->count() > 0;
+        $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+        return $this->unreadNotificationsCount > 0;
     }
 
-    public function getCountNotificationsAttribute()
+    public function getCountNotificationsAttribute(): int
     {
-        return $this->unreadNotifications()->count();
+        $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+        return $this->unreadNotificationsCount;
     }
 }

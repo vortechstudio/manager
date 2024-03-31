@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', \App\Http\Controllers\DashboardController::class)->name('home');
 
+    Route::get('notifications', [\App\Http\Controllers\Auth\NotificationController::class, 'index'])->name('notification.index');
+    Route::get('notifications/{id}', [\App\Http\Controllers\Auth\NotificationController::class, 'show'])->name('notification.show');
+
     Route::prefix('social')->as('social.')->group(function () {
         Route::get('/', \App\Livewire\Social\Dashboard::class)->name('index');
         Route::prefix('articles')->as('articles.')->group(function () {

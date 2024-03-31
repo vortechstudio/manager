@@ -1,7 +1,12 @@
+@php
+    $notifications = Cache::remember('user_notifications_' . $user->id, 60, function () use ($user) {
+        return $user->unreadNotifications()->limit(5)->get();
+    });
+@endphp
 <!--begin::Notifications-->
 <div class="app-navbar-item ms-1 ms-md-3">
     <!--begin::Menu- wrapper-->
-    <div wire:poll.5s class="btn btn-icon btn-custom btn-icon-{{ $user->has_notification ? 'primary' : 'muted' }} btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
+    <div class="btn btn-icon btn-custom btn-icon-{{ $user->has_notification ? 'primary' : 'muted' }} btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
         <i class="ki-duotone ki-call fs-2 fs-lg-1">
             <span class="path1"></span>
             <span class="path2"></span>
@@ -44,8 +49,8 @@
             <!--begin::Tab panel-->
             <div class="tab-pane fade" id="news" role="tabpanel">
                 <!--begin::Items-->
-                <div class="scroll-y mh-325px my-5 px-8" wire:poll.5s>
-                    @foreach($user->unreadNotifications()->limit(5)->get() as $notification)
+                <div class="scroll-y mh-325px my-5 px-8">
+                    @foreach($notifications as $notification)
                         @if($notification->data['sector'] == 'news')
                             <!--begin::Item-->
                             <div class="d-flex flex-stack py-4">
@@ -77,7 +82,7 @@
                 <!--end::Items-->
                 <!--begin::View more-->
                 <div class="py-3 text-center border-top">
-                    <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                    <a href="{{ route('notification.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">Tous Voir...
                         <i class="ki-duotone ki-arrow-right fs-5">
                             <span class="path1"></span>
                             <span class="path2"></span>
@@ -88,7 +93,7 @@
             <div class="tab-pane fade" id="alerts" role="tabpanel">
                 <!--begin::Items-->
                 <div class="scroll-y mh-325px my-5 px-8">
-                    @foreach($user->unreadNotifications()->limit(5)->get() as $notification)
+                    @foreach($notifications as $notification)
                         @if($notification->data['sector'] == 'alerts')
                             <!--begin::Item-->
                             <div class="d-flex flex-stack py-4">
@@ -118,22 +123,20 @@
                     @endforeach
                 </div>
                 <!--end::Items-->
-                <!--begin::View more-->
                 <div class="py-3 text-center border-top">
-                    <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                    <a href="{{ route('notification.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">Tous Voir...
                         <i class="ki-duotone ki-arrow-right fs-5">
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i></a>
                 </div>
-                <!--end::View more-->
             </div>
             <!--end::Tab panel-->
             <!--begin::Tab panel-->
             <div class="tab-pane fade show active" id="update" role="tabpanel">
                 <!--begin::Items-->
                 <div class="scroll-y mh-325px my-5 px-8">
-                    @foreach($user->unreadNotifications()->limit(5)->get() as $notification)
+                    @foreach($notifications as $notification)
                         @if($notification->data['sector'] == 'release')
                             <!--begin::Item-->
                             <div class="d-flex flex-stack py-4">
@@ -163,15 +166,13 @@
                     @endforeach
                 </div>
                 <!--end::Items-->
-                <!--begin::View more-->
                 <div class="py-3 text-center border-top">
-                    <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                    <a href="{{ route('notification.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">Tous Voir...
                         <i class="ki-duotone ki-arrow-right fs-5">
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i></a>
                 </div>
-                <!--end::View more-->
             </div>
             <!--end::Tab panel-->
         </div>
