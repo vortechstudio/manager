@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Social;
 
 use App\Enums\Social\Post\PostTypeEnum;
+use App\Events\NewVersionPublishedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Config\Service;
 use App\Models\Social\Post\Post;
@@ -73,6 +74,11 @@ class ServiceController extends Controller
                 $version->update([
                     'publish_social_at' => now(),
                 ]);
+
+            }
+
+            if ($version->published && $version->publish_social) {
+                NewVersionPublishedEvent::dispatch();
             }
 
             toastr()
