@@ -76,6 +76,8 @@ class Issues
         } else {
             ob_start();
             ?>
+            @AdaGPT Aide moi à corriger cette erreur
+
             ## Détail de l'erreur
 
             Message: <?= $details['message'] ?>
