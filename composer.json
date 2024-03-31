@@ -45,6 +45,8 @@
         "sentry/sentry-laravel": "^4.2",
         "socialiteproviders/google": "^4.1",
         "spatie/laravel-options": "^1.1",
+        "takielias/tablar": "10",
+        "takielias/tablar-kit": "10",
         "te7a-houdini/laravel-trix": "^2.0",
         "van-ons/laraberg": "^2.0",
         "vstudio/helpers": "^1.0",
