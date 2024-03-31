@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use App\Actions\ErrorDispatchHandle;
-use App\Services\Github\Issues;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 

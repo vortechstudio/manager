@@ -19,12 +19,15 @@ class Service extends Component
 
     #[Rule('required', 'min:3', 'max:255')]
     public string $name = '';
+
     #[Rule('required')]
     public string $type = '';
+
     #[Rule('required')]
     public string $description = '';
 
     public string $page_content = '';
+
     #[Rule('required')]
     public string $status = '';
 
