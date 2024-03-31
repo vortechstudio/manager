@@ -115,8 +115,9 @@ class User extends Authenticatable
 
     public function scopeNotifiable(Builder $query)
     {
-        return $query->join('user_profils', 'users.id', '=', 'user_profils.user_id')
-            ->where('notification', true);
+        return $query->whereHas('profil', function ($query) {
+            $query->where('notification', true);
+        });
     }
 
     public function createAccessToken($name, $abilities = ['*'])
