@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Social\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::prefix('services')->as('services.')->group(function () {
             Route::get('/', [\App\Http\Controllers\Social\ServiceController::class, 'index'])->name('index');
             Route::get('{id}', [\App\Http\Controllers\Social\ServiceController::class, 'show'])->name('show');
+
+            Route::prefix('version')->as('version.')->group(function () {
+                Route::get('/', [ServiceController::class, 'postVersion'])->name('store');
+            });
         });
 
     });
