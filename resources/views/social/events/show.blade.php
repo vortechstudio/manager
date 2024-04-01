@@ -203,7 +203,11 @@
                 </div>
             </div>
         @endif
-
+        @if($event->type_event == \App\Enums\Social\EventTypeEnum::GRAPHIC)
+            <div class="tab-pane fade" id="media" role="tabpanel">
+                <livewire:social.event.list-graphic :event="$event" />
+            </div>
+        @endif
         <div class="tab-pane fade" id="participants" role="tabpanel">
             <livewire:social.event.list-user :event="$event" />
         </div>
