@@ -113,9 +113,16 @@ class EventController extends Controller
         return redirect()->back();
     }
 
+    public function show(int $eventId)
+    {
+        $event = Event::findOrFail($eventId);
+
+        return view('social.events.show', compact('event'));
+    }
+
     public function update(int $eventId, Request $request)
     {
-       return match ($request->get('action')) {
+        return match ($request->get('action')) {
             'update' => $this->updateEvent($eventId, $request),
         };
     }
@@ -149,5 +156,36 @@ class EventController extends Controller
         }
 
         return redirect()->route('social.events.index');
+    }
+
+    public function storePoll(int $eventId, Request $request)
+    {
+        $event = Event::findOrFail($eventId);
+        $request->validate([
+            'question' => 'required',
+        ]);
+
+        try {
+            $poll = $event->poll()->create([
+                'question' => $request->question,
+                'event_id' => $event->id,
+            ]);
+
+            foreach ($request->get('formRepeatPollResponse') as $response) {
+                $poll->responses()->create([
+                    'response' => $response['response'],
+                    'count' => 0,
+                    'poll_id' => $poll->id,
+                ]);
+            }
+
+            toastr()
+                ->addSuccess('Sondage enregistré avec succès');
+        } catch (Exception $exception) {
+            toastr()
+                ->addError("Erreur lors de l'enregistrement du sondage");
+        }
+
+        return redirect()->back();
     }
 }
