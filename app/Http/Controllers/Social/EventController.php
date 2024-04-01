@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Social;
 
+use App\Enums\Social\EventStatusEnum;
 use App\Enums\Social\EventTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\FormatImageJob;
@@ -94,5 +95,59 @@ class EventController extends Controller
 
             return redirect()->back();
         }
+    }
+
+    public function edit(int $eventId)
+    {
+        $event = Event::findOrFail($eventId);
+        if ($event->status === EventStatusEnum::DRAFT) {
+            $types = Options::forEnum(EventTypeEnum::class)->toArray();
+            $cercles = Options::forModels(Cercle::class)->toArray();
+
+            return view('social.events.edit', compact('event', 'types', 'cercles'));
+        }
+
+        toastr()
+            ->addError("L'évènement n'est pas en cours d'édition");
+
+        return redirect()->back();
+    }
+
+    public function update(int $eventId, Request $request)
+    {
+       return match ($request->get('action')) {
+            'update' => $this->updateEvent($eventId, $request),
+        };
+    }
+
+    private function updateEvent(int $eventId, Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'start_at' => 'required',
+            'end_at' => 'required',
+            'synopsis' => 'required',
+        ]);
+
+        try {
+            $event = Event::findOrFail($eventId);
+
+            $event->update([
+                'title' => $request->title,
+                'start_at' => Carbon::parse($request->start_at),
+                'end_at' => Carbon::parse($request->end_at),
+                'synopsis' => $request->synopsis,
+            ]);
+
+            toastr()
+                ->addSuccess('Évènement mis à jour avec succès');
+        } catch (Exception $exception) {
+            toastr()
+                ->addError("Erreur lors de la mise à jour de l'évènement");
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('social.events.index');
     }
 }
