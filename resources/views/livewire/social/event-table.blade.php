@@ -63,6 +63,17 @@
                             <a href="{{ route('social.events.show', $event->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer l'évènement">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
+                            @if($event->status === \App\Enums\Social\EventStatusEnum::DRAFT)
+                                <button wire:click="publish({{ $event->id }})" onclick="confirm('Voulez-vous publier cette évènement ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Publier l'évènement">
+                                    <i class="fa-solid fa-check-circle" wire:loading.remove wire:target="publish({{ $event->id }})"></i>
+                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="publish({{ $event->id }})"></i>
+                                </button>
+                            @elseif($event->status === \App\Enums\Social\EventStatusEnum::PUBLISHED)
+                                <button wire:click="unpublish({{ $event->id }})" onclick="confirm('Voulez-vous dépublier cette évènement ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Dépublier l'évènement">
+                                    <i class="fa-solid fa-xmark-circle" wire:loading.remove wire:target="unpublish({{ $event->id }})"></i>
+                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="unpublish({{ $event->id }})"></i>
+                                </button>
+                            @endif
                             <a href="{{ route('social.events.edit', $event->id) }}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edité l'évènement">
                                 <i class="fa-solid fa-edit"></i>
                             </a>
