@@ -21,6 +21,7 @@ class Event extends Model
         'end_at' => 'datetime',
         'status' => EventStatusEnum::class,
         'type_event' => EventTypeEnum::class,
+        'published_at' => 'datetime',
     ];
 
     protected $appends = [
@@ -59,6 +60,7 @@ class Event extends Model
             EventStatusEnum::SUBMITTING => '<span class="badge badge-primary"><i class="fa-solid fa-envelope text-white me-2"></i> Soumission en cours...</span>',
             EventStatusEnum::EVALUATION => '<span class="badge badge-info"><i class="fa-solid fa-envelope text-white me-2"></i> Evaluation en cours...</span>',
             EventStatusEnum::CLOSED => '<span class="badge badge-danger"><i class="fa-solid fa-check-circle text-white me-2"></i> Terminer</span>',
+            EventStatusEnum::PUBLISHED => '<span class="badge badge-warning"><i class="fa-solid fa-network-wired text-white me-2"></i> Publier</span>',
         };
     }
 
