@@ -13,14 +13,14 @@
         <select id="{{ $name }}" wire:model.prevent="{{ $isModel ? $model.'.'.$name : $name }}" class="form-select selectpicker" data-live-search="true" data-placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}">
             <option></option>
             @foreach($options as $option)
-                <option value="{{ $option['id'] }}" {{ $value == $option['id'] ? 'selected' : '' }}>{{ $option['value'] }}</option>
+                <option value="{{ $option['value'] }}" {{ $value == $option['value'] ? 'selected' : '' }}>{{ $option['label'] }}</option>
             @endforeach
         </select>
     @else
         <select id="{{ $name }}" wire:model.prevent="{{ $isModel ? $model.'.'.$name : $name }}" class="form-select">
             <option>{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}</option>
             @foreach($options as $option)
-                <option value="{{ $option['id'] }}" {{ $value == $option['id'] ? 'selected' : '' }}>{{ $option['value'] }}</option>
+                <option value="{{ $option['value'] }}" {{ $value == $option['value'] ? 'selected' : '' }}>{{ $option['label'] }}</option>
             @endforeach
         </select>
     @endif

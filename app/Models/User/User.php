@@ -120,6 +120,11 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeVerified(Builder $query)
+    {
+        return $query->whereNotNull('email_verified_at');
+    }
+
     public function createAccessToken($name, $abilities = ['*'])
     {
         $token = $this->tokens()->create([

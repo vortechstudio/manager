@@ -18,7 +18,7 @@ class Cercle extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'event_cercle', 'cercle_id', 'event_id');
     }
 
     public function posts()

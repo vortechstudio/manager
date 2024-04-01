@@ -220,3 +220,11 @@ if (! function_exists('currentUrlText')) {
         return null;
     }
 }
+
+if (! function_exists('shortUserTag')) {
+    function shortUserTag(string $uuid): ?string
+    {
+        return Str::limit($uuid, 8, '');
+    }
+}
+

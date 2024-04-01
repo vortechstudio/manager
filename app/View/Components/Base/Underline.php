@@ -14,7 +14,8 @@ class Underline extends Component
     public function __construct(
         public string $title = 'Titre',
         public string $color = 'primary',
-        public string $styleText = 'fs-2tx fw-bold'
+        public string $styleText = 'fs-2tx fw-bold',
+        public string $sizeLine = '8',
     ) {
     }
 

@@ -60,6 +60,20 @@ Route::middleware(['auth', 'admin'])->group(function () {
             });
         });
 
+        Route::prefix('events')->as('events.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Social\EventController::class, 'index'])->name('index');
+            Route::post('create', [\App\Http\Controllers\Social\EventController::class, 'store'])->name('store');
+            Route::get('{id}', [\App\Http\Controllers\Social\EventController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [\App\Http\Controllers\Social\EventController::class, 'edit'])->name('edit');
+            Route::put('{id}/edit', [\App\Http\Controllers\Social\EventController::class, 'update'])->name('update');
+            Route::delete('{id}', [\App\Http\Controllers\Social\EventController::class, 'destroy'])->name('destroy');
+
+            Route::post('{id}/poll', [\App\Http\Controllers\Social\EventController::class, 'storePoll'])->name('store.poll');
+
+            Route::get('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'evaluate'])->name('graphics.evaluate');
+            Route::post('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'storeEvaluate'])->name('graphics.evaluate.store');
+        });
+
     });
 });
 
