@@ -188,4 +188,34 @@ class EventController extends Controller
 
         return redirect()->back();
     }
+
+    public function evaluate(int $eventId, int $graphicId)
+    {
+        $event = Event::findOrFail($eventId);
+        $graphic = $event->graphics()->find($graphicId);
+
+        return view('social.events.evaluate', compact('event', 'graphic'));
+    }
+
+    public function storeEvaluate(int $eventId, int $graphicId, Request $request)
+    {
+        $event = Event::findOrFail($eventId);
+        $graphic = $event->graphics()->find($graphicId);
+
+        $respectTheme = $request->respectTheme;
+        $pertinenceTheme = $request->pertinenceTheme;
+        $userIA = $request->userIA;
+        $respectCarateristic = $request->respectCarateristic;
+
+        $count = $respectTheme + $pertinenceTheme + $userIA + $respectCarateristic;
+
+        $graphic->update([
+            'notation' => ($count / 20) * 5,
+        ]);
+
+        toastr()
+            ->addSuccess('Notation enregistrée avec succès');
+
+        return redirect()->route('social.events.show', $event->id);
+    }
 }

@@ -69,6 +69,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::delete('{id}', [\App\Http\Controllers\Social\EventController::class, 'destroy'])->name('destroy');
 
             Route::post('{id}/poll', [\App\Http\Controllers\Social\EventController::class, 'storePoll'])->name('store.poll');
+
+            Route::get('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'evaluate'])->name('graphics.evaluate');
+            Route::post('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'storeEvaluate'])->name('graphics.evaluate.store');
         });
 
     });

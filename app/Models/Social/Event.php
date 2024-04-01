@@ -44,6 +44,11 @@ class Event extends Model
         return $this->hasOne(Poll::class);
     }
 
+    public function graphics()
+    {
+        return $this->hasMany(EventGraphic::class);
+    }
+
     public function getTypeLabelAttribute()
     {
         return match ($this->type_event) {
