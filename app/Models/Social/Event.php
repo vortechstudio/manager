@@ -64,6 +64,56 @@ class Event extends Model
         };
     }
 
+    public function getStatus(string $type)
+    {
+        return match ($type) {
+            'text' => match ($this->status) {
+                EventStatusEnum::DRAFT => 'Brouillon',
+                EventStatusEnum::PROGRESS => 'En cours...',
+                EventStatusEnum::SUBMITTING => 'Soumission en cours...',
+                EventStatusEnum::EVALUATION => 'Evaluation en cours...',
+                EventStatusEnum::CLOSED => 'Terminer',
+                EventStatusEnum::PUBLISHED => 'Publier',
+            },
+            'icon' => match ($this->status) {
+                EventStatusEnum::DRAFT => 'fa-pencil',
+                EventStatusEnum::PROGRESS => 'fa-exchange-alt',
+                EventStatusEnum::SUBMITTING => 'fa-envelope',
+                EventStatusEnum::EVALUATION => 'fa-envelope',
+                EventStatusEnum::CLOSED => 'fa-check-circle',
+                EventStatusEnum::PUBLISHED => 'fa-network-wired',
+            },
+            'color' => match ($this->status) {
+                EventStatusEnum::DRAFT => 'secondary',
+                EventStatusEnum::PROGRESS => 'success',
+                EventStatusEnum::SUBMITTING => 'primary',
+                EventStatusEnum::EVALUATION => 'info',
+                EventStatusEnum::CLOSED => 'danger',
+                EventStatusEnum::PUBLISHED => 'warning',
+            },
+            default => $this->status,
+        };
+    }
+
+    public function getType(string $type)
+    {
+        return match ($type) {
+            'text' => match ($this->type_event) {
+                EventTypeEnum::POLL => 'Sondage',
+                EventTypeEnum::GRAPHIC => 'Graphique',
+            },
+            'icon' => match ($this->type_event) {
+                EventTypeEnum::POLL => 'fa-poll',
+                EventTypeEnum::GRAPHIC => 'fa-image',
+            },
+            'color' => match ($this->type_event) {
+                EventTypeEnum::POLL => 'primary',
+                EventTypeEnum::GRAPHIC => 'warning',
+            },
+            default => $this->type_event,
+        };
+    }
+
     public static function getImage(int $event_id, string $type): string
     {
         $type = match ($type) {
