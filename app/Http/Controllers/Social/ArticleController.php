@@ -54,21 +54,7 @@ class ArticleController extends Controller
                 $request->except(['avatar_remove', 'image'])
             );
         } catch (Exception $exception) {
-            Log::emergency($exception->getMessage(), [$exception]);
             toastr("Erreur lors de la création de l'article", 'error');
-            $issue = new Issues(new LogRecord(
-                new DateTimeImmutable('now'),
-                'Article',
-                Level::Error,
-                $exception->getMessage(),
-                $exception->getTrace(),
-                [
-                    'code' => $exception->getCode(),
-                    'file' => $exception->getFile(),
-                    'line' => $exception->getLine(),
-                ],
-            ));
-            $issue->createIssueFromException();
         }
 
         try {
