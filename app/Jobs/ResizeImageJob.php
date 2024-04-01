@@ -26,6 +26,7 @@ class ResizeImageJob implements ShouldQueue
 
         match ($this->sector) {
             'article' => $this->handleArticle($file, $this->directoryUpload),
+            'event' => $this->handleEvent($file, $this->directoryUpload),
         };
     }
 
@@ -35,5 +36,18 @@ class ResizeImageJob implements ShouldQueue
         $file->scale(1024);
         $file->toWebp(60);
         $file->save($directoryUpload.'/header.webp');
+    }
+
+    private function handleEvent(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->cover($file->width(), 320);
+        $file->scale(1024);
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/header.webp');
+
+        $file->cover($file->width(), 96);
+        $file->scale(96);
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/icon.webp');
     }
 }

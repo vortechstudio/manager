@@ -26,10 +26,17 @@ class FormatImageJob implements ShouldQueue
 
         match ($this->sector) {
             'article' => $this->handleArticle($file, $this->directoryUpload),
+            'event' => $this->handleEvent($file, $this->directoryUpload),
         };
     }
 
     private function handleArticle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/default.webp');
+    }
+
+    private function handleEvent(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/default.webp');
