@@ -73,6 +73,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'evaluate'])->name('graphics.evaluate');
             Route::post('{id}/graphics/{graphics_id}/evaluate', [\App\Http\Controllers\Social\EventController::class, 'storeEvaluate'])->name('graphics.evaluate.store');
         });
+        Route::prefix('feeds')->as('feeds.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Social\Feeds\FeedController::class, 'index'])->name('index');
+            Route::get('{id}', [\App\Http\Controllers\Social\Feeds\FeedController::class, 'show'])->name('show');
+        });
 
     });
 });
