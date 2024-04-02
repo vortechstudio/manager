@@ -61,10 +61,10 @@
                         <td>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="symbol symbol-30px symbol-circle me-5">
-                                    <img src="{{ \App\Models\Social\Cercle::getImage($feed->cercle->id, 'icon') }}" alt="{{ $feed->cercle->name }}">
+                                    <img src="{{ \App\Models\Social\Cercle::getImage($feed->cercle()->first()->id, 'icon') }}" alt="{{ $feed->cercle()->first()->name }}">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-bolder">{{ $feed->cercle->name }}</span>
+                                    <span class="fw-bolder">{{ $feed->cercle()->first()->name }}</span>
                                 </div>
                             </div>
                         </td>
@@ -75,7 +75,12 @@
                                 <span class="badge badge-light-danger">Non publie</span>
                             @endif
                         </td>
-                        <td></td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-between align-items-center w-75">
+                                <span>Nombre de commentaires</span>
+                                <span class="badge badge-primary">{{ $feed->comments()->count() }}</span>
+                            </div>
+                        </td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('social.feeds.show', $feed->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer l'évènement">

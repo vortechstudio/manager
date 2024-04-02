@@ -61,8 +61,11 @@ class ServiceController extends Controller
                     'type' => PostTypeEnum::IMAGE->value,
                 ]);
 
+                $post->cercle()->attach($service->cercle->id);
+
                 try {
-                    $image = \Storage::putFile('posts/'.now()->month.'/'.now()->day.'/', Service::getImage($serviceId, 'default'));
+                    $latest_img = \Storage::get(Service::getImage($serviceId, 'default'));
+                    $image = \Storage::putFile('posts/'.now()->month.'/'.now()->day.'/', $latest_img);
 
                     $post->images()->create([
                         'path' => $image,
