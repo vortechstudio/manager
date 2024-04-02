@@ -45,7 +45,6 @@ class SocialCommand extends Command
     private function articlePublish()
     {
         $articles = Article::where('published', true)
-            ->where('status', 'draft')
             ->get();
 
         foreach ($articles as $article) {
