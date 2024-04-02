@@ -86,6 +86,10 @@
                                 <a href="{{ route('social.feeds.show', $feed->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer l'évènement">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
+                                <button class="btn btn-icon btn-light-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Rejeter ce poste" onclick="confirm('Etes-vous sur de vouloir rejeter cet article ?') || event.stopImmediatePropagation()" wire:click="reject({{ $feed->id }})">
+                                    <i class="fa-solid fa-ban" wire:loading.remove wire:target="reject({{ $feed->id }})"></i>
+                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="reject({{ $feed->id }})"></i>
+                                </button>
                                 <button wire:click="destroy({{ $feed->id }})" onclick="confirm('Voulez-vous supprimer ce service ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer l'évènement">
                                     <i class="fa-solid fa-trash" wire:loading.remove wire:target="destroy({{ $feed->id }})"></i>
                                     <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="destroy({{ $feed->id }})"></i>
