@@ -2,6 +2,7 @@
 
 namespace App\Models\Social;
 
+use App\Models\Config\Service;
 use App\Models\Social\Post\Post;
 use App\Models\Wiki\WikiCategory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,11 @@ class Cercle extends Model
     public function wiki_categories()
     {
         return $this->hasMany(WikiCategory::class);
+    }
+
+    public function service()
+    {
+        return $this->hasOne(Service::class);
     }
 
     public static function getImage(int $cercle_id, string $type)

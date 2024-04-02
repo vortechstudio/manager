@@ -47,6 +47,7 @@ class AuthController extends Controller
                 'admin' => false,
                 'uuid' => Str::uuid(),
             ]);
+            $user->logs()->create(['user_id' => $user->id, 'action' => 'Création du compte']);
 
             if (! $user->socials()->where('provider', $provider)->exists()) {
                 $user->socials()->create([
@@ -56,6 +57,16 @@ class AuthController extends Controller
                     'user_id' => $user->id,
                 ]);
             }
+
+            $user->profil()->firstOrCreate(['user_id' => $user->id]);
+            $user->services()->create([
+                'status' => true,
+                'premium' => false,
+                'user_id' => $user->id,
+                'service_id' => 1,
+            ]);
+
+            $user->logs()->create(['user_id' => $user->id, 'action' => 'Affiliation au service: Accès de base']);
 
             return redirect()->route('auth.setup-register', [$provider, $user->email]);
         }
