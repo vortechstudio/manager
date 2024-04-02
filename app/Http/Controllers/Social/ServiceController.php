@@ -57,12 +57,12 @@ class ServiceController extends Controller
                     'title' => $request->get('title'),
                     'post' => $request->get('contenue'),
                     'published' => true,
-                    'user_id' => 1,
+                    'user_id' => User::where('email', 'maximemockelyn8@gmail.com')->first()->id,
                     'type' => PostTypeEnum::IMAGE->value,
                 ]);
 
                 try {
-                    $image = \Storage::putFile('posts/'.now()->month.'/'.now()->day.'/', Service::getImage($serviceId, 'default'), $post->image);
+                    $image = \Storage::putFile('posts/'.now()->month.'/'.now()->day.'/', Service::getImage($serviceId, 'default'));
 
                     $post->images()->create([
                         'path' => $image,
