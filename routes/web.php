@@ -79,6 +79,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         });
 
     });
+
+    include 'railway.php';
 });
 
 Route::prefix('auth')->as('auth.')->group(function () {

@@ -1,0 +1,9 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('railway')->as('railway.')->group(function () {
+    Route::prefix('materiels')->as('materiels.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\MaterielController::class, 'index'])->name('index');
+    });
+});
