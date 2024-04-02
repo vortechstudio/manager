@@ -4,6 +4,7 @@ namespace App\Models\Config;
 
 use App\Enums\Config\ServiceStatusEnum;
 use App\Enums\Config\ServiceTypeEnum;
+use App\Models\Social\Cercle;
 use App\Models\Support\Tickets\Ticket;
 use App\Models\Support\Tickets\TicketCategory;
 use App\Models\User\User;
@@ -48,6 +49,11 @@ class Service extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function cercle()
+    {
+        return $this->belongsTo(Cercle::class);
     }
 
     public function getTypeLabelAttribute()

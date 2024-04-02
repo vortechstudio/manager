@@ -23,14 +23,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Service::create([
-            'name' => 'Accès de base',
-            'type' => ServiceTypeEnum::PLATEFORME,
-            'description' => 'Accès de base au plateforme Vortech Studio',
-            'status' => ServiceStatusEnum::PRODUCTION,
-            'url' => '//account.'.config('api.domain'),
-        ]);
-
         Cercle::create([
             'name' => 'Vortech Studio',
         ]);
@@ -39,6 +31,15 @@ class DatabaseSeeder extends Seeder
         ]);
         Cercle::create([
             'name' => 'Railway Manager',
+        ]);
+
+        Service::create([
+            'name' => 'Accès de base',
+            'type' => ServiceTypeEnum::PLATEFORME,
+            'description' => 'Accès de base au plateforme Vortech Studio',
+            'status' => ServiceStatusEnum::PRODUCTION,
+            'url' => '//account.'.config('app.domain'),
+            'cercle_id' => 1,
         ]);
 
         $this->call(MenuSeeder::class);
