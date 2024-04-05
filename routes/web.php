@@ -80,6 +80,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     });
 
+    Route::post('upload', \App\Http\Controllers\UploadController::class)->name('upload');
+
     include 'railway.php';
 });
 
