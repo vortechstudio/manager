@@ -6,97 +6,179 @@ use App\Enums\Railway\Engine\EngineMoneyEnum;
 use App\Enums\Railway\Engine\EngineTechMarchEnum;
 use App\Enums\Railway\Engine\EngineTechMotorEnum;
 use App\Enums\Railway\Engine\RailwayEngineEnergyEnum;
-use App\Enums\Railway\Engine\RailwayEngineTrainEnum;
 use Spatie\LaravelOptions\Options;
 
 class EngineSelectAction
 {
     public function selectorTypeTrain($search = null, $field = null)
     {
-        $types = collect(Options::forEnum(RailwayEngineTrainEnum::class)->toArray());
-        $types->where('value', 'motrice')->first()->push(['coef' => 1.8]);
-        $types->where('value', 'voiture')->first()->push(['coef' => 1.5]);
-        $types->where('value', 'automotrice')->first()->push(['coef' => 2]);
-        $types->where('value', 'bus')->first()->push(['coef' => 1.2]);
+        $arr = collect();
+        $arr->push([
+            'id' => 'motrice',
+            'value' => 'Motrice',
+            'coef' => 1.8,
+        ]);
+        $arr->push([
+            'id' => 'voiture',
+            'value' => 'Voiture',
+            'coef' => 1.5,
+        ]);
+        $arr->push([
+            'id' => 'automotrice',
+            'value' => 'Automotrice',
+            'coef' => 2,
+        ]);
+        $arr->push([
+            'id' => 'bus',
+            'value' => 'Bus',
+            'coef' => 1.2,
+        ]);
+
         if ($search != null) {
-            return $types->where('value', $search)->first()[$field ?? 'label'];
+            return $arr->where('id', $search)->first()[$field ?? 'value'];
         } else {
-            return $types;
+            return $arr;
         }
     }
 
     public function selectorTypeEnergy($search = null, $field = null)
     {
-        $types = collect(Options::forEnum(RailwayEngineEnergyEnum::class)->toArray());
-        $coefficients = [
-            'diesel' => 1.5,
-            'vapeur' => 1.2,
-            'electrique' => 2.2,
-            'hybride' => 2.5,
-            'none' => 1,
-        ];
-
-        foreach ($coefficients as $value => $coef) {
-            $types->where('value', $value)->first()->push(['coef' => $coef]);
-        }
+        $arr = collect();
+        $arr->push([
+            'id' => 'diesel',
+            'value' => 'Diesel',
+            'coef' => 1.5,
+        ]);
+        $arr->push([
+            'id' => 'vapeur',
+            'value' => 'Vapeur',
+            'coef' => 1.2,
+        ]);
+        $arr->push([
+            'id' => 'electrique',
+            'value' => 'Electrique',
+            'coef' => 2.2,
+        ]);
+        $arr->push([
+            'id' => 'hybride',
+            'value' => 'Hybride',
+            'coef' => 2.5,
+        ]);
+        $arr->push([
+            'id' => 'none',
+            'value' => 'Aucun',
+            'coef' => 1,
+        ]);
 
         if ($search != null) {
-            return $types->where('value', $search)->first()[$field ?? 'label'];
+            return $arr->where('id', $search)->first()[$field ?? 'value'];
         } else {
-            return $types;
+            return $arr;
         }
     }
+
     public function selectorMoneyShop($search = null)
     {
-        $types = collect(Options::forEnum(EngineMoneyEnum::class)->toArray());
+        $argc = collect();
+        $argc->push([
+            'id' => 'tpoint',
+            'value' => 'T Point',
+        ]);
+        $argc->push([
+            'id' => 'argent',
+            'value' => 'Monnaie Virtuel',
+        ]);
+        $argc->push([
+            'id' => 'euro',
+            'value' => 'Monnaie Réel',
+        ]);
 
         if ($search != null) {
-            return $types->where('value', $search)->first()['label'];
+            return $argc->where('id', $search)->first()['value'];
         } else {
-            return $types;
+            return $argc;
         }
     }
 
     public function selectorTypeMotor($search = null, $field = null)
     {
-        $types = collect(Options::forEnum(EngineTechMotorEnum::class)->toArray());
-        $coefficients = [
-            'diesel' => 1.5,
-            'electrique 1500V' => 1.8,
-            'electrique 25000V' => 1.8,
-            'electrique 1500V/25000V' => 1.8,
-            'vapeur' => 1.2,
-            'hybride' => 2.2,
-            'autre' => 1,
-        ];
+        $argc = collect();
 
-        foreach ($coefficients as $value => $coef) {
-            $types->where('value', $value)->first()->push(['coef' => $coef]);
-        }
+        $argc->push([
+            'id' => 'diesel',
+            'value' => 'Diesel',
+            'coef' => 1.5,
+        ]);
+
+        $argc->push([
+            'id' => 'electrique 1500V',
+            'value' => 'Electrique 1500V',
+            'coef' => 1.8,
+        ]);
+
+        $argc->push([
+            'id' => 'electrique 25000V',
+            'value' => 'Electrique 25Kv',
+            'coef' => 1.8,
+        ]);
+
+        $argc->push([
+            'id' => 'electrique 1500V/25000V',
+            'value' => 'Electrique 1500V/25Kv',
+            'coef' => 1.8,
+        ]);
+
+        $argc->push([
+            'id' => 'vapeur',
+            'value' => 'Vapeur',
+            'coef' => 1.2,
+        ]);
+
+        $argc->push([
+            'id' => 'hybride',
+            'value' => 'Hybride',
+            'coef' => 2.2,
+        ]);
+
+        $argc->push([
+            'id' => 'autre',
+            'value' => 'Autre',
+            'coef' => 1,
+        ]);
 
         if ($search != null) {
-            return $types->where('value', $search)->first()[$field ?? 'label'];
+            return $argc->where('id', $search)->first()[$field ?? 'value'];
         } else {
-            return $types;
+            return $argc;
         }
     }
+
     public function selectorTypeMarchandise($search = null, $field = null)
     {
-        $types = collect(Options::forEnum(EngineTechMarchEnum::class)->toArray());
-        $coefficients = [
-            'none' => 1,
-            'passagers' => 1.5,
-            'marchandises' => 1.2,
-        ];
+        $argc = collect();
 
-        foreach ($coefficients as $value => $coef) {
-            $types->where('value', $value)->first()->push(['coef' => $coef]);
-        }
+        $argc->push([
+            'id' => 'none',
+            'value' => 'Aucun',
+            'coef' => 1,
+        ]);
+
+        $argc->push([
+            'id' => 'passagers',
+            'value' => 'Passagers',
+            'coef' => 1.5,
+        ]);
+
+        $argc->push([
+            'id' => 'marchandises',
+            'value' => 'Marchandises',
+            'coef' => 1.2,
+        ]);
 
         if ($search != null) {
-            return $types->where('value', $search)->first()[$field ?? 'label'];
+            return $argc->where('id', $search)->first()[$field ?? 'value'];
         } else {
-            return $types;
+            return $argc;
         }
     }
 }

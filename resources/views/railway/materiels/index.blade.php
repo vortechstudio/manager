@@ -7,4 +7,6 @@
     <x-base.toolbar
         title="Gestion des matériels roulants"
         :breads="array('Railway Manager', 'Gestion des matériels roulants')" />
+
+    <livewire:railway.engine.engine-table />
 @endsection

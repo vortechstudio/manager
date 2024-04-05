@@ -39,4 +39,15 @@ class RailwayEngine extends Model
     {
         return $this->hasOne(RailwayEngineTechnical::class);
     }
+
+    public function getFirstImage($engine_id)
+    {
+        $engine = self::find($engine_id);
+
+        if ($engine->type_train == RailwayEngineTrainEnum::AUTO) {
+            return \Storage::url('engines/automotrice/'.\Str::slug($engine->name).'-0.gif');
+        } else {
+            return \Storage::url('engines/'.$engine->type_train.'/'.\Str::slug($engine->name).'.gif');
+        }
+    }
 }

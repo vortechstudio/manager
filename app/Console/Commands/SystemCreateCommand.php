@@ -149,6 +149,7 @@ class SystemCreateCommand extends Command
         info('Création du matériel roulant');
 
         $engine = RailwayEngine::create([
+            'uuid' => \Str::uuid(),
             'name' => $name,
             'type_transport' => $type_transport,
             'type_train' => $type_train,
