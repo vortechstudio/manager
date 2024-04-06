@@ -98,7 +98,6 @@ Route::prefix('auth')->as('auth.')->group(function () {
 });
 
 Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPasswordForm'])
-    ->name('password.confirm')
     ->middleware('auth');
 
 Route::get('/test', function () {
