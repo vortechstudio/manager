@@ -10,12 +10,8 @@ use App\Models\Social\Article;
 use App\Models\Social\Cercle;
 use App\Models\User\User;
 use App\Services\Github\Issues;
-use DateTimeImmutable;
 use Exception;
 use Illuminate\Http\Request;
-use Log;
-use Monolog\Level;
-use Monolog\LogRecord;
 use Spatie\LaravelOptions\Options;
 use Storage;
 
