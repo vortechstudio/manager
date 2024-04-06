@@ -4,12 +4,13 @@
             <i class="ki-duotone ki-magnifier fs-2 text-gray-500 position-absolute top-50 translate-middle-y ms-4"><span class="path1"></span><span class="path2"></span></i>
             <input type="text" class="form-control border-gray-200 h-40px bg-body ps-13 fs-7" wire:model.live.debounce.500ms="search" placeholder="Rechercher un évènement..." data-kt-search-element="input">
         </div>
-        <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px" id="perPage">
+        <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px me-5" id="perPage">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
+        <a href="{{ route('railway.materiels.create') }}" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Nouveau Matériel</a>
     </div>
     <div class="table-responsive">
         <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
@@ -25,6 +26,7 @@
             @if($engines->count() > 0)
                 <tbody>
                 @foreach($engines as $engine)
+
                     <tr>
                         <td>{{ $engine->id }}</td>
                         <td>
@@ -37,33 +39,12 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ \Str::slug($engine->type_train) }}</td>
-                        <td></td>
+                        <td>{{ $engine->type_train }}</td>
                         <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a href="{{ route('social.feeds.show', $feed->id) }}" class="btn btn-icon btn-secondary"
-                                   data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer le feed">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <button class="btn btn-icon btn-light-danger" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" data-bs-title="Rejeter ce poste"
-                                        onclick="confirm('Etes-vous sur de vouloir rejeter cet article ?') || event.stopImmediatePropagation()"
-                                        wire:click="reject({{ $feed->id }})">
-                                    <i class="fa-solid fa-ban" wire:loading.remove
-                                       wire:target="reject({{ $feed->id }})"></i>
-                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading
-                                       wire:target="reject({{ $feed->id }})"></i>
-                                </button>
-                                <button wire:click="destroy({{ $feed->id }})"
-                                        onclick="confirm('Voulez-vous supprimer ce service ?') || event.stopImmediatePropagation()"
-                                        class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Supprimer le feed">
-                                    <i class="fa-solid fa-trash" wire:loading.remove
-                                       wire:target="destroy({{ $feed->id }})"></i>
-                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading
-                                       wire:target="destroy({{ $feed->id }})"></i>
-                                </button>
-                            </div>
+                            <span class="badge badge-light-{{ $engine->active ? 'success' : 'danger' }}">{{ $engine->active ? 'Active' : 'Inactif' }}</span>
+                        </td>
+                        <td>
+
                         </td>
                     </tr>
                 @endforeach

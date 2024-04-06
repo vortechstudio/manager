@@ -2,12 +2,6 @@
 
 namespace App\Actions\Railway;
 
-use App\Enums\Railway\Engine\EngineMoneyEnum;
-use App\Enums\Railway\Engine\EngineTechMarchEnum;
-use App\Enums\Railway\Engine\EngineTechMotorEnum;
-use App\Enums\Railway\Engine\RailwayEngineEnergyEnum;
-use Spatie\LaravelOptions\Options;
-
 class EngineSelectAction
 {
     public function selectorTypeTrain($search = null, $field = null)
@@ -117,13 +111,13 @@ class EngineSelectAction
         ]);
 
         $argc->push([
-            'id' => 'electrique 25000V',
+            'id' => 'electrique 25Kv',
             'value' => 'Electrique 25Kv',
             'coef' => 1.8,
         ]);
 
         $argc->push([
-            'id' => 'electrique 1500V/25000V',
+            'id' => 'electrique 1500v/25Kv',
             'value' => 'Electrique 1500V/25Kv',
             'coef' => 1.8,
         ]);

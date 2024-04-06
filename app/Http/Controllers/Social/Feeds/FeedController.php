@@ -15,6 +15,7 @@ class FeedController extends Controller
     public function show(int $id)
     {
         $feed = Post::find($id);
+
         return view('social.feeds.show', compact('feed'));
     }
 }

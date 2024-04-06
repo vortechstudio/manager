@@ -50,7 +50,7 @@
                 @endforeach
             @endisset
             @if($submit)
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-outline btn-outline-primary">Enregistrer</button>
             @endif
         </div>
     </div>

@@ -22,7 +22,7 @@ class Post extends Model
     ];
 
     protected $appends = [
-        'has_image'
+        'has_image',
     ];
 
     public function user()

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\FormatImageJob;
-use App\Jobs\UploadImageJob;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
@@ -22,6 +20,6 @@ class UploadController extends Controller
 
     private function uploadEngine(Request $request)
     {
-        dispatch(new UploadImageJob($request->file->getRealPath(), $request->type, $request->has('type_engine')));
+        $request->file('file')->storeAs('uploads', $request->file('file')->getClientOriginalName());
     }
 }

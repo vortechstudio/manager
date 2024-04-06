@@ -3,7 +3,6 @@
 namespace App\Tables\Social;
 
 use App\Models\Social\Event;
-use Illuminate\Http\Request;
 use Takielias\TablarKit\DataTable\DataTable;
 use Takielias\TablarKit\Enums\ExportType;
 
@@ -27,5 +26,4 @@ class SocialEvent extends DataTable
             ->setExportTypes([ExportType::CSV, ExportType::PDF, ExportType::XLS])
             ->paginate(10);
     }
-
 }

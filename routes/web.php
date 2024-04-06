@@ -102,5 +102,5 @@ Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class
     ->middleware('auth');
 
 Route::get('/test', function () {
-    return (new \App\Actions\Railway\EngineSelectAction())->selectorTypeTrain();
+    dd((new \App\Services\Twitter\Notification())->send('test tweet'));
 });

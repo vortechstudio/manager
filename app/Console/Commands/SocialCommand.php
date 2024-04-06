@@ -48,7 +48,7 @@ class SocialCommand extends Command
             ->get();
 
         foreach ($articles as $article) {
-            if ($article->published_at->isPast()) {
+            if ($article->published_at->isPast() && $article->status == 'draft') {
                 try {
                     try {
                         $article->update([
@@ -61,7 +61,7 @@ class SocialCommand extends Command
                     Log::emergency($exception->getMessage(), [$exception]);
                 }
             }
-            if ($article->publish_social && $article->publish_social_at->isPast()) {
+            if ($article->publish_social && $article->publish_social_at->isPast() && $article->status == 'draft') {
                 try {
                     $article->update([
                         'status' => 'published',
@@ -72,7 +72,7 @@ class SocialCommand extends Command
 
                 // Publication sur les différents canaux
                 foreach (UserProfil::where('notification', true)->with('user')->get() as $user) {
-                    $user->user->notify(new ArticleWasPublishToSocialNotification($article));
+                    $user->user->notify(new IsPublishNotification('blog', $article));
                 }
             }
         }

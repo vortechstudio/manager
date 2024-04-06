@@ -13,7 +13,7 @@ class EngineTable extends Component
 
     public string $search = '';
 
-    public string $orderField = 'title';
+    public string $orderField = 'name';
 
     public string $orderDirection = 'ASC';
 
@@ -21,7 +21,7 @@ class EngineTable extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'orderField' => ['except' => 'title'],
+        'orderField' => ['except' => 'name'],
         'orderDirection' => ['except' => 'ASC'],
     ];
 

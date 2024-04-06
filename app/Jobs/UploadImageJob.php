@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Intervention\Image\ImageManager;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UploadImageJob implements ShouldQueue
 {
@@ -25,6 +27,8 @@ class UploadImageJob implements ShouldQueue
 
     private function uploadImageEngine(string $file)
     {
-
+        $f = new File($file);
+        $manager = ImageManager::gd()->read($file);
+        $manager->save();
     }
 }

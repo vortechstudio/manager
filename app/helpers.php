@@ -227,4 +227,3 @@ if (! function_exists('shortUserTag')) {
         return Str::limit($uuid, 8, '');
     }
 }
-

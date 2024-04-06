@@ -16,7 +16,7 @@ use Spatie\LaravelOptions\Options;
 
 class Service extends Component
 {
-    use LivewireAlert,WithPagination, WithFileUploads;
+    use LivewireAlert,WithFileUploads, WithPagination;
 
     #[Rule('required', 'min:3', 'max:255')]
     public string $name = '';
@@ -35,6 +35,7 @@ class Service extends Component
     public string $url = '';
 
     public $default;
+
     public $icon;
 
     public string $orderField = 'name';

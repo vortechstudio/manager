@@ -141,12 +141,14 @@ class User extends Authenticatable
     public function getHasNotificationAttribute(): bool
     {
         $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+
         return $this->unreadNotificationsCount > 0;
     }
 
     public function getCountNotificationsAttribute(): int
     {
         $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+
         return $this->unreadNotificationsCount;
     }
 }

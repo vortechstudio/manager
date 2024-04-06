@@ -14,8 +14,11 @@ class ListUser extends Component
     public Event $event;
 
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'ASC';
+
     public int $perPage = 10;
 
     protected $queryString = [

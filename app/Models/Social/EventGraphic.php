@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class EventGraphic extends Model
 {
     protected $guarded = [];
+
     protected $casts = [
         'type_media' => EventGraphicTypeEnum::class,
     ];
@@ -31,6 +32,7 @@ class EventGraphic extends Model
     public function getFormatNoteAttribute()
     {
         $badgeClass = ($this->notation <= 2.5) ? 'badge-danger' : (($this->notation <= 3.9) ? 'badge-warning' : 'badge-success');
+
         return "<span class='badge $badgeClass'>$this->notation</span>";
     }
 }

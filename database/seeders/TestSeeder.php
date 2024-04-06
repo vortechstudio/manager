@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Config\Service;
 use App\Models\Social\Article;
-use App\Models\Social\Cercle;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
 
