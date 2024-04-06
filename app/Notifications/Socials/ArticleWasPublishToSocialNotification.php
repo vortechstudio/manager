@@ -23,8 +23,12 @@ class ArticleWasPublishToSocialNotification extends Notification
     public function toTwitter($notifiable)
     {
         try {
-            return (new TwitterStatusUpdate($this->article->title))
-                ->withImage(\Storage::disk('vortech')->url('blog/'.$this->article->id.'/default.png'));
+            if (\Storage::exists('blog/' . $this->article->id . '/default.png')) {
+                return (new TwitterStatusUpdate($this->article->title))
+                    ->withImage(\Storage::url('blog/' . $this->article->id . '/default.png'));
+            } else {
+                return (new TwitterStatusUpdate($this->article->title));
+            }
         } catch (CouldNotSendNotification $e) {
             \Log::error($e->getMessage(), [$e]);
             $issue = Issues::createIssueMonolog('article publish to twitter', $e->getMessage(), [$e]);
