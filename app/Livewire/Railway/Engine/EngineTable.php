@@ -40,6 +40,22 @@ class EngineTable extends Component
         return 'livewire.pagination';
     }
 
+    public function destroy(int $engine_id)
+    {
+        $engine = RailwayEngine::find($engine_id);
+        if ($engine->type_train->value == 'automotrice') {
+            for ($i = 0; $i <= $engine->technical->nb_wagon; $i++) {
+                \Storage::delete('engines/automotrice/' . $engine->slug . '-' . $i . '.gif');
+            }
+        } else {
+            \Storage::delete('engines/' . $engine->type_train->value . '/' . $engine->slug . '.gif');
+        }
+
+        $engine->delete();
+
+        $this->alert('success', 'Le matériel est maintenant supprimé');
+    }
+
     public function render()
     {
         return view('livewire.railway.engine.engine-table', [
