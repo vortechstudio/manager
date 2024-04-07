@@ -113,4 +113,9 @@ class MaterielController extends Controller
 
         return redirect()->route('railway.materiels.index');
     }
+
+    public function show(RailwayEngine $engine)
+    {
+        return view('railway.materiels.show', compact('engine'));
+    }
 }
