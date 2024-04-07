@@ -35,6 +35,48 @@ class EngineSelectAction
         }
     }
 
+    public function selectorTypeTransport($search = null, $field = null)
+    {
+        $arr = collect();
+        $arr->push([
+            'id' => 'ter',
+            'value' => 'TER',
+            'image' => \Storage::url('icons/railway/transport/logo_ter.svg'),
+        ]);
+        $arr->push([
+            'id' => 'tgv',
+            'value' => 'TGV',
+            'image' => \Storage::url('icons/railway/transport/logo_tgv.svg'),
+        ]);
+        $arr->push([
+            'id' => 'intercity',
+            'value' => 'Intercité',
+            'image' => \Storage::url('icons/railway/transport/logo_intercite.svg'),
+        ]);
+        $arr->push([
+            'id' => 'tram',
+            'value' => 'TRAM',
+            'image' => \Storage::url('icons/railway/transport/logo_tram.svg'),
+        ]);
+        $arr->push([
+            'id' => 'metro',
+            'value' => 'Metro',
+            'image' => \Storage::url('icons/railway/transport/logo_metro.svg'),
+        ]);
+        $arr->push([
+            'id' => 'other',
+            'value' => 'Autre',
+            'image' => \Storage::url('icons/railway/transport/default.png'),
+        ]);
+
+        if ($search != null) {
+            return $arr->where('id', $search)->first()[$field ?? 'value'];
+        } else {
+            return $arr;
+        }
+    }
+
+
     public function selectorTypeEnergy($search = null, $field = null)
     {
         $arr = collect();
