@@ -85,7 +85,7 @@
                             <select name="type_motor" id="type_motor" class="form-select" data-control="select2" data-placeholder="---  Selectionner un type de motorisation ---" required>
                                 <option></option>
                                 <option value="diesel">Diesel</option>
-                                <option value="electrique 1500V">Electrique 1500V</option>
+                                <option value="electrique 1500v">Electrique 1500V</option>
                                 <option value="electrique 25Kv">Electrique 25kV</option>
                                 <option value="electrique 1500v/25Kv">Electrique 1500V/25kV</option>
                                 <option value="vapeur">Vapeur</option>
