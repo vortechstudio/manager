@@ -147,7 +147,7 @@ class EngineSelectAction
         ]);
 
         $argc->push([
-            'id' => 'electrique 1500V',
+            'id' => 'electrique 1500v',
             'value' => 'Electrique 1500V',
             'coef' => 1.8,
         ]);
