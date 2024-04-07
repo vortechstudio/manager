@@ -61,7 +61,7 @@ class EngineAction extends EngineSelectAction
 
     public function getDataCalcForEssieux($essieux, $automotrice = false, $nbWagon = 1)
     {
-        $bogeys = str_split($essieux);
+        $bogeys = \Str::ucsplit(\Str::upper($essieux));
         $calc = 2;
 
         foreach ($bogeys as $bogey) {
@@ -95,9 +95,9 @@ class EngineAction extends EngineSelectAction
         }
 
         if ($automotrice) {
-            return ($calc / 100) * $nbWagon;
+            return $calc * $nbWagon;
         } else {
-            return $calc / 100;
+            return $calc;
         }
     }
 }
