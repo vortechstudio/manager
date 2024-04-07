@@ -116,6 +116,8 @@ class MaterielController extends Controller
 
     public function show(RailwayEngine $engine)
     {
+        $engine = $engine->load('price', 'shop', 'technical');
+        //dd($engine);
         return view('railway.materiels.show', compact('engine'));
     }
 }
