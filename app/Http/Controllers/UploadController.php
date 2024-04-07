@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): void
     {
         $request->validate([
             'type' => 'required',
@@ -18,7 +18,7 @@ class UploadController extends Controller
         };
     }
 
-    private function uploadEngine(Request $request)
+    private function uploadEngine(Request $request): void
     {
         $request->file('file')->storeAs('uploads', $request->file('file')->getClientOriginalName());
     }

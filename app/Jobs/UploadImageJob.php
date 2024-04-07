@@ -25,7 +25,7 @@ class UploadImageJob implements ShouldQueue
         };
     }
 
-    private function uploadImageEngine(string $file)
+    private function uploadImageEngine(string $file): void
     {
         $f = new File($file);
         $manager = ImageManager::gd()->read($file);

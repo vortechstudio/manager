@@ -9,7 +9,7 @@ class UserNotificationNavbar extends Component
 {
     public User $user;
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
     }

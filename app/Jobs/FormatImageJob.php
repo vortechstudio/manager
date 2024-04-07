@@ -36,7 +36,7 @@ class FormatImageJob implements ShouldQueue
         $file->save($directoryUpload.'/default.webp');
     }
 
-    private function handleEvent(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleEvent(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/default.webp');

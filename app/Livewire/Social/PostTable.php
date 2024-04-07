@@ -42,7 +42,7 @@ class PostTable extends Component
         return 'livewire.pagination';
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $post = Post::find($id);
 
@@ -56,7 +56,7 @@ class PostTable extends Component
         }
     }
 
-    public function reject(int $id)
+    public function reject(int $id): void
     {
         $post = Post::find($id);
         try {

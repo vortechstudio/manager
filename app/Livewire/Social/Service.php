@@ -86,7 +86,7 @@ class Service extends Component
         $this->url = $this->service->url;
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
@@ -122,7 +122,7 @@ class Service extends Component
         }
     }
 
-    public function destroy(int $serviceId)
+    public function destroy(int $serviceId): void
     {
         $service = \App\Models\Config\Service::find($serviceId);
         try {

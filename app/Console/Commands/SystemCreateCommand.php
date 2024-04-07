@@ -25,7 +25,7 @@ class SystemCreateCommand extends Command
         };
     }
 
-    private function createEngine()
+    private function createEngine(): void
     {
         intro("Création d'un matériel roulant !");
         $name = text(

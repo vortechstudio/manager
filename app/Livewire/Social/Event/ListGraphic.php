@@ -31,7 +31,7 @@ class ListGraphic extends Component
         return 'livewire.pagination';
     }
 
-    public function setOrderField(string $name)
+    public function setOrderField(string $name): void
     {
         if ($name === $this->orderField) {
             $this->orderDirection = $this->orderDirection === 'ASC' ? 'DESC' : 'ASC';
@@ -41,7 +41,7 @@ class ListGraphic extends Component
         }
     }
 
-    public function destroy(int $graphicId)
+    public function destroy(int $graphicId): void
     {
         $graphic = $this->event->graphics()->findOrFail($graphicId);
         try {

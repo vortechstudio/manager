@@ -39,7 +39,7 @@ class EventTable extends Component
         return 'livewire.pagination';
     }
 
-    public function destroy(int $event_id)
+    public function destroy(int $event_id): void
     {
         $event = Event::find($event_id);
         try {
@@ -51,7 +51,7 @@ class EventTable extends Component
         }
     }
 
-    public function publish(int $event_id)
+    public function publish(int $event_id): void
     {
         $event = Event::find($event_id);
         try {
@@ -65,7 +65,7 @@ class EventTable extends Component
         }
     }
 
-    public function unpublish(int $event_id)
+    public function unpublish(int $event_id): void
     {
         $event = Event::find($event_id);
         try {
