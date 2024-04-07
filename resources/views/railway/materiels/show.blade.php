@@ -106,6 +106,14 @@
                         <div class="tab-pane fade show active" id="technical" role="tabpanel">
                             @include('components.railway.engine.technical', ['engine' => $engine])
                         </div>
+                        <div class="tab-pane fade" id="gestion" role="tabpanel">
+                            @include('components.railway.engine.gestion', ['engine' => $engine])
+                        </div>
+                        @if($engine->in_shop)
+                            <div class="tab-pane fade" id="shop" role="tabpanel">
+                                @include('components.railway.engine.shop', ['engine' => $engine])
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
