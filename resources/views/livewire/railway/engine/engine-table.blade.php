@@ -44,7 +44,18 @@
                             <span class="badge badge-light-{{ $engine->active ? 'success' : 'danger' }}">{{ $engine->active ? 'Active' : 'Inactif' }}</span>
                         </td>
                         <td>
-
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{{ route('railway.materiels.show', $engine) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer le matériel">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{{ route('railway.materiels.edit', $engine) }}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edité le matériel">
+                                    <i class="fa-solid fa-edit"></i>
+                                </a>
+                                <button wire:click="destroy({{ $engine->id }})" onclick="confirm('Voulez-vous supprimer ce matériel ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le matériel">
+                                    <i class="fa-solid fa-trash" wire:loading.remove wire:target="destroy({{ $engine->id }})"></i>
+                                    <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="destroy({{ $engine->id }})"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

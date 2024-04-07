@@ -7,5 +7,8 @@ Route::prefix('railway')->as('railway.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Railway\MaterielController::class, 'index'])->name('index');
         Route::get('create', [\App\Http\Controllers\Railway\MaterielController::class, 'create'])->name('create');
         Route::post('create', [\App\Http\Controllers\Railway\MaterielController::class, 'store'])->name('store');
+        Route::get('{engine}', [\App\Http\Controllers\Railway\MaterielController::class, 'show'])->name('show');
+        Route::get('{engine}/edit', [\App\Http\Controllers\Railway\MaterielController::class, 'edit'])->name('edit');
+        Route::put('{engine}/edit', [\App\Http\Controllers\Railway\MaterielController::class, 'update'])->name('update');
     });
 });
