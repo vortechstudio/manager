@@ -11,6 +11,7 @@
         "atymic/twitter": "3.2",
         "barryvdh/laravel-dompdf": "^2.0",
         "erlandmuchasaj/laravel-gzip": "^1.0",
+        "ginocampra/laravel-leaflet": "^1.0",
         "graham-campbell/github": "^12.4",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.4",
