@@ -81,6 +81,30 @@ class HubController extends Controller
     public function show(RailwayGare $gare)
     {
         $gare = $gare->load('hub', 'weather');
-        return view('railway.hubs.show', compact('gare'));
+
+        $options = [
+            'center' => [
+                'lat' => $gare->latitude,
+                'lng' => $gare->longitude
+            ],
+            'googleview' => true,
+            'zoom' => 18,
+            'zoomControl' => true,
+            'minZoom' => 3,
+            'maxZoom' => 18,
+        ];
+
+        $initialMarkers = [
+            [
+                'position' => [
+                    'lat' => $gare->latitude,
+                    'lng' => $gare->longitude
+                ],
+                'draggable' => false,
+                'title' => $gare->name
+            ],
+        ];
+
+        return view('railway.hubs.show', compact('gare', 'options', 'initialMarkers'));
     }
 }
