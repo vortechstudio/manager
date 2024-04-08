@@ -51,6 +51,28 @@ class HubTable extends Component
         }
     }
 
+    public function disabled(int $id): void
+    {
+        try {
+            $gare = RailwayGare::find($id);
+            $gare->hub()->update(['active' => false]);
+            $this->alert('success', 'Gare inactiver avec succès');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
+    public function enabled(int $id): void
+    {
+        try {
+            $gare = RailwayGare::find($id);
+            $gare->hub()->update(['active' => true]);
+            $this->alert('success', 'Gare activer avec succès');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
     public function render()
     {
         return view('livewire.railway.hubs.hub-table', [

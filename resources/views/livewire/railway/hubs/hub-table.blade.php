@@ -70,6 +70,12 @@
                                 <a href="{{ route('railway.hubs.show', $gare) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer la Gare">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
+                                @if($gare->is_hub)
+                                    <button @if($gare->hub->active) wire:click="disabled({{ $gare->id }})" @else wire:click="enabled({{ $gare->id }})" @endif class="btn btn-sm btn-icon {{ $gare->hub->active ? 'btn-outline btn-outline-danger' : 'btn-outline btn-outline-success' }}" data-bs-toggle="tooltip" data-bs-title="{{ $gare->hub->active ? 'Inactiver le système' : 'Activer le système' }}">
+                                        <i class="fa-solid {{ $gare->hub->active ? 'fa-times' : 'fa-check' }}" wire:loading.remove wire:target="{{ $gare->hub->active ? 'disabled' : 'enabled' }}"></i>
+                                        <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="{{ $gare->hub->active ? 'disabled' : 'enabled' }}"></i>
+                                    </button>
+                                @endif
                                 <button wire:click="destroy({{ $gare->id }})" onclick="confirm('Voulez-vous supprimer cette gare ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer la gare">
                                     <i class="fa-solid fa-trash" wire:loading.remove wire:target="destroy({{ $gare->id }})"></i>
                                     <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="destroy({{ $gare->id }})"></i>
