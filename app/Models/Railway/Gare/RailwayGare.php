@@ -19,6 +19,7 @@ class RailwayGare extends Model
     protected $appends = [
         'is_hub',
         'type_gare_string',
+        'type_equipement_string',
     ];
 
     public function weather()
@@ -50,6 +51,34 @@ class RailwayGare extends Model
     public function getIsHubAttribute(): bool
     {
         return $this->hub()->count() != 0;
+    }
+
+    public function getTypeEquipementIconAttribute($equipement): string
+    {
+        return match ($equipement) {
+            'toilette' => 'fa-restroom',
+            'info_sonore' => 'fa-volume-up',
+            'info_visuel' => 'fa-eye',
+            'ascenceurs' => 'fa-elevator',
+            'escalator' => 'fa-stairs',
+            'guichets' => 'fa-ticket',
+            'boutique' => 'fa-shop',
+            'restaurant' => 'fa-utensils',
+        };
+    }
+
+    public function getTypeEquipementStringAttribute($equipement): string
+    {
+        return match ($equipement) {
+            'toilette' => 'Toilette',
+            'info_sonore' => 'Information Sonore',
+            'info_visuel' => 'Information visuelle',
+            'ascenceurs' => 'Ascenceurs',
+            'escalator' => 'Escalateurs',
+            'guichets' => 'Guichets',
+            'boutique' => 'Boutique',
+            'restaurant' => 'Restaurant',
+        };
     }
 
     public function formatIsHub()
