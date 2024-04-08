@@ -213,7 +213,7 @@ class SystemCreateCommand extends Command
 
         $transports = multiselect(
             label: 'Selectionner les types de transport acceptées dans cette gare',
-            options: ['ter', 'tgv', 'intercity', 'tram', 'bus', 'metro']
+            options: ['ter' => 'TER', 'tgv' => 'TGV', 'intercity' => 'INTERCITY', 'bus' => 'BUS', 'metro' => 'METRO'],
         );
 
         if ($type_gare == 'large' || $type_gare == 'terminus') {

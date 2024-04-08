@@ -67,7 +67,7 @@
         <div class="separator separator-2 border-gray-300 my-3"></div>
         @foreach(json_decode($gare->transports, true) as $transport)
             <div class="symbol symbol-50px symbol-2by3 me-2">
-                <img src="{{ Storage::path('icons/railway/transport/logo_'.$transport.'.svg') }}" alt="">
+                <img src="{{ Storage::url('icons/railway/transport/logo_'.$transport.'.svg') }}" alt="">
             </div>
         @endforeach
     </div>

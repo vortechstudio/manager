@@ -43,23 +43,29 @@
                             <span class="form-label mb-2">Transport accepté</span>
                             <x-form.checkbox
                                 name="transports[]"
+                                value="ter"
                                 label="Ter" />
                             <x-form.checkbox
                                 name="transports[]"
+                                value="tgv"
                                 label="Tgv" />
                             <x-form.checkbox
                                 name="transports[]"
+                                value="intercity"
                                 label="Intercité" />
                             <x-form.checkbox
                                 name="transports[]"
+                                value="tram"
                                 label="Tram" />
 
                             <x-form.checkbox
                                 name="transports[]"
+                                value="bus"
                                 label="Bus" />
 
                             <x-form.checkbox
                                 name="transports[]"
+                                value="metro"
                                 label="Metro" />
                         </div>
                     </div>

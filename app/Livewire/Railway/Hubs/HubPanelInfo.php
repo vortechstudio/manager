@@ -56,6 +56,8 @@ class HubPanelInfo extends Component
         } catch (\Exception $e) {
             $this->alert('error', 'Une erreur est survenue');
         }
+
+        return redirect()->route('railway.hubs.index');
     }
 
     public function render()
