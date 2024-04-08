@@ -17,6 +17,7 @@
     @yield("styles")
     @stack("styles")
     <wireui:scripts />
+    @laravelPWA
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->

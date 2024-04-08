@@ -16,6 +16,7 @@
     <link href="{{ asset('/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+    @laravelPWA
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -120,11 +121,10 @@
 <!--begin::Javascript-->
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="{{ asset('/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('/js/scripts.bundle.js') }}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/authentication/sign-in/general.js"></script>
 @livewireScripts
 <!--end::Custom Javascript-->
 <!--end::Javascript-->

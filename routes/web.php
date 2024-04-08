@@ -100,6 +100,9 @@ Route::prefix('auth')->as('auth.')->group(function () {
 Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPasswordForm'])
     ->middleware('auth');
 
+Route::get('/offline', function () {
+    return view('laravelpwa::offline');
+});
 Route::get('/test', function () {
 
 });
