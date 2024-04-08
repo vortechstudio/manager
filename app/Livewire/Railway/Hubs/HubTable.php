@@ -40,13 +40,24 @@ class HubTable extends Component
         return 'livewire.pagination';
     }
 
+    public function destroy(int $id): void
+    {
+        try {
+            $gare = RailwayGare::find($id);
+            $gare->delete();
+            $this->alert('success', 'Gare supprimée avec succès');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
     public function render()
     {
         return view('livewire.railway.hubs.hub-table', [
             'gares' => RailwayGare::with('weather', 'hub')
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->orderBy($this->orderField, $this->orderDirection)
-            ->paginate($this->perPage),
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->orderBy($this->orderField, $this->orderDirection)
+                ->paginate($this->perPage),
         ]);
     }
 }
