@@ -77,4 +77,10 @@ class HubController extends Controller
 
         return redirect()->route('railway.hubs.index');
     }
+
+    public function show(RailwayGare $gare)
+    {
+        $gare = $gare->load('hub', 'weather');
+        return view('railway.hubs.show', compact('gare'));
+    }
 }
