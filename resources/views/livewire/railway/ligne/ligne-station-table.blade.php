@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 col-lg-9 mb-5">
+    <div class="col-sm-12 col-lg-9 mb-5" x-data="{addStation: false}">
         <div class="d-flex flex-row align-items-end mb-5">
             <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px me-5" id="perPage">
                 <option value="10">10</option>
@@ -31,7 +31,36 @@
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
-            <a href="#addStation" data-bs-toggle="modal" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Nouvelle station</a>
+            <button x-on:click="addStation = ! addStation" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Nouvelle station</button>
+        </div>
+        <div x-show="addStation">
+            <form action="" wire:submit="save" method="POST">
+                @csrf
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3 class="card-title">Nouvelle station</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-10">
+                            <label for="railway_gare_id" class="form-label required">Type de matériel</label>
+                            <div wire:ignore.self>
+                                <select wire:model="railway_gare_id" name="railway_gare_id" id="railway_gare_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner une gare---" required>
+                                    <option></option>
+                                    @foreach(\App\Models\Railway\Gare\RailwayGare::all() as $gare)
+                                        <option value="{{ $gare->id }}">{{ $gare->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <span wire:loading.remove><i class="fa-solid fa-check me-3"></i> Valider</span>
+                            <span wire:loading><i class="fa-solid fa-spinner fa-spin-pulse"></i> Validation en cours...</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
             <div class="table-loading-message">
@@ -76,44 +105,6 @@
         </div>
         {{ $stations->links() }}
     </div>
-    <div class="modal fade" tabindex="-1" id="addStation">
-        <form wire:submit="save" method="POST">
-            @csrf
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Nouvelle Station</h3>
-
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                        </div>
-                        <!--end::Close-->
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="mb-10">
-                            <label for="railway_gare_id" class="form-label required">Type de matériel</label>
-                            <select wire:model="railway_gare_id" name="railway_gare_id" id="railway_gare_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner une gare---" required>
-                                <option></option>
-                                @foreach(\App\Models\Railway\Gare\RailwayGare::all() as $gare)
-                                    <option value="{{ $gare->id }}">{{ $gare->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">
-                            <span wire:loading.remove><i class="fa-solid fa-check me-3"></i> Valider</span>
-                            <span wire:loading><i class="fa-solid fa-spinner fa-spin-pulse"></i> Validation en cours...</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 
 
@@ -121,6 +112,10 @@
     <script type="text/javascript">
         document.querySelectorAll("[data-control='select2']").forEach(select => {
             $(select).select2()
+            $(select).on('change', e => {
+                let data = $(select).val()
+                @this.set('railway_gare_id', data)
+            })
         })
     </script>
 @endpush
