@@ -22,7 +22,7 @@ class LigneStationTable extends Component
 
     public int $perPage = 10;
 
-    public int $railway_gare_id;
+    public int $railway_gare_id = 0;
 
     protected $queryString = [
         'orderField' => ['except' => 'id'],
@@ -72,6 +72,9 @@ class LigneStationTable extends Component
                 $station->update([
                     'time' => (new LigneStationAction())->calculTemps($distance, $vitesse),
                     'distance' => $distance,
+                ]);
+                $this->ligne->update([
+                    'time_min' => $this->ligne->time_min + $station->time,
                 ]);
 
             } else {
