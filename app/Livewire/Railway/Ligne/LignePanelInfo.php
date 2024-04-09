@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Railway\Ligne;
 
+use App\Actions\Railway\LigneAction;
 use App\Models\Railway\Ligne\RailwayLigne;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -56,6 +57,42 @@ class LignePanelInfo extends Component
             $this->alert('success', 'La ligne a bien été supprimée');
         }catch (\Exception $exception) {
             $this->alert('error', 'Erreur lors de la suppression de la ligne');
+        }
+    }
+
+    public function distance()
+    {
+        try {
+            $sum = $this->ligne->stations()->sum('distance');
+
+            $this->ligne->distance = $sum;
+            $this->ligne->save();
+            $this->ligne->refresh();
+
+            $this->alert('success', 'La distance a bien été mise à jour');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Erreur lors de la mise à jour de la distance');
+        }
+    }
+
+    public function pricing()
+    {
+        try {
+            if ($this->ligne->distance == 0) {
+                $this->alert('warning', $this->ligne->name, [
+                    'text' => 'Veuillez effectuer le calcule de distance avant !',
+                ]);
+            } else {
+                $this->ligne->update([
+                    'price' => (new LigneAction())->calculatePrice($this->ligne),
+                ]);
+
+                $this->alert('success', $this->ligne->name, [
+                    'text' => 'Le prix de la ligne à bien été calculer',
+                ]);
+            }
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Erreur lors du calcul du prix de la ligne');
         }
     }
 
