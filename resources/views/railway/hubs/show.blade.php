@@ -11,10 +11,10 @@
         sticky="true" />
 
     <div class="row">
-        <div class="col-sm-12 col-lg-3 mb-5">
+        <div class="col-sm-12 col-lg-4 mb-5">
             <livewire:railway.hubs.hub-panel-info :gare="$gare" />
         </div>
-        <div class="col-sm-12 col-lg-9">
+        <div class="col-sm-12 col-lg-8">
             <div class="card shadow-lg" x-data="{card_title: 'Localisation'}">
                 <div class="card-header">
                     <div class="card-title" x-text="card_title"></div>
@@ -38,7 +38,7 @@
                         </div>
                         @if($gare->is_hub)
                             <div class="tab-pane fade" id="lignes" role="tabpanel">
-
+                                <livewire:railway.hubs.hub-ligne-table :gare="$gare" />
                             </div>
                         @endif
                     </div>
