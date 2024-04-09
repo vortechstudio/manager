@@ -31,7 +31,7 @@ class LigneController extends Controller
 
         try {
             RailwayLigne::create([
-                'name' => RailwayGare::find($request->get('start_gare_id'))->name . '-' . RailwayGare::find($request->get('end_gare_id'))->name,
+                'name' => RailwayGare::find($request->get('start_gare_id'))->name.'-'.RailwayGare::find($request->get('end_gare_id'))->name,
                 'price' => 0,
                 'distance' => 0,
                 'time_min' => 0,
@@ -71,25 +71,47 @@ class LigneController extends Controller
             'maxZoom' => 18,
         ];
 
-        $initialMarkers = [
-            [
-                'position' => [
-                    'lat' => $ligne->start->latitude,
-                    'lng' => $ligne->start->longitude,
-                ],
-                'draggable' => false,
-                'title' => $ligne->start->name,
+        $initialMarkers = collect();
+        $initPolylines = collect();
+        $initialMarkers->push([
+            'position' => [
+                'lat' => $ligne->start->latitude,
+                'lng' => $ligne->start->longitude,
             ],
-            [
-                'position' => [
-                    'lat' => $ligne->end->latitude,
-                    'lng' => $ligne->end->longitude,
-                ],
-                'draggable' => false,
-                'title' => $ligne->end->name,
-            ],
-        ];
+            'draggable' => false,
+            'title' => $ligne->start->name,
+        ]);
 
-        return view('railway.lignes.show', compact('ligne', 'options', 'initialMarkers'));
+        $initialMarkers->push([
+            'position' => [
+                'lat' => $ligne->end->latitude,
+                'lng' => $ligne->end->longitude,
+            ],
+            'draggable' => false,
+            'title' => $ligne->end->name,
+        ]);
+
+        if ($ligne->stations()->count() > 0) {
+            foreach ($ligne->stations as $station) {
+                $initialMarkers->push([
+                    'position' => [
+                        'lat' => $station->gare->latitude,
+                        'lng' => $station->gare->longitude,
+                    ],
+                    'draggable' => false,
+                    'title' => $station->gare->name,
+                ]);
+
+                $initPolylines->push([
+                    [
+                        $station->gare->latitude,
+                        $station->gare->longitude,
+                    ],
+                ]);
+            }
+
+        }
+
+        return view('railway.lignes.show', compact('ligne', 'options', 'initialMarkers', 'initPolylines'));
     }
 }
