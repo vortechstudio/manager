@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "ext-curl": "*",
+        "anthonymartin/geo-location": "^2.0",
         "arcanedev/log-viewer": "^10.0",
         "atymic/twitter": "3.2",
         "barryvdh/laravel-dompdf": "^2.0",

@@ -85,7 +85,7 @@ class HubController extends Controller
         $options = [
             'center' => [
                 'lat' => $gare->latitude,
-                'lng' => $gare->longitude
+                'lng' => $gare->longitude,
             ],
             'googleview' => true,
             'zoom' => 18,

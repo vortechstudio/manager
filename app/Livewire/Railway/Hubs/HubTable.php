@@ -77,7 +77,7 @@ class HubTable extends Component
     {
         return view('livewire.railway.hubs.hub-table', [
             'gares' => RailwayGare::with('weather', 'hub')
-                ->where('name', 'like', '%' . $this->search . '%')
+                ->when($this->search, fn ($query, $search) => $query->where('name', 'like', '%' . $search . '%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);
