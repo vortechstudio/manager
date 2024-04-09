@@ -32,7 +32,7 @@
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="map" role="tabpanel">
-                            <x-laravel-map :options="$options" :initial-markers="$initialMarkers" />
+                            <x-laravel-map :options="$options" :initial-markers="$initialMarkers" :initial-polylines="$initPolylines" />
                         </div>
                         <div class="tab-pane fade" id="stations" role="tabpanel">
                             <livewire:railway.ligne.ligne-station-table :ligne="$ligne" />
