@@ -24,7 +24,6 @@ class RailwayLigne extends Model
     ];
 
     protected $appends = [
-        'name',
         'status_label',
     ];
 
@@ -40,7 +39,7 @@ class RailwayLigne extends Model
 
     public function hub()
     {
-        return $this->belongsTo(RailwayHub::class, 'hub_id');
+        return $this->belongsTo(RailwayHub::class, 'railway_hub_id');
     }
 
     public function stations()
@@ -48,10 +47,6 @@ class RailwayLigne extends Model
         return $this->hasMany(RailwayLigneStation::class);
     }
 
-    public function getNameAttribute()
-    {
-        return $this->start->name . ' - ' . $this->end->name;
-    }
 
     public function getStatusLabelAttribute()
     {
