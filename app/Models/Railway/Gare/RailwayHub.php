@@ -25,7 +25,7 @@ class RailwayHub extends Model
 
     public function gare()
     {
-        return $this->belongsTo(RailwayGare::class, 'gare_id');
+        return $this->belongsTo(RailwayGare::class, 'railway_gare_id');
     }
 
     public function lignes()
