@@ -6,6 +6,8 @@ use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
+use App\Models\Railway\Gare\RailwayHub;
+use App\Models\Railway\Ligne\RailwayLigne;
 use App\Services\SncfService;
 use Illuminate\Console\Command;
 
@@ -14,6 +16,8 @@ use function Laravel\Prompts\alert;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\intro;
 use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\note;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -28,6 +32,7 @@ class SystemCreateCommand extends Command
         match ($this->argument('action')) {
             'engine' => $this->createEngine(),
             'gare' => $this->createGare(),
+            'ligne' => $this->createLigne(),
         };
     }
 
@@ -271,5 +276,85 @@ class SystemCreateCommand extends Command
 
         info('La gare a bien été créée');
 
+    }
+
+    private function createLigne()
+    {
+        intro("Création d'une ligne");
+        note("Veillez à completer la ligne dans sa fiche à la fin de cette interface");
+
+        $hub_id = select(
+            label: 'Hub Affilier ?',
+            options: $this->formatHub(),
+            scroll: 100
+        );
+
+        $gare_depart = select(
+            label: 'Quel est la gare de départ ?',
+            options: $this->formatGaresDepart($hub_id)
+        );
+
+        $gare_arrive = search(
+            label: "Quel est la gare d'arrivée ?",
+            options: fn (string $value) => strlen($value) > 0 ?
+                $this->formatGare($value) :
+                [],
+            scroll: 10
+        );
+
+        $type_ligne = \Laravel\Prompts\select(
+            label: 'Quel est le type de ligne ?',
+            options: ['ter', 'tgv', 'intercite', 'transilien', 'tram', 'metro', 'bus'],
+            default: 'ter'
+        );
+
+        $visual = select(
+            label: 'Mode de production de cette ligne',
+            options: ['beta', 'prod'],
+            hint: 'Si prod est selectionner, le matériel est disponible en béta et en prod simultanément'
+        );
+
+        $ligne = RailwayLigne::create([
+            'price' => 0,
+            'distance' => 0,
+            'time_min' => 0,
+            'active' => false,
+            'status' => $visual,
+            'type' => $type_ligne,
+            'start_gare_id' => RailwayGare::where('name', 'like', '%'.$gare_depart.'%')->first()->id,
+            'end_gare_id' => RailwayGare::where('name', 'like', '%'.$gare_arrive.'%')->first()->id,
+            'railway_hub_id' => RailwayGare::where('name', 'like', '%'.$hub_id.'%')->first()->hub->id,
+        ]);
+
+        info('La ligne a bien été créée');
+    }
+
+    private function formatHub(): array
+    {
+        $hubs = RailwayHub::with('gare')->where('active', true)->get();
+        $hubs_array = [];
+        foreach ($hubs as $hub) {
+            $hubs_array[$hub->id] = $hub->gare->name;
+        }
+
+        return $hubs_array;
+    }
+
+    private function formatGare($value): array
+    {
+        $gares = RailwayGare::where('name', 'like', '%'.$value.'%')->get();
+        $gares_array = [];
+        foreach ($gares as $gare) {
+            $gares_array[$gare->id] = $gare->name;
+        }
+
+        return $gares_array;
+    }
+
+    private function formatGaresDepart(int|string $hub_id): array
+    {
+        $gare = RailwayGare::where('name', 'LIKE', '%'.$hub_id.'%')->first();
+
+        return [$gare->hub->id => $gare->name];
     }
 }
