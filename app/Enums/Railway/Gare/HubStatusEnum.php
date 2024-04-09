@@ -2,11 +2,11 @@
 
 namespace App\Enums\Railway\Gare;
 
-enum HubStatusEnum
+enum HubStatusEnum: string
 {
-    const NULL = '';
+    case NULL = '';
 
-    const BETA = 'beta';
+    case BETA = 'beta';
 
-    const PROD = 'production';
+    case PROD = 'production';
 }
