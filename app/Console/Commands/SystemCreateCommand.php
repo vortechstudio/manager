@@ -315,6 +315,7 @@ class SystemCreateCommand extends Command
         );
 
         $ligne = RailwayLigne::create([
+            'name' => $gare_depart.'-'.$gare_arrive,
             'price' => 0,
             'distance' => 0,
             'time_min' => 0,
