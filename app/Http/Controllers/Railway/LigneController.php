@@ -53,7 +53,43 @@ class LigneController extends Controller
 
             return redirect()->back();
         }
+    }
 
+    public function show(RailwayLigne $ligne)
+    {
+        $ligne = $ligne->load('start', 'end', 'stations', 'hub');
 
+        $options = [
+            'center' => [
+                'lat' => $ligne->start->latitude,
+                'lng' => $ligne->start->longitude,
+            ],
+            'googleview' => true,
+            'zoom' => 11,
+            'zoomControl' => true,
+            'minZoom' => 3,
+            'maxZoom' => 18,
+        ];
+
+        $initialMarkers = [
+            [
+                'position' => [
+                    'lat' => $ligne->start->latitude,
+                    'lng' => $ligne->start->longitude,
+                ],
+                'draggable' => false,
+                'title' => $ligne->start->name,
+            ],
+            [
+                'position' => [
+                    'lat' => $ligne->end->latitude,
+                    'lng' => $ligne->end->longitude,
+                ],
+                'draggable' => false,
+                'title' => $ligne->end->name,
+            ],
+        ];
+
+        return view('railway.lignes.show', compact('ligne', 'options', 'initialMarkers'));
     }
 }
