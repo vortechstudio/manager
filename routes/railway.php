@@ -20,4 +20,13 @@ Route::prefix('railway')->as('railway.')->group(function () {
         Route::get('{gare}/edit', [\App\Http\Controllers\Railway\HubController::class, 'edit'])->name('edit');
         Route::put('{gare}/edit', [\App\Http\Controllers\Railway\HubController::class, 'update'])->name('update');
     });
+
+    Route::prefix('lignes')->as('lignes.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\LigneController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\Railway\LigneController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Railway\LigneController::class, 'store'])->name('store');
+        Route::get('{ligne}', [\App\Http\Controllers\Railway\LigneController::class, 'show'])->name('show');
+        Route::get('{ligne}/edit', [\App\Http\Controllers\Railway\LigneController::class, 'edit'])->name('edit');
+        Route::put('{ligne}/edit', [\App\Http\Controllers\Railway\LigneController::class, 'update'])->name('update');
+    });
 });
