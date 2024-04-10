@@ -11,8 +11,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('type')->nullable();
             $table->string('action')->nullable();
-            $table->integer('action_count');
+            $table->integer('action_count')->default(0);
         });
     }
 

@@ -2,17 +2,17 @@
 
 namespace App\Models\User;
 
-use App\Models\Railway\Config\RailwayQuest;
+use App\Models\Railway\Config\RailwayLevelReward;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserQuests extends Model
+class UserReward extends Model
 {
     public $timestamps = false;
     protected $guarded = [];
 
     protected $casts = [
-        'completed_at' => 'timestamp',
+        'awarded_at' => 'timestamp',
     ];
 
     protected function user(): BelongsTo
@@ -20,8 +20,8 @@ class UserQuests extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function railwayQuest(): BelongsTo
+    protected function railwayLevelReward(): BelongsTo
     {
-        return $this->belongsTo(RailwayQuest::class);
+        return $this->belongsTo(RailwayLevelReward::class);
     }
 }
