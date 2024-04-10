@@ -27,7 +27,7 @@ class MenuSeeder extends Seeder
         Menu::set('manager_head', 'Matériels Roulants', '/railway/materiels', 12);
         Menu::set('manager_head', 'Gares & Hubs', '/railway/hubs', 12);
         Menu::set('manager_head', 'Lignes', '/railway/lignes', 12);
-        Menu::set('manager_head', 'Badges & Récompenses', '/railway/badges', 12);
+        Menu::set('manager_head', 'Quêtes', '/railway/quests', 12);
         Menu::set('manager_head', 'Service de location', '/railway/location', 12);
         Menu::set('manager_head', 'Service bancaire', '/railway/finance', 12);
         Menu::set('manager_head', 'Recherches & Développements', '/railway/recherches', 12);
