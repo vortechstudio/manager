@@ -4,14 +4,17 @@ namespace App\Console\Commands;
 
 use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
+use App\Enums\Railway\Config\LevelRewardTypeEnum;
+use App\Models\Railway\Config\RailwayLevel;
+use App\Models\Railway\Config\RailwayLevelReward;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
 use App\Models\Railway\Ligne\RailwayLigne;
 use App\Services\SncfService;
 use Illuminate\Console\Command;
-
 use RakibDevs\Weather\Weather;
+
 use function Laravel\Prompts\alert;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\intro;
@@ -33,6 +36,7 @@ class SystemCreateCommand extends Command
             'engine' => $this->createEngine(),
             'gare' => $this->createGare(),
             'ligne' => $this->createLigne(),
+            'level' => $this->generateLevel(),
         };
     }
 
@@ -281,7 +285,7 @@ class SystemCreateCommand extends Command
     private function createLigne()
     {
         intro("Création d'une ligne");
-        note("Veillez à completer la ligne dans sa fiche à la fin de cette interface");
+        note('Veillez à completer la ligne dans sa fiche à la fin de cette interface');
 
         $hub_id = select(
             label: 'Hub Affilier ?',
@@ -357,5 +361,104 @@ class SystemCreateCommand extends Command
         $gare = RailwayGare::where('name', 'LIKE', '%'.$hub_id.'%')->first();
 
         return [$gare->hub->id => $gare->name];
+    }
+
+    private function generateLevel()
+    {
+        $this->generateRewards();
+        $levelMax = text(
+            label: 'Nombre de niveau maximum ?',
+        );
+
+        $xpStart = text(
+            label: 'XP de depart ?',
+        );
+
+        info('Réinitialisation des niveaux');
+
+        foreach (RailwayLevel::all() as $level) {
+            $level->delete();
+        }
+
+        info('Création des niveaux');
+
+        for ($i = 0; $i <= $levelMax; $i++) {
+            RailwayLevel::create([
+                'id' => $i,
+                'exp_required' => $xpStart * ($i + config('railway.coef_level')),
+                'railway_level_reward_id' => RailwayLevelReward::all()->random()->id,
+            ]);
+        }
+    }
+
+    private function generateRewards()
+    {
+        $bases = collect();
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::ARGENT->name),
+            'value' => intval(round(rand(1000, 9999), -2, PHP_ROUND_HALF_UP)),
+
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::AUDIT_EXT->name),
+            'value' => intval(round(rand(2, 10), 0, PHP_ROUND_HALF_UP)),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::AUDIT_INT->name),
+            'value' => intval(round(rand(2, 10), 0, PHP_ROUND_HALF_UP)),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::ENGINE->name),
+            'value' => 0,
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::ENGINE_R->name),
+            'value' => 0,
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::IMPOT->name),
+            'value' => intval(round(rand(1000, 10000), -2, PHP_ROUND_HALF_UP)),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::RD_COAST->name),
+            'value' => intval(round(rand(1000, 10000), -2, PHP_ROUND_HALF_UP)),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::RD_RATE->name),
+            'value' => round(random_float(0, 0.5), 2, PHP_ROUND_HALF_ODD),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::SIMULATION->name),
+            'value' => intval(round(rand(2, 10), 0, PHP_ROUND_HALF_UP)),
+        ]);
+
+        $bases->push([
+            'type' => \Str::lower(LevelRewardTypeEnum::TPOINT->name),
+            'value' => intval(round(rand(5, 20), 2, PHP_ROUND_HALF_UP)),
+        ]);
+
+        foreach (RailwayLevelReward::all() as $reward) {
+            $reward->delete();
+        }
+
+        \DB::statement('ALTER TABLE `railway_level_rewards` AUTO_INCREMENT = 0;');
+
+        foreach ($bases as $reward) {
+            RailwayLevelReward::create([
+                'name' => \Str::ucfirst($reward['type']),
+                'type' => LevelRewardTypeEnum::tryFrom(\Str::lower($reward['type']))->value,
+                'action' => 'reward_'.$reward['type'],
+                'action_count' => $reward['value'],
+            ]);
+        }
     }
 }
