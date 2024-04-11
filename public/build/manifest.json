@@ -290,7 +290,7 @@
     "src": "node_modules/html2canvas/dist/html2canvas.esm.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-5d6c3574.css",
+    "file": "assets/app-a358bae9.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -302,7 +302,7 @@
     "css": [
       "assets/app-6909daa0.css"
     ],
-    "file": "assets/app-918380e0.js",
+    "file": "assets/app-bdfe9afe.js",
     "imports": [
       "_axios-4d564c32.js",
       "_jquery-ded6ffb4.js",
