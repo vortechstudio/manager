@@ -9,7 +9,11 @@ jobs:
   deploy_staging:
     runs-on: ubuntu-latest
     steps:
-      - name: Invoke deployment hook
-        uses: distributhor/workflow-webhook@v3
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          host: ${{ secrets.STAGE_HOST }}
+          username: ${{ secrets.STAGE_USERNAME }}
+          password: ${{ secrets.STAGE_PASSWORD }}
+          port: ${{ secrets.STAGE_PORT }}
+          script: cd /var/www/manager.vortechstudio.ovh && sudo sh update-staging.sh
