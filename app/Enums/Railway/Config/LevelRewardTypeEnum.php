@@ -4,21 +4,21 @@ namespace App\Enums\Railway\Config;
 
 enum LevelRewardTypeEnum: string
 {
-    case ARGENT = 'Argent';
-    case TPOINT = 'TPoint';
-    case RD_RATE = 'Taux de recherche';
-    case RD_COAST = 'App de recherche';
-    case AUDIT_INT = 'Audit Interne';
-    case AUDIT_EXT = 'Audit Externe';
-    case SIMULATION = 'Simulation';
-    case IMPOT = 'Crédit Impot';
-    case ENGINE = 'Matériel Roulant';
-    case ENGINE_R = 'reskin';
+    case ARGENT = 'argent';
+    case TPOINT = 'tpoint';
+    case RD_RATE = 'rd_rate';
+    case RD_COAST = 'rd_coast';
+    case AUDIT_INT = 'audit_int';
+    case AUDIT_EXT = 'audit_ext';
+    case SIMULATION = 'simulation';
+    case IMPOT = 'impot';
+    case ENGINE = 'engine';
+    case ENGINE_R = 'engine_r';
 
 
-    public function getLabel(): string
+    public static function getLabel($case): string
     {
-        return match ($this) {
+        return match ($case) {
             self::ARGENT => 'Argent',
             self::TPOINT => 'TPoint',
             self::RD_RATE => 'Taux de recherche',
@@ -32,9 +32,9 @@ enum LevelRewardTypeEnum: string
         };
     }
 
-    public function getValue(): string
+    public static function getValue($case): string
     {
-        return match ($this) {
+        return match ($case) {
             self::ARGENT => 'argent',
             self::TPOINT => 'TPoint',
             self::RD_RATE => 'research_rate',
@@ -48,9 +48,9 @@ enum LevelRewardTypeEnum: string
         };
     }
 
-    public function getIcon(): string
+    public static function getIcon($case): string
     {
-        return match ($this) {
+        return match ($case) {
             self::ARGENT => \Storage::url('icons/railway/argent.png'),
             self::TPOINT => \Storage::url('icons/railway/tpoint.png'),
             self::RD_RATE => \Storage::url('icons/railway/rate_research.png'),

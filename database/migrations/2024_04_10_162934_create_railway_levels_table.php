@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('railway_levels', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->primary();
             $table->bigInteger('exp_required')->default(0);
             $table->foreignId('railway_level_reward_id')->constrained('railway_level_rewards')->cascadeOnDelete()->cascadeOnUpdate();
         });
