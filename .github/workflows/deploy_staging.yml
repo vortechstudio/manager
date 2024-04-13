@@ -12,8 +12,8 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.STAGE_HOST }}
-          username: ${{ secrets.STAGE_USERNAME }}
-          password: ${{ secrets.STAGE_PASSWORD }}
-          port: ${{ secrets.STAGE_PORT }}
-          script: cd /var/www/manager.vortechstudio.ovh && sudo sh update-staging.sh
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: cd /www/wwwroot/manager.vortechstudio.ovh && sudo sh update-staging.sh
