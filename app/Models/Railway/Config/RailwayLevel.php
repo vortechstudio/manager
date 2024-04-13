@@ -10,8 +10,8 @@ class RailwayLevel extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    protected function railwayLevelReward(): BelongsTo
+    public function reward(): BelongsTo
     {
-        return $this->belongsTo(RailwayLevelReward::class);
+        return $this->belongsTo(RailwayLevelReward::class, 'railway_level_reward_id', 'id');
     }
 }

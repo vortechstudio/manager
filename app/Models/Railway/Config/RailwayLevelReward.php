@@ -4,6 +4,7 @@ namespace App\Models\Railway\Config;
 
 use App\Enums\Railway\Config\LevelRewardTypeEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RailwayLevelReward extends Model
 {
@@ -13,4 +14,9 @@ class RailwayLevelReward extends Model
     protected $casts = [
         'type' => LevelRewardTypeEnum::class,
     ];
+
+    public function levels(): HasMany
+    {
+        return $this->hasMany(RailwayLevel::class);
+    }
 }
