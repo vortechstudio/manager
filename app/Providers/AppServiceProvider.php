@@ -35,5 +35,8 @@ class AppServiceProvider extends ServiceProvider
             return $user->admin;
         });
 
+        Gate::define('viewLogViewer', function (User $user) {
+            return $user->admin;
+        });
     }
 }
