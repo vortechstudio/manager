@@ -4,14 +4,18 @@ namespace App\Console\Commands;
 
 use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
+use App\Actions\Railway\LevelAction;
+use App\Enums\Railway\Config\LevelRewardTypeEnum;
+use App\Models\Railway\Config\RailwayLevel;
+use App\Models\Railway\Config\RailwayLevelReward;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
 use App\Models\Railway\Ligne\RailwayLigne;
 use App\Services\SncfService;
 use Illuminate\Console\Command;
-
 use RakibDevs\Weather\Weather;
+
 use function Laravel\Prompts\alert;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\intro;
@@ -33,6 +37,7 @@ class SystemCreateCommand extends Command
             'engine' => $this->createEngine(),
             'gare' => $this->createGare(),
             'ligne' => $this->createLigne(),
+            'level' => $this->generateLevel(),
         };
     }
 
@@ -281,7 +286,7 @@ class SystemCreateCommand extends Command
     private function createLigne()
     {
         intro("Création d'une ligne");
-        note("Veillez à completer la ligne dans sa fiche à la fin de cette interface");
+        note('Veillez à completer la ligne dans sa fiche à la fin de cette interface');
 
         $hub_id = select(
             label: 'Hub Affilier ?',
@@ -357,5 +362,18 @@ class SystemCreateCommand extends Command
         $gare = RailwayGare::where('name', 'LIKE', '%'.$hub_id.'%')->first();
 
         return [$gare->hub->id => $gare->name];
+    }
+
+    private function generateLevel(): void
+    {
+        $levelMax = text(
+            label: 'Nombre de niveau maximum ?',
+        );
+
+        $xpStart = text(
+            label: 'XP de depart ?',
+        );
+
+        (new LevelAction)->handle($levelMax, $xpStart);
     }
 }

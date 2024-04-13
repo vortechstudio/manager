@@ -29,4 +29,8 @@ Route::prefix('railway')->as('railway.')->group(function () {
         Route::get('{ligne}/edit', [\App\Http\Controllers\Railway\LigneController::class, 'edit'])->name('edit');
         Route::put('{ligne}/edit', [\App\Http\Controllers\Railway\LigneController::class, 'update'])->name('update');
     });
+
+    Route::prefix('quests')->as('quests.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\QuestController::class, 'index'])->name('index');
+    });
 });
