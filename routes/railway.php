@@ -33,4 +33,13 @@ Route::prefix('railway')->as('railway.')->group(function () {
     Route::prefix('quests')->as('quests.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Railway\QuestController::class, 'index'])->name('index');
     });
+
+    Route::prefix('location')->as('location.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\LocationController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\Railway\LocationController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Railway\LocationController::class, 'store'])->name('store');
+        Route::get('{location}', [\App\Http\Controllers\Railway\LocationController::class, 'show'])->name('show');
+        Route::get('{location}/edit', [\App\Http\Controllers\Railway\LocationController::class, 'edit'])->name('edit');
+        Route::put('{location}/edit', [\App\Http\Controllers\Railway\LocationController::class, 'update'])->name('update');
+    });
 });
