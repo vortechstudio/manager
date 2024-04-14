@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Railway\Config\RailwayRental;
 use Exception;
 use Illuminate\Http\Request;
+use Str;
 
 class LocationController extends Controller
 {
@@ -29,7 +30,7 @@ class LocationController extends Controller
 
         try {
             RailwayRental::create([
-                'uuid' => \Str::uuid(),
+                'uuid' => Str::uuid(),
                 'name' => $request->get('name'),
                 'contract_duration' => $request->get('contract_duration'),
                 'type' => json_encode($request->get('type')),
@@ -40,6 +41,7 @@ class LocationController extends Controller
 
             return redirect()->route('railway.location.index');
         } catch (Exception $exception) {
+            \Log::critical("[LocationController][store] {$exception->getMessage()}", ['exception' => $exception]);
             toastr()
                 ->addError($exception->getMessage());
 
