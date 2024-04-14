@@ -25,7 +25,16 @@
                 <th></th>
             </tr>
             </thead>
-            @if($locations->count() > 0)
+            @empty($locations)
+                <tbody>
+                <tr>
+                    <td colspan="7">
+                        <x-base.is-null
+                            text="Aucun service enregistrées" />
+                    </td>
+                </tr>
+                </tbody>
+            @else
                 <tbody>
                 @foreach($locations as $location)
                     <tr>
@@ -58,15 +67,6 @@
                         </td>
                     </tr>
                 @endforeach
-                </tbody>
-            @else
-                <tbody>
-                <tr>
-                    <td colspan="7">
-                        <x-base.is-null
-                            text="Aucun service enregistrées" />
-                    </td>
-                </tr>
                 </tbody>
             @endif
         </table>

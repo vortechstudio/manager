@@ -20,6 +20,7 @@ class UploadController extends Controller
         return match ($request->type) {
             'engine' => $this->uploadEngine($request),
             'rental' => $this->uploadRental($request),
+            default => abort(404, 'Type inconnu'),
         };
     }
 

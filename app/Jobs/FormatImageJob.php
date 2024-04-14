@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\Github\Issues;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -44,9 +45,19 @@ class FormatImageJob implements ShouldQueue
         $file->save($directoryUpload.'/default.webp');
     }
 
+    /**
+     * @throws \Exception
+     */
     private function handleRental(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
     {
         $file->toWebp(60);
-        $file->save($directoryUpload.'/'.\Str::lower($this->nameFile).'.webp');
+        try {
+            $file->save($directoryUpload.'/'.\Str::lower($this->nameFile).'.webp');
+        } catch (\Exception $exception) {
+            \Log::critical("Error: {$exception->getMessage()}", ['exception' => $exception]);
+            $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            throw new \Exception("Error saving image: {$exception->getMessage()}");
+        }
     }
 }
