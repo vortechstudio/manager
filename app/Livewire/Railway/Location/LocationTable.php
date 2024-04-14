@@ -3,6 +3,8 @@
 namespace App\Livewire\Railway\Location;
 
 use App\Models\Railway\Config\RailwayRental;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -38,6 +40,22 @@ class LocationTable extends Component
     public function paginationView()
     {
         return 'livewire.pagination';
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            $location = RailwayRental::find($id);
+            $location->delete();
+
+            if (Storage::exists('logos/rentals/'.\Str::lower($location->name).'.webp')) {
+                Storage::delete('logos/rentals/'.\Str::lower($location->name).'.webp');
+            }
+
+            $this->alert('success', 'Le service de location a été supprimé');
+        } catch (Exception $exception) {
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
     public function render()

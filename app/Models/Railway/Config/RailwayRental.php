@@ -24,10 +24,10 @@ class RailwayRental extends Model
 
     public function getImageAttribute()
     {
-        if (\Storage::exists('logos/rentals/'.\Str::lower($this->name).'.png')) {
-            return asset('storage/logos/rentals/'.\Str::lower($this->name).'.png');
+        if (\Storage::exists('logos/rentals/'.\Str::lower($this->name).'.webp')) {
+            return \Storage::url('logos/rentals/'.\Str::lower($this->name).'.webp');
         } else {
-            return asset('storage/logos/rentals/default.png');
+            return \Storage::url('logos/rentals/default.png');
         }
     }
 }

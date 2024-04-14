@@ -34,12 +34,22 @@
                                 <div class="symbol symbol-50px symbol-2by3">
                                     <img src="{{ $location->image }}" alt="{{ $location->name }}">
                                 </div>
-                                <span class="fs-2 fw-semibold">{{ $rental->name }}</span>
+                                <span class="fs-2 fw-semibold">{{ $location->name }}</span>
                             </div>
                         </td>
-                        <td><td>{{ $location->contract_duration }} {{ Str::plural("Semaine", $location->contract_duration) }}</td></td>
+                        <td>{{ $location->contract_duration }} {{ Str::plural("Semaine", $location->contract_duration) }}</td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach(json_decode($location->type, true) as $type)
+                                    <div class="symbol symbol-30px symbol-2by3">
+                                        <img src="{{ Storage::url('icons/railway/transport/logo_'.$type.'.svg') }}" alt="" data-bs-toggle="tooltip" data-bs-original-title="{{ Str::ucfirst($type) }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
+                                <a href="{{ route('railway.location.show', $location->id) }}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir le service de location"><i class="fa-solid fa-eye"></i></a>
                                 <button wire:click="destroy({{ $location->id }})" onclick="confirm('Voulez-vous supprimer ce service de location ?') || event.stopImmediatePropagation()" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le service de location">
                                     <i class="fa-solid fa-trash" wire:loading.remove wire:target="destroy({{ $location->id }})"></i>
                                     <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="destroy({{ $location->id }})"></i>

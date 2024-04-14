@@ -10,8 +10,8 @@
     </style>
 @endpush
 
-<div class="image-input image-input-outline {{ $width }}" data-kt-image-input="true" style="background-image: url({{ $default }})">
-    <div class="image-input-wrapper {{ $width }}" style="background-image: url({{ $default }})">
+<div class="image-input image-input-outline {{ $width }}" data-kt-image-input="true" style="background-image: url({{ $default }}); background-position: center; background-size: cover">
+    <div class="image-input-wrapper {{ $width }}" style="background-image: url({{ $default }}); background-position: center; background-size: cover">
         <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
                data-kt-image-input-action="change"
                data-bs-toggle="tooltip"
