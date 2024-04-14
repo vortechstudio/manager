@@ -42,7 +42,7 @@ class ArticleController extends Controller
             'author' => 'required',
             'cercle_id' => 'required',
             'type' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
         ]);
 
         try {
