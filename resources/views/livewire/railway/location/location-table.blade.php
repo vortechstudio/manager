@@ -5,10 +5,9 @@
             <input type="text" class="form-control border-gray-200 h-40px bg-body ps-13 fs-7" wire:model.live.debounce.500ms="search" placeholder="Rechercher un service..." data-kt-search-element="input">
         </div>
         <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px me-5" id="perPage">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            @foreach([10,25,50,100] as $value)
+                <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
         </select>
         <a href="{{ route('railway.location.create') }}" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Nouveau service</a>
     </div>
