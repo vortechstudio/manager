@@ -17,4 +17,17 @@ class RailwayRental extends Model
         'uuid' => 'string',
         'type' => 'array',
     ];
+
+    protected $appends = [
+        'image',
+    ];
+
+    public function getImageAttribute()
+    {
+        if (\Storage::exists('logos/rentals/'.\Str::lower($this->name).'.webp')) {
+            return \Storage::url('logos/rentals/'.\Str::lower($this->name).'.webp');
+        } else {
+            return \Storage::url('logos/rentals/default.png');
+        }
+    }
 }

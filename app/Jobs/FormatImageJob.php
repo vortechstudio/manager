@@ -17,6 +17,7 @@ class FormatImageJob implements ShouldQueue
         public string $filePath,
         public string $directoryUpload,
         public string $sector,
+        public ?string $nameFile = null,
     ) {
     }
 
@@ -27,6 +28,7 @@ class FormatImageJob implements ShouldQueue
         match ($this->sector) {
             'article' => $this->handleArticle($file, $this->directoryUpload),
             'event' => $this->handleEvent($file, $this->directoryUpload),
+            'rental' => $this->handleRental($file, $this->directoryUpload),
         };
     }
 
@@ -40,5 +42,11 @@ class FormatImageJob implements ShouldQueue
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/default.webp');
+    }
+
+    private function handleRental(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/'.\Str::lower($this->nameFile).'.webp');
     }
 }
