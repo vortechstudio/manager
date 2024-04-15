@@ -45,6 +45,7 @@
         "xlsx": "^0.18.5"
     },
     "dependencies": {
-        "@dasundev/livewire-dropzone-styles": "^1.0.7"
+        "@dasundev/livewire-dropzone-styles": "^1.0.7",
+        "newrelic": "^11.15.0"
     }
 }
