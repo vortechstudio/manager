@@ -21,7 +21,7 @@ class ServiceController extends Controller
     {
         return view('social.services.show', [
             'serviceId' => $serviceId,
-            'service' => Service::find($serviceId),
+            'service' => Service::with('versions', 'cercle')->find($serviceId),
         ]);
     }
 
