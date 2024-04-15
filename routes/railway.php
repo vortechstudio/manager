@@ -42,4 +42,8 @@ Route::prefix('railway')->as('railway.')->group(function () {
         Route::get('{location}/edit', [\App\Http\Controllers\Railway\LocationController::class, 'edit'])->name('edit');
         Route::put('{location}/edit', [\App\Http\Controllers\Railway\LocationController::class, 'update'])->name('update');
     });
+
+    Route::prefix('finance')->as('finance.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\FinanceController::class, 'index'])->name('index');
+    });
 });
