@@ -290,7 +290,7 @@
     "src": "node_modules/html2canvas/dist/html2canvas.esm.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-a358bae9.css",
+    "file": "assets/app-de2bc52e.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },

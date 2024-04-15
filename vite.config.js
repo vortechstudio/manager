@@ -16,6 +16,7 @@ export default defineConfig({
         }
     },
     build: {
+        minify: 'esbuild',
         commonjsOptions: {
             transformMixedEsModules: true
         },
