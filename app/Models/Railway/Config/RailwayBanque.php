@@ -49,7 +49,7 @@ class RailwayBanque extends Model
     {
         $this->fluxes()->create([
             'date' => now()->startOfDay(),
-            'interest' => generateRandomFloat($this->interest_min, $this->interest_max),
+            'interest' => random_float($this->interest_min, $this->interest_max),
             'railway_banque_id' => $this->id,
         ]);
     }
