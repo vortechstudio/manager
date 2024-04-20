@@ -5,7 +5,7 @@
 
 @section("content")
     <x-base.toolbar
-        title="Gestion des Services de location"
+        title="Gestion des Services bancaires"
         :breads="array('Railway Manager', 'Gestion des Services bancaires')" />
 
     <livewire:railway.finance.finance-table />
