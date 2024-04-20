@@ -3,6 +3,7 @@
 namespace App\Livewire\Railway\Finance;
 
 use App\Models\Railway\Config\RailwayBanque;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,18 @@ class FinanceTable extends Component
     public string $orderDirection = 'ASC';
 
     public int $perPage = 10;
+
+    public string $name = '';
+
+    public string $description = '';
+
+    public float $interest_min = 0;
+
+    public float $interest_max = 0;
+
+    public float $express_base = 0;
+
+    public float $public_base = 0;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -38,6 +51,49 @@ class FinanceTable extends Component
     public function paginationView()
     {
         return 'livewire.pagination';
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'name' => 'required',
+            'interest_min' => 'required',
+            'interest_max' => 'required',
+            'express_base' => 'required',
+            'public_base' => 'required',
+        ]);
+
+        try {
+            $bank = RailwayBanque::create([
+                'uuid' => \Str::uuid(),
+                'name' => $this->name,
+                'description' => $this->description,
+                'interest_min' => $this->interest_min,
+                'interest_max' => $this->interest_max,
+                'express_base' => $this->express_base,
+                'public_base' => $this->public_base,
+            ]);
+
+            $bank->generate();
+            $this->alert('success', 'Banque enregistre avec succes');
+            $this->dispatch('closeModal', 'addBank');
+        } catch (\Exception $e) {
+            $this->alert('error', $e->getMessage());
+        }
+    }
+
+    public function destroy(int $id)
+    {
+        $bank = RailwayBanque::find($id);
+
+        try {
+            $bank->delete();
+
+            Storage::delete("logos/banks/{$bank->name}.webp");
+            $this->alert('success', 'Banque supprimé avec succes');
+        } catch (\Exception $e) {
+            $this->alert('error', $e->getMessage());
+        }
     }
 
     public function render()
