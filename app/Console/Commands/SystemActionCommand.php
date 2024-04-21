@@ -16,7 +16,7 @@ class SystemActionCommand extends Command
     public function handle(): void
     {
         match ($this->argument('action')) {
-            'dayly_flux' => $this->dailyFlux(),
+            'daily_flux' => $this->dailyFlux(),
         };
     }
 
