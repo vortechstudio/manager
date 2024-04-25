@@ -12,7 +12,7 @@ use Te7aHoudini\LaravelTrix\Traits\HasTrixRichText;
 
 class Article extends Model
 {
-    use Categorizable, HasFactory, HasTrixRichText;
+    use Categorizable, HasFactory;
 
     protected $guarded = [];
 

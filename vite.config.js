@@ -8,13 +8,6 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
-        hmr: {
-            host: 'localhost',
-            protocol: 'ws',
-            port: 3000
-        }
-    },
     build: {
         minify: 'esbuild',
         commonjsOptions: {

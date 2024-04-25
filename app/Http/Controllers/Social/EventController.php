@@ -21,16 +21,14 @@ class EventController extends Controller
     /**
      * @throws Exception
      */
-    public function index(SocialEvent $table, Request $request)
+    public function index(Request $request)
     {
-        if ($request->expectsJson()) {
-            return $table->getData($request);
-        }
+        $events = Event::all();
         $types = Options::forEnum(EventTypeEnum::class)->toArray();
         $cercles = Options::forModels(Cercle::class)->toArray();
         //dd($cercles);
 
-        return view('social.events.index', compact('types', 'cercles'));
+        return view('social.events.index', compact('types', 'cercles', 'events'));
     }
 
     public function store(Request $request)

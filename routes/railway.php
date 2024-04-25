@@ -45,5 +45,10 @@ Route::prefix('railway')->as('railway.')->group(function () {
 
     Route::prefix('finance')->as('finance.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Railway\FinanceController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\Railway\FinanceController::class, 'create'])->name('create');
+        Route::post('create', [\App\Http\Controllers\Railway\FinanceController::class, 'store'])->name('store');
+        Route::get('{banque}', [\App\Http\Controllers\Railway\FinanceController::class, 'show'])->name('show');
+        Route::get('{banque}/edit', [\App\Http\Controllers\Railway\FinanceController::class, 'edit'])->name('edit');
+        Route::put('{banque}/edit', [\App\Http\Controllers\Railway\FinanceController::class, 'update'])->name('update');
     });
 });
