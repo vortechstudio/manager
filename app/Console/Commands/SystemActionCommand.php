@@ -29,9 +29,9 @@ class SystemActionCommand extends Command
         foreach (User::where('admin', true)->get() as $user) {
             $user->notify(new SendMessageNotification(
                 'Flux Bancaire quotidien',
-                'Le flux des intêret bancaire à été mise à jours',
+                'alerts',
                 'info',
-                'fa-info-circle'
+                'Le flux bancaire quotidien est mis à jour.'
             ));
         }
     }
