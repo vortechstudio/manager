@@ -22,6 +22,9 @@ class FormatImageJob implements ShouldQueue
     ) {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function handle(): void
     {
         $file = ImageManager::gd()->read($this->filePath);
@@ -30,6 +33,7 @@ class FormatImageJob implements ShouldQueue
             'article' => $this->handleArticle($file, $this->directoryUpload),
             'event' => $this->handleEvent($file, $this->directoryUpload),
             'rental' => $this->handleRental($file, $this->directoryUpload),
+            'banque' => $this->handleBanque($file, $this->directoryUpload),
         };
     }
 
@@ -56,6 +60,22 @@ class FormatImageJob implements ShouldQueue
         } catch (\Exception $exception) {
             \Log::critical("Error: {$exception->getMessage()}", ['exception' => $exception]);
             $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            throw new \Exception("Error saving image: {$exception->getMessage()}");
+        }
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function handleBanque(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->toWebp(60);
+        try {
+            $file->save($directoryUpload.'/'.\Str::lower($this->nameFile).'.webp');
+        } catch (\Exception $exception) {
+            \Log::critical("Error: {$exception->getMessage()}", ['exception' => $exception]);
+            $issue = new Issues(Issues::createIssueMonolog('article_banque', $exception->getMessage(), [$exception]));
             $issue->createIssueFromException();
             throw new \Exception("Error saving image: {$exception->getMessage()}");
         }

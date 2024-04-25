@@ -17,3 +17,5 @@ yarn-error.log
 /.vscode
 /composer.phar
 /package-lock.json
+newrelic_agent.log
+machinet.conf
