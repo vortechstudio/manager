@@ -12,7 +12,7 @@ class Image
     {
     }
 
-    public function resize(array $dimensions)
+    public function resize(array $dimensions): void
     {
         $file = new File($this->file);
         $manager = new ImageManager(Driver::class);

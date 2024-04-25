@@ -1,0 +1,18 @@
+{
+  "_axios-4d564c32.js": {
+    "file": "assets/axios-4d564c32.js"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-de2bc52e.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-7be8ae69.js",
+    "imports": [
+      "_axios-4d564c32.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

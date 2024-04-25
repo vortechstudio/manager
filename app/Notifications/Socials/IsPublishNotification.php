@@ -23,6 +23,7 @@ class IsPublishNotification extends Notification
             'title' => $this->getInfoFromType('title'),
             'description' => $this->getInfoFromType('desc'),
             'time' => now(),
+            'sector' => 'news',
         ];
     }
 
@@ -34,6 +35,7 @@ class IsPublishNotification extends Notification
             'title' => $this->getInfoFromType('title'),
             'description' => $this->getInfoFromType('desc'),
             'time' => now(),
+            'sector' => 'news',
         ];
     }
 

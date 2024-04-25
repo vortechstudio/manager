@@ -1,5 +1,4 @@
 import './bootstrap';
-import './tabler-init';
 import {Livewire, Alpine} from '../../vendor/livewire/livewire/dist/livewire.esm';
 
 Livewire.start();
@@ -16,10 +15,3 @@ document.querySelectorAll('[data-format="datetime"]').forEach(item => {
         }// locale for this instance only
     });
 })
-
-document.querySelectorAll('[data-control="select2"]').forEach(item => {
-    $(item).on('change', e => {
-        let data = $(item).val(); // Utiliser val() au lieu de select2("val")
-        this.set($(item).attr('name'), data)
-    });
-});

@@ -84,7 +84,7 @@ class InstallCommand extends Command
         return true;
     }
 
-    public function copyEnvExampleToEnv()
+    public function copyEnvExampleToEnv(): void
     {
         if ($this->option('env') == 'local') {
             if (! is_file(base_path('.env')) && is_file(base_path('.env.example'))) {
@@ -101,7 +101,7 @@ class InstallCommand extends Command
         }
     }
 
-    public static function generateAppKey()
+    public static function generateAppKey(): void
     {
         Artisan::call('key:generate');
     }
@@ -123,7 +123,7 @@ class InstallCommand extends Command
         return true;
     }
 
-    public function updateEnvVariablesFromOptions()
+    public function updateEnvVariablesFromOptions(): void
     {
         $this->updateEnv([
             'DB_HOST' => $this->option('db-host'),
@@ -147,7 +147,7 @@ class InstallCommand extends Command
         DB::reconnect($conn);
     }
 
-    private function installCoreSystem()
+    private function installCoreSystem(): void
     {
         if ($this->confirm('Voulez-vous utiliser git flow ?')) {
             Process::run('git flow init -f -d --feature feature/  --bugfix bugfix/ --release release/ --hotfix hotfix/ --support support/', function (string $type, string $output) {
@@ -172,7 +172,7 @@ class InstallCommand extends Command
         Process::run('composer require barryvdh/laravel-dompdf');
     }
 
-    private function installOptionnalSystem()
+    private function installOptionnalSystem(): void
     {
         if ($this->confirm("Voulez-vous utiliser l'authentification ?")) {
             $installFor = Process::run('composer require laravel/fortify');
@@ -194,7 +194,7 @@ class InstallCommand extends Command
 
     }
 
-    private function installFrontSystem()
+    private function installFrontSystem(): void
     {
         $this->info('Installation de livewire');
         $installLive = Process::run('composer require livewire/livewire');

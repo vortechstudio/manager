@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('social events')->daily();
         $schedule->command('social eventPublish')->daily();
         $schedule->command('social article_publish')->everyMinute();
+        $schedule->command('action daily_flux')->daily();
     }
 
     /**

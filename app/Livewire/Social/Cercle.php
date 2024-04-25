@@ -32,7 +32,7 @@ class Cercle extends Component
         'orderDirection' => ['except' => 'ASC'],
     ];
 
-    public function setOrderField(string $name)
+    public function setOrderField(string $name): void
     {
         if ($name === $this->orderField) {
             $this->orderDirection = $this->orderDirection === 'ASC' ? 'DESC' : 'ASC';
@@ -75,7 +75,7 @@ class Cercle extends Component
         $this->alert('success', 'Cercle enregistré');
     }
 
-    public function destroy(int $cercleId)
+    public function destroy(int $cercleId): void
     {
         \App\Models\Social\Cercle::where('id', $cercleId)->delete();
         $this->alert('success', 'Cercle supprimé');

@@ -13,7 +13,7 @@ class ShowAction extends Component
 
     public $event;
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         try {
             $this->event->delete();
@@ -25,7 +25,7 @@ class ShowAction extends Component
         $this->redirectRoute('social.events.index');
     }
 
-    public function publish()
+    public function publish(): void
     {
         $this->event->status = EventStatusEnum::PUBLISHED;
         $this->event->published_at = now();
@@ -33,7 +33,7 @@ class ShowAction extends Component
         $this->alert('success', 'Évènement publie avec succès');
     }
 
-    public function unpublish()
+    public function unpublish(): void
     {
         $this->event->status = EventStatusEnum::DRAFT;
         $this->event->save();

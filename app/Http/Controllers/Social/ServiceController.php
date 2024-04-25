@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Social;
 
 use App\Enums\Social\Post\PostTypeEnum;
-use App\Events\NewVersionPublishedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Config\Service;
 use App\Models\Social\Post\Post;
@@ -22,7 +21,7 @@ class ServiceController extends Controller
     {
         return view('social.services.show', [
             'serviceId' => $serviceId,
-            'service' => Service::find($serviceId),
+            'service' => Service::with('versions', 'cercle')->find($serviceId),
         ]);
     }
 

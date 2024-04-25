@@ -10,12 +10,8 @@ use App\Models\Social\Article;
 use App\Models\Social\Cercle;
 use App\Models\User\User;
 use App\Services\Github\Issues;
-use DateTimeImmutable;
 use Exception;
 use Illuminate\Http\Request;
-use Log;
-use Monolog\Level;
-use Monolog\LogRecord;
 use Spatie\LaravelOptions\Options;
 use Storage;
 
@@ -40,20 +36,32 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|min:5',
+            'title' => 'required|string|min:5',
             'description' => 'max:255',
             'contenue' => 'required',
             'author' => 'required',
             'cercle_id' => 'required',
             'type' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
         ]);
 
         try {
-            $article = Article::create(
-                $request->except(['avatar_remove', 'image'])
-            );
+            $article = Article::create([
+                'title' => $request->get('title'),
+                'description' => $request->get('description'),
+                'contenue' => $request->get('contenue'),
+                'type' => $request->get('type'),
+                'published' => $request->has('form.published'),
+                'published_at' => $request->get('form.published_at'),
+                'publish_social' => $request->has('form.publish_social'),
+                'publish_social_at' => $request->get('form.publish_social_at'),
+                'promote' => $request->has('promote'),
+                'status' => 'draft',
+                'author' => $request->get('author'),
+                'cercle_id' => $request->get('cercle_id'),
+            ]);
         } catch (Exception $exception) {
+            \Log::critical($exception->getMessage(), $exception->getTrace());
             toastr("Erreur lors de la création de l'article", 'error');
         }
 
@@ -61,7 +69,8 @@ class ArticleController extends Controller
             // On enregistre l'image dans le dossier blog et on déclenche un job permettant de structurer les images pour un header
             $request->image->storeAs(
                 'blog/'.$article->id,
-                'default.'.$request->image->extension()
+                'default.'.$request->image->extension(),
+                'vortech'
             );
 
             dispatch(new ResizeImageJob(
@@ -78,8 +87,10 @@ class ArticleController extends Controller
 
             Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$request->image->getClientOriginalExtension());
         } catch (Exception $exception) {
+            \Log::critical($exception->getMessage(), $exception->getTrace());
             $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
             $issue->createIssueFromException();
+            toastr()->addError($exception->getMessage());
         }
 
         toastr()->addSuccess("L'article a été créé");

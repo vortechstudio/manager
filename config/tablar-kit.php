@@ -42,7 +42,6 @@ return [
         'jodit' => Takielias\TablarKit\Components\Editors\Jodit::class,
     ],
 
-
     'default-class' => 'form-control',
 
     /*
@@ -73,7 +72,6 @@ return [
 
     'root_name' => 'default',
 
-
     'middleware' => [
         'web', 'auth',
     ],
@@ -95,8 +93,8 @@ return [
             'gif',
             'png',
             'bmp',
-            'svg'
-        ]
+            'svg',
+        ],
     ],
 
     'cache' => [
@@ -117,7 +115,7 @@ return [
     ),
 
     'thumb' => [
-        'dir_url' => env('APP_URL') . '/assets/images/jodit/',
+        'dir_url' => env('APP_URL').'/assets/images/jodit/',
 
         'mask' => 'thumb-%s.svg',
 
@@ -132,7 +130,6 @@ return [
             ''
         ),
     ],
-
 
     /*
      * Directory nesting limit
@@ -156,7 +153,6 @@ return [
         Takielias\TablarKit\Actions\FolderRename::class,
         Takielias\TablarKit\Actions\Permissions::class,
     ],
-
 
     /* --------------------------------------------------------------------------------------------
     * FilePond Configuration

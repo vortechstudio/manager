@@ -17,6 +17,7 @@
     @yield("styles")
     @stack("styles")
     <wireui:scripts />
+    @laravelPWA
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -113,6 +114,9 @@
 @livewireScriptConfig
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 @vite(['resources/js/app.js'])
 <x-livewire-alert::scripts />
 <x:pharaonic-select2::scripts />

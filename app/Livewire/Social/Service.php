@@ -16,7 +16,7 @@ use Spatie\LaravelOptions\Options;
 
 class Service extends Component
 {
-    use LivewireAlert,WithPagination, WithFileUploads;
+    use LivewireAlert,WithFileUploads, WithPagination;
 
     #[Rule('required', 'min:3', 'max:255')]
     public string $name = '';
@@ -35,6 +35,7 @@ class Service extends Component
     public string $url = '';
 
     public $default;
+
     public $icon;
 
     public string $orderField = 'name';
@@ -85,7 +86,7 @@ class Service extends Component
         $this->url = $this->service->url;
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
@@ -121,7 +122,7 @@ class Service extends Component
         }
     }
 
-    public function destroy(int $serviceId)
+    public function destroy(int $serviceId): void
     {
         $service = \App\Models\Config\Service::find($serviceId);
         try {

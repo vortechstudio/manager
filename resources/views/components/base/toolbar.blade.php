@@ -13,7 +13,7 @@
     <div class="d-flex flex-row justify-content-between align-items-center">
         @isset($breads)
             <div class="d-flex flex-column">
-                <span class="fs-2 text-dark fw-bold">{{ $title }}</span>
+                <span class="fs-2 text-dark fw-bold">{!! $title !!}</span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
@@ -35,7 +35,7 @@
                 </ul>
             </div>
         @else
-            <span class="fs-2 text-dark fw-bold">{{ $title }}</span>
+            <span class="fs-2 text-dark fw-bold">{!! $title !!}</span>
         @endif
         <div class="">
             @if($return)
@@ -50,7 +50,7 @@
                 @endforeach
             @endisset
             @if($submit)
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-outline btn-outline-primary">Enregistrer</button>
             @endif
         </div>
     </div>

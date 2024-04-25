@@ -83,7 +83,7 @@ class PublishVersionCommand extends Command
         return "v{$major}.{$minor}.{$patch}";
     }
 
-    private function generateTag($newTag, $oldTag)
+    private function generateTag($newTag, $oldTag): void
     {
         $lastCommit = Http::withToken($this->token)
             ->get("https://api.github.com/repos/$this->owner/$this->repo/commits?per_page=1")
@@ -149,7 +149,7 @@ class PublishVersionCommand extends Command
         return $body;
     }
 
-    private function generateRelease($newTag, string $body)
+    private function generateRelease($newTag, string $body): void
     {
         $release = Http::withToken($this->token)
             ->post("https://api.github.com/repos/$this->owner/$this->repo/releases", [
