@@ -2,8 +2,11 @@
 
 namespace App\Models\Railway\Config;
 
+use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Storage;
+use Str;
 
 class RailwayRental extends Model
 {
@@ -24,10 +27,8 @@ class RailwayRental extends Model
 
     public function getImageAttribute()
     {
-        if (\Storage::exists('logos/rentals/'.\Str::lower($this->name).'.webp')) {
-            return \Storage::url('logos/rentals/'.\Str::lower($this->name).'.webp');
-        } else {
-            return \Storage::url('logos/rentals/default.png');
-        }
+        return Cache::remember('getImageAttribute:'.$this->name, 1440, function () {
+            return Storage::exists('logos/rentals/'.Str::lower($this->name).'.webp') ? Storage::url('logos/rentals/'.Str::lower($this->name).'.webp') : Storage::url('logos/rentals/default.png');
+        });
     }
 }
