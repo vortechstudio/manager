@@ -13,7 +13,7 @@ class PostCommentBlock extends Component
 
     public PostComment $comment;
 
-    public function reject(int $id)
+    public function reject(int $id): void
     {
         $comment = PostComment::find($id);
         try {

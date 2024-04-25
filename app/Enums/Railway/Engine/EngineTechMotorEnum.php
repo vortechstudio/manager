@@ -10,4 +10,5 @@ enum EngineTechMotorEnum: string
     case ELEC_DUAL = 'electrique 1500v/25Kv';
     case HYBRIDE = 'hybride';
     case VAPEUR = 'vapeur';
+    case AUTRE = 'autre';
 }

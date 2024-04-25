@@ -26,7 +26,7 @@ class DefineVersionCommand extends Command
         $this->latestTag();
     }
 
-    private function latestTag()
+    private function latestTag(): void
     {
         try {
             $response = Http::withToken($this->token)
@@ -41,7 +41,7 @@ class DefineVersionCommand extends Command
         }
     }
 
-    private function compareCommit(string $lastTag)
+    private function compareCommit(string $lastTag): void
     {
         [$major, $minor, $patch] = explode('.', str_replace('v', '', $lastTag));
         $commitsResponse = Http::withToken($this->token)

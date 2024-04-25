@@ -14,8 +14,11 @@ class ListUser extends Component
     public Event $event;
 
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'ASC';
+
     public int $perPage = 10;
 
     protected $queryString = [
@@ -29,7 +32,7 @@ class ListUser extends Component
         return 'livewire.pagination';
     }
 
-    public function setOrderField(string $name)
+    public function setOrderField(string $name): void
     {
         if ($name === $this->orderField) {
             $this->orderDirection = $this->orderDirection === 'ASC' ? 'DESC' : 'ASC';

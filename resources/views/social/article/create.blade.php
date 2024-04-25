@@ -49,7 +49,7 @@
                                 name="image" />
                         </div>
                         <div class="mb-10">
-                            <label for="cercle_id" class="form-label required">Type</label>
+                            <label for="cercle_id" class="form-label required">Cercle</label>
                             <div wire:ignore>
                                 <select id="cercle_id" name="cercle_id" class="form-select" data-control="select2" data-placeholder="-- Selectionner un cercle --" data-pharaonic="select2"  wire:model.defer="form.cercle_id">
                                     <option value=""></option>

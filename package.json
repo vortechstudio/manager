@@ -7,6 +7,8 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
         "@tabler/core": "1.0.0-beta20",
         "@tabler/icons": "^2.32.0",
         "@tabler/icons-webfont": "^2.32.0",
@@ -14,6 +16,7 @@
         "axios": "^1.1.2",
         "bootstrap": "5.3.1",
         "countup.js": "^2.6.2",
+        "critical": "^7.1.1",
         "dropzone": "^6.0.0-beta.2",
         "filepond": "^4.30.4",
         "filepond-plugin-file-encode": "^2.1.14",
@@ -33,12 +36,18 @@
         "nouislider": "^15.7.0",
         "plyr": "^3.7.8",
         "react-filerobot-image-editor": "^4.6.3",
+        "rollup-plugin-critical": "^1.0.13",
         "sass": "~1.64.2",
         "sass-loader": "^13.3.1",
+        "semantic-release": "^23.0.7",
         "tabulator-tables": "^5.5.2",
         "tinymce": "^6.4.2",
         "tom-select": "^2.2.2",
         "vite": "^4.0.0",
         "xlsx": "^0.18.5"
+    },
+    "dependencies": {
+        "@dasundev/livewire-dropzone-styles": "^1.0.7",
+        "newrelic": "^11.15.0"
     }
 }

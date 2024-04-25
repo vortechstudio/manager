@@ -30,7 +30,7 @@ class Articles extends Component
         return 'livewire.pagination';
     }
 
-    public function setOrderField(string $name)
+    public function setOrderField(string $name): void
     {
         if ($name === $this->orderField) {
             $this->orderDirection = $this->orderDirection === 'ASC' ? 'DESC' : 'ASC';
@@ -40,7 +40,7 @@ class Articles extends Component
         }
     }
 
-    public function published(int $id)
+    public function published(int $id): void
     {
         if (Article::publish($id)) {
             $this->alert('success', 'Article publie avec succes');
@@ -49,7 +49,7 @@ class Articles extends Component
         }
     }
 
-    public function unpublished(int $id)
+    public function unpublished(int $id): void
     {
         if (Article::unpublish($id)) {
             $this->alert('success', 'Article dépublier');
@@ -58,7 +58,7 @@ class Articles extends Component
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $article = Article::find($id);
         try {

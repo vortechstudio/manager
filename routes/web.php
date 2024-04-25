@@ -79,6 +79,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         });
 
     });
+
+    Route::post('upload', \App\Http\Controllers\UploadController::class)->name('upload');
+
+    include 'railway.php';
 });
 
 Route::prefix('auth')->as('auth.')->group(function () {
@@ -94,9 +98,11 @@ Route::prefix('auth')->as('auth.')->group(function () {
 });
 
 Route::get('password-confirm', [\App\Http\Controllers\Auth\AuthController::class, 'confirmPasswordForm'])
-    ->name('password.confirm')
     ->middleware('auth');
 
+Route::get('/offline', function () {
+    return view('laravelpwa::offline');
+});
 Route::get('/test', function () {
 
 });

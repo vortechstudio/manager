@@ -15,10 +15,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\NewAccessToken;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use AuthenticationLoggable, HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -141,12 +142,14 @@ class User extends Authenticatable
     public function getHasNotificationAttribute(): bool
     {
         $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+
         return $this->unreadNotificationsCount > 0;
     }
 
     public function getCountNotificationsAttribute(): int
     {
         $this->unreadNotificationsCount = $this->unreadNotificationsCount ?? $this->unreadNotifications()->count();
+
         return $this->unreadNotificationsCount;
     }
 }

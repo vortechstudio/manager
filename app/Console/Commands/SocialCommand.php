@@ -42,13 +42,13 @@ class SocialCommand extends Command
         };
     }
 
-    private function articlePublish()
+    private function articlePublish(): void
     {
         $articles = Article::where('published', true)
             ->get();
 
         foreach ($articles as $article) {
-            if ($article->published_at->isPast()) {
+            if ($article->published_at->isPast() && $article->status == 'draft') {
                 try {
                     try {
                         $article->update([
@@ -61,7 +61,7 @@ class SocialCommand extends Command
                     Log::emergency($exception->getMessage(), [$exception]);
                 }
             }
-            if ($article->publish_social && $article->publish_social_at->isPast()) {
+            if ($article->publish_social && $article->publish_social_at->isPast() && $article->status == 'draft') {
                 try {
                     $article->update([
                         'status' => 'published',
@@ -72,13 +72,13 @@ class SocialCommand extends Command
 
                 // Publication sur les différents canaux
                 foreach (UserProfil::where('notification', true)->with('user')->get() as $user) {
-                    $user->user->notify(new ArticleWasPublishToSocialNotification($article));
+                    $user->user->notify(new IsPublishNotification('blog', $article));
                 }
             }
         }
     }
 
-    private function verifyStatusEvents()
+    private function verifyStatusEvents(): void
     {
         foreach (Event::all() as $event) {
             $calc_diff_in_day = now()->startOfDay()->diffInDays($event->end_at->endOfDay());
@@ -112,14 +112,14 @@ class SocialCommand extends Command
         }
     }
 
-    private function notifyAdmin(Event $event, string $message)
+    private function notifyAdmin(Event $event, string $message): void
     {
         foreach (User::where('admin', true)->get() as $user) {
             $user->notify(new AlertStatusEventNotification($event, $message));
         }
     }
 
-    private function verifyEventIsPublish()
+    private function verifyEventIsPublish(): void
     {
         foreach (Event::all() as $event) {
             if ($event->start_at->startOfDay() == now()->startOfDay()) {
@@ -128,7 +128,7 @@ class SocialCommand extends Command
         }
     }
 
-    private function verifyPostIsBlocked()
+    private function verifyPostIsBlocked(): void
     {
         foreach (Post::all() as $post) {
             if ($post->reject()->exists()) {
@@ -163,7 +163,7 @@ class SocialCommand extends Command
         }
     }
 
-    private function verifyPostCommentIsBlocked()
+    private function verifyPostCommentIsBlocked(): void
     {
         foreach (PostComment::all() as $comment) {
             if ($comment->reject()->exists()) {
@@ -198,7 +198,7 @@ class SocialCommand extends Command
         }
     }
 
-    private function verifyAccountBanned()
+    private function verifyAccountBanned(): void
     {
         foreach (UserProfil::all() as $profil) {
             if ($profil->banned && $profil->banned_for->startOfDay == now()->startOfDay()) {

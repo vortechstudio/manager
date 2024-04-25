@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'larabug'],
+            'channels' => ['daily', 'larabug', 'flare'],
             'ignore_exceptions' => false,
         ],
 
@@ -129,6 +129,10 @@ return [
 
         'larabug' => [
             'driver' => 'larabug',
+        ],
+
+        'flare' => [
+            'driver' => 'flare',
         ],
     ],
 
