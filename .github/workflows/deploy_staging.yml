@@ -16,4 +16,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: cd /www/wwwroot/manager.vortechstudio.ovh && sudo -S sh update-staging.sh
+          script: sudo su && cd /www/wwwroot/manager.vortechstudio.ovh && sh update-staging.sh
