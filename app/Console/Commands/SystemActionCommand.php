@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\Railway\Config\BonusTypeEnum;
 use App\Models\Railway\Config\RailwayBanque;
+use App\Models\Railway\Config\RailwayBonus;
 use App\Models\User\User;
 use App\Notifications\Users\SendMessageNotification;
 use Illuminate\Console\Command;
+use Spatie\LaravelOptions\Options;
 
 class SystemActionCommand extends Command
 {
@@ -17,6 +20,7 @@ class SystemActionCommand extends Command
     {
         match ($this->argument('action')) {
             'daily_flux' => $this->dailyFlux(),
+            'monthly_bonus' => $this->monthlyBonus(),
         };
     }
 
@@ -33,6 +37,24 @@ class SystemActionCommand extends Command
                 'info',
                 'Le flux bancaire quotidien est mis à jour.'
             ));
+        }
+    }
+
+    private function monthlyBonus()
+    {
+        foreach (RailwayBonus::all() as $bonus) {
+            $bonus->delete();
+        }
+
+        for ($i = 1; $i <= 30; $i++) {
+            $type = collect(Options::forEnum(BonusTypeEnum::class)->toArray())->random()['value'];
+            $qte = RailwayBonus::generateValueFromType($type);
+            RailwayBonus::create([
+                'number_day' => $i,
+                'designation' => RailwayBonus::generateDesignationFromType($type, $qte),
+                'type' => $type,
+                'qte' => $qte,
+            ]);
         }
     }
 }
