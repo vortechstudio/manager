@@ -9,7 +9,7 @@
         "@popperjs/core": "^2.11.8",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
-        "@tabler/core": "1.0.0-beta20",
+        "@tabler/core": "^1.0.0-beta9",
         "@tabler/icons": "^2.32.0",
         "@tabler/icons-webfont": "^2.32.0",
         "apexcharts": "^3.40.0",
@@ -41,10 +41,9 @@
         "sass-loader": "^13.3.1",
         "semantic-release": "^23.0.7",
         "tabulator-tables": "^5.5.2",
-        "tinymce": "^6.4.2",
+        "tinymce": "^7.0.1",
         "tom-select": "^2.2.2",
-        "vite": "^4.0.0",
-        "xlsx": "^0.18.5"
+        "vite": "^4.0.0"
     },
     "dependencies": {
         "@dasundev/livewire-dropzone-styles": "^1.0.7",
