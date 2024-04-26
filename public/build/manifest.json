@@ -2,15 +2,26 @@
   "_axios-4d564c32.js": {
     "file": "assets/axios-4d564c32.js"
   },
+  "_echarts-1963f985.js": {
+    "file": "assets/echarts-1963f985.js",
+    "imports": [
+      "_zrender-bf60e33e.js"
+    ]
+  },
+  "_zrender-bf60e33e.js": {
+    "file": "assets/zrender-bf60e33e.js"
+  },
   "resources/css/app.css": {
     "file": "assets/app-de2bc52e.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-7be8ae69.js",
+    "file": "assets/app-6dbdf37e.js",
     "imports": [
-      "_axios-4d564c32.js"
+      "_axios-4d564c32.js",
+      "_echarts-1963f985.js",
+      "_zrender-bf60e33e.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
