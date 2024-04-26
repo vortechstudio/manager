@@ -16,4 +16,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: cd /www/wwwroot/manager.vortechstudio.fr && sudo -S sh update-production.sh
+          script: sudo su && cd /www/wwwroot/manager.vortechstudio.fr && sh update-production.sh
