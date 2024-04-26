@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/vortechstudio/manager/compare/v2.0.0...v2.1.0) (2024-04-26)
+
+
+### Bug Fixes
+
+* **Railway Bonus:** Correction de la table ([fa9fe2a](https://github.com/vortechstudio/manager/commit/fa9fe2a43f5a31b84f8783a222e50bf9f16f5780))
+
+
+### Features
+
+* **Railway Bonus:** Ajout de la prise en charge des bonus journalier. ([53096e2](https://github.com/vortechstudio/manager/commit/53096e20c67e74b0b534bd451bc02ef9a6c22782))
+* **Railway Bonus:** Ajout de la prise en charge des bonus journalier. ([1d4a2f2](https://github.com/vortechstudio/manager/commit/1d4a2f2b2ae3af997f1c60584ba6659cf2820fd1))
+
 # [2.0.0](https://github.com/vortechstudio/manager/compare/v1.0.0...v2.0.0) (2024-04-26)
 
 
