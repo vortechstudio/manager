@@ -32,7 +32,7 @@
                             <td>
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="symbol symbol-70px symbol-2by3 me-5">
-                                        <img src="{{ Storage::disk('vortech')->url("blog/$article->id/default.webp") }}" alt="{{ $article->title }}">
+                                        <img src="{{ $article->image }}" alt="{{ $article->title }}">
                                     </div>
                                     <span class="fw-bolder text-light">{{ $article->title }}</span>
                                 </div>
