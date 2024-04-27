@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Railway\AdvantageCardAction;
 use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
 use App\Actions\Railway\LevelAction;
@@ -38,6 +39,7 @@ class SystemCreateCommand extends Command
             'gare' => $this->createGare(),
             'ligne' => $this->createLigne(),
             'level' => $this->generateLevel(),
+            'card' => $this->createCard(),
         };
     }
 
@@ -375,5 +377,10 @@ class SystemCreateCommand extends Command
         );
 
         (new LevelAction)->handle($levelMax, $xpStart);
+    }
+
+    private function createCard(): void
+    {
+        (new AdvantageCardAction())->generate();
     }
 }
