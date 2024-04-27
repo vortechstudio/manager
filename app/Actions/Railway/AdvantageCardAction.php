@@ -26,6 +26,8 @@ class AdvantageCardAction extends AdvantageDropRate
                 'qte' => $qte,
                 'tpoint' => $coast,
                 'drop_rate' => $this->calculateDropRateByType($qte, $type),
+                'model_id' => $type == 'engine' ? RailwayEngine::all()->random()->id : null,
+                'name_function' => $this->defineNameFunctionFromType($type),
             ]);
         }
     }
@@ -74,7 +76,7 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
-    private function defineDescriptionFromType(string $type, int $qte): string
+    public function defineDescriptionFromType(string $type, int $qte): string
     {
         if ($type == 'engine' || $type == 'reskin') {
             $motor = RailwayEngine::all()->random();
@@ -96,7 +98,7 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
-    private function calculateDropRateByType(int $qte, string $type)
+    public function calculateDropRateByType(int $qte, string $type)
     {
         return match ($type) {
             'argent' => $this->rateArgent($qte),
@@ -108,6 +110,60 @@ class AdvantageCardAction extends AdvantageDropRate
             'credit_impot' => $this->rateCreditImpot($qte),
             'engine', 'reskin' => 5.0,
             default => 0,
+        };
+    }
+
+    public function categories(string $search = ''): \Illuminate\Support\Collection
+    {
+        $lists = collect();
+        $lists->push([
+            'slug' => 'third',
+            'name' => 'Troisième classe',
+            'color_bg' => 'bg-grey-800',
+            'color_text' => 'text-grey-300',
+            'cards' => RailwayAdvantageCard::where('class', 'third'),
+        ]);
+
+        $lists->push([
+            'slug' => 'second',
+            'name' => 'Seconde classe',
+            'color_bg' => 'bg-red-800',
+            'color_text' => 'text-red-300',
+            'cards' => RailwayAdvantageCard::where('class', 'second'),
+        ]);
+
+        $lists->push([
+            'slug' => 'first',
+            'name' => 'Première classe',
+            'color_bg' => 'bg-blue-800',
+            'color_text' => 'text-blue-300',
+            'cards' => RailwayAdvantageCard::where('class', 'first'),
+        ]);
+
+        $lists->push([
+            'slug' => 'premium',
+            'name' => 'Premium',
+            'color_bg' => 'bg-yellow-800',
+            'color_text' => 'text-yellow-300',
+            'cards' => RailwayAdvantageCard::where('class', 'premium'),
+        ]);
+
+        return $lists;
+    }
+
+    private function defineNameFunctionFromType(string $type): ?string
+    {
+        return match ($type) {
+            'argent' => 'argent',
+            'research_rate' => 'research_rate',
+            'research_coast' => 'research_coast',
+            'audit_int' => 'audit_int',
+            'audit_ext' => 'audit_ext',
+            'simulation' => 'simulation',
+            'credit_impot' => 'credit_impot',
+            'engine' => 'engine',
+            'reskin' => 'reskin',
+            default => null,
         };
     }
 }
