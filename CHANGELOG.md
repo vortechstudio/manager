@@ -1,3 +1,20 @@
+# [2.3.0](https://github.com/vortechstudio/manager/compare/v2.2.0...v2.3.0) (2024-04-27)
+
+
+### Bug Fixes
+
+* **Horizon:** Correction et mise à jour des gates d'accès à Horizon. ([6763c42](https://github.com/vortechstudio/manager/commit/6763c421606e371409a6f5f48c8819e26d5f2bbf))
+* **Horizon:** Suppression du gate horizon dans AppServiceProvider.php, il ne sert pas. ([d000831](https://github.com/vortechstudio/manager/commit/d0008317d2e5241c25d629679f52dff87f396c58))
+* **Railway Porte Carte:** Correction du générateur automatique de porte carte, il rajoute le model_id si un type "engine" est selectionner et le nom du déclencheur suivant le type. ([058ae0c](https://github.com/vortechstudio/manager/commit/058ae0cee463145fa47ac7e2ac46cf6198c34598))
+
+
+### Features
+
+* **Railway Porte Carte:** Ajout d'un tableau de listing des portes-cartes ([8cd3d7a](https://github.com/vortechstudio/manager/commit/8cd3d7aa32362fd971b9317383b8d4ea4c695456))
+* **Railway Porte Carte:** Ajout de l'action de rafraichissement des portes cartes, il supprime et recréez la base des portes cartes. Ajout de l'ajout manuel d'un porte-carte au besoin. ([3c70c5d](https://github.com/vortechstudio/manager/commit/3c70c5d5583bcb8574ddd2ba2f98f2c20287c1bc))
+* **Railway Porte Carte:** Ajout de l'interface de gestion des portes cartes. ([96f348d](https://github.com/vortechstudio/manager/commit/96f348dff4de479a99db2ef8ccaa7694bf25bee8))
+* **Railway Porte Carte:** Ajout de la fonction de génération automatique des porte carte. ([2f2583e](https://github.com/vortechstudio/manager/commit/2f2583e23b1069f8ffd1e91ae2f048e5a2c7feda))
+
 # [2.2.0](https://github.com/vortechstudio/manager/compare/v2.1.0...v2.2.0) (2024-04-27)
 
 
