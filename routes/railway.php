@@ -51,4 +51,8 @@ Route::prefix('railway')->as('railway.')->group(function () {
     Route::prefix('bonus')->as('bonus.')->group(function () {
         Route::get('/', \App\Http\Controllers\Railway\BonusController::class)->name('index');
     });
+
+    Route::prefix('portecarte')->as('card.')->group(function () {
+        Route::get('/', \App\Http\Controllers\Railway\CardController::class)->name('index');
+    });
 });
