@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-sm-12 col-lg-4 mb-10">
             <div class="card shadow-sm">
-                <img src="{{ Storage::url("blog/$article->id/default.webp") }}" class="card-img-top" alt="...">
+                <img src="{{ $article->image }}" class="card-img-top" alt="{{ $article->title }}">
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         <span class="fw-bold">Cercle</span>
@@ -93,7 +93,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="post" role="tabpanel">
                             <p class="fst-italic mb-5">{!! $article->description !!}</p>
-                            <img src="{{ $article->image }}" alt="{{ $article->title }}" class="img-thumbnail">
+                            <img src="{{ $article->image_head }}" alt="{{ $article->title }}" class="img-thumbnail">
                             <div class="separator separator-dashed separator-content border-primary my-15">
                                 <i class="fa-solid fa-newspaper fs-1 text-primary"></i>
                             </div>
