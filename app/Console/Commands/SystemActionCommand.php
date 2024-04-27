@@ -56,5 +56,14 @@ class SystemActionCommand extends Command
                 'qte' => $qte,
             ]);
         }
+
+        foreach (User::where('admin', true)->get() as $user) {
+            $user->notify(new SendMessageNotification(
+                'Bonus mensuel',
+                'alerts',
+                'info',
+                'Le bonus mensuel est mis à jour.'
+            ));
+        }
     }
 }
