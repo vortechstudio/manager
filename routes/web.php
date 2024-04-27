@@ -104,5 +104,5 @@ Route::get('/offline', function () {
     return view('laravelpwa::offline');
 });
 Route::get('/test', function () {
-
+    dd((new \App\Actions\Railway\AdvantageCardAction())->generateType());
 });
