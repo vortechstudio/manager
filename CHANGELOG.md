@@ -1,3 +1,11 @@
+# [2.2.0](https://github.com/vortechstudio/manager/compare/v2.1.0...v2.2.0) (2024-04-27)
+
+
+### Features
+
+* **Railway Bonus:** Ajout d'une notification à l'administrateur lors du renouvellement des bonus mensuel. ([1eacf78](https://github.com/vortechstudio/manager/commit/1eacf783973d3cf41fb78265d47cca1179472320))
+* **Railway Bonus:** Ajout visuel de type alerte pour alerter l'utilisateur de la réinitialisation des bonus dans X temps. ([a5f6e8b](https://github.com/vortechstudio/manager/commit/a5f6e8b783aea87f59a4fa217b1c0c8f58d9b3a9))
+
 # [2.1.0](https://github.com/vortechstudio/manager/compare/v2.0.0...v2.1.0) (2024-04-26)
 
 
