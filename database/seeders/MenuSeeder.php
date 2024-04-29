@@ -33,7 +33,6 @@ class MenuSeeder extends Seeder
         Menu::set('manager_head', 'Recherches & Développements', '/railway/recherches', 12);
         Menu::set('manager_head', 'Bonus Journalier', '/railway/bonus', 12);
         Menu::set('manager_head', 'Porte Carte', '/railway/portecarte', 12);
-        Menu::set('manager_head', 'Tutoriels', '/railway/tutoriels', 12);
         Menu::set('manager_head', 'Saison Pass', '/railway/pass', 12);
         Menu::set('manager_head', 'Configurations', '/railway/config', 12);
 
