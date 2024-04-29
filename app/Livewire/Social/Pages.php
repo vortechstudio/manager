@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Social;
 
+use App\Models\User\User;
 use App\Services\Github\Issues;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -17,6 +18,18 @@ class Pages extends Component
     public string $orderField = 'id';
 
     public string $orderDirection = 'ASC';
+
+    public string $title = '';
+
+    public string $description = '';
+
+    public string $content = '';
+
+    public string $keywords = '';
+
+    public int $author = 0;
+
+    public bool $published = false;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -81,6 +94,38 @@ class Pages extends Component
             $page = Page::findOrFail($id);
             $page->published = false;
             $page->save();
+        } catch (\Exception $exception) {
+            $issue = new Issues(Issues::createIssueMonolog('page', $exception->getMessage(), [$exception]));
+            $issue->createIssueFromException();
+            $this->alert('error', 'Une erreur est survenue');
+        }
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'author' => 'required',
+        ]);
+
+        try {
+            $page = Page::create([
+                'published' => $this->published,
+            ]);
+
+            $page->translateOrNew('fr')->title = $this->title;
+            $page->translateOrNew('fr')->description = $this->description;
+            $page->translateOrNew('fr')->content = $this->content;
+            $page->translateOrNew('fr')->keywords = $this->keywords;
+
+            $page->creator_id = $this->author;
+            $page->creator_type = User::class;
+
+            $page->save();
+
+            $this->alert('success', 'La page a bien été enregistrée');
+            $this->dispatch('closeModal', 'addPage');
         } catch (\Exception $exception) {
             $issue = new Issues(Issues::createIssueMonolog('page', $exception->getMessage(), [$exception]));
             $issue->createIssueFromException();
