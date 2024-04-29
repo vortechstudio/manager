@@ -1,3 +1,16 @@
+## [2.3.1](https://github.com/vortechstudio/manager/compare/v2.3.0...v2.3.1) (2024-04-29)
+
+
+### Bug Fixes
+
+* **Core:** Correction d'un bug sur le fichier de compilation applicatif ([57b69c1](https://github.com/vortechstudio/manager/commit/57b69c1558e01e177854be58886f04c3f00a0d6b)), closes [#15](https://github.com/vortechstudio/manager/issues/15)
+* **Core:** Corrections mineurs ([40c78f8](https://github.com/vortechstudio/manager/commit/40c78f8fb3e99bdeca27b6a0ce7a50c289a89a56)), closes [#17](https://github.com/vortechstudio/manager/issues/17)
+* **Core:** Corrections mineurs ([faef217](https://github.com/vortechstudio/manager/commit/faef217c5e6bb8f4b7f48d553332d0dce7a45cd3)), closes [#16](https://github.com/vortechstudio/manager/issues/16)
+* **Social Article:** Correction du lien d'affichage de la preview d'un article dans le tableaucdes articles. ([a66e29b](https://github.com/vortechstudio/manager/commit/a66e29b6c26c03e15efac1f827a29bf8c87696f8))
+* **Social Article:** Correction du lien des images dans la vue d'un article. ([8e44ebd](https://github.com/vortechstudio/manager/commit/8e44ebdc4ffc9f971cad049697c44e29a926c373))
+* **Social Article:** Redefinitions en cache de l'image d'un article. ([fea6f1e](https://github.com/vortechstudio/manager/commit/fea6f1e8e757d56343e159d9ee4a11bf4de36460))
+* **Social Cercle:** Redefinitions en cache de l'image d'un cercle. ([d874cf0](https://github.com/vortechstudio/manager/commit/d874cf023079117512ef4462ad6a5caf2b4e303e))
+
 # [2.3.0](https://github.com/vortechstudio/manager/compare/v2.2.0...v2.3.0) (2024-04-27)
 
 
