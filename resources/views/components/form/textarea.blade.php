@@ -45,28 +45,13 @@
 @endif
 
 @if($type == 'ckeditor')
-    @push('scripts')
-        <script src="{{ asset('/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
-    @endpush
-    <div class="mb-10">
+    <div class="mb-10" wire:ignore>
         @if(!$noLabel)
             <label for="{{ $name }}" class="form-label {{ $required ? 'required' : '' }}">{{ $label }}</label>
         @endif
             <textarea
-                x-data x-init="ClassicEditor
-                .create(document.querySelector('#ckeditor'), {
-
-                })
-                .then(editor => {
-                    editor.model.document.on('change:data', () => {
-                        @this.set('ckeditor', editor.getData())
-                    })
-                })
-                .catch(err => {
-                    console.error(err.stack);
-                });"
                 class="form-control {{ $class }} @error("$name") is-invalid @enderror"
-                wire:model.lazy="{{ $isModel ? $model.'.'.$name : $name }}"
+                wire:model="{{ $isModel ? $model.'.'.$name : $name }}"
                 id="ckeditor"
                 name="{{ $name }}"
                 placeholder="{{ $required && $noLabel ? ($placeholder ? $placeholder.'*' : $label.'*') : ($placeholder ? $placeholder : $label) }}"
@@ -74,8 +59,22 @@
             @error("$name")
             <span class="text-danger error">{{ $message }}</span>
             @enderror
-
     </div>
+    @push('scripts')
+        <script src="{{ asset('/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
+        <script type="text/javascript">
+            ClassicEditor
+                .create(document.querySelector('#ckeditor'))
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        @this.set('{{ $name }}', editor.getData())
+                    })
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    @endpush
 @endif
 
 @if($type == 'tinymce')
@@ -159,6 +158,7 @@
         <script src="{{ asset('/vendor/laraberg/js/laraberg.js') }}"></script>
         <script type="text/javascript">
             Laraberg.init('{{ $name }}')
+
         </script>
     @endpush
 @endif

@@ -8,14 +8,18 @@
                 </div>
             </div>
             <div class="card-toolbar">
-                <a href="{{ route("social.articles.create") }}" class="btn btn-sm btn-light">
+                <button data-bs-toggle="modal" data-bs-target="#addArticle" class="btn btn-sm btn-light">
                     <i class="fa-solid fa-plus me-2"></i> Nouvelle article
-                </a>
+                </button>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5">
-                <thead>
+            <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
+                <div class="table-loading-message">
+                    <span class="spinner-border spinner-border-sm align-middle me-2"></span> Chargement...
+                </div>
+                <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5">
+                    <thead>
                     <tr class="fw-bold fs-3">
                         <x-base.table-header :direction="$orderDirection" name="id" :field="$orderField">#</x-base.table-header>
                         <x-base.table-header :direction="$orderDirection" name="title" :field="$orderField">Titre</x-base.table-header>
@@ -24,8 +28,8 @@
                         <x-base.table-header :direction="$orderDirection" name="updated_at" :field="$orderField">Date</x-base.table-header>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach($articles as $article)
                         <tr>
                             <td>{{ $article->id }}</td>
@@ -88,11 +92,134 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card-footer">
             {{ $articles->links() }}
         </div>
     </div>
+    <div wire:ignore.self class="modal fade" tabindex="-1" id="addArticle">
+        <form action="" method="post" wire:submit="save" enctype="multipart/form-data">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Nouvelle article</h3>
+
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-9">
+                                <x-form.input
+                                    name="title"
+                                    label="Titre"
+                                    required="true" />
+
+                                <x-form.textarea
+                                    name="description"
+                                    label="Courte Description de l'article (Introduction)" />
+
+                                <x-form.textarea
+                                    type="ckeditor"
+                                    name="contenue"
+                                    label="Contenue de l'article"
+                                    required="true" />
+                            </div>
+                            <div class="col-sm-12 col-lg-3">
+                                <div class="mb-10 d-flex flex-column" wire:ignore>
+                                    <label for="img_cover" class="form-label required mb-2">Image de couverture</label>
+                                    <x-form.image-input
+                                        name="image"
+                                        label="Image de couverture"
+                                        width="w-300px" />
+                                </div>
+                                <div class="mb-10">
+                                    <label for="cercle_id" class="form-label required">Cercle</label>
+                                    <select name="cercle_id" wire:model="cercle_id" id="cercle_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner un cercle ---" required>
+                                        <option></option>
+                                        @foreach(\App\Models\Social\Cercle::all() as $cercle)
+                                            <option value="{{ $cercle->id }}">{{ $cercle->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-10">
+                                    <label for="type" class="form-label required">Type d'article</label>
+                                    <select name="type" wire:model="type" id="type" class="form-select" data-control="select2" data-placeholder="---  Selectionner un type d'article ---" required>
+                                        <option></option>
+                                        @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Social\ArticleTypeEnum::class)->toArray() as $type)
+                                            <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-10">
+                                    <label for="author" class="form-label required">Auteur de l'article</label>
+                                    <select name="author" wire:model="author" id="author" class="form-select" data-control="select2" data-placeholder="---  Selectionner un auteur ---" required>
+                                        <option></option>
+                                        @foreach(\App\Models\User\User::where('admin', true)->get() as $user)
+                                            <option value="{{ $user->id }}" data-avatar="{{ $user->socials()->first()->avatar }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="separator border border-2 border-gray-300 my-5"></div>
+                                <div class="d-flex flex-row justify-content-between align-items-center mb-10">
+                                    <x-form.checkbox
+                                        name="promote"
+                                        label="Promouvoir l'article" />
+                                </div>
+                                <div x-data="{show_published_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
+                                    <x-form.switches
+                                        name="published"
+                                        label="Publié l'article"
+                                        value="1"
+                                        class-check="primary"
+                                        alpine="true"
+                                        fun-alpine="show_published_at = ! show_published_at" />
+
+                                    <div x-show="show_published_at">
+                                        <label for="published_at" class="form-label">Publié le:</label>
+                                        <input data-format="datetime" class="form-control" wire:model="published_at" placeholder="Pick a date"/>
+                                    </div>
+                                </div>
+                                <div x-data="{show_published_social_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
+                                    <x-form.switches
+                                        name="publish_social"
+                                        label="Publié l'article sur les réseaux"
+                                        value="1"
+                                        class-check="warning"
+                                        alpine="true"
+                                        fun-alpine="show_published_social_at = ! show_published_social_at" />
+
+                                    <div x-show="show_published_social_at">
+                                        <label for="publish_social_at" class="form-label">Publié le:</label>
+                                        <input data-format="datetime" class="form-control" wire:model="publish_social_at" placeholder="Pick a date"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" wire:click="resetForm">Réinitialiser</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span wire:loading.remove wire:target="save"><i class="fa-solid fa-check-circle me-3"></i> Enregistrer</span>
+                            <span wire:loading wire:target="save"><i class="fa-solid fa-spinner fa-spin-pulse"></i>Veuillez patienter</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+
+@push("scripts")
+    <x-base.close-modal />
+    <x-script.select2.base />
+    <x-script.select2.with-image name="author" />
+@endpush
