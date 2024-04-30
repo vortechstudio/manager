@@ -33,20 +33,18 @@ class MenuSeeder extends Seeder
         Menu::set('manager_head', 'Recherches & Développements', '/railway/recherches', 12);
         Menu::set('manager_head', 'Bonus Journalier', '/railway/bonus', 12);
         Menu::set('manager_head', 'Porte Carte', '/railway/portecarte', 12);
-        Menu::set('manager_head', 'Tutoriels', '/railway/tutoriels', 12);
-        Menu::set('manager_head', 'Saison Pass', '/railway/pass', 12);
         Menu::set('manager_head', 'Configurations', '/railway/config', 12);
 
         Menu::set('manager_head', 'Administration', '#');
-        Menu::set('manager_head', 'Gestion des utilisateurs', '/admin/users', 25);
-        Menu::set('manager_head', 'Laravel Pulse', '/pulse', 25);
-        Menu::set('manager_head', 'Log Système', '/log-viewer', 25);
-        Menu::set('manager_head', 'Horizon', '/horizon', 25);
+        Menu::set('manager_head', 'Gestion des utilisateurs', '/admin/users', 23);
+        Menu::set('manager_head', 'Laravel Pulse', '/pulse', 23);
+        Menu::set('manager_head', 'Log Système', '/log-viewer', 23);
+        Menu::set('manager_head', 'Horizon', '/horizon', 23);
 
         Menu::set('manager_head', 'Support Technique', '#');
-        Menu::set('manager_head', 'Tickets', '/support/tickets', 30);
-        Menu::set('manager_head', 'Rapport de Bugs', '/support/bugs', 30);
-        Menu::set('manager_head', 'Suggestions', '/support/suggestions', 30);
-        Menu::set('manager_head', 'Rapport de plaintes', '/support/complaints', 30);
+        Menu::set('manager_head', 'Tickets', '/support/tickets', 28);
+        Menu::set('manager_head', 'Rapport de Bugs', '/support/bugs', 28);
+        Menu::set('manager_head', 'Suggestions', '/support/suggestions', 28);
+        Menu::set('manager_head', 'Rapport de plaintes', '/support/complaints', 28);
     }
 }
