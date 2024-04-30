@@ -7,6 +7,7 @@ use App\Enums\Config\ServiceStatusEnum;
 use App\Enums\Config\ServiceTypeEnum;
 use App\Models\Config\Service;
 use App\Models\Social\Cercle;
+use Database\Seeders\Railway\SettingsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(MenuSeeder::class);
+        $this->call(SettingsSeeder::class);
 
         if (config('app.env') == 'local' || config('app.env') == 'testing') {
             $this->call(TestSeeder::class);
