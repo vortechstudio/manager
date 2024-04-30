@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('social article_publish')->everyMinute()->description("Permet de notifier que l'article est publie");
         $schedule->command('action daily_flux')->daily()->description("Permet de déclencher la mise à jour journalière des flux d'intérêt bancaire");
         $schedule->command('action monthly_bonus')->monthlyOn(1)->description('Permet de déclencher la génération des bonus mensuels');
+        $schedule->command('action daily_config')->daily()->description('Permet de déclencher la création des paramètres quotidiens');
     }
 
     /**
