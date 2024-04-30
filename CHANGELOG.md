@@ -1,3 +1,24 @@
+# [3.0.0](https://github.com/vortechstudio/manager/compare/v2.3.1...v3.0.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* **Railway Core:** Suppression de la prise en charge des saison pass, le système de quête se suffit à lui-même. ([b476aa2](https://github.com/vortechstudio/manager/commit/b476aa2cbfc3b1b7bcc854ed9e70552c8fe3ad30))
+* **Railway Core:** Suppression de la prise en charge des tutoriels, le système de quête se suffit à lui-même. ([9cc1fed](https://github.com/vortechstudio/manager/commit/9cc1fedd37908a3b8da228b99e3022dd66ac1d68))
+
+
+* Merge pull request #39 from vortechstudio/develop ([970dc36](https://github.com/vortechstudio/manager/commit/970dc369feb6836eeb85f3c09dc715aaa493aca6)), closes [#39](https://github.com/vortechstudio/manager/issues/39)
+
+
+### Features
+
+* **Railway Configuration:** Prise en charge de la configuration du système interne à railway manager. ([0e8b272](https://github.com/vortechstudio/manager/commit/0e8b27263a89689cbe90feafb16dc378db3df30c))
+
+
+### BREAKING CHANGES
+
+* Railway Manager Système de gestion terminer.
+
 ## [2.3.1](https://github.com/vortechstudio/manager/compare/v2.3.0...v2.3.1) (2024-04-29)
 
 
