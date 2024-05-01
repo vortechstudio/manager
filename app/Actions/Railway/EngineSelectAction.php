@@ -4,7 +4,15 @@ namespace App\Actions\Railway;
 
 class EngineSelectAction
 {
-    public function selectorTypeTrain($search = null, $field = null)
+    /**
+     * Returns a collection of available types of trains.
+     *
+     * @param  string|null  $search  The search parameter to filter the collection by.
+     * @param  string|null  $field  The field to retrieve from the search result. Defaults to 'value'.
+     * @return string|array|null Returns the value of the specified field if a search parameter is provided,
+     *                           or returns the entire collection if no search parameter is provided.
+     */
+    public function selectorTypeTrain(?string $search = null, ?string $field = null): array|string|null
     {
         $arr = collect();
         $arr->push([
@@ -35,7 +43,14 @@ class EngineSelectAction
         }
     }
 
-    public function selectorTypeTransport($search = null, $field = null)
+    /**
+     * Retrieve the type of transport based on search criteria.
+     *
+     * @param  string|null  $search  The ID of the type to search for.
+     * @param  string|null  $field  The field to retrieve, defaults to 'value'.
+     * @return mixed The value of the specified field if $search is provided, otherwise the collection of transport types.
+     */
+    public function selectorTypeTransport(?string $search = null, ?string $field = null): mixed
     {
         $arr = collect();
         $arr->push([
@@ -76,8 +91,14 @@ class EngineSelectAction
         }
     }
 
-
-    public function selectorTypeEnergy($search = null, $field = null)
+    /**
+     * Retrieve the type of energy based on search criteria.
+     *
+     * @param  string|null  $search  The ID of the type to search for.
+     * @param  string|null  $field  The field to retrieve, defaults to 'value'.
+     * @return mixed The value of the specified field if $search is provided, otherwise the collection of energy types.
+     */
+    public function selectorTypeEnergy(?string $search = null, ?string $field = null): mixed
     {
         $arr = collect();
         $arr->push([
@@ -113,7 +134,13 @@ class EngineSelectAction
         }
     }
 
-    public function selectorMoneyShop($search = null)
+    /**
+     * Retrieve the type of money shop based on search criteria.
+     *
+     * @param  string|null  $search  The ID of the type to search for.
+     * @return mixed The value of the 'value' field for the specified ID if $search is provided, otherwise the collection of money shop types.
+     */
+    public function selectorMoneyShop(?string $search = null): mixed
     {
         $argc = collect();
         $argc->push([
@@ -136,7 +163,14 @@ class EngineSelectAction
         }
     }
 
-    public function selectorTypeMotor($search = null, $field = null)
+    /**
+     * Select the type of motor.
+     *
+     * @param  string|null  $search  The search criteria.
+     * @param  string|null  $field  The field to return.
+     * @return \Illuminate\Support\Collection|string|null The collection of motor types or the specified field value.
+     */
+    public function selectorTypeMotor(?string $search = null, ?string $field = null): string|\Illuminate\Support\Collection|null
     {
         $argc = collect();
 
@@ -189,7 +223,15 @@ class EngineSelectAction
         }
     }
 
-    public function selectorTypeMarchandise($search = null, $field = null)
+    /**
+     * Retrieves a collection of selector type marchandise.
+     *
+     * @param  string|null  $search  The value to search for. Defaults to null.
+     * @param  string|null  $field  The field to retrieve for the matching record. Defaults to null.
+     * @return \Illuminate\Support\Collection|array|string Returns the collection of selector type marchandise if $search is null.
+     *                                                     If $search is not null, returns the value of the specified $field for the matching record, or null if no match is found.
+     */
+    public function selectorTypeMarchandise(?string $search = null, ?string $field = null): array|string|\Illuminate\Support\Collection
     {
         $argc = collect();
 

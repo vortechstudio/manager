@@ -4,6 +4,13 @@ namespace App\Actions\Railway;
 
 class GareAction
 {
+    /**
+     * Returns the number of habitants based on the type of gare and frequency
+     *
+     * @param  string  $type_gare  The type of gare (halte, small, medium, large, terminus)
+     * @param  int  $freq  The frequency
+     * @return int The number of habitants
+     */
     public function getHabitant(string $type_gare, int $freq): int
     {
         return match ($type_gare) {
@@ -15,6 +22,12 @@ class GareAction
         };
     }
 
+    /**
+     * Defines the equipment available based on the type of gare
+     *
+     * @param  string  $type_gare  The type of gare (halte, small, medium, large, terminus)
+     * @return array The array of equipment available
+     */
     public function defineEquipements(string $type_gare): array
     {
         return match ($type_gare) {
@@ -25,7 +38,14 @@ class GareAction
         };
     }
 
-    public function definePrice($type_gare, $nb_quai): float
+    /**
+     * Calculate the price based on the type of station and the number of platforms.
+     *
+     * @param  string  $type_gare  The type of station ('halte', 'small', 'medium', 'large', 'terminus').
+     * @param  int  $nb_quai  The number of platforms.
+     * @return float The calculated price.
+     */
+    public function definePrice(string $type_gare, int $nb_quai): float
     {
         $coef = match ($type_gare) {
             'halte' => 1.05,
@@ -48,7 +68,14 @@ class GareAction
         return round($calc, 2);
     }
 
-    public static function defineTaxeHub($price, $nb_quai): float
+    /**
+     * Define the taxe hub for a given price and number of quai.
+     *
+     * @param  float  $price  The price to calculate the taxe hub for.
+     * @param  int  $nb_quai  The number of quai to calculate the taxe hub for.
+     * @return float The taxe hub value.
+     */
+    public static function defineTaxeHub(float $price, int $nb_quai): float
     {
         $calc = $price / $nb_quai / 20 / 10;
 
