@@ -5,10 +5,8 @@ return [
     /**
      * Get a free Open Weather Map API key
      * https://openweathermap.org/price.
-     *
      */
-
-    'api_key' => env('OPENWEATHER_API_KEY', ""),
+    'api_key' => env('OPENWEATHER_API_KEY', ''),
 
     /**
      * Current weather API endpoint : https://api.openweathermap.org/data/2.5/weather.
@@ -49,9 +47,7 @@ return [
      * Library Configuration
      *
      * https://openweathermap.org/current#multi
-     *
      */
-
     'lang' => env('OPENWEATHER_API_LANG', 'en'),
     'date_format' => 'm/d/Y',
     'time_format' => 'h:i A',
@@ -65,6 +61,5 @@ return [
      * For temperature in Fahrenheit (f) and wind speed in miles/hour, use units=imperial
      * For temperature in Celsius (c) and wind speed in meter/sec, use units=metric
      */
-
     'temp_format' => 'c',
 ];

@@ -9,6 +9,7 @@ use Livewire\Component;
 class UploadFile extends Component
 {
     use LivewireAlert;
+
     public array $images = [];
 
     public bool $multiple = false;
@@ -20,7 +21,7 @@ class UploadFile extends Component
     public function submit()
     {
         match ($this->type) {
-            "rental" => $this->uploadRental($this->model, $this->images),
+            'rental' => $this->uploadRental($this->model, $this->images),
         };
     }
 

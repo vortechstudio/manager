@@ -41,7 +41,7 @@ class DeleteMedia
     /**
      * Delete post medias
      *
-     * @param int $model_id The ID of the post model
+     * @param  int  $model_id  The ID of the post model
      * @return bool Returns true if post medias are deleted successfully, false otherwise
      */
     private function deletePostMedias(int $model_id)

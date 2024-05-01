@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Pharaonic\Laravel\Categorizable\Traits\Categorizable;
 use Storage;
-use Te7aHoudini\LaravelTrix\Traits\HasTrixRichText;
 
 class Article extends Model
 {

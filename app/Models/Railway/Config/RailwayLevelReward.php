@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class RailwayLevelReward extends Model
 {
     public $timestamps = false;
+
     protected $guarded = [];
 
     protected $casts = [
