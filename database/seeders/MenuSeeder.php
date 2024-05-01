@@ -86,5 +86,20 @@ class MenuSeeder extends Seeder
         Menu::set('railway_manager_app', 'Audit Interne', '/marketing/internalaudit', 62);
         Menu::set('railway_manager_app', 'Gestion des tarifs', '/marketing/pricing', 62);
         Menu::set('railway_manager_app', 'Marketing', '/marketing', 62);
+
+        Menu::set('account_head', 'Accueil', '/');
+
+        Menu::set('account_head', 'Comptes', '#');
+        Menu::set('account_head', 'Informations de compte', '/account', 67);
+        Menu::set('account_head', 'Historique du compte', '/account/history', 67);
+        Menu::set('account_head', 'Historique de connexion', '/account/loginStatus', 67);
+        Menu::set('account_head', 'Mes données personnels', '/account/rgpd', 67);
+
+        Menu::set('account_head', 'Services & Options', '#');
+        Menu::set('account_head', 'Etat des services & Options', '/services', 72);
+        Menu::set('account_head', 'Sécuriser mon compte (MFA)', '/services/mfa', 72);
+
+        Menu::set('account_head', 'Centre de support', '#');
+
     }
 }
