@@ -25,3 +25,7 @@ Route::get('/services', function (Request $request) {
         return response()->json(\App\Models\Config\Service::all());
     }
 });
+
+Route::prefix('support')->group(function () {
+
+});

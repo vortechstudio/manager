@@ -2,15 +2,19 @@
   "_axios-4d564c32.js": {
     "file": "assets/axios-4d564c32.js"
   },
+  "_laravel-echo-55c64d0d.js": {
+    "file": "assets/laravel-echo-55c64d0d.js"
+  },
   "resources/css/app.css": {
     "file": "assets/app-de2bc52e.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-8faf9869.js",
+    "file": "assets/app-163b8d20.js",
     "imports": [
-      "_axios-4d564c32.js"
+      "_axios-4d564c32.js",
+      "_laravel-echo-55c64d0d.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
