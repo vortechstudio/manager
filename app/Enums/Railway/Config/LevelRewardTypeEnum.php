@@ -15,7 +15,6 @@ enum LevelRewardTypeEnum: string
     case ENGINE = 'engine';
     case ENGINE_R = 'engine_r';
 
-
     public static function getLabel($case): string
     {
         return match ($case) {

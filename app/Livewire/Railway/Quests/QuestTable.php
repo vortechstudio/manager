@@ -89,7 +89,7 @@ class QuestTable extends Component
     public function render()
     {
         return view('livewire.railway.quests.quest-table', [
-            'quests' => RailwayQuest::when($this->search, fn($query, $search) => $query->where('name', 'like', "%{$search}%"))
+            'quests' => RailwayQuest::when($this->search, fn ($query, $search) => $query->where('name', 'like', "%{$search}%"))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

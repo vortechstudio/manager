@@ -8,12 +8,22 @@ use App\Models\Railway\Config\RailwayLevelReward;
 
 class LevelAction
 {
-    public function handle($niv_max = 50, $xp_start = 1250)
+    /**
+     * This method handles the generation of rewards and levels for the Vortech Manager application.
+     *
+     * @param  int  $niv_max  The maximum level to be generated (default: 50).
+     * @param  int  $xp_start  The starting experience points for the levels (default: 1250).
+     * @return void
+     */
+    public function handle(int $niv_max = 50, int $xp_start = 1250)
     {
         $this->generateRewards();
         $this->generateLevels($niv_max, $xp_start);
     }
 
+    /**
+     * @var \Illuminate\Support\Collection
+     */
     private function generateRewards(): void
     {
         $bases = collect();
@@ -85,7 +95,13 @@ class LevelAction
         }
     }
 
-    private function generateLevels(mixed $niv_max, mixed $xp_start)
+    /**
+     * Generate railway levels
+     *
+     * @param  mixed  $niv_max  The maximum level to generate
+     * @param  mixed  $xp_start  The starting XP for each level
+     */
+    private function generateLevels(mixed $niv_max, mixed $xp_start): void
     {
         foreach (RailwayLevel::all() as $level) {
             $level->delete();

@@ -9,7 +9,6 @@ use App\Jobs\FormatImageJob;
 use App\Jobs\ResizeImageJob;
 use App\Models\Social\Cercle;
 use App\Models\Social\Event;
-use App\Tables\Social\SocialEvent;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;

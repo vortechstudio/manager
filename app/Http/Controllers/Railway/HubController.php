@@ -98,10 +98,10 @@ class HubController extends Controller
             [
                 'position' => [
                     'lat' => $gare->latitude,
-                    'lng' => $gare->longitude
+                    'lng' => $gare->longitude,
                 ],
                 'draggable' => false,
-                'title' => $gare->name
+                'title' => $gare->name,
             ],
         ];
 

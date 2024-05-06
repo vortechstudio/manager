@@ -8,7 +8,6 @@ use App\Models\Social\Post\Post;
 use App\Models\Social\Post\PostComment;
 use App\Models\User\User;
 use App\Models\User\UserProfil;
-use App\Notifications\Socials\ArticleWasPublishToSocialNotification;
 use App\Notifications\Socials\IsPublishNotification;
 use App\Notifications\System\AlertStatusEventNotification;
 use App\Notifications\Users\AvertissementNotification;

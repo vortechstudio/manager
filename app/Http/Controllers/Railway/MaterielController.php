@@ -106,7 +106,7 @@ class MaterielController extends Controller
         }
 
         toastr()
-            ->addSuccess('Materiel ' . $request->get('name') . ' ajouter avec succes');
+            ->addSuccess('Materiel '.$request->get('name').' ajouter avec succes');
 
         toastr()
             ->addInfo('Installer les images dans les dossiers correspondant. (engines/types_train/slugify_name.gif');
@@ -117,14 +117,15 @@ class MaterielController extends Controller
     public function show(RailwayEngine $engine)
     {
         $engine = $engine->load('price', 'shop', 'technical');
+
         //dd($engine);
         return view('railway.materiels.show', compact('engine'));
     }
 
-
     public function edit(RailwayEngine $engine)
     {
         $engine = $engine->load('price', 'shop', 'technical');
+
         //dd($engine);
         return view('railway.materiels.edit', compact('engine'));
     }

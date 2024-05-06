@@ -4,7 +4,18 @@ namespace App\Actions\Railway;
 
 class EngineAction extends EngineSelectAction
 {
-    public function calcTarifAchat($type_train, $type_energy, $type_motor, $type_marchandise, $valEssieux, $nbWagon = 1)
+    /**
+     * Calculate the purchase price of a train
+     *
+     * @param  string  $type_train  The type of train (motrice, voiture, automotrice, bus)
+     * @param  string  $type_energy  The type of energy (vapeur, diesel, electrique, hybride, none)
+     * @param  string  $type_motor  The type of motor
+     * @param  string  $type_marchandise  The type of merchandise
+     * @param  float|int  $valEssieux  The value of essieux
+     * @param  int  $nbWagon  The number of wagons (default: 1)
+     * @return float|int The calculated purchase price
+     */
+    public function calcTarifAchat(string $type_train, string $type_energy, string $type_motor, string $type_marchandise, float|int $valEssieux, int $nbWagon = 1): float|int
     {
         $train = match ($type_train) {
             'motrice' => 10000,
@@ -36,7 +47,14 @@ class EngineAction extends EngineSelectAction
         return $calc;
     }
 
-    public function calcPriceMaintenance($duration, $val_essieux)
+    /**
+     * Calculates the price of maintenance based on the duration and the value of essieux.
+     *
+     * @param  int  $duration  The duration of maintenance in months.
+     * @param  float|int  $val_essieux  The value of essieux.
+     * @return float|int The calculated price of maintenance.
+     */
+    public function calcPriceMaintenance(int $duration, float|int $val_essieux): float|int
     {
         $calc = $duration * $val_essieux;
         if ($calc >= 100) {
@@ -46,12 +64,26 @@ class EngineAction extends EngineSelectAction
         return $calc;
     }
 
-    public function calcPriceLocation($price_achat)
+    /**
+     * Calculates the price of location based on the purchase price.
+     *
+     * @param  float|int  $price_achat  The purchase price.
+     * @return float The calculated price of location.
+     */
+    public function calcPriceLocation(float|int $price_achat): float
     {
         return $price_achat / 30 / 1.2;
     }
 
-    public function calcDurationMaintenance($essieux, $automotrice = false, $nbWagon = 1)
+    /**
+     * Calculates the duration of maintenance based on the essieux, automotrice flag, and number of wagons.
+     *
+     * @param  int  $essieux  The essieux value.
+     * @param  bool  $automotrice  Flag to indicate if it is an automotrice.
+     * @param  int  $nbWagon  The number of wagons.
+     * @return \Illuminate\Support\Carbon The calculated duration of maintenance.
+     */
+    public function calcDurationMaintenance(int $essieux, bool $automotrice = false, int $nbWagon = 1): \Illuminate\Support\Carbon
     {
         $min_init = 15;
         $calcEssieux = $min_init + self::getDataCalcForEssieux($essieux, $automotrice, $nbWagon);
@@ -59,7 +91,15 @@ class EngineAction extends EngineSelectAction
         return now()->startOfDay()->addMinutes($calcEssieux);
     }
 
-    public function getDataCalcForEssieux($essieux, $automotrice = false, $nbWagon = 1)
+    /**
+     * Calculates the data for essieux.
+     *
+     * @param  string  $essieux  The essieux value.
+     * @param  bool  $automotrice  Flag indicating if it is automotrice.
+     * @param  int  $nbWagon  The number of wagons.
+     * @return float|int The calculated data.
+     */
+    public function getDataCalcForEssieux(string $essieux, bool $automotrice = false, int $nbWagon = 1): float|int
     {
         $bogeys = \Str::ucsplit(\Str::upper($essieux));
         $calc = 2;

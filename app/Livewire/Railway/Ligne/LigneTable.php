@@ -44,7 +44,7 @@ class LigneTable extends Component
     {
         return view('livewire.railway.ligne.ligne-table', [
             'lignes' => RailwayLigne::with('start', 'end', 'stations', 'hub')
-                ->when($this->search, fn($query, $search) => $query->where('name', 'like', "%{$search}%"))
+                ->when($this->search, fn ($query, $search) => $query->where('name', 'like', "%{$search}%"))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

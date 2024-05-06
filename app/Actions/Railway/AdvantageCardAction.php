@@ -7,6 +7,15 @@ use App\Models\Railway\Engine\RailwayEngine;
 
 class AdvantageCardAction extends AdvantageDropRate
 {
+    /**
+     * Generate RailwayAdvantageCard objects
+     *
+     * This method generates RailwayAdvantageCard objects and saves them to the database.
+     * It iterates over the existing RailwayAdvantageCard objects and deletes them before generating new ones.
+     * For each generated card, it assigns a random class and type, calculates the quantity (qte) based on the type and class,
+     * defines the coast based on the class, generates a description based on the type and quantity,
+     * calculates the drop rate based on the quantity and type, and assigns a random model_id if the type is 'engine'.
+     */
     public function generate(): void
     {
         foreach (RailwayAdvantageCard::all() as $card) {
@@ -32,18 +41,38 @@ class AdvantageCardAction extends AdvantageDropRate
         }
     }
 
+    /**
+     * Generate a random class for RailwayAdvantageCard
+     *
+     * This method returns a randomly selected class for a RailwayAdvantageCard.
+     * The available classes are 'premium', 'first', 'second', and 'first'.
+     *
+     * @return string The randomly selected class
+     */
     public function generateClass(): string
     {
         $classes = collect(['premium', 'first', 'second', 'first']);
+
         return $classes->random();
     }
 
+    /**
+     * Generates a random type from a predefined list.
+     */
     public function generateType(): string
     {
         $types = collect(['argent', 'research_rate', 'research_coast', 'audit_int', 'audit_ext', 'simulation', 'credit_impot', 'engine', 'reskin']);
+
         return $types->random();
     }
 
+    /**
+     * Generate quantity from type and class.
+     *
+     * @param  string  $type  The type of the item.
+     * @param  string  $class  The class of the item.
+     * @return float|int The generated quantity.
+     */
     public function generateQteFromTypeAndClass(string $type, string $class): float|int
     {
         return match ($class) {
@@ -55,6 +84,12 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
+    /**
+     * Generate the quantity from the given type.
+     *
+     * @param  string  $type  The type to generate the quantity from.
+     * @return float|int The generated quantity.
+     */
     public function generateQteFromType(string $type): float|int
     {
         return match ($type) {
@@ -66,6 +101,12 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
+    /**
+     * Define the coast based on the given class.
+     *
+     * @param  string  $class  The class to define the coast from.
+     * @return int The defined coast.
+     */
     public function defineCoastFromClass(string $class): int
     {
         return match ($class) {
@@ -76,6 +117,13 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
+    /**
+     * Define the description from the given type and quantity.
+     *
+     * @param  string  $type  The type to define the description from.
+     * @param  int  $qte  The quantity to define the description from.
+     * @return string The defined description.
+     */
     public function defineDescriptionFromType(string $type, int $qte): string
     {
         if ($type == 'engine' || $type == 'reskin') {
@@ -98,6 +146,13 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
+    /**
+     * Calculate drop rate by type.
+     *
+     * @param  int  $qte  The quantity.
+     * @param  string  $type  The type.
+     * @return float|int The drop rate.
+     */
     public function calculateDropRateByType(int $qte, string $type)
     {
         return match ($type) {
@@ -113,6 +168,12 @@ class AdvantageCardAction extends AdvantageDropRate
         };
     }
 
+    /**
+     * Retrieve a collection of categories.
+     *
+     * @param  string  $search  The optional string to search for categories.
+     * @return \Illuminate\Support\Collection The collection of categories.
+     */
     public function categories(string $search = ''): \Illuminate\Support\Collection
     {
         $lists = collect();
@@ -151,6 +212,12 @@ class AdvantageCardAction extends AdvantageDropRate
         return $lists;
     }
 
+    /**
+     * Define the name function from the given type.
+     *
+     * @param  string  $type  The type to define the name function from.
+     * @return string|null The defined name function or null if not found.
+     */
     private function defineNameFunctionFromType(string $type): ?string
     {
         return match ($type) {
