@@ -46,5 +46,60 @@ class MenuSeeder extends Seeder
         Menu::set('manager_head', 'Rapport de Bugs', '/support/bugs', 28);
         Menu::set('manager_head', 'Suggestions', '/support/suggestions', 28);
         Menu::set('manager_head', 'Rapport de plaintes', '/support/complaints', 28);
+
+        Menu::set('railway_manager_app', 'Acceuil', '/');
+
+        Menu::set('railway_manager_app', 'Gestion du réseau', '#');
+        Menu::set('railway_manager_app', 'Planification', '/network/planning', 34);
+        Menu::set('railway_manager_app', 'Achat de HUB', '/network/hub/buy', 34);
+        Menu::set('railway_manager_app', 'Achat de Ligne', '/network/line/buy', 34);
+        Menu::set('railway_manager_app', 'Réseau', '/network', 34);
+
+        Menu::set('railway_manager_app', 'Gestion du matériel', '#');
+        Menu::set('railway_manager_app', 'Achat de Materiels', '/train/buy', 39);
+        Menu::set('railway_manager_app', 'Technicentre', '/technicentre', 39);
+        Menu::set('railway_manager_app', 'Matériels', '/train', 39);
+
+        Menu::set('railway_manager_app', 'Gestion de la Compagnie', '#');
+        Menu::set('railway_manager_app', 'Customisation', '/company/customize', 43);
+        Menu::set('railway_manager_app', 'Profil', '/company/profile', 43);
+        Menu::set('railway_manager_app', 'Classement', '/company/rank', 43);
+        Menu::set('railway_manager_app', 'Compagnie', '/company', 43);
+
+        Menu::set('railway_manager_app', 'Centre de compétence', '#');
+        Menu::set('railway_manager_app', 'Général', '/research', 48);
+        Menu::set('railway_manager_app', 'Infrastructure', '/research/infrastructure', 48);
+        Menu::set('railway_manager_app', 'Matériels', '/research/train', 48);
+
+        Menu::set('railway_manager_app', 'Services', '#');
+        Menu::set('railway_manager_app', 'Partenariat', '/services/partner', 53);
+        Menu::set('railway_manager_app', 'Infrastructures', '/services/infrastructure', 53);
+        Menu::set('railway_manager_app', 'Service à bord', '/services/board', 53);
+        Menu::set('railway_manager_app', 'Service en gare', '/services/station', 53);
+
+        Menu::set('railway_manager_app', 'Finances', '#');
+        Menu::set('railway_manager_app', 'Banques', '/finance/bank', 57);
+        Menu::set('railway_manager_app', 'Compatibilite', '/finance/compatibility', 57);
+        Menu::set('railway_manager_app', 'Finance', '/finance', 57);
+
+        Menu::set('railway_manager_app', 'Bureau du marketing', '#');
+        Menu::set('railway_manager_app', 'Audit Interne', '/marketing/internalaudit', 61);
+        Menu::set('railway_manager_app', 'Gestion des tarifs', '/marketing/pricing', 61);
+        Menu::set('railway_manager_app', 'Marketing', '/marketing', 61);
+
+        \App\Models\Config\Menu::set('account_head', 'Accueil', '/', 'fa-solid fa-house');
+
+        \App\Models\Config\Menu::set('account_head', 'Comptes', '#', 'fa-regular fa-circle-user');
+        Menu::set('account_head', 'Informations de compte', '/account', 66);
+        Menu::set('account_head', 'Historique du compte', '/account/history', 66);
+        Menu::set('account_head', 'Historique de connexion', '/account/loginStatus', 66);
+        Menu::set('account_head', 'Mes données personnels', '/account/rgpd', 66);
+
+        \App\Models\Config\Menu::set('account_head', 'Services & Options', '#', 'fa-solid fa-gear');
+        Menu::set('account_head', 'Etat des services & Options', '/services', 71);
+        Menu::set('account_head', 'Sécuriser mon compte (MFA)', '/services/mfa', 71);
+
+        \App\Models\Config\Menu::set('account_head', 'Centre de support', '#', 'fa-solid fa-headset');
+
     }
 }

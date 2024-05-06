@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserQuests extends Model
 {
     public $timestamps = false;
+
     protected $guarded = [];
 
     protected $casts = [

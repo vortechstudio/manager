@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/services', function (Request $request) {
+    if ($request->has('service_name')) {
+        return response()->json(\App\Models\Config\Service::where('name', 'like', '%'.$request->get('service_name').'%')->first());
+    } else {
+        return response()->json(\App\Models\Config\Service::all());
+    }
+});
+
+Route::prefix('support')->group(function () {
+
+});

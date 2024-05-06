@@ -47,7 +47,6 @@ class RailwayLigne extends Model
         return $this->hasMany(RailwayLigneStation::class);
     }
 
-
     public function getStatusLabelAttribute()
     {
         if ($this->active) {

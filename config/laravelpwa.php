@@ -14,35 +14,35 @@ return [
         'icons' => [
             '72x72' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-72x72.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '96x96' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-96x96.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '128x128' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-128x128.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '144x144' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-144x144.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '152x152' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-152x152.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '192x192' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-192x192.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '384x384' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-384x384.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
             '512x512' => [
                 'path' => config('filesystems.disks.vortech.url').('pwa/icons/icon-512x512.png'),
-                'purpose' => 'any'
+                'purpose' => 'any',
             ],
         ],
         'splash' => [
@@ -57,6 +57,6 @@ return [
             '1668x2388' => config('filesystems.disks.vortech.url').('pwa/splash/splash-1668x2388.png'),
             '2048x2732' => config('filesystems.disks.vortech.url').('pwa/splash/splash-2048x2732.png'),
         ],
-        'custom' => []
-    ]
+        'custom' => [],
+    ],
 ];

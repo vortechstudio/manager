@@ -40,10 +40,10 @@ class EngineShowAction extends Component
     {
         if ($this->engine->type_train->value == 'automotrice') {
             for ($i = 0; $i <= $this->engine->technical->nb_wagon; $i++) {
-                \Storage::delete('engines/automotrice/' . $this->engine->slug . '-' . $i . '.gif');
+                \Storage::delete('engines/automotrice/'.$this->engine->slug.'-'.$i.'.gif');
             }
         } else {
-            \Storage::delete('engines/' . $this->engine->type_train->value . '/' . $this->engine->slug . '.gif');
+            \Storage::delete('engines/'.$this->engine->type_train->value.'/'.$this->engine->slug.'.gif');
         }
 
         $this->engine->delete();

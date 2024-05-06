@@ -32,7 +32,7 @@ class LignePanelInfo extends Component
             $this->ligne->save();
 
             $this->alert('success', 'La ligne a bien été activée');
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->alert('error', 'Erreur lors de l\'activation de la ligne');
         }
     }
@@ -44,7 +44,7 @@ class LignePanelInfo extends Component
             $this->ligne->save();
 
             $this->alert('success', 'La ligne a bien été en production');
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->alert('error', 'Erreur lors de la modification de la ligne');
         }
     }
@@ -55,7 +55,7 @@ class LignePanelInfo extends Component
             $this->ligne->delete();
 
             $this->alert('success', 'La ligne a bien été supprimée');
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->alert('error', 'Erreur lors de la suppression de la ligne');
         }
     }

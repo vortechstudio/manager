@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 class SncfService
 {
     public Collection $gare;
+
     public Collection $frequentation;
 
     public function __construct()
