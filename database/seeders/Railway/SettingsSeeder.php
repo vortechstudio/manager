@@ -40,13 +40,13 @@ class SettingsSeeder extends Seeder
         if (! RailwaySetting::where('name', 'like', '%start_argent%')->exists()) {
             RailwaySetting::create([
                 'name' => 'start_argent',
-                'value' => 0,
+                'value' => 3000000,
             ]);
         }
 
-        if (! RailwaySetting::where('name', 'like', '%price_tpoint%')->exists()) {
+        if (! RailwaySetting::where('name', 'like', '%start_tpoint%')->exists()) {
             RailwaySetting::create([
-                'name' => 'price_tpoint',
+                'name' => 'start_tpoint',
                 'value' => 0,
             ]);
         }

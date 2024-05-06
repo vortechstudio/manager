@@ -5,16 +5,20 @@
   "_laravel-echo-55c64d0d.js": {
     "file": "assets/laravel-echo-55c64d0d.js"
   },
+  "_pusher-js-403c4ed0.js": {
+    "file": "assets/pusher-js-403c4ed0.js"
+  },
   "resources/css/app.css": {
     "file": "assets/app-de2bc52e.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-163b8d20.js",
+    "file": "assets/app-00316529.js",
     "imports": [
       "_axios-4d564c32.js",
-      "_laravel-echo-55c64d0d.js"
+      "_laravel-echo-55c64d0d.js",
+      "_pusher-js-403c4ed0.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
