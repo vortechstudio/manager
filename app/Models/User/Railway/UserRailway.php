@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserRailway extends Model
 {
     public $timestamps = false;
+    protected $guarded = [];
 
     public function user(): BelongsTo
     {

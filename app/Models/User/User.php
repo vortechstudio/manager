@@ -9,6 +9,7 @@ use App\Models\Social\Post\Post;
 use App\Models\Social\Post\PostComment;
 use App\Models\Support\Tickets\Ticket;
 use App\Models\Support\Tickets\TicketMessage;
+use App\Models\User\Railway\UserRailway;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -112,6 +113,11 @@ class User extends Authenticatable
     public function socials()
     {
         return $this->hasMany(UserSocial::class);
+    }
+
+    public function railway()
+    {
+        return $this->hasOne(UserRailway::class);
     }
 
     public function scopeNotifiable(Builder $query)
