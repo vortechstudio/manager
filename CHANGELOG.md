@@ -1,3 +1,15 @@
+# [3.1.0](https://github.com/vortechstudio/manager/compare/v3.0.0...v3.1.0) (2024-05-06)
+
+
+### Bug Fixes
+
+* Suppression du fichier app-8faf9869.js dans le dossier public/build/assets. ([62dfc2d](https://github.com/vortechstudio/manager/commit/62dfc2dae53f37a488b0ec07c84bee354d756876))
+
+
+### Features
+
+* **MenuSeeder, api:** Ajout de nouvelles routes et mises à jour du MenuSeeder ([1ad22f7](https://github.com/vortechstudio/manager/commit/1ad22f79cbe12b8395cefbc0bc895710bb826111))
+
 # [3.0.0](https://github.com/vortechstudio/manager/compare/v2.3.1...v3.0.0) (2024-04-30)
 
 
