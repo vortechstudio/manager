@@ -1,3 +1,17 @@
+# [3.2.0](https://github.com/vortechstudio/manager/compare/v3.1.0...v3.2.0) (2024-05-08)
+
+
+### Bug Fixes
+
+* **Railway Core:** Ajout et Mise à jour des modèles User et UserRailway ([fd12664](https://github.com/vortechstudio/manager/commit/fd126641581ade5b1bc97b5d88217b3c1da96ed2))
+
+
+### Features
+
+* **Service:** Ajout de la fonctionnalité de mise à jour des releases ([e2dff72](https://github.com/vortechstudio/manager/commit/e2dff727c2d8ec5c9f74335e067274f37ce473cd))
+* **Service:** Ajout et mise à jour des fonctionnalités ([c8b4f56](https://github.com/vortechstudio/manager/commit/c8b4f5686bf12e4fc0999b633c1ad3e264f8c840))
+* **UserRailway:** Ajout du modèle UserRailway et migration associée ([7ac6c85](https://github.com/vortechstudio/manager/commit/7ac6c857810168424478c0c0a27e724479da4a28))
+
 # [3.1.0](https://github.com/vortechstudio/manager/compare/v3.0.0...v3.1.0) (2024-05-06)
 
 
