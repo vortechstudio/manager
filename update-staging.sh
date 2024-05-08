@@ -1,5 +1,7 @@
 #\bin\bash
 
+php artisan down
+
 git reset --hard
 git pull origin master
 
@@ -10,3 +12,5 @@ php artisan migrate:fresh --seed
 php artisan optimize
 php artisan view:clear
 php artisan horizon:terminate
+
+php artisan up
