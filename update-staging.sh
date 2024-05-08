@@ -12,5 +12,6 @@ php artisan migrate:fresh --seed
 php artisan optimize
 php artisan view:clear
 php artisan horizon:terminate
+chmod -R 777 storage bootstrap/cache
 
 php artisan up
