@@ -58,6 +58,11 @@ class Service extends Model
         return $this->belongsTo(Cercle::class);
     }
 
+    public function hasVersions()
+    {
+        return $this->versions()->where('published', true)->exists();
+    }
+
     public function getTypeLabelAttribute()
     {
         return match ($this->type) {

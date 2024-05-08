@@ -131,6 +131,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <x-form.input
+                                    name="repository"
+                                    label="Repo du projet" />
                             </div>
                         </div>
                     </div>

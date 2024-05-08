@@ -29,6 +29,8 @@ class Service extends Component
 
     public string $url = '';
 
+    public string $repository = '';
+
     public string $orderField = 'name';
 
     public string $orderDirection = 'ASC';
@@ -70,6 +72,7 @@ class Service extends Component
                 'page_content' => $this->page_content,
                 'status' => $this->status,
                 'url' => $this->url,
+                'repository' => $this->repository,
             ]);
             $this->alert('success', 'Service sauvegardé avec succes');
             $this->dispatch('closeModal', modalId: 'addService');
