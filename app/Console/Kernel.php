@@ -19,6 +19,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('action daily_flux')->daily()->description("Permet de déclencher la mise à jour journalière des flux d'intérêt bancaire");
         $schedule->command('action monthly_bonus')->monthlyOn(1)->description('Permet de déclencher la génération des bonus mensuels');
         $schedule->command('action daily_config')->daily()->description('Permet de déclencher la création des paramètres quotidiens');
+
+        $schedule->command('release:update')->daily()->description('Déclenche la mise à jour de version pour les services associé et ayant un repository valide.');
     }
 
     /**

@@ -2,21 +2,16 @@
 
 namespace App\Livewire\Social;
 
-use App\Enums\Config\ServiceStatusEnum;
-use App\Enums\Config\ServiceTypeEnum;
-use App\Services\Github\Issues;
+use App\Actions\DeleteMedia;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Spatie\LaravelOptions\Options;
 
 class Service extends Component
 {
-    use LivewireAlert,WithFileUploads, WithPagination;
+    use LivewireAlert, WithPagination;
 
     #[Rule('required', 'min:3', 'max:255')]
     public string $name = '';
@@ -34,9 +29,7 @@ class Service extends Component
 
     public string $url = '';
 
-    public $default;
-
-    public $icon;
+    public string $repository = '';
 
     public string $orderField = 'name';
 
@@ -44,12 +37,7 @@ class Service extends Component
 
     public string $search = '';
 
-    public bool $showModal = false;
-
-    #[Locked]
-    public int $serviceId;
-
-    public ?\App\Models\Config\Service $service;
+    public int $perPage = 5;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -72,52 +60,24 @@ class Service extends Component
         return 'livewire.pagination';
     }
 
-    public function edit(int $service_id): void
-    {
-        $this->service = \App\Models\Config\Service::where('id', $service_id)->first();
-        $this->showModal = true;
-        $this->serviceId = $service_id;
-
-        $this->name = $this->service->name;
-        $this->type = $this->service->type;
-        $this->description = $this->service->description;
-        $this->page_content = $this->service->page_content;
-        $this->status = $this->service->status;
-        $this->url = $this->service->url;
-    }
-
     public function save(): void
     {
         $this->validate();
 
         try {
-            if (empty($this->service)) {
-                $service = \App\Models\Config\Service::create([
-                    'name' => $this->name,
-                    'type' => $this->type,
-                    'description' => $this->description,
-                    'page_content' => $this->page_content,
-                    'status' => $this->status,
-                    'url' => $this->url,
-                ]);
-                $this->alert('success', 'Service sauvegardé avec succes');
-            } else {
-                $service = $this->service;
-                $service->update([
-                    'name' => $this->name,
-                    'type' => $this->type,
-                    'description' => $this->description,
-                    'page_content' => $this->page_content,
-                    'status' => $this->status,
-                    'url' => $this->url,
-                ]);
-            }
-            $this->dispatch('closeModal', modalId: '#serviceForm');
-            $this->reset('service', 'name', 'type', 'description', 'page_content', 'status', 'url', 'showModal');
+            \App\Models\Config\Service::create([
+                'name' => $this->name,
+                'type' => $this->type,
+                'description' => $this->description,
+                'page_content' => $this->page_content,
+                'status' => $this->status,
+                'url' => $this->url,
+                'repository' => $this->repository,
+            ]);
             $this->alert('success', 'Service sauvegardé avec succes');
+            $this->dispatch('closeModal', modalId: 'addService');
         } catch (\Exception $exception) {
-            $issue = Issues::createIssueMonolog('service', 'Impossible de sauvegarder le service', [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException();
+            \Log::emergency($exception->getMessage(), [$exception]);
             $this->alert('error', 'Impossible de sauvegarder le service');
         }
     }
@@ -127,17 +87,11 @@ class Service extends Component
         $service = \App\Models\Config\Service::find($serviceId);
         try {
             $service->delete();
+            (new DeleteMedia())->handle('service', $serviceId);
             $this->alert('success', 'Service supprimé avec succes');
         } catch (\Exception $exception) {
-            $issue = Issues::createIssueMonolog('service', 'Impossible de supprimer le service', [$exception], 'emergency');
-            (new Issues($issue))->createIssueFromException();
             $this->alert('error', 'Impossible de supprimer le service');
         }
-    }
-
-    public function resetModal(): void
-    {
-        $this->reset('cercle', 'name', 'type', 'description', 'page_content', 'status', 'url', 'showModal');
     }
 
     #[Title('Gestion des Services')]
@@ -146,9 +100,7 @@ class Service extends Component
         return view('livewire.social.service', [
             'services' => \App\Models\Config\Service::where('name', 'like', '%'.$this->search.'%')
                 ->orderBy($this->orderField, $this->orderDirection)
-                ->paginate(5),
-            'types' => Options::forEnum(ServiceTypeEnum::class)->toArray(),
-            'statuses' => Options::forEnum(ServiceStatusEnum::class)->toArray(),
+                ->paginate($this->perPage),
         ]);
     }
 }
