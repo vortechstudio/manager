@@ -83,7 +83,7 @@ class Service extends Model
         return $this->versions()->where('published', true)->whereNot('version', $this->latest_version->version)->orderBy('version', 'desc')->get();
     }
 
-    public static function getImage(int $service_id, string $type): string
+    public function getImage(int $service_id, string $type): string
     {
         $type = match ($type) {
             'icon' => 'icon',

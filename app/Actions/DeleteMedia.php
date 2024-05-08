@@ -18,6 +18,7 @@ class DeleteMedia
         return match ($sector) {
             'events' => $this->deleteEventMedias($model_id),
             'posts' => $this->deletePostMedias($model_id),
+            'service' => $this->deleteServiceMedias($model_id)
         };
     }
 
@@ -56,6 +57,17 @@ class DeleteMedia
             return true;
         } catch (\Exception $e) {
 
+            return false;
+        }
+    }
+
+    private function deleteServiceMedias(int $model_id): bool
+    {
+        try {
+            \Storage::delete('services/'.$model_id);
+
+            return true;
+        } catch (\Exception $e) {
             return false;
         }
     }
