@@ -22,6 +22,8 @@ class Service extends Model
     protected $casts = [
         'type' => ServiceTypeEnum::class,
         'status' => ServiceStatusEnum::class,
+        'published_at' => 'timestamp',
+        'publish_social_at' => 'timestamp',
     ];
 
     protected $appends = [
