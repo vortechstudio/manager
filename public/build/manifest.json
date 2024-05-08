@@ -14,7 +14,7 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-00316529.js",
+    "file": "assets/app-307421c9.js",
     "imports": [
       "_axios-4d564c32.js",
       "_laravel-echo-55c64d0d.js",

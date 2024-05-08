@@ -41,18 +41,7 @@ class DatabaseSeeder extends Seeder
             'status' => ServiceStatusEnum::PRODUCTION,
             'url' => '//account.'.config('app.domain'),
             'cercle_id' => 1,
-        ]);
-
-        $s->versions()->create([
-            'title' => 'Version 1.0.0',
-            'description' => 'Première version',
-            'contenue' => 'Contenue de la version 1.0.0',
-            'published' => true,
-            'publish_social' => true,
-            'published_at' => now(),
-            'publish_social_at' => now(),
-            'version' => '1.0.0',
-            'service_id' => $s->id,
+            'repository' => 'account_v2',
         ]);
 
         $this->call(MenuSeeder::class);
