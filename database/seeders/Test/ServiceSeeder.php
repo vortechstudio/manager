@@ -16,18 +16,7 @@ class ServiceSeeder extends Seeder
             'page_content' => 'Jeux de simulation de compagnie ferroviaire !',
             'status' => 'idea',
             'url' => '//dev.railway-manager.io',
-        ]);
-
-        $service->versions()->create([
-            'version' => '0.0.1-alpha',
-            'title' => 'Version 0.0.1-alpha',
-            'description' => 'Première version alpha du jeu',
-            'contenue' => 'Contenue de la version 0.0.1-alpha',
-            'published' => true,
-            'published_at' => now(),
-            'publish_social' => true,
-            'publish_social_at' => now(),
-            'service_id' => $service->id,
+            'repository' => 'railway_manager',
         ]);
         \Storage::makeDirectory("services/$service->id");
     }
