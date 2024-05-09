@@ -58,7 +58,7 @@
                                 <a href="{{ route('railway.lignes.show', $ligne) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-title="Gérer la ligne">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <button @if($ligne->active) wire:click="disabled" @else wire:click="enable" @endif class="btn btn-icon btn-outline {{ $ligne->active ? 'btn-outline-danger' : 'btn-outline-success' }}" data-bs-toggle="tooltip" data-bs-title="{{ $ligne->active ? 'Désactiver la ligne' : 'Activer la ligne' }}">
+                                <button @if($ligne->active) wire:click="disabled({{ $ligne->id }})" @else wire:click="enable({{ $ligne->id }})" @endif class="btn btn-icon btn-outline {{ $ligne->active ? 'btn-outline-danger' : 'btn-outline-success' }}" data-bs-toggle="tooltip" data-bs-title="{{ $ligne->active ? 'Désactiver la ligne' : 'Activer la ligne' }}">
                                     <i class="fa-solid {{ $ligne->active ? 'fa-times' : 'fa-check' }}" wire:loading.remove wire:target="{{ $ligne->active ? 'disabled' : 'enabled' }}"></i>
                                     <i class="fa-solid fa-spinner fa-spin-pulse" wire:loading wire:target="{{ $ligne->active ? 'disabled' : 'enabled' }}"></i>
                                 </button>
