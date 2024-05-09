@@ -40,6 +40,47 @@ class LigneTable extends Component
         return 'livewire.pagination';
     }
 
+    public function disabled(int $id)
+    {
+        try {
+            RailwayLigne::find($id)
+                ->update([
+                    'active' => false,
+                ]);
+
+            $this->alert('success', 'La ligne à été désactivé');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Oops! Something went wrong.');
+            \Log::emergency($exception->getMessage(), [$exception]);
+        }
+    }
+
+    public function enable(int $id)
+    {
+        try {
+            RailwayLigne::find($id)
+                ->update([
+                    'active' => true,
+                ]);
+
+            $this->alert('success', 'La ligne à été activé');
+        } catch (\Exception $exception) {
+            $this->alert('error', 'Oops! Something went wrong.');
+            \Log::emergency($exception->getMessage(), [$exception]);
+        }
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            RailwayLigne::find($id)->delete();
+            $this->alert('success', 'Ligne supprimée avec succès');
+        } catch (\Exception $exception) {
+            \Log::emergency($exception->getMessage(), [$exception]);
+            $this->alert('error', 'Oops! Something went wrong.');
+        }
+    }
+
     public function render()
     {
         return view('livewire.railway.ligne.ligne-table', [

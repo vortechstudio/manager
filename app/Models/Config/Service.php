@@ -85,9 +85,13 @@ class Service extends Model
         return $this->versions()->where('published', true)->orderBy('version', 'desc')->first();
     }
 
-    public function getOtherVersionsAttribute()
+    public function getOtherVersionsAttribute(): \Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\Config\_IH_ServiceVersion_C|array
     {
-        return $this->versions()->where('published', true)->whereNot('version', $this->latest_version->version)->orderBy('version', 'desc')->get();
+        if (isset($this->latest_version->version)) {
+            return $this->versions()->where('published', true)->whereNot('version', $this->latest_version->version)->orderBy('version', 'desc')->get();
+        } else {
+            return [];
+        }
     }
 
     public function getImage(int $service_id, string $type): string
