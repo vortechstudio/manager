@@ -133,13 +133,6 @@
                                     required="true" />
                             </div>
                             <div class="col-sm-12 col-lg-3">
-                                <div class="mb-10 d-flex flex-column" wire:ignore>
-                                    <label for="img_cover" class="form-label required mb-2">Image de couverture</label>
-                                    <x-form.image-input
-                                        name="image"
-                                        label="Image de couverture"
-                                        width="w-300px" />
-                                </div>
                                 <div class="mb-10">
                                     <label for="cercle_id" class="form-label required">Cercle</label>
                                     <select name="cercle_id" wire:model="cercle_id" id="cercle_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner un cercle ---" required>
@@ -172,34 +165,6 @@
                                     <x-form.checkbox
                                         name="promote"
                                         label="Promouvoir l'article" />
-                                </div>
-                                <div x-data="{show_published_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
-                                    <x-form.switches
-                                        name="published"
-                                        label="Publié l'article"
-                                        value="1"
-                                        class-check="primary"
-                                        alpine="true"
-                                        fun-alpine="show_published_at = ! show_published_at" />
-
-                                    <div x-show="show_published_at">
-                                        <label for="published_at" class="form-label">Publié le:</label>
-                                        <input data-format="datetime" class="form-control" wire:model="published_at" placeholder="Pick a date"/>
-                                    </div>
-                                </div>
-                                <div x-data="{show_published_social_at: false}" class="d-flex flex-row justify-content-between align-items-center mb-10">
-                                    <x-form.switches
-                                        name="publish_social"
-                                        label="Publié l'article sur les réseaux"
-                                        value="1"
-                                        class-check="warning"
-                                        alpine="true"
-                                        fun-alpine="show_published_social_at = ! show_published_social_at" />
-
-                                    <div x-show="show_published_social_at">
-                                        <label for="publish_social_at" class="form-label">Publié le:</label>
-                                        <input data-format="datetime" class="form-control" wire:model="publish_social_at" placeholder="Pick a date"/>
-                                    </div>
                                 </div>
                             </div>
                         </div>
