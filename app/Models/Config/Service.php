@@ -102,10 +102,10 @@ class Service extends Model
             'default' => 'default',
         };
 
-        if (\Storage::exists('services/' . $service_id . '/' . $type . '.webp')) {
-            return \Storage::url('services/' . $service_id . '/' . $type . '.webp');
+        if (\Storage::exists('services/'.$service_id.'/'.$type.'.webp')) {
+            return \Storage::url('services/'.$service_id.'/'.$type.'.webp');
         } else {
-            return \Storage::url('services/' . $type . '_default.png');
+            return \Storage::url('services/'.$type.'_default.png');
         }
     }
 }

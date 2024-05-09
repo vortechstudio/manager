@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\UserAction;
 use App\Models\Config\Service;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -44,7 +45,8 @@ class UpdateReleaseCommand extends Command
                 }
             }
         }
-        $this->alert("Mise à jour terminer");
+        $this->alert('Mise à jour terminer');
+
         return 0;
     }
 }
