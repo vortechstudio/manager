@@ -134,6 +134,9 @@
                                 <x-form.input
                                     name="repository"
                                     label="Repo du projet" />
+                                <x-form.input
+                                    name="folder"
+                                    label="Dossier du projet" />
                             </div>
                         </div>
                     </div>
