@@ -82,8 +82,8 @@
                                 name="active"
                                 label="Actif" />
                             <div class="mb-10">
-                                <label for="status" class="form-label required">Etape de Developpement</label>
-                                <select name="status" id="status" class="form-select" data-control="select2" data-placeholder="---  Selectionner un status ---" required>
+                                <label for="status" class="form-label">Etape de Developpement</label>
+                                <select name="status" id="status" class="form-select" data-control="select2" data-placeholder="---  Selectionner un status ---">
                                     <option></option>
                                     <option value="beta">Beta</option>
                                     <option value="prod">Production</option>
