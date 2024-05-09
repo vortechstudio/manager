@@ -34,6 +34,8 @@ class HubController extends Controller
         if ($sncf->searchGare($request->get('name')) === null) {
             toastr()
                 ->addError("La gare n'existe pas");
+
+            return redirect()->back();
         }
 
         $gare = RailwayGare::create([
