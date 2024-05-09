@@ -78,12 +78,12 @@ class EngineAction extends EngineSelectAction
     /**
      * Calculates the duration of maintenance based on the essieux, automotrice flag, and number of wagons.
      *
-     * @param  int  $essieux  The essieux value.
+     * @param  string  $essieux  The essieux value.
      * @param  bool  $automotrice  Flag to indicate if it is an automotrice.
      * @param  int  $nbWagon  The number of wagons.
      * @return \Illuminate\Support\Carbon The calculated duration of maintenance.
      */
-    public function calcDurationMaintenance(int $essieux, bool $automotrice = false, int $nbWagon = 1): \Illuminate\Support\Carbon
+    public function calcDurationMaintenance(string $essieux, bool $automotrice = false, int $nbWagon = 1): \Illuminate\Support\Carbon
     {
         $min_init = 15;
         $calcEssieux = $min_init + self::getDataCalcForEssieux($essieux, $automotrice, $nbWagon);
