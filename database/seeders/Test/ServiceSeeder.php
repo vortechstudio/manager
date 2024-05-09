@@ -35,6 +35,7 @@ class ServiceSeeder extends Seeder
                 'service_id' => $ab->id,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'premium' => false,
             ]);
 
             $user->logs()->create([
@@ -69,6 +70,7 @@ class ServiceSeeder extends Seeder
                 'service_id' => $rw->id,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'premium' => false,
             ]);
 
             $user->logs()->create([
