@@ -86,6 +86,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#stat">Statistiques</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#images">Images</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -100,8 +103,11 @@
                             {!! $article->contenue !!}
                         </div>
 
-                        <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
+                        <div class="tab-pane fade" id="stat" role="tabpanel">
                             ...
+                        </div>
+                        <div class="tab-pane fade" id="images" role="tabpanel">
+                            <livewire:social.article-tab-image :article="$article" />
                         </div>
                     </div>
                 </div>

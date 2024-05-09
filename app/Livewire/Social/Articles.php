@@ -17,7 +17,7 @@ use Storage;
 
 class Articles extends Component
 {
-    use LivewireAlert, WithFileUploads, WithPagination;
+    use LivewireAlert, WithPagination;
 
     public string $search = '';
 
@@ -32,8 +32,6 @@ class Articles extends Component
     public string $contenue = '';
 
     public string $type = '';
-
-    public $image = null;
 
     public int $cercle_id = 0;
 
@@ -72,66 +70,28 @@ class Articles extends Component
 
     public function save()
     {
-        $this->validate([
-            'title' => 'required|string|min:5',
-            'description' => 'max:255',
-            'contenue' => 'required',
-            'author' => 'required',
-            'cercle_id' => 'required',
-            'type' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-        ]);
-
         try {
-            $article = Article::create([
+            Article::create([
                 'title' => $this->title,
                 'description' => $this->description,
                 'contenue' => $this->contenue,
                 'type' => $this->type,
-                'published' => $this->published,
-                'published_at' => $this->published_at != '' ? Carbon::createFromTimestamp(strtotime($this->published_at)) : null,
-                'publish_social' => $this->publish_social,
-                'publish_social_at' => $this->publish_social_at != '' ? Carbon::createFromTimestamp(strtotime($this->publish_social_at)) : null,
+                'published' => false,
+                'published_at' => null,
+                'publish_social' => false,
+                'publish_social_at' => null,
                 'promote' => $this->promote,
                 'status' => 'draft',
                 'author' => $this->author,
                 'cercle_id' => $this->cercle_id,
             ]);
+
+            $this->alert('success', 'Article sauvegardé avec succes');
+            $this->dispatch('closeModal', 'addArticle');
         } catch (Exception $exception) {
             \Log::critical($exception->getMessage(), $exception->getTrace());
             $this->alert('error', 'Impossible de sauvegarder l\'article');
         }
-
-        try {
-            // On enregistre l'image dans le dossier blog et on déclenche un job permettant de structurer les images pour un header
-            $this->image->storeAs(
-                'blog/'.$article->id,
-                'default.'.$this->image->extension(),
-                'vortech'
-            );
-
-            dispatch(new ResizeImageJob(
-                filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$this->image->getClientOriginalExtension()),
-                directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
-                sector: 'article'
-            ));
-
-            dispatch(new FormatImageJob(
-                filePath: Storage::disk('vortech')->path('blog/'.$article->id.'/default.'.$this->image->getClientOriginalExtension()),
-                directoryUpload: Storage::disk('vortech')->path('blog/'.$article->id),
-                sector: 'article'
-            ));
-
-            Storage::disk('vortech')->delete('blog/'.$article->id.'/default.'.$this->image->getClientOriginalExtension());
-        } catch (Exception $exception) {
-            \Log::critical($exception->getMessage(), $exception->getTrace());
-            $issue = new Issues(Issues::createIssueMonolog('article_image', $exception->getMessage(), [$exception]));
-            $issue->createIssueFromException();
-            toastr()->addError($exception->getMessage());
-        }
-
-        $this->alert('success', 'Article sauvegardé avec succes');
-        $this->dispatch('closeModal', 'addArticle');
     }
 
     public function published(int $id): void
