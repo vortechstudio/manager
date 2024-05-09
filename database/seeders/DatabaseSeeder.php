@@ -3,10 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Enums\Config\ServiceStatusEnum;
-use App\Enums\Config\ServiceTypeEnum;
-use App\Models\Config\Service;
-use App\Models\Social\Cercle;
 use Database\Seeders\Railway\SettingsSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,31 +20,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Cercle::create([
-            'name' => 'Vortech Studio',
-        ]);
-        Cercle::create([
-            'name' => 'Vortech Lab',
-        ]);
-        Cercle::create([
-            'name' => 'Railway Manager',
-        ]);
-
-        $s = Service::create([
-            'name' => 'Accès de base',
-            'type' => ServiceTypeEnum::PLATEFORME,
-            'description' => 'Accès de base au plateforme Vortech Studio',
-            'status' => ServiceStatusEnum::PRODUCTION,
-            'url' => '//account.'.config('app.domain'),
-            'cercle_id' => 1,
-            'repository' => 'account_v2',
-        ]);
-
         $this->call(MenuSeeder::class);
         $this->call(SettingsSeeder::class);
 
-        if (config('app.env') == 'local' || config('app.env') == 'testing') {
+        if (config('app.env') == 'local') {
             $this->call(TestSeeder::class);
+        } elseif (config('app.env') == 'staging') {
+            $this->call(StagingSeeder::class);
         }
     }
 }
