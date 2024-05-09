@@ -1,3 +1,15 @@
+# [3.3.0](https://github.com/vortechstudio/manager/compare/v3.2.0...v3.3.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* **Railway Gares & Hubs:** Ajout de redirection et modification du formulaire ([c4ff492](https://github.com/vortechstudio/manager/commit/c4ff49289abf7a8590a9e5a0b12d3172e1f45480))
+
+
+### Features
+
+* **Railway Ligne:** Ajout de fonctionnalités pour activer/désactiver et supprimer une ligne ([3c74d8c](https://github.com/vortechstudio/manager/commit/3c74d8c08949d8cdf9c3742357b45ff3492b1c98))
+
 # [3.2.0](https://github.com/vortechstudio/manager/compare/v3.1.0...v3.2.0) (2024-05-08)
 
 
