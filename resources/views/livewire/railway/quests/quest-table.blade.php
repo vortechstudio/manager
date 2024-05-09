@@ -43,6 +43,21 @@
                         label="XP Accordée"
                         type="number"
                         required="true" />
+                    <div class="row">
+                        <div class="col-6">
+                            <x-form.input
+                                name="action"
+                                label="Action Executer"
+                                required="true" />
+                        </div>
+                        <div class="col-6">
+                            <x-form.input
+                                name="action_count"
+                                label="Valeur de l'action"
+                                type="number"
+                                required="true" />
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex flex-end">

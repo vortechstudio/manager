@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Test;
+namespace Database\Seeders\staging;
 
 use App\Models\Config\Service;
 use App\Models\Social\Cercle;
@@ -17,9 +17,9 @@ class ServiceSeeder extends Seeder
             'description' => 'Accès au système de vortech studio',
             'page_content' => 'Accès au système de vortech studio',
             'status' => 'production',
-            'url' => '//account.vortechstudio.io',
+            'url' => '//account.vortechstudio.ovh',
             'repository' => 'account_v2',
-            'folder' => 'C:\laragon\www\account.vortechstudio',
+            'folder' => '/www/wwwroot/account.vortechstudio.ovh',
         ]);
         \Storage::makeDirectory("services/$ab->id");
 
@@ -52,9 +52,9 @@ class ServiceSeeder extends Seeder
             'description' => 'Simulation de compagnie ferroviaire !',
             'page_content' => 'Jeux de simulation de compagnie ferroviaire !',
             'status' => 'idea',
-            'url' => '//dev.railway-manager.io',
+            'url' => '//beta.railway-manager.ovh',
             'repository' => 'railway_manager',
-            'folder' => 'C:\laragon\www\dev.railway-manager',
+            'folder' => '/www/wwwroot/beta.railway-manager.ovh',
         ]);
         \Storage::makeDirectory("services/$rw->id");
 
@@ -78,6 +78,5 @@ class ServiceSeeder extends Seeder
                 'user_id' => $user->id,
             ]);
         }
-
     }
 }

@@ -23,6 +23,9 @@ class QuestTable extends Component
 
     public string $description = '';
 
+    public string $action = '';
+    public int $action_count = 0;
+
     public int $xp_reward = 0;
 
     protected $queryString = [
@@ -51,6 +54,8 @@ class QuestTable extends Component
         $this->name = '';
         $this->description = '';
         $this->xp_reward = 0;
+        $this->action = '';
+        $this->action_count = 0;
     }
 
     public function save()
@@ -58,6 +63,8 @@ class QuestTable extends Component
         $this->validate([
             'name' => 'required',
             'xp_reward' => 'required',
+            'action' => 'required',
+            'action_count' => 'required',
         ]);
 
         try {
@@ -65,6 +72,8 @@ class QuestTable extends Component
                 'name' => $this->name,
                 'description' => $this->description,
                 'xp_reward' => $this->xp_reward,
+                'action' => $this->action,
+                'action_count' => $this->action_count,
             ]);
             $this->resetForm();
         } catch (\Exception $e) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Test;
+namespace Database\Seeders\production;
 
 use App\Models\Config\Service;
 use App\Models\Social\Cercle;
@@ -17,9 +17,9 @@ class ServiceSeeder extends Seeder
             'description' => 'Accès au système de vortech studio',
             'page_content' => 'Accès au système de vortech studio',
             'status' => 'production',
-            'url' => '//account.vortechstudio.io',
+            'url' => '//account.vortechstudio.fr',
             'repository' => 'account_v2',
-            'folder' => 'C:\laragon\www\account.vortechstudio',
+            'folder' => '/www/wwwroot/account.vortechstudio.fr',
         ]);
         \Storage::makeDirectory("services/$ab->id");
 
@@ -27,22 +27,6 @@ class ServiceSeeder extends Seeder
             'name' => 'Vortech Studio',
         ]);
         \Storage::makeDirectory("cercles/$c_ab->id");
-
-        foreach (User::all() as $user) {
-            $user->services()->create([
-                'status' => true,
-                'user_id' => $user->id,
-                'service_id' => $ab->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'premium' => false,
-            ]);
-
-            $user->logs()->create([
-                'action' => 'Affiliation au service: Accès de base',
-                'user_id' => $user->id,
-            ]);
-        }
 
         //---------------------------------------------------------//
 
@@ -52,9 +36,9 @@ class ServiceSeeder extends Seeder
             'description' => 'Simulation de compagnie ferroviaire !',
             'page_content' => 'Jeux de simulation de compagnie ferroviaire !',
             'status' => 'idea',
-            'url' => '//dev.railway-manager.io',
+            'url' => '//stable.vortechstudio.fr',
             'repository' => 'railway_manager',
-            'folder' => 'C:\laragon\www\dev.railway-manager',
+            'folder' => '/www/wwwroot/stable.railway-manager.fr',
         ]);
         \Storage::makeDirectory("services/$rw->id");
 
@@ -62,22 +46,5 @@ class ServiceSeeder extends Seeder
             'name' => 'Railway Manager',
         ]);
         \Storage::makeDirectory("cercles/$c_rw->id");
-
-        foreach (User::all() as $user) {
-            $user->services()->create([
-                'status' => true,
-                'user_id' => $user->id,
-                'service_id' => $rw->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'premium' => false,
-            ]);
-
-            $user->logs()->create([
-                'action' => 'Affiliation au service: Railway Manager',
-                'user_id' => $user->id,
-            ]);
-        }
-
     }
 }
