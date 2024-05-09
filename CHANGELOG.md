@@ -1,3 +1,14 @@
+# [3.4.0](https://github.com/vortechstudio/manager/compare/v3.3.0...v3.4.0) (2024-05-09)
+
+
+### Features
+
+* **Article:** Ajout attribut URL et sa méthode d'accès ([52826d7](https://github.com/vortechstudio/manager/commit/52826d7b26328c556599c64f49e9f497b3e5b94c))
+* **article:** ajout de l'onglet images aux articles ([81b276c](https://github.com/vortechstudio/manager/commit/81b276ceed6855d25213500f8a84df2b0070eabe))
+* **base de données, seeders:** Ajout du champ 'dossier' aux services et mise à jour de la logique de seeding ([740b01f](https://github.com/vortechstudio/manager/commit/740b01fc407edfe1a02d4bd64dd17a17c9858c1b))
+* **Railway Quests:** Ajouter champs "action" et "action_count" à Quests ([e584ff2](https://github.com/vortechstudio/manager/commit/e584ff216b7119b0016b7c791551334b3016e413))
+* **ServiceSeeder:** Ajout du champ 'premium' dans les seeders de service ([6087664](https://github.com/vortechstudio/manager/commit/6087664dd05dd61df57bef3d53162caa9ab16258))
+
 # [3.3.0](https://github.com/vortechstudio/manager/compare/v3.2.0...v3.3.0) (2024-05-09)
 
 
