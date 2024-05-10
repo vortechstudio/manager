@@ -39,7 +39,7 @@
                             <td>
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="symbol symbol-70px symbol-2by3 me-5">
-                                        <img src="{{ \App\Models\Social\Event::getImage($event->id, "default") }}" alt="{{ $event->title }}">
+                                        <img src="{{ $event->getImage("default") }}" alt="{{ $event->title }}">
                                     </div>
                                     <div class="d-flex flex-column">
                                         <span class="fw-bolder">{{ $event->title }}</span>

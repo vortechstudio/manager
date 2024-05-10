@@ -7,7 +7,7 @@
             </button>
         </div>
     </div>
-    <img src="{{ \App\Models\Social\Event::getImage($event->id, 'header') }}" alt="{{ $event->title }}">
+    <img src="{{ $event->getImage('header') }}" alt="{{ $event->title }}">
     <div class="card-body">
         <div class="fs-2x fw-bolder mb-3">{{ $event->title }}</div>
         <div class="d-flex flex-row align-items-center p-5 bg-gray-200 rounded mb-10">

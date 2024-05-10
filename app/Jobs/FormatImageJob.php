@@ -32,6 +32,8 @@ class FormatImageJob implements ShouldQueue
         match ($this->sector) {
             'article' => $this->handleArticle($file, $this->directoryUpload),
             'event' => $this->handleEvent($file, $this->directoryUpload),
+            'event_icon' => $this->handleEventIcon($file, $this->directoryUpload),
+            'event_header' => $this->handleEventHeader($file, $this->directoryUpload),
             'rental' => $this->handleRental($file, $this->directoryUpload),
             'banque' => $this->handleBanque($file, $this->directoryUpload),
             'cercle' => $this->handleCercle($file, $this->directoryUpload),
@@ -51,6 +53,21 @@ class FormatImageJob implements ShouldQueue
         $file->toWebp(60);
         $file->save($directoryUpload.'/default.webp');
     }
+
+    private function handleEventIcon(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/icon.webp');
+    }
+
+    private function handleEventHeader(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
+    {
+        $file->cover($file->width(), 320);
+        $file->scale(1024);
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/header.webp');
+    }
+
 
     /**
      * @throws \Exception
