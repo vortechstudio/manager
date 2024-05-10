@@ -16,7 +16,7 @@
                 <!--begin: Pic-->
                 <div class="me-7 mb-4">
                     <div class="symbol symbol-100px symbol-lg-160px symbol-2by3 position-relative">
-                        <img src="{{ \App\Models\Social\Event::getImage($event->id, 'default') }}" alt="{{ $event->title }}">
+                        <img src="{{ $event->getImage('default') }}" alt="{{ $event->title }}">
                         <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-{{ $event->getStatus('color') }} rounded-circle border border-4 border-body h-20px w-20px" data-bs-toggle="tooltip" data-bs-title="{{ $event->getStatus('text') }}"></div>
                     </div>
                 </div>
@@ -77,11 +77,9 @@
                         Evènement
                     </a>
                 </li>
-                <!--end::Nav item-->
-                <!--begin::Nav item-->
                 <li class="nav-item mt-2">
-                    <a class="nav-link text-active-primary ms-0 me-10 py-5 " data-bs-toggle="tab" href="#content">
-                        Contenue
+                    <a class="nav-link text-active-primary ms-0 me-10 py-5" data-bs-toggle="tab" href="#images">
+                        Images
                     </a>
                 </li>
                 <!--end::Nav item-->
@@ -115,51 +113,10 @@
 
     <div class="tab-content" id="tabEvent">
         <div class="tab-pane fade show active" id="event" role="tabpanel">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h3 class="card-title">Post</h3>
-                </div>
-                <img src="{{ \App\Models\Social\Event::getImage($event->id, 'header') }}" alt="{{ $event->title }}">
-                <div class="card-body">
-                    <div class="fs-2x fw-bolder mb-3">{{ $event->title }}</div>
-                    <div class="d-flex flex-row align-items-center p-5 bg-gray-200 rounded mb-10">
-                        <div class="symbol symbol-70px symbol-circle me-5">
-                            <img src="{{ $event->cercles()->first()->cercle_icon }}" alt="{{ $event->cercles()->first()->name }}">
-                        </div>
-                        <div class="d-flex flex-column">
-                            <span class="fs-2 fw-bold">{{ $event->cercles()->first()->name }}</span>
-                            <span class="text-muted">Par Vortech Studio</span>
-                        </div>
-                    </div>
-
-                    <div class="fst-italic mb-3">{{ $event->synopsis }}</div>
-                    {!! $event->contenue !!}
-                </div>
-            </div>
+            <livewire:social.event.event-tab-content :event="$event" />
         </div>
-        <div class="tab-pane fade" id="content" role="tabpanel">
-            <form action="{{ route('social.events.update', $event->id) }}" method="POST">
-                <div class="card shadow-sm">
-                    <div class="card-header">
-                        <h3 class="card-title">Edition du contenu</h3>
-                        <div class="card-toolbar">
-                            <button type="submit" class="btn btn-sm btn-light">
-                                Sauvegarder
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="action" value="updateContent">
-
-                        <x-form.textarea
-                            type="laraberg"
-                            name="contenue"
-                            value="{!! $event->contenue !!}" />
-                    </div>
-                </div>
-            </form>
+        <div class="tab-pane fade" id="images" role="tabpanel">
+            <livewire:social.event.event-tab-image :event="$event" />
         </div>
         @if($event->type_event == \App\Enums\Social\EventTypeEnum::POLL)
             <div class="tab-pane fade" id="poll" role="tabpanel">

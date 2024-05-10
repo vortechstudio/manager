@@ -46,8 +46,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::put('{id}/edit', [\App\Http\Controllers\Social\PageController::class, 'update'])->name('update');
             Route::delete('{id}', [\App\Http\Controllers\Social\PageController::class, 'destroy'])->name('destroy');
         });
-
-        Route::get('cercles', [\App\Http\Controllers\Social\CercleController::class, 'index'])->name('cercles.index');
+        Route::prefix('cercles')->as('cercles.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Social\CercleController::class, 'index'])->name('index');
+            Route::get('{id}', [\App\Http\Controllers\Social\CercleController::class, 'show'])->name('show');
+        });
 
         Route::prefix('services')->as('services.')->group(function () {
             Route::get('/', [\App\Http\Controllers\Social\ServiceController::class, 'index'])->name('index');

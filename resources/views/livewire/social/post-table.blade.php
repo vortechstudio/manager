@@ -61,7 +61,7 @@
                         <td>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="symbol symbol-30px symbol-circle me-5">
-                                    <img src="{{ \App\Models\Social\Cercle::getImage($feed->cercle()->first()->id, 'icon') }}" alt="{{ $feed->cercle()->first()->name }}">
+                                    <img src="{{ $feed->cercle()->first()->getImage($feed->cercle()->first()->id, 'icon') }}" alt="{{ $feed->cercle()->first()->name }}">
                                 </div>
                                 <div class="d-flex flex-column">
                                     <span class="fw-bolder">{{ $feed->cercle()->first()->name }}</span>

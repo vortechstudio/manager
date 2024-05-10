@@ -96,9 +96,6 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer">
-            {{ $articles->links() }}
-        </div>
     </div>
     <div wire:ignore.self class="modal fade" tabindex="-1" id="addArticle">
         <form action="" method="post" wire:submit="save" enctype="multipart/form-data">
