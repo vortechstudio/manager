@@ -18,4 +18,18 @@ class UserAction
             ));
         }
     }
+
+    public function sendNotificationToUsers(string $title, string $message, string $type = 'info')
+    {
+        foreach (User::all() as $user) {
+            if ($user->profil->notification) {
+                $user->notify(new SendMessageNotification(
+                    title: $title,
+                    sector: 'alerts',
+                    type: $type,
+                    message: $message,
+                ));
+            }
+        }
+    }
 }

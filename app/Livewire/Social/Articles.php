@@ -2,22 +2,20 @@
 
 namespace App\Livewire\Social;
 
-use App\Jobs\FormatImageJob;
-use App\Jobs\ResizeImageJob;
 use App\Models\Social\Article;
 use App\Services\Github\Issues;
-use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Storage;
 
 class Articles extends Component
 {
     use LivewireAlert, WithPagination;
+
+    public Article|Collection|null $articles;
 
     public string $search = '';
 
@@ -136,11 +134,17 @@ class Articles extends Component
     #[Title('Gestion des Articles')]
     public function render()
     {
-        return view('livewire.social.articles', [
-            'articles' => Article::with('author', 'cercle')
+        if ($this->articles) {
+            $articles = $this->articles->paginate(5);
+        } else {
+            $articles = Article::with('author', 'cercle')
                 ->when($this->search, fn ($q) => $q->where('title', 'LIKE', "%{$this->search}%"))
                 ->orderBy($this->orderField, $this->orderDirection)
-                ->paginate(5),
+                ->paginate(5);
+        }
+
+        return view('livewire.social.articles', [
+            'articles' => $articles,
         ])
             ->layout('layouts.app');
     }

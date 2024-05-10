@@ -3,6 +3,7 @@
 namespace App\Livewire\Social\Event;
 
 use App\Actions\DeleteMedia;
+use App\Actions\UserAction;
 use App\Enums\Social\EventStatusEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -30,6 +31,10 @@ class ShowAction extends Component
         $this->event->status = EventStatusEnum::PUBLISHED;
         $this->event->published_at = now();
         $this->event->save();
+        (new UserAction())->sendNotificationToUsers(
+            title: 'Nouvelle evènement publier',
+            message: $this->event->title
+        );
         $this->alert('success', 'Évènement publie avec succès');
     }
 
