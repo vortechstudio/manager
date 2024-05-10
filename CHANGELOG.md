@@ -1,3 +1,19 @@
+# [3.5.0](https://github.com/vortechstudio/manager/compare/v3.4.0...v3.5.0) (2024-05-10)
+
+
+### Bug Fixes
+
+* **Social Cercle:** Mise à jour des vues et du modèle des cercles sociaux ([7c8d943](https://github.com/vortechstudio/manager/commit/7c8d9433680287cad8299c2b9b64512e2a79677f))
+* **Social Evenement:** migrate event creation form to livewire component ([93f3942](https://github.com/vortechstudio/manager/commit/93f3942063bc771327e5f2f79e78d34ded3846c2))
+* **Social Evenement:** remplacement du code dans show.blade.php ([42f4b16](https://github.com/vortechstudio/manager/commit/42f4b16fe7e1b3ddbf19407a17f3647f487b2635))
+
+
+### Features
+
+* **Social Cercle:** Ajout du composant 'CercleImage' permettant d'upload les images du cercle ([0d75dec](https://github.com/vortechstudio/manager/commit/0d75decb19269d53fbeefc937c06fd7372cffd57))
+* **Social Evenement:** Ajout de l'onglet de contenu de l'événement ([3ecc9eb](https://github.com/vortechstudio/manager/commit/3ecc9eba336bb9d3b8640878780626b7f4cfdb40))
+* **Social Evenement:** Ajout du formulaire d'upload d'image pour les événements ([c9829c8](https://github.com/vortechstudio/manager/commit/c9829c84983ef908503e6ca62f45e4fc1b1ab1c4))
+
 # [3.4.0](https://github.com/vortechstudio/manager/compare/v3.3.0...v3.4.0) (2024-05-09)
 
 
