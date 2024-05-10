@@ -4,6 +4,7 @@ namespace App\Livewire\Social;
 
 use App\Actions\DeleteMedia;
 use App\Models\Social\Event;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -13,13 +14,27 @@ class EventTable extends Component
 {
     use LivewireAlert, WithPagination;
 
-    public Event|Collection|null $event;
+    public Event|Collection|null $event = null;
 
     public string $orderField = 'title';
 
     public string $orderDirection = 'ASC';
 
     public string $search = '';
+
+    public string $title = '';
+
+    public string $type_event = '';
+
+    public int $cercle_id = 0;
+
+    public string $star_at = '';
+
+    public string $end_at = '';
+
+    public string $synopsis = '';
+
+    public string $contenue = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -40,6 +55,28 @@ class EventTable extends Component
     public function paginationView()
     {
         return 'livewire.pagination';
+    }
+
+    public function save()
+    {
+        try {
+            $event = Event::create([
+                'title' => $this->title,
+                'type_event' => $this->type_event,
+                'synopsis' => $this->synopsis,
+                'contenue' => $this->contenue,
+                'start_at' => Carbon::parse($this->star_at),
+                'end_at' => Carbon::parse($this->end_at),
+            ]);
+
+            $event->cercles()->attach($this->cercle_id);
+
+            $this->alert('success', "L'évènement à été créer avec succès");
+            $this->dispatch('closeModal', 'addEvent');
+        } catch (\Exception $exception) {
+            \Log::emergency($exception->getMessage(), [$exception]);
+            $this->alert('error', 'Erreur lors de la création de l\'évènement');
+        }
     }
 
     public function destroy(int $event_id): void
