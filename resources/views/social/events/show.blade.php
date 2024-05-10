@@ -115,27 +115,7 @@
 
     <div class="tab-content" id="tabEvent">
         <div class="tab-pane fade show active" id="event" role="tabpanel">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h3 class="card-title">Post</h3>
-                </div>
-                <img src="{{ \App\Models\Social\Event::getImage($event->id, 'header') }}" alt="{{ $event->title }}">
-                <div class="card-body">
-                    <div class="fs-2x fw-bolder mb-3">{{ $event->title }}</div>
-                    <div class="d-flex flex-row align-items-center p-5 bg-gray-200 rounded mb-10">
-                        <div class="symbol symbol-70px symbol-circle me-5">
-                            <img src="{{ $event->cercles()->first()->cercle_icon }}" alt="{{ $event->cercles()->first()->name }}">
-                        </div>
-                        <div class="d-flex flex-column">
-                            <span class="fs-2 fw-bold">{{ $event->cercles()->first()->name }}</span>
-                            <span class="text-muted">Par Vortech Studio</span>
-                        </div>
-                    </div>
-
-                    <div class="fst-italic mb-3">{{ $event->synopsis }}</div>
-                    {!! $event->contenue !!}
-                </div>
-            </div>
+            <livewire:social.event.event-tab-content :event="$event" />
         </div>
         <div class="tab-pane fade" id="content" role="tabpanel">
             <form action="{{ route('social.events.update', $event->id) }}" method="POST">
