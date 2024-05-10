@@ -34,6 +34,9 @@ class FormatImageJob implements ShouldQueue
             'event' => $this->handleEvent($file, $this->directoryUpload),
             'rental' => $this->handleRental($file, $this->directoryUpload),
             'banque' => $this->handleBanque($file, $this->directoryUpload),
+            'cercle' => $this->handleCercle($file, $this->directoryUpload),
+            'cercle_header' => $this->handleCercleHeader($file, $this->directoryUpload),
+            'cercle_icon' => $this->handleCercleIcon($file, $this->directoryUpload),
         };
     }
 
@@ -79,5 +82,23 @@ class FormatImageJob implements ShouldQueue
             $issue->createIssueFromException();
             throw new \Exception("Error saving image: {$exception->getMessage()}");
         }
+    }
+
+    private function handleCercle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/default.webp');
+    }
+
+    private function handleCercleHeader(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/header.webp');
+    }
+
+    private function handleCercleIcon(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    {
+        $file->toWebp(60);
+        $file->save($directoryUpload.'/icon.webp');
     }
 }

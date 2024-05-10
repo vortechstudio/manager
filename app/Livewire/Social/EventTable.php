@@ -4,6 +4,7 @@ namespace App\Livewire\Social;
 
 use App\Actions\DeleteMedia;
 use App\Models\Social\Event;
+use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,6 +12,8 @@ use Livewire\WithPagination;
 class EventTable extends Component
 {
     use LivewireAlert, WithPagination;
+
+    public Event|Collection|null $event;
 
     public string $orderField = 'title';
 
@@ -80,10 +83,17 @@ class EventTable extends Component
 
     public function render()
     {
-        return view('livewire.social.event-table', [
-            'events' => Event::where('title', 'like', "%{$this->search}%")
+
+        if ($this->event) {
+            $event = $this->event->paginate(10);
+        } else {
+            $event = Event::where('title', 'like', "%{$this->search}%")
                 ->orderBy($this->orderField, $this->orderDirection)
-                ->paginate(10),
+                ->paginate(10);
+        }
+
+        return view('livewire.social.event-table', [
+            'events' => $event,
         ]);
     }
 }

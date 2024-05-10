@@ -22,7 +22,7 @@
                         <td>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="symbol symbol-70px symbol-2by3 me-5">
-                                    <img src="{{ \App\Models\Social\Cercle::getImage($cercle->id, 'icon') }}" alt="{{ $cercle->name }}">
+                                    <img src="{{ $cercle->getImage($cercle->id, 'icon') }}" alt="{{ $cercle->name }}">
                                 </div>
                                 <span class="fw-bolder text-light">{{ $cercle->name }}</span>
                             </div>
