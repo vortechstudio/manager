@@ -8,5 +8,5 @@
         title="Gestion des articles"
         :breads="array('Social', 'Gestion des articles')" />
 
-    <livewire:social.articles />
+    <livewire:social.articles :articles="$articles"/>
 @endsection

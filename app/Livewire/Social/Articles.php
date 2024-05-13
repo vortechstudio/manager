@@ -15,7 +15,7 @@ class Articles extends Component
 {
     use LivewireAlert, WithPagination;
 
-    public Article|Collection|null $articles = null;
+    public Article|Collection|null $articles;
 
     public string $search = '';
 
@@ -50,6 +50,11 @@ class Articles extends Component
         'orderField' => ['except' => 'title'],
         'orderDirection' => ['except' => 'ASC'],
     ];
+
+    public function mount()
+    {
+
+    }
 
     public function paginationView()
     {
@@ -134,7 +139,7 @@ class Articles extends Component
     #[Title('Gestion des Articles')]
     public function render()
     {
-        if (! empty($this->articles)) {
+        if (isset($this->articles)) {
             $articles = $this->articles->paginate(5);
         } else {
             $articles = Article::with('author', 'cercle')
