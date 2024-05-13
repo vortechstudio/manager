@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\UserAction;
 use App\Models\Config\Service;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

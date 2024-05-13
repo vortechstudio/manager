@@ -15,7 +15,7 @@ class Articles extends Component
 {
     use LivewireAlert, WithPagination;
 
-    public Article|Collection|null $articles;
+    public Article|Collection|null $articles = null;
 
     public string $search = '';
 
@@ -134,7 +134,7 @@ class Articles extends Component
     #[Title('Gestion des Articles')]
     public function render()
     {
-        if ($this->articles) {
+        if (! empty($this->articles)) {
             $articles = $this->articles->paginate(5);
         } else {
             $articles = Article::with('author', 'cercle')
