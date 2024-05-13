@@ -1,3 +1,16 @@
+# [3.6.0](https://github.com/vortechstudio/manager/compare/v3.5.0...v3.6.0) (2024-05-13)
+
+
+### Bug Fixes
+
+* **Railway Engine:** Correction du chemin d'accès aux fichiers .gif pour le type de train ([18d4350](https://github.com/vortechstudio/manager/commit/18d435033595e40a9b8c3346ac2e63684faa148f))
+* **Utilisateurs:** Ajout de liaison avec le modele UserRailwaySocial ([d26d1ff](https://github.com/vortechstudio/manager/commit/d26d1ff460bfdbb69adc094018f800931ba32e7a))
+
+
+### Features
+
+* **Railway Social:** Ajout de UserRailwaySocial et de sa migration ([d90b575](https://github.com/vortechstudio/manager/commit/d90b57577aecd69680e04f5231a138e8a2650d65))
+
 # [3.5.0](https://github.com/vortechstudio/manager/compare/v3.4.0...v3.5.0) (2024-05-10)
 
 
