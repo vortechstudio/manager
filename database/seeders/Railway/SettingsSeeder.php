@@ -57,5 +57,12 @@ class SettingsSeeder extends Seeder
                 'value' => 0,
             ]);
         }
+
+        if (! RailwaySetting::where('name', 'like', '%exchange_tpoint%')->exists()) {
+            RailwaySetting::create([
+                'name' => 'exchange_tpoint',
+                'value' => 0,
+            ]);
+        }
     }
 }
