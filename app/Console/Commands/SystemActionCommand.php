@@ -83,7 +83,7 @@ class SystemActionCommand extends Command
         RailwaySetting::where('name', 'price_parking')->first()->update([
             'value' => random_float(1, 2),
         ]);
-        RailwaySetting::where('name', 'price_tpoint')->first()->update([
+        RailwaySetting::where('name', 'exchange_tpoint')->first()->update([
             'value' => random_float(1, 1.2),
         ]);
 
