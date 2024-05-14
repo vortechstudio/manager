@@ -21,6 +21,7 @@
         "laravel-notification-channels/facebook-poster": "^6.0",
         "laravel-notification-channels/onesignal": "^2.5",
         "laravel-notification-channels/twitter": "^8.0",
+        "laravel-notification-channels/webpush": "^8.0",
         "laravel/fortify": "^1.20",
         "laravel/framework": "^10.10",
         "laravel/horizon": "^5.23",

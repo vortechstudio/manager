@@ -51,6 +51,11 @@ class Articles extends Component
         'orderDirection' => ['except' => 'ASC'],
     ];
 
+    public function mount()
+    {
+
+    }
+
     public function paginationView()
     {
         return 'livewire.pagination';
@@ -134,7 +139,7 @@ class Articles extends Component
     #[Title('Gestion des Articles')]
     public function render()
     {
-        if ($this->articles) {
+        if (isset($this->articles)) {
             $articles = $this->articles->paginate(5);
         } else {
             $articles = Article::with('author', 'cercle')
