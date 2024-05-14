@@ -78,6 +78,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('{id}', [\App\Http\Controllers\Social\Feeds\FeedController::class, 'show'])->name('show');
         });
 
+        Route::prefix('messagerie')->as('messagerie.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Social\MessagerieController::class, 'index'])->name('index');
+        });
+
+        Route::prefix('menu')->as('menu.')->group(function () {
+
+        });
     });
 
     Route::post('upload', \App\Http\Controllers\UploadController::class)->name('upload');
