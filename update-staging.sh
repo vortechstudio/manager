@@ -15,6 +15,7 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 php artisan clear
+php artisan webpush:vapid
 php artisan horizon:terminate
 chmod -R 777 storage bootstrap/cache
 
