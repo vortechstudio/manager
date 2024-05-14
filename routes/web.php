@@ -83,7 +83,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         });
 
         Route::prefix('menu')->as('menu.')->group(function () {
-
+            Route::get('/', [\App\Http\Controllers\Social\MenuController::class, 'index'])->name('index');
         });
     });
 
