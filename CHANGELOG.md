@@ -1,3 +1,21 @@
+# [3.7.0](https://github.com/vortechstudio/manager/compare/v3.6.0...v3.7.0) (2024-05-14)
+
+
+### Bug Fixes
+
+* **app:** Correction de bugs et amélioration du code ([b5d3312](https://github.com/vortechstudio/manager/commit/b5d3312f9adf85f5361c1369f0b5992f2ada1387))
+
+
+### Features
+
+* **Core:** Ajout de la fonctionnalité Webpush ([957fbba](https://github.com/vortechstudio/manager/commit/957fbba09551b65672b15e5affa4e059320db585))
+* **Messagerie:** Ajout de la relation entre les modèles Service et Message ([f7a1bf3](https://github.com/vortechstudio/manager/commit/f7a1bf3f452ad3619dc9f24e6a530bcad628e79e))
+* **Messagerie:** Ajout des contrôleurs de menu et de messagerie, et mise à jour de MenuSeeder ([530ea89](https://github.com/vortechstudio/manager/commit/530ea8968d9abfc9d63a6bb59defefc753ff7f4f))
+* **Messagerie:** Ajout du composant Livewire pour la messagerie et de son fichier blade associé ([f210a70](https://github.com/vortechstudio/manager/commit/f210a70883e8f72daab34a6778ce7899c0edea1f))
+* **Railway Message:** Ajout de récompenses aux messages ([ffa80c2](https://github.com/vortechstudio/manager/commit/ffa80c24289880cfc78addb1bad04481380ad89e))
+* **Railway Messages:** création du modèle et de la migration des messages ([a88e043](https://github.com/vortechstudio/manager/commit/a88e0430cedfb141f581b003b6688c0bb90c62ef))
+* **Utilisateur:** Ajout de la date de naissance ([82cb3aa](https://github.com/vortechstudio/manager/commit/82cb3aae605875c78e68ba8378fde7cd73bc5979))
+
 # [3.6.0](https://github.com/vortechstudio/manager/compare/v3.5.0...v3.6.0) (2024-05-13)
 
 
