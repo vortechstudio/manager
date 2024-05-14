@@ -69,5 +69,9 @@ class ServiceSeeder extends Seeder
             ]);
         }
 
+        $rw->shops()->create([
+            'service_id' => $rw->id,
+        ]);
+
     }
 }

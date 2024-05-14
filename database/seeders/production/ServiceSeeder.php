@@ -46,5 +46,8 @@ class ServiceSeeder extends Seeder
             'name' => 'Railway Manager',
         ]);
         \Storage::makeDirectory("cercles/$c_rw->id");
+        $rw->shops()->create([
+            'service_id' => $rw->id,
+        ]);
     }
 }
