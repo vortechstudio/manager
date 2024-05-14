@@ -78,5 +78,9 @@ class ServiceSeeder extends Seeder
                 'user_id' => $user->id,
             ]);
         }
+
+        $rw->shops()->create([
+            'service_id' => $rw->id,
+        ]);
     }
 }

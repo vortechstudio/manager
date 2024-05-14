@@ -87,6 +87,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         });
     });
 
+    Route::prefix('admin')->as('admin.')->group(function () {
+        Route::prefix('users')->as('users.')->group(function () {
+            Route::get('/')->name('index');
+        });
+        Route::get('/shops', \App\Http\Controllers\Admin\ShopController::class)->name('shops');
+    });
+
     Route::post('upload', \App\Http\Controllers\UploadController::class)->name('upload');
 
     include 'railway.php';
