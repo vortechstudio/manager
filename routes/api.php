@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/services', function (Request $request) {
     if ($request->has('service_name')) {
-        return response()->json(\App\Models\Config\Service::where('name', 'like', '%'.$request->get('service_name').'%')->first());
+        return response()->json(\App\Models\Config\Service::with('versions', 'tickets', 'shops')->where('name', 'like', '%'.$request->get('service_name').'%')->first());
     } else {
         return response()->json(\App\Models\Config\Service::all());
     }
