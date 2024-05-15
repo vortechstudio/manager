@@ -1,5 +1,6 @@
 #\bin\bash
 php artisan down
+php artisan service:locked
 
 git reset --hard
 git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
@@ -18,4 +19,5 @@ php artisan webpush:vapid
 php artisan horizon:terminate
 chmod -R 777 storage bootstrap/cache
 
+php artisan service:unlocked
 php artisan up

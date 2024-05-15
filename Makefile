@@ -18,4 +18,3 @@ migrate:
 	php artisan action monthly_bonus
 	php artisan action daily_config
 	php artisan create level
-	php artisan create card

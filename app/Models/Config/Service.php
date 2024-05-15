@@ -64,6 +64,11 @@ class Service extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
     public function hasVersions()
     {
         return $this->versions()->where('published', true)->exists();
