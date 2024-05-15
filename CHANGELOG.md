@@ -1,3 +1,18 @@
+# [3.8.0](https://github.com/vortechstudio/manager/compare/v3.7.0...v3.8.0) (2024-05-15)
+
+
+### Features
+
+* **Boutique:** ajout de fonctionnalités du module boutique ([141498f](https://github.com/vortechstudio/manager/commit/141498f8a369fa9389828f169ad0ec3fe758e5e9))
+* **Boutique:** Ajout de nouveaux articles dans la boutique et modification des attributs de la table ShopItems ([42df124](https://github.com/vortechstudio/manager/commit/42df124d627734f9f8fcf99fd1a656f8d9123b71))
+* **Boutique:** Ajoute une relation entre les services et les boutiques ([2f87073](https://github.com/vortechstudio/manager/commit/2f87073938a7d968e3ef32a91962ef9e09223aba))
+* **Boutique:** Création de la table package_item ([38d89cb](https://github.com/vortechstudio/manager/commit/38d89cb8e0eb696cafbf56db8a2f0623fe41f490))
+* **Boutique:** Création des tables, modèles et graines du Shop ([c92355f](https://github.com/vortechstudio/manager/commit/c92355f8d944d243809127cf81121dbfb60957a6))
+* **Boutique:** Création du composant ShopTable et de sa vue associée ([3defdee](https://github.com/vortechstudio/manager/commit/3defdeea13f7ebfbe3519f41a15bf30bf71a1972))
+* **Menu:** Ajout de la fonction d'index et de la route correspondante ([a84f46a](https://github.com/vortechstudio/manager/commit/a84f46a17c26995fe596026f6289c4a926adef15))
+* **Menu:** Creation du composant MenuTable ([f3bb9e2](https://github.com/vortechstudio/manager/commit/f3bb9e2bc0737c7ed2b980d7a677131cd021977e))
+* **Service:** Ajout de la notion de verrouillage ([277874d](https://github.com/vortechstudio/manager/commit/277874d7091093d69550bd2ebdf685effcbc66e5))
+
 # [3.7.0](https://github.com/vortechstudio/manager/compare/v3.6.0...v3.7.0) (2024-05-14)
 
 
