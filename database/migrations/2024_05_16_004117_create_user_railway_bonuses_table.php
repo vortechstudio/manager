@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('user_railway_mouvements', function (Blueprint $table) {
+        Schema::create('user_railway_bonuses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->decimal('amount', 16);
-            $table->string('type_amount');
-            $table->string('type_mvm');
-            $table->foreignId('user_railway_company_id')
+            $table->integer('simulation')->default(0);
+            $table->integer('audit_ext')->default(0);
+            $table->integer('audit_int')->default(0);
+            $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
@@ -22,6 +21,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('user_railway_mouvements');
+        Schema::dropIfExists('user_railway_bonuses');
     }
 };
