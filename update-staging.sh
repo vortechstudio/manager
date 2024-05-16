@@ -1,7 +1,7 @@
 #\bin\bash
 
-php artisan down
 php artisan service:locked
+php artisan down
 
 git reset --hard
 git pull origin master
@@ -20,5 +20,5 @@ php artisan webpush:vapid
 php artisan horizon:terminate
 chmod -R 777 storage bootstrap/cache
 
-php artisan service:unlocked
 php artisan up
+php artisan service:unlocked
