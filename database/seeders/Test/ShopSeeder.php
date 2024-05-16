@@ -105,5 +105,20 @@ class ShopSeeder extends Seeder
             'qte' => 1600,
             'stripe_token' => 'price_1O475ACJTg16gfTH3zIh4hyi',
         ]);
+
+        ShopItem::create([
+            'name' => '10 simulation',
+            'description' => 'Lorem Ipsum',
+            'currency_type' => 'argent',
+            'price' => 10000,
+            'disponibility_end_at' => Carbon::now()->addDays(rand(15, 98)),
+            'blocked' => true,
+            'blocked_max' => 5,
+            'shop_category_id' => 3,
+            'rarity' => 'bronze',
+            'section' => 'simulation',
+            'qte' => 10,
+            'stripe_token' => null,
+        ]);
     }
 }
