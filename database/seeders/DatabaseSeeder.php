@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             $this->call(TestSeeder::class);
         } elseif (config('app.env') == 'staging') {
             $this->call(StagingSeeder::class);
+        } else {
+            $this->call(ProductionSeeder::class);
         }
     }
 }
