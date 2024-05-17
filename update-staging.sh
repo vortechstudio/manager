@@ -9,8 +9,7 @@ git pull origin master
 composer install --prefer-dist --no-interaction
 npm install
 
-# shellcheck disable=SC1073
-if [ "$(git diff --name-only HEAD HEAD~1 -- database/migration)" != ""]
+if [ "$(git diff --name-only HEAD HEAD~1 -- database/migration)" != "" ]
 then
     php artisan migrate:fresh --seed
 fi
