@@ -81,7 +81,7 @@ class ServiceSeeder extends Seeder
             ]);
         }
 
-        $rw->shops()->create([
+        $rw->shop()->create([
             'service_id' => $rw->id,
         ]);
     }
