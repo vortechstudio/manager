@@ -80,6 +80,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         Route::prefix('messagerie')->as('messagerie.')->group(function () {
             Route::get('/', [\App\Http\Controllers\Social\MessagerieController::class, 'index'])->name('index');
+            Route::get('{id}', [\App\Http\Controllers\Social\MessagerieController::class, 'show'])->name('show');
         });
 
         Route::prefix('menu')->as('menu.')->group(function () {
