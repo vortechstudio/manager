@@ -19,6 +19,7 @@ class Service extends Model
     use HasPages, SoftDeletes;
 
     protected $guarded = [];
+    protected $connection = 'mysql';
 
     protected $casts = [
         'type' => ServiceTypeEnum::class,
@@ -56,7 +57,7 @@ class Service extends Model
 
     public function cercle()
     {
-        return $this->belongsTo(Cercle::class);
+        return $this->belongsTo(Cercle::class, 'cercle_id');
     }
 
     public function messages()
@@ -64,9 +65,9 @@ class Service extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function shops()
+    public function shop()
     {
-        return $this->hasMany(Shop::class);
+        return $this->hasOne(Shop::class);
     }
 
     public function hasVersions()

@@ -4,7 +4,7 @@
             <div class="col-sm-12 col-lg-3">
                 <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
                     <li class="nav-item w-100 me-0 mb-md-2">
-                        <a class="nav-link w-100 active btn btn-flex btn-active-light-success" data-bs-toggle="tab" href="#{{ Str::slug($service->latest_version->version) }}">
+                        <a class="nav-link w-100 active btn btn-flex btn-active-light-success" data-bs-toggle="tab" href="#version_{{ $service->latest_version->id }}">
                                         <span class="d-flex flex-column align-items-start">
                                             <span class="fs-4 fw-bold">{{ $service->latest_version->version }}</span>
                                             <span class="badge badge-info">Latest</span>
@@ -13,7 +13,7 @@
                     </li>
                     @foreach($service->other_versions as $version)
                         <li class="nav-item w-100 me-0 mb-md-2">
-                            <a class="nav-link w-100 btn btn-flex btn-active-light-info" data-bs-toggle="tab" href="#{{ Str::slug($version->version) }}">
+                            <a class="nav-link w-100 btn btn-flex btn-active-light-info" data-bs-toggle="tab" href="#version_{{ $version->id }}">
                              <span class="d-flex flex-column align-items-start">
                                  <span class="fs-4 fw-bold">{{ $version->version }}</span>
                              </span>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-12 col-lg-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade active show" id="{{ Str::slug($service->latest_version->version) }}">
+                    <div class="tab-pane fade active show" id="version_{{ $service->latest_version->id }}">
                         <div class="fs-2 fw-bold mb-2">{{ $service->latest_version->title }}</div>
                         <div class="fst-italic text-muted mb-2">{{ $service->latest_version->description }}</div>
                         <x-markdown>
@@ -32,7 +32,7 @@
                         </x-markdown>
                     </div>
                     @foreach($service->other_versions as $version)
-                        <div class="tab-pane fade" id="{{ Str::slug($version->version) }}">
+                        <div class="tab-pane fade" id="version_{{ $version->id }}">
                             <div class="fs-2 fw-bold mb-2">{{ $version->title }}</div>
                             <div class="fst-italic text-muted mb-2">{{ $version->description }}</div>
                             <x-markdown>

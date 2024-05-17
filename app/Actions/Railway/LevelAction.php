@@ -83,7 +83,7 @@ class LevelAction
             $reward->delete();
         }
 
-        \DB::statement('ALTER TABLE `railway_level_rewards` AUTO_INCREMENT = 0;');
+        \DB::connection('railway')->statement('ALTER TABLE `railway_level_rewards` AUTO_INCREMENT = 0;');
 
         foreach ($bases as $reward) {
             RailwayLevelReward::create([

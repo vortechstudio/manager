@@ -7,15 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-            Schema::connection('railway')->create('railway_research_categories', function (Blueprint $table) {
+            Schema::connection('railway')->create('railway_badges', function (Blueprint $table) {
                 $table->id();
+                $table->uuid();
                 $table->string('name');
-                $table->text('description')->nullable();
+                $table->string('function');
+                $table->integer('count')->default(1);
+                $table->softDeletes();
             });
     }
 
     public function down(): void
     {
-            Schema::connection('railway')->dropIfExists('railway_research_categories');
+            Schema::connection('railway')->dropIfExists('railway_badges');
     }
 };

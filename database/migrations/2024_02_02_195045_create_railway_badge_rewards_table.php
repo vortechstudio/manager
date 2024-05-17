@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-            Schema::connection('mysql')->create('polls', function (Blueprint $table) {
+            Schema::connection('railway')->create('railway_badge_rewards', function (Blueprint $table) {
                 $table->id();
-                $table->string('question');
-                $table->foreignId('event_id')
-                    ->constrained()
+                $table->string('type');
+                $table->string('value');
+
+                $table->foreignId('badge_id')
+                    ->constrained('railway_badges')
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();
             });
@@ -19,6 +21,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-            Schema::connection('mysql')->dropIfExists('polls');
+            Schema::connection('railway')->dropIfExists('railway_badge_rewards');
     }
 };
