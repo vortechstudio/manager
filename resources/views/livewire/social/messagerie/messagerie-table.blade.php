@@ -43,8 +43,17 @@
                 @foreach($messages as $message)
                     <tr>
                         <td>{{ $message->message_subject }}</td>
-                        <td>{{ $message->message_type }}</td>
-                        <td></td>
+                        <td>{{ Str::ucfirst($message->message_type->value) }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a wire:navigate href="{{ route('social.messagerie.show', $message->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir le message">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="" wire:click="destroy({{ $message->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le message">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

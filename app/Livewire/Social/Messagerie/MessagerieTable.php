@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Social\Messagerie;
 
+use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Core\Message;
 use App\Models\User\UserService;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -116,13 +117,23 @@ class MessagerieTable extends Component
         }
     }
 
+    public function destroy(int $message_id)
+    {
+        try {
+            $message = Message::find($message_id);
+            $message->delete();
+        } catch (\Exception $exception) {
+            (new ErrorDispatchHandle())->handle($exception);
+        }
+    }
+
     #[Title('Service de messagerie')]
     public function render()
     {
         return view('livewire.social.messagerie.messagerie-table', [
             'messages' => Message::with('railway_messages')
-                ->when($this->selectTypeMessage, fn ($query) => $query->where('message_type', $this->selectTypeMessage))
-                ->when($this->search, fn ($query) => $query->where('name', 'like', '%'.$this->search.'%'))
+                ->when($this->selectTypeMessage, fn($query) => $query->where('message_type', $this->selectTypeMessage))
+                ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);
