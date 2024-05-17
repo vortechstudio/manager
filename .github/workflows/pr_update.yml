@@ -12,13 +12,7 @@ jobs:
         with:
           fetch-depth: 0  # Nécessaire pour obtenir tous les commits
 
-      - name: Review Code
-        uses: brobles82/ollama-github-reviews@v0.0.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          MODEL: 'llama3'
-
-      - name: Update PR Title and Description
+      - name: Mise à jour du titre et de la description
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
@@ -33,3 +27,13 @@ jobs:
           else
             echo "Le titre est vide, la mise à jour du PR est annulée."
           fi
+
+      - name: Robin AI Reviewer
+        uses: Integral-Healthcare/robin-ai-reviewer@v1.7.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPEN_AI_API_KEY: ${{ secrets.AI_KEY }}
+          gpt_model_name: 'gpt-3.5-turbo'
+          files_to_ignore: |
+            "public/*"
+            "storage/*"
