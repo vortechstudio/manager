@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('user_railways', function (Blueprint $table) {
+        Schema::connection('railway')->table('user_railways', function (Blueprint $table) {
             $table->uuid('uuid')->after('id');
         });
     }
 
     public function down(): void
     {
-        Schema::table('user_railways', function (Blueprint $table) {
+        Schema::connection('railway')->table('user_railways', function (Blueprint $table) {
             $table->dropColumn('uuid');
         });
     }

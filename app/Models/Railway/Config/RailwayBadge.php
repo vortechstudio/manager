@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Railway\Research;
+namespace App\Models\Railway\Config;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RailwayResearchProject extends Model
+class RailwayBadge extends Model
 {
     use SoftDeletes;
 
@@ -14,8 +14,12 @@ class RailwayResearchProject extends Model
 
     public $timestamps = false;
 
-    public function category()
+    protected $casts = [
+        'uuid' => 'string',
+    ];
+
+    public function rewards()
     {
-        return $this->belongsTo(RailwayResearchCategory::class, 'research_category_id');
+        return $this->hasMany(RailwayBadgeReward::class);
     }
 }
