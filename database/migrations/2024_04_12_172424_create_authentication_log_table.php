@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-            Schema::connection('railway')->create(config('authentication-log.table_name'), function (Blueprint $table) {
+            Schema::connection('mysql')->create(config('authentication-log.table_name'), function (Blueprint $table) {
                 $table->id();
                 $table->morphs('authenticatable');
                 $table->string('ip_address', 45)->nullable();
@@ -22,6 +22,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-            Schema::connection('railway')->dropIfExists(config('authentication-log.table_name'));
+            Schema::connection('mysql')->dropIfExists(config('authentication-log.table_name'));
     }
 };
