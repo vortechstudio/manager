@@ -10,7 +10,7 @@ git pull origin master
 composer install --prefer-dist --no-interaction
 npm install
 
-if [ "$(git diff --name-only HEAD HEAD~1 -- database/migration)" != "" ]
+if [ "$(git diff --name-only HEAD HEAD~1 -- database/migrations)" != "" ]
 then
     mysql -u votre_nom_utilisateur -p votre_mot_de_passe -e "
 
