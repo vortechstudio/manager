@@ -6,7 +6,8 @@
 @section("content")
     <x-base.toolbar
         :title="$message->message_subject"
-        :breads="array('Social', 'Service de messagerie', $message->message_subject)" />
+        :breads="array('Social', 'Service de messagerie', $message->message_subject)"
+        :return="true" />
 
     <div class="card shadow-sm">
         <div class="card-header">
@@ -25,7 +26,7 @@
                     <livewire:social.messagerie.content-panel :message="$message" />
                 </div>
                 <div class="tab-pane fade" id="rewards" role="tabpanel">
-                    <livewire:social.messagerie.content-panel :message="$message" />
+                    <livewire:social.messagerie.reward-panel :message="$message" />
                 </div>
             </div>
         </div>

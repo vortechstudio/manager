@@ -37,8 +37,8 @@
                             </div>
                             <div class="col-sm-12 col-lg-3">
                                 <div class="mb-10">
-                                    <label for="message_type" class="form-label required">Type de matériel</label>
-                                    <select wire:model="message.message_type" name="message_type" id="message_type" class="form-select" data-placeholder="---  Selectionner un type de matériel ---" required>
+                                    <label for="message_type" class="form-label required">Type de message</label>
+                                    <select wire:model="message_type" name="message_type" id="message_type" class="form-select" data-placeholder="---  Selectionner un type de matériel ---" required>
                                         <option></option>
                                         @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\MessageTypeEnum::class)->toArray() as $type)
                                             <option value="{{ $type['value'] }}" @if($type['value'] == $message->message_type->value) selected @endif>{{ $type['label'] }}</option>
@@ -49,7 +49,7 @@
                             <div class="col-sm-12 col-lg-3">
                                 <div class="mb-10">
                                     <label for="service_id" class="form-label required">Services</label>
-                                    <select wire:model="message.service_id" name="service_id" id="service_id" class="form-select" data-placeholder="---  Selectionner un type de matériel ---" required>
+                                    <select wire:model="service_id" name="service_id" id="service_id" class="form-select" data-placeholder="---  Selectionner un type de matériel ---" required>
                                         <option></option>
                                         @foreach(\Spatie\LaravelOptions\Options::forModels(\App\Models\Config\Service::class, 'name', 'id')->toArray() as $type)
                                             <option value="{{ $type['value'] }}" @if($type['value'] == $message->service_id) selected @endif>{{ $type['label'] }}</option>
