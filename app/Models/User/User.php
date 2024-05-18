@@ -16,7 +16,6 @@ use App\Models\User\Railway\UserRailwayCompany;
 use App\Models\User\Railway\UserRailwayMessage;
 use App\Models\User\Railway\UserRailwayReward;
 use App\Models\User\Railway\UserRailwaySocial;
-use Assada\Achievements\Achiever;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,7 +27,7 @@ use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 
 class User extends Authenticatable
 {
-    use Achiever, AuthenticationLoggable, HasApiTokens, HasFactory, HasPushSubscriptions, Notifiable;
+    use AuthenticationLoggable, HasApiTokens, HasFactory, HasPushSubscriptions, Notifiable;
 
     protected $connection = 'mysql';
 
