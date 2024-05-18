@@ -89,7 +89,7 @@ class MessagerieTable extends Component
                     $message,
                     $this->allUser,
                     null
-                ))->delay($newDate);
+                ))->delay(now()->addMinutes($newDate));
             } else {
                 if ($this->allUser) {
                     foreach (Service::find($message->service_id)->users as $user) {

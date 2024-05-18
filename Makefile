@@ -7,6 +7,10 @@ start:
 	npm run dev
 
 migrate:
+	mysql -u root -p  -e "\
+    	DROP DATABASE IF EXISTS railway_dev; \
+    	CREATE DATABASE railway_dev; \
+    	"
 	php artisan migrate:fresh --seed --force
 	php artisan cache:clear
 	php artisan config:clear
