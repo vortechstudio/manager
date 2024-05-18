@@ -113,27 +113,6 @@
                                         </div>
                                         <div>
                                             <x-form.checkbox
-                                                name="hasReward"
-                                                label="Lié à une récompense"
-                                                value="true" />
-
-                                            <div class="mb-10">
-                                                <label for="reward_type" class="form-label required">Type de récompense</label>
-                                                <select wire:model="reward_type" name="reward_type" id="reward_type" class="form-select" data-placeholder="---  Selectionner un type de récompense ---" required>
-                                                    <option></option>
-                                                    @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\MessageRewardTypeEnum::class)->toArray() as $type)
-                                                        <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <x-form.input
-                                                type="number"
-                                                name="reward_value"
-                                                label="Valeur de la récompense" />
-                                        </div>
-                                        <div>
-                                            <x-form.checkbox
                                                 name="allUser"
                                                 value="true"
                                                 label="Envoyer à tous les utilisateurs" />
@@ -147,6 +126,17 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <x-form.checkbox
+                                                name="retarded"
+                                                value="true"
+                                                label="Retarder le message" />
+
+                                            <x-form.input
+                                                type="datetime-local"
+                                                name="retarded_at"
+                                                label="Date/Heure d'envoie" />
                                         </div>
                                     </div>
                                 </div>

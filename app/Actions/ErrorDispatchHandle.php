@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Services\Github\Issues;
+use Laravel\Reverb\Loggers\Log;
 
 /**
  * Class ErrorDispatchHandle
@@ -15,5 +16,6 @@ class ErrorDispatchHandle
     {
         $issue = new Issues(Issues::createIssueMonolog('exception', $e->getMessage(), [$e]));
         $issue->createIssueFromException();
+        \Log::emergency($e->getMessage(), [$e]);
     }
 }
