@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Social\Messagerie;
 
+use App\Actions\ErrorDispatchHandle;
+use App\Jobs\Core\RetardedMessageJob;
+use App\Models\Config\Service;
 use App\Models\Railway\Core\Message;
-use App\Models\User\UserService;
+use Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -21,25 +24,17 @@ class MessagerieTable extends Component
 
     public int $perPage = 5;
 
+    //form
     public string $selectTypeMessage = '';
-
     public string $message_subject = '';
-
     public string $message_type = '';
-
     public string $message_content = '';
-
     public int $service_id = 0;
-
-    public bool $hasReward = false;
-
-    public string $reward_type = '';
-
-    public int $reward_value = 0;
-
     public bool $allUser = false;
-
     public int $user_id = 0;
+    public array $listUsers = [];
+    public bool $retarded = false;
+    public string $retarded_at = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -68,9 +63,8 @@ class MessagerieTable extends Component
         $this->message_type = '';
         $this->message_content = '';
         $this->service_id = 0;
-        $this->hasReward = false;
-        $this->reward_type = '';
-        $this->reward_value = 0;
+        $this->retarded = false;
+        $this->retarded_at = '';
     }
 
     public function save()
@@ -89,23 +83,27 @@ class MessagerieTable extends Component
                 'service_id' => $this->service_id,
             ]);
 
-            if ($this->allUser) {
-                foreach (UserService::with('user')->where('service_id', $this->service_id)->get() as $user) {
-                    $message->railway_messages()->create([
-                        'user_id' => $user->user->id,
-                        'message_id' => $message->id,
-                        'reward_type' => $this->reward_type,
-                        'reward_value' => $this->reward_value,
-                    ]);
-                }
+            if ($this->retarded) {
+                $newDate = Carbon::parse($this->retarded_at)->diffInMinutes(now());
+                dispatch(new RetardedMessageJob(
+                    $message,
+                    $this->allUser,
+                    null
+                ))->delay($newDate);
             } else {
-                $message->railway_messages()
-                    ->create([
+                if ($this->allUser) {
+                    foreach (Service::find($message->service_id)->users as $user) {
+                        $message->railway_messages()->create([
+                            'user_id' => $user->id,
+                            'message_id' => $message->id,
+                        ]);
+                    }
+                } else {
+                    $message->railway_messages()->create([
                         'user_id' => $this->user_id,
                         'message_id' => $message->id,
-                        'reward_type' => $this->reward_type,
-                        'reward_value' => $this->reward_value,
                     ]);
+                }
             }
 
             $this->alert('success', 'Message envoyer avec succès');
@@ -116,13 +114,23 @@ class MessagerieTable extends Component
         }
     }
 
+    public function destroy(int $message_id)
+    {
+        try {
+            $message = Message::find($message_id);
+            $message->delete();
+        } catch (\Exception $exception) {
+            (new ErrorDispatchHandle())->handle($exception);
+        }
+    }
+
     #[Title('Service de messagerie')]
     public function render()
     {
         return view('livewire.social.messagerie.messagerie-table', [
             'messages' => Message::with('railway_messages')
-                ->when($this->selectTypeMessage, fn ($query) => $query->where('message_type', $this->selectTypeMessage))
-                ->when($this->search, fn ($query) => $query->where('name', 'like', '%'.$this->search.'%'))
+                ->when($this->selectTypeMessage, fn($query) => $query->where('message_type', $this->selectTypeMessage))
+                ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

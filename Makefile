@@ -18,3 +18,8 @@ migrate:
 	php artisan action monthly_bonus
 	php artisan action daily_config
 	php artisan create level
+
+sync_database:
+	cp -r database/migrations ../dev.railway-manager/database/
+	cp -r app/Models ../dev.railway-manager/app/
+	cp -r app/Enums ../dev.railway-manager/app/
