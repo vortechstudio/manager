@@ -8,6 +8,8 @@
         title="Gestion des Succès & Trophées"
         :breads="array('Railway Manager', 'Gestion des Succès & Trophées')" />
 
+    <livewire:railway.achievement.achievement-table />
+
 @endsection
 
 @push("scripts")

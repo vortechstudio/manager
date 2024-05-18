@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::connection('mysql')->create('achievements_rewards', function (Blueprint $table) {
+        Schema::connection('railway')->create('achievements_rewards', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('achievement_id');
@@ -17,6 +17,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::connection('mysql')->dropIfExists('achievements_rewards');
+        Schema::connection('railway')->dropIfExists('achievements_rewards');
     }
 };
