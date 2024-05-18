@@ -24,6 +24,9 @@
                 <div class="tab-pane fade show active" id="content" role="tabpanel">
                     <livewire:social.messagerie.content-panel :message="$message" />
                 </div>
+                <div class="tab-pane fade" id="rewards" role="tabpanel">
+                    <livewire:social.messagerie.content-panel :message="$message" />
+                </div>
             </div>
         </div>
     </div>
