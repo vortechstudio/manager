@@ -40,6 +40,7 @@
                     <tr class="fw-bold fs-3">
                         <x-base.table-header :direction="$orderDirection" name="sector" :field="$orderField">Secteur</x-base.table-header>
                         <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
+                        <th>Nombre de déblocage</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -75,6 +76,9 @@
                                     @endif
                                 @endif
                             </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-circle badge-primary">{{ \App\Models\User\Railway\UserRailwayAchievement::where('achievement_id', $trophy->id)->count() }}</span>
                         </td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
