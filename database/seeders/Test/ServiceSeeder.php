@@ -20,6 +20,7 @@ class ServiceSeeder extends Seeder
             'url' => '//account.vortechstudio.io',
             'repository' => 'account_v2',
             'folder' => 'C:\laragon\www\account.vortechstudio',
+            'cercle_id' => 1,
         ]);
         \Storage::makeDirectory("services/$ab->id");
 
@@ -50,6 +51,7 @@ class ServiceSeeder extends Seeder
             'url' => '//dev.railway-manager.io',
             'repository' => 'railway_manager',
             'folder' => 'C:\laragon\www\dev.railway-manager',
+            'cercle_id' => 2,
         ]);
         \Storage::makeDirectory("services/$rw->id");
 
@@ -69,7 +71,7 @@ class ServiceSeeder extends Seeder
             ]);
         }
 
-        $rw->shops()->create([
+        $rw->shop()->create([
             'service_id' => $rw->id,
         ]);
 

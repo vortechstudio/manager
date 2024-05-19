@@ -11,6 +11,7 @@ class ShopPackage extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $connection = 'mysql';
 
     public function category()
     {
@@ -19,6 +20,6 @@ class ShopPackage extends Model
 
     public function items()
     {
-        return $this->belongsToMany(ShopItem::class);
+        return $this->belongsToMany(ShopItem::class, 'package_items', 'package_id', 'item_id');
     }
 }

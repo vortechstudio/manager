@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Services\Github\Issues;
+use Laravel\Reverb\Loggers\Log;
 
 /**
  * Class ErrorDispatchHandle
@@ -13,7 +14,10 @@ class ErrorDispatchHandle
 {
     public function handle(\Throwable $e): void
     {
-        $issue = new Issues(Issues::createIssueMonolog('exception', $e->getMessage(), [$e]));
-        $issue->createIssueFromException();
+        if (config('app.env') == 'staging' || config('app.env') == 'production') {
+            $issue = new Issues(Issues::createIssueMonolog('exception', $e->getMessage(), [$e]));
+            $issue->createIssueFromException();
+        }
+        \Log::emergency($e->getMessage(), [$e]);
     }
 }

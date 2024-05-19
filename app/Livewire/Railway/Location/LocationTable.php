@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Railway\Location;
 
+use App\Livewire\OrderTrait;
 use App\Models\Railway\Config\RailwayRental;
 use Exception;
 use Illuminate\Support\Facades\Storage;

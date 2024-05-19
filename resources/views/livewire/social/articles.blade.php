@@ -132,7 +132,7 @@
                             <div class="col-sm-12 col-lg-3">
                                 <div class="mb-10">
                                     <label for="cercle_id" class="form-label required">Cercle</label>
-                                    <select name="cercle_id" wire:model="cercle_id" id="cercle_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner un cercle ---" required>
+                                    <select name="cercle_id" wire:model="cercle_id" id="cercle_id" class="form-select" data-placeholder="---  Selectionner un cercle ---" required>
                                         <option></option>
                                         @foreach(\App\Models\Social\Cercle::all() as $cercle)
                                             <option value="{{ $cercle->id }}">{{ $cercle->name }}</option>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="mb-10">
                                     <label for="type" class="form-label required">Type d'article</label>
-                                    <select name="type" wire:model="type" id="type" class="form-select" data-control="select2" data-placeholder="---  Selectionner un type d'article ---" required>
+                                    <select name="type" wire:model="type" id="type" class="form-select" data-placeholder="---  Selectionner un type d'article ---" required>
                                         <option></option>
                                         @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Social\ArticleTypeEnum::class)->toArray() as $type)
                                             <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="mb-10">
                                     <label for="author" class="form-label required">Auteur de l'article</label>
-                                    <select name="author" wire:model="author" id="author" class="form-select" data-control="select2" data-placeholder="---  Selectionner un auteur ---" required>
+                                    <select name="author" wire:model="author" id="author" class="form-select" data-placeholder="---  Selectionner un auteur ---" required>
                                         <option></option>
                                         @foreach(\App\Models\User\User::where('admin', true)->get() as $user)
                                             <option value="{{ $user->id }}" data-avatar="{{ $user->socials()->first()->avatar }}">{{ $user->name }}</option>
@@ -182,6 +182,4 @@
 
 @push("scripts")
     <x-base.close-modal />
-    <x-script.select2.base />
-    <x-script.select2.with-image name="author" />
 @endpush

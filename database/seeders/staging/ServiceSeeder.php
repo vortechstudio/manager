@@ -11,6 +11,11 @@ class ServiceSeeder extends Seeder
 {
     public function run(): void
     {
+        $c_ab = Cercle::create([
+            'name' => 'Vortech Studio',
+        ]);
+        \Storage::makeDirectory("cercles/$c_ab->id");
+
         $ab = Service::create([
             'name' => 'Accès de Base',
             'type' => 'plateforme',
@@ -20,13 +25,9 @@ class ServiceSeeder extends Seeder
             'url' => '//account.vortechstudio.ovh',
             'repository' => 'account_v2',
             'folder' => '/www/wwwroot/account.vortechstudio.ovh',
+            'cercle_id' => 1,
         ]);
         \Storage::makeDirectory("services/$ab->id");
-
-        $c_ab = Cercle::create([
-            'name' => 'Vortech Studio',
-        ]);
-        \Storage::makeDirectory("cercles/$c_ab->id");
 
         foreach (User::all() as $user) {
             $user->services()->create([
@@ -46,6 +47,11 @@ class ServiceSeeder extends Seeder
 
         //---------------------------------------------------------//
 
+        $c_rw = Cercle::create([
+            'name' => 'Railway Manager',
+        ]);
+        \Storage::makeDirectory("cercles/$c_rw->id");
+
         $rw = Service::create([
             'name' => 'Railway Manager',
             'type' => 'jeux',
@@ -55,13 +61,9 @@ class ServiceSeeder extends Seeder
             'url' => '//beta.railway-manager.ovh',
             'repository' => 'railway_manager',
             'folder' => '/www/wwwroot/beta.railway-manager.ovh',
+            'cercle_id' => 2
         ]);
         \Storage::makeDirectory("services/$rw->id");
-
-        $c_rw = Cercle::create([
-            'name' => 'Railway Manager',
-        ]);
-        \Storage::makeDirectory("cercles/$c_rw->id");
 
         foreach (User::all() as $user) {
             $user->services()->create([
@@ -79,7 +81,7 @@ class ServiceSeeder extends Seeder
             ]);
         }
 
-        $rw->shops()->create([
+        $rw->shop()->create([
             'service_id' => $rw->id,
         ]);
     }
