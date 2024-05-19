@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Railway\AchievementController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('railway')->as('railway.')->group(function () {
@@ -58,6 +59,11 @@ Route::prefix('railway')->as('railway.')->group(function () {
 
     Route::prefix('shop')->as('shop.')->group(function () {
 
+    });
+
+    Route::prefix('achievement')->as('achievement.')->group(function () {
+        Route::get('/', [AchievementController::class, 'index'])->name('index');
+        Route::get('{id}', [AchievementController::class, 'show'])->name('show');
     });
 
     Route::prefix('config')->as('config.')->group(function () {

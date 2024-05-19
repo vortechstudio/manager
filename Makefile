@@ -27,3 +27,27 @@ sync_database:
 	cp -r database/migrations ../dev.railway-manager/database/
 	cp -r app/Models ../dev.railway-manager/app/
 	cp -r app/Enums ../dev.railway-manager/app/
+
+sync_s3_beta:
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/blog' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/cercles' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/data' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/engines' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/events' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/icons' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/logos' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/other' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/pwa' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 --delete '../s3.vortechstudio/services' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
+
+sync_s3:
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/blog' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/cercles' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/data' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/engines' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/events' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/icons' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/logos' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/other' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/pwa' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 --delete '../s3.vortechstudio/services' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
