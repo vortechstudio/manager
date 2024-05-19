@@ -105,7 +105,7 @@ class User extends Authenticatable
 
     public function services()
     {
-        return $this->belongsToMany(UserService::class, 'user_services', 'service_id', 'user_id');
+        return $this->hasMany(UserService::class);
     }
 
     public function tickets()
