@@ -1,3 +1,11 @@
+# [3.10.0](https://github.com/vortechstudio/manager/compare/v3.9.0...v3.10.0) (2024-05-19)
+
+
+### Features
+
+* Améliorations du module Support Ticket et des réalisations dans le module Railway Core ([b8ab8ff](https://github.com/vortechstudio/manager/commit/b8ab8ff9e1fd0c35f83dd186c9c8f23bd041f469))
+* **Railway Succès & Trophées:** Améliorations et création d'actions ([32757ca](https://github.com/vortechstudio/manager/commit/32757cafb09301dd89d528a6b502d8b6fb0e3db3))
+
 # [3.9.0](https://github.com/vortechstudio/manager/compare/v3.8.0...v3.9.0) (2024-05-19)
 
 
