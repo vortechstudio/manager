@@ -1,5 +1,5 @@
 #\bin\bash
-source .env
+source ./.env
 
 php artisan service:locked
 php artisan down
@@ -12,7 +12,7 @@ npm install
 
 if [ "$(git diff --name-only HEAD HEAD~1 -- database/migrations)" != "" ]
 then
-    mysql -u votre_nom_utilisateur -p votre_mot_de_passe -e "
+    mysql -u ${DB_USERNAME} -p ${DB_PASSWORD} -e "
 
     # Suppression de la base de données
     DROP DATABASE IF EXISTS ${DB_RAILWAY_DATABASE};
