@@ -1,3 +1,39 @@
+# [3.9.0](https://github.com/vortechstudio/manager/compare/v3.8.0...v3.9.0) (2024-05-19)
+
+
+### Bug Fixes
+
+* **ErrorDispatchHandler:** Restreint la création d'issues seulement pour les environnements de staging et de production ([46b2298](https://github.com/vortechstudio/manager/commit/46b2298b45df44201d075a4ae27f209224ca27b6))
+* **General:** Ajoute une nouvelle connexion 'railway' dans create_authentication_log_table ([1a65aab](https://github.com/vortechstudio/manager/commit/1a65aabe9ab861dccbc4328b03cb9a475a785b3d))
+* **script:** Correction du chemin vers le dossier des migrations dans update-staging.sh ([5cddf8e](https://github.com/vortechstudio/manager/commit/5cddf8ebb5191a92740244b8099ae54e6a2d0d82))
+* **Service:** Ajout de 'cercle_id' aux graines de services et mise à jour de l'API des services ([55c962c](https://github.com/vortechstudio/manager/commit/55c962cd71d874862f639561ff68e1d1b0944d7c))
+* **workflows:** mise à jour des variables d'environnement et ajustement des fichiers ignorés ([b5122da](https://github.com/vortechstudio/manager/commit/b5122da44edd152f948ba57c65100f5009a6af90))
+
+
+### Features
+
+* **app config:** Ajout du HorizonServiceProvider dans le fichier de configuration de l'application ([08e9ee2](https://github.com/vortechstudio/manager/commit/08e9ee2b87be0d62f24dbc7c54f7964f3c60d0f3))
+* **BONUS:** Ajout du bonus utilisateur pour le railway ([168cb0a](https://github.com/vortechstudio/manager/commit/168cb0a91f5768b38f271e7a2a80bb03703a9f97))
+* **config:** Mise à jour des variables d'environnement et des paramètres de connexion à la base de données ([31f91a6](https://github.com/vortechstudio/manager/commit/31f91a6cfd9f2a4f5e4ef13cf5e8cee8c9d277a8))
+* **database/seeders:** Ajout du ProductionSeeder ([b121503](https://github.com/vortechstudio/manager/commit/b1215034fadd59ffbe423c61ce328a888e60287d))
+* **Messagerie:** Ajout d'une fonctionnalité d'édition de messages ([7e7026d](https://github.com/vortechstudio/manager/commit/7e7026d642e9f0caf93b1f7018c0d53674066daa))
+* **Messagerie:** Ajout de la fonction de suppression des messages ([89933fa](https://github.com/vortechstudio/manager/commit/89933faec3a922526c2ef24c2742989ef23511b8))
+* **Messagerie:** Ajout de la fonctionnalité 'show' pour les messages ([6f9762d](https://github.com/vortechstudio/manager/commit/6f9762dcde309f0a2e6b372608f615a1d1737ece))
+* **Messagerie:** Ajoute le composant RewardPanel ([3fd4f9a](https://github.com/vortechstudio/manager/commit/3fd4f9a23eb2f2c82ae1f072162664681e98e5a4))
+* **Modèles:** mise à jour des relations et configurations de bases de données ([c4701b5](https://github.com/vortechstudio/manager/commit/c4701b5bdedc9ef14cff406fe69e69441b54bc11))
+* **Railway Badge:** Création des tables railway_badges et railway_badge_rewards ([6c92b99](https://github.com/vortechstudio/manager/commit/6c92b99b71d85b970bb20dc85b2ea208bafe3b0b))
+* **Railway Core:** Ajout d'entités et de fichiers de migration pour le système de chemin de fer ([3efe4b3](https://github.com/vortechstudio/manager/commit/3efe4b36d5da39a6083e40b7d801b86664f779c6))
+* **Railway Succès & Trophées:** Ajout d'une page de gestion des succès et des trophées ([4c72494](https://github.com/vortechstudio/manager/commit/4c724944742312a9c86e3f7ceb40bed47b1aaf92))
+* **Railway Succès & Trophées:** Ajout de la gestion des succès ([c66a192](https://github.com/vortechstudio/manager/commit/c66a1922c676b0914413033574f539d0fa814264))
+* **Railway Succès & Trophées:** Ajout de la gestion des trophées et des utilisateurs ([a613d8e](https://github.com/vortechstudio/manager/commit/a613d8ec988acc99f797ddb12c2909a6f40b25ee))
+* **Railway Succès & Trophées:** ajout des détails et récompenses des succès ([2fb2222](https://github.com/vortechstudio/manager/commit/2fb22224b47b9055d998063b36539653008df4ec))
+* **Railway Succès et Trophées:** Ajout du tableau des réalisations ([4e27639](https://github.com/vortechstudio/manager/commit/4e2763931e96332f9e22fffdfe95e65df9280fd4))
+* **Social Messagerie:** ajoute les fonctions de récompense ([272ac5b](https://github.com/vortechstudio/manager/commit/272ac5b193b808ebfdbcaf81ed0ba71fddcd67c1))
+* **update-staging.sh:** Ajout d'une condition pour l'exécution de la migration ([6f27f04](https://github.com/vortechstudio/manager/commit/6f27f04e929bc8d43b616eb6278c3cbbd0621666))
+* **User:** Ajout du système d'accomplissements et de récompenses ([dbd3caa](https://github.com/vortechstudio/manager/commit/dbd3caae629cc170a2afac7fe3430d9fedf2f535))
+* **vue sociale:** Ajout d'un nouvel onglet de récompenses dans la messagerie ([e687e56](https://github.com/vortechstudio/manager/commit/e687e56158863904502f8fa2fb70298f5a69a49c))
+* **workflows:** ajout de la revue de code à pr_update ([125660b](https://github.com/vortechstudio/manager/commit/125660b201cca1caa5e83181c222ea78034ef0e8))
+
 # [3.8.0](https://github.com/vortechstudio/manager/compare/v3.7.0...v3.8.0) (2024-05-15)
 
 
