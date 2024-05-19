@@ -12,6 +12,7 @@
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link defer href="{{ asset('/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link defer href="{{ asset('/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     @livewireStyles
     @vite(['resources/css/app.css'])
     @yield("styles")

@@ -2,6 +2,7 @@
 
 namespace App\Models\Railway\Core;
 
+use App\Actions\Railway\AchievementAction;
 use App\Enums\Railway\Core\AchievementLevelEnum;
 use App\Enums\Railway\Core\AchievementSectorEnum;
 use App\Models\User\Railway\UserRailwayAchievement;
@@ -19,6 +20,7 @@ class Achievement extends Model
     protected $appends = [
         'icon',
         'icon_sector',
+        'action_function_exist'
     ];
 
     public function rewards()
@@ -34,5 +36,15 @@ class Achievement extends Model
     public function getIconSectorAttribute()
     {
         return \Storage::url('icons/railway/success/'.$this->sector->value.'.png');
+    }
+
+    public function getActionFunctionExistAttribute()
+    {
+        return method_exists(AchievementAction::class, $this->action.'Action');
+    }
+
+    public function unlock()
+    {
+        (new AchievementAction())->handle($this);
     }
 }

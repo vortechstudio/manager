@@ -38,6 +38,7 @@
                 <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
                     <thead>
                     <tr class="fw-bold fs-3">
+                        <th></th>
                         <x-base.table-header :direction="$orderDirection" name="sector" :field="$orderField">Secteur</x-base.table-header>
                         <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
                         <th>Nombre de déblocage</th>
@@ -46,6 +47,11 @@
                     </thead>
                     <tbody>
                     @foreach($achievements as $trophy)
+                        <td>
+                            @if(!$trophy->action_function_exist)
+                                <i class="fa-solid fa-exclamation-circle text-danger fs-2 animate__animated animate__flash animate__infinite" data-bs-toggle="tooltip" data-bs-title="La fonction n'existe pas dans le code"></i>
+                            @endif
+                        </td>
                         <td>{{ Str::ucfirst($trophy->sector->value) }}</td>
                         <td>
                             <div class="d-flex flex-row justify-content-between align-items-center">
@@ -58,17 +64,17 @@
                                         <span class="text-gray-600">{{ $trophy->description }}</span>
                                     </div>
                                 </div>
-                                @if($trophy->rewards()->count() > 0)
-                                    @if($trophy->rewards()->count == 1)
+                                @if($trophy->rewards->count() > 0)
+                                    @if($trophy->rewards->count() == 1)
                                         <div class="symbol symbol-50px">
-                                            <img src="{{ Storage::url('icons/railway/success/reward/'.$trophy->rewards()->first()->type_reward.'.png') }}" alt="">
+                                            <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type_reward->value.'.png') }}" alt="">
                                             <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->amount_reward }}</span>
                                         </div>
                                     @else
                                         <div class="symbol-group symbol-hover">
                                             @foreach($trophy->rewards as $reward)
                                                 <div class="symbol symbol-50px">
-                                                    <img src="{{ Storage::url('icons/railway/success/reward/'.$reward->type_reward.'.png') }}" alt="">
+                                                    <img src="{{ Storage::url('icons/railway/'.$reward->type_reward->value.'.png') }}" alt="">
                                                     <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $reward->amount_reward }}</span>
                                                 </div>
                                             @endforeach
