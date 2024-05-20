@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Railway\Planning\RailwayPlanning;
+use App\Models\Railway\Planning\RailwayPlanningConstructor;
 use App\Models\Social\Article;
 use App\Models\Social\Event;
 use App\Models\Social\Post\Post;
@@ -175,6 +176,11 @@ class User extends Authenticatable
     public function railway_plannings()
     {
         return $this->hasMany(RailwayPlanning::class);
+    }
+
+    public function railway_planning_constructors()
+    {
+        return $this->hasMany(RailwayPlanningConstructor::class);
     }
 
     public function scopeNotifiable(Builder $query)
