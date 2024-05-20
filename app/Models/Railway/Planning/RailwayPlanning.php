@@ -46,4 +46,9 @@ class RailwayPlanning extends Model
     {
         return $this->hasOne(RailwayPlanningTravel::class);
     }
+
+    public function logs()
+    {
+        return $this->hasMany(RailwayPlannningLog::class);
+    }
 }
