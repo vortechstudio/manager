@@ -13,7 +13,7 @@ class LignePanelInfo extends Component
 
     public RailwayLigne $ligne;
 
-    public function disabled()
+    public function disabled(): void
     {
         try {
             $this->ligne->active = false;
@@ -25,7 +25,7 @@ class LignePanelInfo extends Component
         }
     }
 
-    public function enabled()
+    public function enabled(): void
     {
         try {
             $this->ligne->active = true;
@@ -37,7 +37,7 @@ class LignePanelInfo extends Component
         }
     }
 
-    public function production()
+    public function production(): void
     {
         try {
             $this->ligne->status = 'production';
@@ -49,7 +49,7 @@ class LignePanelInfo extends Component
         }
     }
 
-    public function delete()
+    public function delete(): void
     {
         try {
             $this->ligne->delete();
@@ -60,7 +60,7 @@ class LignePanelInfo extends Component
         }
     }
 
-    public function distance()
+    public function distance(): void
     {
         try {
             $sum = $this->ligne->stations()->sum('distance');
@@ -75,7 +75,7 @@ class LignePanelInfo extends Component
         }
     }
 
-    public function pricing()
+    public function pricing(): void
     {
         try {
             if ($this->ligne->distance == 0) {

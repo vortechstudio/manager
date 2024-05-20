@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Railway;
 
 use App\Actions\Railway\EngineAction;
 use App\Http\Controllers\Controller;
+use App\Models\Railway\Config\RailwayRental;
 use App\Models\Railway\Engine\RailwayEngine;
 use Illuminate\Http\Request;
 
@@ -98,6 +99,12 @@ class MaterielController extends Controller
                     'price' => $request->get('price_shop'),
                     'railway_engine_id' => $engine->id,
                 ]);
+            }
+
+            foreach (RailwayRental::all() as $rental) {
+                if (in_array(json_decode($rental->type, true), $engine->type_train->value)) {
+                    $engine->rentals()->attach($rental->id);
+                }
             }
         } catch (\Exception $exception) {
             \Log::emergency($exception->getMessage(), $exception->getTrace());

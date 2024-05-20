@@ -19,7 +19,7 @@ class CercleImage extends Component
 
     public $icon;
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->header->storeAs(

@@ -8,8 +8,8 @@ use Livewire\Component;
 class ServicePanelInfo extends Component
 {
     use LivewireAlert;
-    public \App\Models\Config\Service $service;
 
+    public \App\Models\Config\Service $service;
 
     public function render()
     {

@@ -24,6 +24,7 @@ class QuestTable extends Component
     public string $description = '';
 
     public string $action = '';
+
     public int $action_count = 0;
 
     public int $xp_reward = 0;
@@ -49,7 +50,7 @@ class QuestTable extends Component
         return 'livewire.pagination';
     }
 
-    public function resetForm()
+    public function resetForm(): void
     {
         $this->name = '';
         $this->description = '';
@@ -58,7 +59,7 @@ class QuestTable extends Component
         $this->action_count = 0;
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'name' => 'required',
@@ -83,7 +84,7 @@ class QuestTable extends Component
         $this->alert('success', 'Quête enregistree avec succes');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         try {
             $quest = RailwayQuest::find($id);

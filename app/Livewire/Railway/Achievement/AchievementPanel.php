@@ -26,7 +26,7 @@ class AchievementPanel extends Component
 
     public int $selectedReward = 0;
 
-    public function save()
+    public function save(): void
     {
         try {
             if ($this->selectedReward != 0) {

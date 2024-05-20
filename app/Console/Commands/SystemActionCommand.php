@@ -27,10 +27,8 @@ class SystemActionCommand extends Command
 
     /**
      * Generates daily flux for all RailwayBanque records and sends a notification to the admin.
-     *
-     * @return void
      */
-    private function dailyFlux()
+    private function dailyFlux(): void
     {
         foreach (RailwayBanque::all() as $bank) {
             $bank->generate();
@@ -42,11 +40,10 @@ class SystemActionCommand extends Command
     /**
      * Deletes all existing RailwayBonus records and creates 30 new ones with random data.
      *
-     * @return void
      *
      * @throws \Exception description of exception
      */
-    private function monthlyBonus()
+    private function monthlyBonus(): void
     {
         foreach (RailwayBonus::all() as $bonus) {
             $bonus->delete();
@@ -69,7 +66,7 @@ class SystemActionCommand extends Command
     /**
      * Update daily configuration settings for price_diesel, price_electricity, price_kilometer, price_parking, and price_tpoint.
      */
-    private function dailyConfig()
+    private function dailyConfig(): void
     {
         RailwaySetting::where('name', 'price_diesel')->first()->update([
             'value' => random_float(1.1, 2.2),

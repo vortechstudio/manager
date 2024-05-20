@@ -15,6 +15,7 @@ class MessagerieController extends Controller
     public function show(int $message_id)
     {
         $message = Message::with('railway_messages')->find($message_id);
+
         return view('social.messagerie.show', [
             'message' => $message,
         ]);

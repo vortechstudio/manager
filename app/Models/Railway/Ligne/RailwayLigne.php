@@ -6,6 +6,7 @@ use App\Enums\Railway\Ligne\LigneStatusEnum;
 use App\Enums\Railway\Ligne\LigneTypeEnum;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
+use App\Models\User\Railway\UserRailwayLigne;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pharaonic\Laravel\Settings\Traits\Settingable;
@@ -15,6 +16,7 @@ class RailwayLigne extends Model
     use Settingable, SoftDeletes;
 
     protected $guarded = [];
+
     protected $connection = 'railway';
 
     public $timestamps = false;
@@ -46,6 +48,11 @@ class RailwayLigne extends Model
     public function stations()
     {
         return $this->hasMany(RailwayLigneStation::class);
+    }
+
+    public function userRailwayLigne()
+    {
+        return $this->hasMany(UserRailwayLigne::class);
     }
 
     public function getStatusLabelAttribute()

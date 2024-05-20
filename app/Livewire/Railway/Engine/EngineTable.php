@@ -40,7 +40,7 @@ class EngineTable extends Component
         return 'livewire.pagination';
     }
 
-    public function destroy(int $engine_id)
+    public function destroy(int $engine_id): void
     {
         $engine = RailwayEngine::find($engine_id);
         if ($engine->type_train->value == 'automotrice') {

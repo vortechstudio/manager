@@ -6,6 +6,7 @@ use App\Actions\Railway\AdvantageCardAction;
 use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
 use App\Actions\Railway\LevelAction;
+use App\Models\Railway\Config\RailwayRental;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
@@ -200,11 +201,17 @@ class SystemCreateCommand extends Command
             'engine_id' => $engine->id,
         ]);
 
+        foreach (RailwayRental::all() as $rental) {
+            if (in_array(json_decode($rental->type, true), $engine->type_train->value)) {
+                $engine->rentals()->attach($rental->id);
+            }
+        }
+
         alert('Le matériel roulant a bien été créé');
         \Laravel\Prompts\info('Installer les images dans les dossiers correspondant. (engines/types_train/slugify_name.gif)');
     }
 
-    private function createGare()
+    private function createGare(): void
     {
         intro("Création d'une gare !");
         $name = text(
@@ -282,7 +289,7 @@ class SystemCreateCommand extends Command
 
     }
 
-    private function createLigne()
+    private function createLigne(): void
     {
         intro("Création d'une ligne");
         note('Veillez à completer la ligne dans sa fiche à la fin de cette interface');

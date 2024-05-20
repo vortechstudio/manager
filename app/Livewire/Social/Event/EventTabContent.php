@@ -14,12 +14,12 @@ class EventTabContent extends Component
 
     public string $contenue;
 
-    public function mount()
+    public function mount(): void
     {
         $this->contenue = $this->event->contenue;
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->event->update([

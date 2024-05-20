@@ -18,7 +18,7 @@ class UploadFile extends Component
 
     public string $type = '';
 
-    public function submit()
+    public function submit(): void
     {
         match ($this->type) {
             'rental' => $this->uploadRental($this->model, $this->images),
