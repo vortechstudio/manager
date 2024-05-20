@@ -17,9 +17,12 @@ class RewardPanel extends Component
     public string $search = '';
 
     public int $perPage = 8;
+
     public int $reward_item_id = 0;
+
     //form
     public string $reward_type = '';
+
     public string $reward_value = '';
 
     protected $queryString = [
@@ -31,7 +34,7 @@ class RewardPanel extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->message->rewards()
@@ -49,7 +52,7 @@ class RewardPanel extends Component
         }
     }
 
-    public function delete(int $reward_id)
+    public function delete(int $reward_id): void
     {
         try {
             $countReadMsg = $this->message->railway_messages()->where('is_read', true)->get()->count();
@@ -69,7 +72,7 @@ class RewardPanel extends Component
     {
         return view('livewire.social.messagerie.reward-panel', [
             'rewards' => $this->message->rewards()
-                ->when($this->search, fn($query) => $query->where('reward_type', 'like', '%' . $this->search . '%'))
+                ->when($this->search, fn ($query) => $query->where('reward_type', 'like', '%'.$this->search.'%'))
                 ->paginate($this->perPage),
         ]);
     }

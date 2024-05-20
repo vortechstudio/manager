@@ -211,7 +211,7 @@ class SystemCreateCommand extends Command
         \Laravel\Prompts\info('Installer les images dans les dossiers correspondant. (engines/types_train/slugify_name.gif)');
     }
 
-    private function createGare()
+    private function createGare(): void
     {
         intro("Création d'une gare !");
         $name = text(
@@ -289,7 +289,7 @@ class SystemCreateCommand extends Command
 
     }
 
-    private function createLigne()
+    private function createLigne(): void
     {
         intro("Création d'une ligne");
         note('Veillez à completer la ligne dans sa fiche à la fin de cette interface');

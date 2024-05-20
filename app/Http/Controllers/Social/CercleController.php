@@ -15,6 +15,7 @@ class CercleController extends Controller
     public function show(int $id)
     {
         $cercle = Cercle::with('events', 'articles', 'wiki_categories', 'service')->find($id);
+
         return view('social.cercle.show', compact('cercle'));
     }
 }

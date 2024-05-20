@@ -14,7 +14,7 @@ class UserTable extends Component
 
     public $users;
 
-    public function mount()
+    public function mount(): void
     {
         if (empty($this->users)) {
             $this->users = User::when($this->search, fn ($query, $search) => $query->where('name', 'like', '%'.$search.'%'))

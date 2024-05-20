@@ -12,7 +12,7 @@ class HubPanelInfo extends Component
 
     public RailwayGare $gare;
 
-    public function production()
+    public function production(): void
     {
         try {
             $this->gare->hub->status = 'production';
@@ -24,7 +24,7 @@ class HubPanelInfo extends Component
         }
     }
 
-    public function disabled()
+    public function disabled(): void
     {
         try {
             $this->gare->hub->active = false;
@@ -36,7 +36,7 @@ class HubPanelInfo extends Component
         }
     }
 
-    public function enabled()
+    public function enabled(): void
     {
         try {
             $this->gare->hub->active = true;

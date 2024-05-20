@@ -61,7 +61,7 @@ class ServiceSeeder extends Seeder
             'url' => '//beta.railway-manager.ovh',
             'repository' => 'railway_manager',
             'folder' => '/www/wwwroot/beta.railway-manager.ovh',
-            'cercle_id' => 2
+            'cercle_id' => 2,
         ]);
         \Storage::makeDirectory("services/$rw->id");
 

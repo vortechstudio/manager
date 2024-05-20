@@ -7,7 +7,7 @@ use App\Notifications\Users\SendMessageNotification;
 
 class UserAction
 {
-    public function sendNotificationToAdmin(string $title, string $message, string $type = 'info')
+    public function sendNotificationToAdmin(string $title, string $message, string $type = 'info'): void
     {
         foreach (User::where('admin', true)->get() as $user) {
             $user->notify(new SendMessageNotification(
@@ -19,7 +19,7 @@ class UserAction
         }
     }
 
-    public function sendNotificationToUsers(string $title, string $message, string $type = 'info')
+    public function sendNotificationToUsers(string $title, string $message, string $type = 'info'): void
     {
         foreach (User::all() as $user) {
             if ($user->profil->notification) {

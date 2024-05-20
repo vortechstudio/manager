@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Railway\Location;
 
-use App\Livewire\OrderTrait;
 use App\Models\Railway\Config\RailwayRental;
 use Exception;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +42,7 @@ class LocationTable extends Component
         return 'livewire.pagination';
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         try {
             $location = RailwayRental::find($id);

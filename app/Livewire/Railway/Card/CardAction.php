@@ -21,7 +21,7 @@ class CardAction extends Component
 
     public int $model_id;
 
-    public function save()
+    public function save(): void
     {
         try {
             RailwayAdvantageCard::create([
@@ -41,7 +41,7 @@ class CardAction extends Component
         }
     }
 
-    public function refresh()
+    public function refresh(): void
     {
         try {
             (new AdvantageCardAction())->generate();

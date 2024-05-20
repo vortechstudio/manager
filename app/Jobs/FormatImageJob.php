@@ -68,11 +68,10 @@ class FormatImageJob implements ShouldQueue
         $file->save($directoryUpload.'/header.webp');
     }
 
-
     /**
      * @throws \Exception
      */
-    private function handleRental(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleRental(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         try {
@@ -88,7 +87,7 @@ class FormatImageJob implements ShouldQueue
     /**
      * @throws \Exception
      */
-    private function handleBanque(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleBanque(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         try {
@@ -101,19 +100,19 @@ class FormatImageJob implements ShouldQueue
         }
     }
 
-    private function handleCercle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleCercle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/default.webp');
     }
 
-    private function handleCercleHeader(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleCercleHeader(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/header.webp');
     }
 
-    private function handleCercleIcon(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleCercleIcon(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->toWebp(60);
         $file->save($directoryUpload.'/icon.webp');

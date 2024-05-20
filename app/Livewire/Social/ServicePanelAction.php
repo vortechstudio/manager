@@ -31,7 +31,7 @@ class ServicePanelAction extends Component
 
     public string $repository = '';
 
-    public function mount()
+    public function mount(): void
     {
         $this->name = $this->service->name;
         $this->type = $this->service->type->value;
@@ -42,7 +42,7 @@ class ServicePanelAction extends Component
         $this->repository = $this->service->repository;
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
@@ -59,7 +59,7 @@ class ServicePanelAction extends Component
         }
     }
 
-    public function steping(string $step)
+    public function steping(string $step): void
     {
         try {
             \App\Models\Config\Service::find($this->service->id)->update([
@@ -73,7 +73,7 @@ class ServicePanelAction extends Component
         }
     }
 
-    public function destroy()
+    public function destroy(): void
     {
         try {
             \App\Models\Config\Service::find($this->service->id)->delete();

@@ -40,7 +40,7 @@ class ShopTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             if (Shop::where('service_id', $this->service_id)->exists()) {
@@ -58,7 +58,7 @@ class ShopTable extends Component
         }
     }
 
-    public function destroy(int $shop_id)
+    public function destroy(int $shop_id): void
     {
         try {
             $shop = Shop::find($shop_id);

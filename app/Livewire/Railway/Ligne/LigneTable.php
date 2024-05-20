@@ -40,7 +40,7 @@ class LigneTable extends Component
         return 'livewire.pagination';
     }
 
-    public function disabled(int $id)
+    public function disabled(int $id): void
     {
         try {
             RailwayLigne::find($id)
@@ -55,7 +55,7 @@ class LigneTable extends Component
         }
     }
 
-    public function enable(int $id)
+    public function enable(int $id): void
     {
         try {
             RailwayLigne::find($id)
@@ -70,7 +70,7 @@ class LigneTable extends Component
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         try {
             RailwayLigne::find($id)->delete();

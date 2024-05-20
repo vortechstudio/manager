@@ -14,7 +14,7 @@ class AchievementRewardsTable extends Component
 
     public Achievement $achievement;
 
-    public function delete(int $reward_id)
+    public function delete(int $reward_id): void
     {
         try {
             $reward = $this->achievement->rewards()->find($reward_id);

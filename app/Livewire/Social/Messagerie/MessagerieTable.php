@@ -26,14 +26,23 @@ class MessagerieTable extends Component
 
     //form
     public string $selectTypeMessage = '';
+
     public string $message_subject = '';
+
     public string $message_type = '';
+
     public string $message_content = '';
+
     public int $service_id = 0;
+
     public bool $allUser = false;
+
     public int $user_id = 0;
+
     public array $listUsers = [];
+
     public bool $retarded = false;
+
     public string $retarded_at = '';
 
     protected $queryString = [
@@ -57,7 +66,7 @@ class MessagerieTable extends Component
         return 'livewire.pagination';
     }
 
-    public function resetForm()
+    public function resetForm(): void
     {
         $this->message_subject = '';
         $this->message_type = '';
@@ -67,7 +76,7 @@ class MessagerieTable extends Component
         $this->retarded_at = '';
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'message_subject' => 'required',
@@ -114,7 +123,7 @@ class MessagerieTable extends Component
         }
     }
 
-    public function destroy(int $message_id)
+    public function destroy(int $message_id): void
     {
         try {
             $message = Message::find($message_id);
@@ -129,8 +138,8 @@ class MessagerieTable extends Component
     {
         return view('livewire.social.messagerie.messagerie-table', [
             'messages' => Message::with('railway_messages')
-                ->when($this->selectTypeMessage, fn($query) => $query->where('message_type', $this->selectTypeMessage))
-                ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
+                ->when($this->selectTypeMessage, fn ($query) => $query->where('message_type', $this->selectTypeMessage))
+                ->when($this->search, fn ($query) => $query->where('name', 'like', '%'.$this->search.'%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

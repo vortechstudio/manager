@@ -13,18 +13,28 @@ class AchievementTable extends Component
     use LivewireAlert, WithPagination;
 
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'ASC';
+
     public int $perPage = 10;
+
     public string $bySector = '';
+
     public string $byLevel = '';
 
     //Form
     public string $sector = '';
+
     public string $level = '';
+
     public string $name = '';
+
     public string $description = '';
+
     public string $action = '';
+
     public int $goal = 0;
 
     protected $queryString = [
@@ -48,7 +58,7 @@ class AchievementTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             Achievement::create([
@@ -67,7 +77,7 @@ class AchievementTable extends Component
         }
     }
 
-    public function delete(int $trophy_id)
+    public function delete(int $trophy_id): void
     {
         try {
             Achievement::find($trophy_id)->delete();

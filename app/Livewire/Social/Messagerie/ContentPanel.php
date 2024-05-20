@@ -22,7 +22,7 @@ class ContentPanel extends Component
 
     public int $service_id = 0;
 
-    public function mount()
+    public function mount(): void
     {
         $this->message_subject = $this->message->message_subject;
         $this->message_type = $this->message->message_type->value;
@@ -30,7 +30,7 @@ class ContentPanel extends Component
         $this->service_id = $this->message->service_id;
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->message->update([

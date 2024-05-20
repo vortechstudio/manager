@@ -44,7 +44,7 @@ class LigneStationTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             $latestStation = $this->ligne->stations()->latest('id')->first();
@@ -90,7 +90,7 @@ class LigneStationTable extends Component
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         try {
             $station = RailwayLigneStation::find($id);

@@ -17,7 +17,7 @@ class ArticleTabImage extends Component
 
     public $image;
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->image->storeAs(

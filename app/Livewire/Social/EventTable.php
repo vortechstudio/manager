@@ -57,7 +57,7 @@ class EventTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             $event = Event::create([

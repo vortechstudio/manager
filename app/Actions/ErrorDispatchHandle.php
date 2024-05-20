@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Services\Github\Issues;
-use Laravel\Reverb\Loggers\Log;
 
 /**
  * Class ErrorDispatchHandle

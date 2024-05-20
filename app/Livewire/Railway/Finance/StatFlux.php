@@ -13,7 +13,7 @@ class StatFlux extends Component
 
     public array $data = [];
 
-    public function mount()
+    public function mount(): void
     {
         for ($i = 0; $i < 30; $i++) {
             $this->labels[] = date('Y-m-d', strtotime('-'.$i.' day'));
