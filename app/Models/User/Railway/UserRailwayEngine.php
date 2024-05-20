@@ -4,6 +4,7 @@ namespace App\Models\User\Railway;
 
 use App\Enums\Railway\Users\RailwayEngineStatusEnum;
 use App\Models\Railway\Engine\RailwayEngine;
+use App\Models\Railway\Users\RailwayPlanning;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,5 +33,10 @@ class UserRailwayEngine extends Model
     public function userRailwayLigne()
     {
         return $this->hasMany(UserRailwayLigne::class);
+    }
+
+    public function plannings()
+    {
+        return $this->hasMany(RailwayPlanning::class);
     }
 }
