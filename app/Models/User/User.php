@@ -3,7 +3,7 @@
 namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Railway\Users\RailwayPlanning;
+use App\Models\Railway\Planning\RailwayPlanning;
 use App\Models\Social\Article;
 use App\Models\Social\Event;
 use App\Models\Social\Post\Post;

@@ -3,7 +3,7 @@
 namespace App\Models\User\Railway;
 
 use App\Models\Railway\Ligne\RailwayLigne;
-use App\Models\Railway\Users\RailwayPlanning;
+use App\Models\Railway\Planning\RailwayPlanning;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
