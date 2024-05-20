@@ -11,6 +11,7 @@ class UserRailwayLigne extends Model
 {
     public $timestamps = false;
     protected $guarded = [];
+    protected $connection = 'railway';
 
     protected $casts = [
         'date_achat' => 'timestamp',
@@ -34,5 +35,10 @@ class UserRailwayLigne extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function tarifs()
+    {
+        return $this->hasMany(UserRailwayLigneTarif::class);
     }
 }
