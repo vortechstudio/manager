@@ -6,6 +6,7 @@ use App\Models\Social\Cercle;
 use Database\Seeders\Test\AchievementSeeder;
 use Database\Seeders\Test\ArticleSeeder;
 use Database\Seeders\Test\PageSeeder;
+use Database\Seeders\Test\Railway\EngineSeeder;
 use Database\Seeders\Test\ServiceSeeder;
 use Database\Seeders\Test\ShopSeeder;
 use Database\Seeders\Test\UserSeeder;
@@ -27,5 +28,6 @@ class TestSeeder extends Seeder
         $this->call(PageSeeder::class);
         $this->call(ShopSeeder::class);
         $this->call(AchievementSeeder::class);
+        $this->call(EngineSeeder::class);
     }
 }
