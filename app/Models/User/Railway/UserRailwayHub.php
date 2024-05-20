@@ -26,4 +26,9 @@ class UserRailwayHub extends Model
     {
         return $this->belongsTo(RailwayHub::class, 'railway_hub_id');
     }
+
+    public function userRailwayLigne()
+    {
+        return $this->hasMany(UserRailwayLigne::class);
+    }
 }

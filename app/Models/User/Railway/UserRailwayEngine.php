@@ -28,4 +28,9 @@ class UserRailwayEngine extends Model
     {
         return $this->belongsTo(RailwayEngine::class);
     }
+
+    public function userRailwayLigne()
+    {
+        return $this->hasMany(UserRailwayLigne::class);
+    }
 }
