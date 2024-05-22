@@ -119,5 +119,6 @@ Route::get('/offline', function () {
     return view('laravelpwa::offline');
 });
 Route::get('/test', function () {
-
+    $calc = (new \App\Services\Models\Railway\Engine\RailwayEngineAction(\App\Models\Railway\Engine\RailwayEngine::find(8)))->getCoefEssieux();
+    dd($calc);
 });
