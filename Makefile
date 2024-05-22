@@ -58,7 +58,7 @@ prepare: sync_s3 sync_s3_beta sync_database
 	npm run build
 	./vendor/bin/pint app/
 	./vendor/bin/rector process app
-	sync_database
+	make sync_database
 	git add .
 	git commit -m "style(General): Correction syntaxique du programme"
 	git push origin develop
