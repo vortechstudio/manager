@@ -9,11 +9,10 @@ use App\Models\Railway\Gare\RailwayHub;
 use App\Models\User\Railway\UserRailwayLigne;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Pharaonic\Laravel\Settings\Traits\Settingable;
 
 class RailwayLigne extends Model
 {
-    use Settingable, SoftDeletes;
+    use SoftDeletes;
 
     protected $guarded = [];
 
