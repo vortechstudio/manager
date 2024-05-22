@@ -87,7 +87,7 @@ class SystemCreateCommand extends Command
 
         $type_motor = select(
             label: 'Quel est le type de motorisation',
-            options: ['diesel', 'electrique 1500V', 'electrique 25000V', 'electrique 1500V/25000V', 'vapeur', 'hybride', 'autre']
+            options: ['diesel', 'electrique 1500V', 'electrique 25Kv', 'electrique 1500v/25Kv', 'vapeur', 'hybride', 'autre']
         );
 
         $type_marchandise = select(
@@ -182,14 +182,16 @@ class SystemCreateCommand extends Command
             'maintenance' => $price_maintenance,
             'in_reduction' => false,
             'location' => $price_location,
-            'engine_id' => $engine->id,
+            'railway_engine_id' => $engine->id,
         ]);
 
-        $engine->shop()->create([
-            'money' => $money_shop,
-            'price' => $price_shop,
-            'engine_id' => $engine->id,
-        ]);
+        if($in_shop) {
+            $engine->shop()->create([
+                'money' => $money_shop,
+                'price' => $price_shop,
+                'railway_engine_id' => $engine->id,
+            ]);
+        }
 
         $engine->technical()->create([
             'essieux' => $essieux,
@@ -198,11 +200,11 @@ class SystemCreateCommand extends Command
             'marchandise' => $type_marchandise,
             'nb_marchandise' => $nb_marchandise,
             'nb_wagon' => $nb_wagon,
-            'engine_id' => $engine->id,
+            'railway_engine_id' => $engine->id,
         ]);
 
         foreach (RailwayRental::all() as $rental) {
-            if (in_array(json_decode($rental->type, true), $engine->type_train->value)) {
+            if (in_array($engine->type_train->value, json_decode($rental->type, true))) {
                 $engine->rentals()->attach($rental->id);
             }
         }
