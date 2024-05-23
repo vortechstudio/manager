@@ -185,7 +185,7 @@ class SystemCreateCommand extends Command
             'railway_engine_id' => $engine->id,
         ]);
 
-        if($in_shop) {
+        if ($in_shop) {
             $engine->shop()->create([
                 'money' => $money_shop,
                 'price' => $price_shop,
