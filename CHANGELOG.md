@@ -1,3 +1,18 @@
+# [3.11.0](https://github.com/vortechstudio/manager/compare/v3.10.0...v3.11.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* **General:** Ajouter de nouvelles fonctionnalités et des révisions ([ff108c4](https://github.com/vortechstudio/manager/commit/ff108c48563e3612c0c8a75e80df89af12719216))
+
+
+### Features
+
+* Ajout de nouvelles fonctionnalités de calcul pour le moteur des chemins de fer ([353cfcc](https://github.com/vortechstudio/manager/commit/353cfcc5b0c312d68f54a02c6e3ad8aff92dba3c))
+* **General:** Ajout et mise à jour de modèles et de migrations ([21fdadb](https://github.com/vortechstudio/manager/commit/21fdadbe3d1a8f381cf8c06f1fe1b62c436816ad))
+* **Railway Engine:** Ajout de la liaison entre le matériel et les services de location ([27dff8f](https://github.com/vortechstudio/manager/commit/27dff8f2949193e4f5c80b3472f1b69e7bead6fb))
+* **Railway:** Ajout et refactorisation de fonctionnalités ([8b18d3a](https://github.com/vortechstudio/manager/commit/8b18d3a114a74cecc85e7330a28a37ec302c31eb))
+
 # [3.10.0](https://github.com/vortechstudio/manager/compare/v3.9.0...v3.10.0) (2024-05-19)
 
 
