@@ -50,7 +50,7 @@ class MenuTable extends Component
         return 'livewire.pagination';
     }
 
-    public function resetForm()
+    public function resetForm(): void
     {
         $this->title = '';
         $this->sector = '';
@@ -59,7 +59,7 @@ class MenuTable extends Component
         $this->parent_id = 0;
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             Menu::set(

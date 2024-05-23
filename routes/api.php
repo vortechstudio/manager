@@ -29,6 +29,7 @@ Route::prefix('services')->group(function () {
 
     Route::get('{id}', function (int $id) {
         $service = \App\Models\Config\Service::with('versions', 'tickets', 'shop', 'cercle', 'ticket_categories')->find($id);
+
         return response()->json($service);
     });
 
@@ -40,6 +41,7 @@ Route::prefix('services')->group(function () {
             ->where('type', 'news')
             ->orWhere('type', 'notice')
             ->get();
+
         return response()->json($articles);
     });
 });

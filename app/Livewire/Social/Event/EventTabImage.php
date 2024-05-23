@@ -21,7 +21,7 @@ class EventTabImage extends Component
 
     public $default;
 
-    public function save()
+    public function save(): void
     {
         try {
             $this->default->storeAs(

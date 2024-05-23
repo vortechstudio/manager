@@ -6,9 +6,12 @@ use App\Actions\UserAction;
 use App\Enums\Railway\Config\BonusTypeEnum;
 use App\Models\Railway\Config\RailwayBanque;
 use App\Models\Railway\Config\RailwayBonus;
+use App\Models\Railway\Config\RailwayFluxMarket;
 use App\Models\Railway\Config\RailwaySetting;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Spatie\LaravelOptions\Options;
+use Vortechstudio\Helpers\Facades\Helpers;
 
 class SystemActionCommand extends Command
 {
@@ -22,15 +25,14 @@ class SystemActionCommand extends Command
             'daily_flux' => $this->dailyFlux(),
             'monthly_bonus' => $this->monthlyBonus(),
             'daily_config' => $this->dailyConfig(),
+            'daily_market_flux' => $this->dailyMarketFlux()
         };
     }
 
     /**
      * Generates daily flux for all RailwayBanque records and sends a notification to the admin.
-     *
-     * @return void
      */
-    private function dailyFlux()
+    private function dailyFlux(): void
     {
         foreach (RailwayBanque::all() as $bank) {
             $bank->generate();
@@ -42,11 +44,10 @@ class SystemActionCommand extends Command
     /**
      * Deletes all existing RailwayBonus records and creates 30 new ones with random data.
      *
-     * @return void
      *
      * @throws \Exception description of exception
      */
-    private function monthlyBonus()
+    private function monthlyBonus(): void
     {
         foreach (RailwayBonus::all() as $bonus) {
             $bonus->delete();
@@ -69,7 +70,7 @@ class SystemActionCommand extends Command
     /**
      * Update daily configuration settings for price_diesel, price_electricity, price_kilometer, price_parking, and price_tpoint.
      */
-    private function dailyConfig()
+    private function dailyConfig(): void
     {
         RailwaySetting::where('name', 'price_diesel')->first()->update([
             'value' => random_float(1.1, 2.2),
@@ -88,5 +89,18 @@ class SystemActionCommand extends Command
         ]);
 
         (new UserAction())->sendNotificationToAdmin('Configuration quotidienne', 'Les configurations sont mis à jour.');
+    }
+
+    private function dailyMarketFlux(): void
+    {
+        RailwayFluxMarket::create([
+            'amount_flux_engine' => 0,
+            'amount_flux_ligne' => 0,
+            'amount_flux_hub' => 0,
+            'flux_hub' => Helpers::randomFloat(-5, 5),
+            'flux_engine' => Helpers::randomFloat(-5, 5),
+            'flux_ligne' => Helpers::randomFloat(-5, 5),
+            'date' => Carbon::today(),
+        ]);
     }
 }

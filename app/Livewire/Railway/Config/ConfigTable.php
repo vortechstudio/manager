@@ -41,7 +41,7 @@ class ConfigTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'name' => 'required',
@@ -61,7 +61,7 @@ class ConfigTable extends Component
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $config = RailwaySetting::find($id);
         $config->delete();

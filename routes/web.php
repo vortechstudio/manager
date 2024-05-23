@@ -119,5 +119,7 @@ Route::get('/offline', function () {
     return view('laravelpwa::offline');
 });
 Route::get('/test', function () {
-
+    $engine = \App\Models\User\Railway\UserRailwayEngine::find(1);
+    $calc = $engine->simulateSelling();
+    dd($calc);
 });

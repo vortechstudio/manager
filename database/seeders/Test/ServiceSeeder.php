@@ -3,7 +3,6 @@
 namespace Database\Seeders\Test;
 
 use App\Models\Config\Service;
-use App\Models\Social\Cercle;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
 

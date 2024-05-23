@@ -6,6 +6,7 @@ use App\Actions\Railway\AdvantageCardAction;
 use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
 use App\Actions\Railway\LevelAction;
+use App\Models\Railway\Config\RailwayRental;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
@@ -86,7 +87,7 @@ class SystemCreateCommand extends Command
 
         $type_motor = select(
             label: 'Quel est le type de motorisation',
-            options: ['diesel', 'electrique 1500V', 'electrique 25000V', 'electrique 1500V/25000V', 'vapeur', 'hybride', 'autre']
+            options: ['diesel', 'electrique 1500V', 'electrique 25Kv', 'electrique 1500v/25Kv', 'vapeur', 'hybride', 'autre']
         );
 
         $type_marchandise = select(
@@ -181,14 +182,16 @@ class SystemCreateCommand extends Command
             'maintenance' => $price_maintenance,
             'in_reduction' => false,
             'location' => $price_location,
-            'engine_id' => $engine->id,
+            'railway_engine_id' => $engine->id,
         ]);
 
-        $engine->shop()->create([
-            'money' => $money_shop,
-            'price' => $price_shop,
-            'engine_id' => $engine->id,
-        ]);
+        if ($in_shop) {
+            $engine->shop()->create([
+                'money' => $money_shop,
+                'price' => $price_shop,
+                'railway_engine_id' => $engine->id,
+            ]);
+        }
 
         $engine->technical()->create([
             'essieux' => $essieux,
@@ -197,14 +200,20 @@ class SystemCreateCommand extends Command
             'marchandise' => $type_marchandise,
             'nb_marchandise' => $nb_marchandise,
             'nb_wagon' => $nb_wagon,
-            'engine_id' => $engine->id,
+            'railway_engine_id' => $engine->id,
         ]);
+
+        foreach (RailwayRental::all() as $rental) {
+            if (in_array($engine->type_train->value, json_decode($rental->type, true))) {
+                $engine->rentals()->attach($rental->id);
+            }
+        }
 
         alert('Le matériel roulant a bien été créé');
         \Laravel\Prompts\info('Installer les images dans les dossiers correspondant. (engines/types_train/slugify_name.gif)');
     }
 
-    private function createGare()
+    private function createGare(): void
     {
         intro("Création d'une gare !");
         $name = text(
@@ -282,7 +291,7 @@ class SystemCreateCommand extends Command
 
     }
 
-    private function createLigne()
+    private function createLigne(): void
     {
         intro("Création d'une ligne");
         note('Veillez à completer la ligne dans sa fiche à la fin de cette interface');

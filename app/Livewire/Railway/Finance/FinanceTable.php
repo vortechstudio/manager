@@ -53,7 +53,7 @@ class FinanceTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'name' => 'required',
@@ -82,7 +82,7 @@ class FinanceTable extends Component
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $bank = RailwayBanque::find($id);
 

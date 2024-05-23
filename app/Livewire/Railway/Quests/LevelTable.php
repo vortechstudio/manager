@@ -41,7 +41,7 @@ class LevelTable extends Component
         return 'livewire.pagination';
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             (new LevelAction())->handle();

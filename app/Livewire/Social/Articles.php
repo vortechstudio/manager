@@ -71,7 +71,7 @@ class Articles extends Component
         }
     }
 
-    public function save()
+    public function save(): void
     {
         try {
             Article::create([

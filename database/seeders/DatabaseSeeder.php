@@ -33,27 +33,27 @@ class DatabaseSeeder extends Seeder
         }
 
         TicketCategory::create([
-            "name" => "Général",
-            "icon" => "fa-solid fa-globe",
-            "service_id" => 2
+            'name' => 'Général',
+            'icon' => 'fa-solid fa-globe',
+            'service_id' => 2,
         ]);
 
         TicketCategory::create([
-            "name" => "Rapport de bug",
-            "icon" => "fa-solid fa-bugs",
-            "service_id" => 2
+            'name' => 'Rapport de bug',
+            'icon' => 'fa-solid fa-bugs',
+            'service_id' => 2,
         ]);
 
         TicketCategory::create([
-            "name" => "Suggestions",
-            "icon" => "fa-solid fa-code-fork",
-            "service_id" => 2
+            'name' => 'Suggestions',
+            'icon' => 'fa-solid fa-code-fork',
+            'service_id' => 2,
         ]);
 
         TicketCategory::create([
-            "name" => "Plaintes",
-            "icon" => "fa-solid fa-user-injured",
-            "service_id" => 2
+            'name' => 'Plaintes',
+            'icon' => 'fa-solid fa-user-injured',
+            'service_id' => 2,
         ]);
     }
 }

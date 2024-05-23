@@ -52,7 +52,7 @@ class ResizeImageJob implements ShouldQueue
         $file->save($directoryUpload.'/icon.webp');
     }
 
-    private function handleCercle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload)
+    private function handleCercle(\Intervention\Image\Interfaces\ImageInterface $file, string $directoryUpload): void
     {
         $file->cover($file->width(), 320);
         $file->scale(1024);

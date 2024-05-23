@@ -101,7 +101,7 @@ class Pages extends Component
         }
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate([
             'title' => 'required',
