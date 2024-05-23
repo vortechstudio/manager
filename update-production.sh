@@ -17,6 +17,9 @@ php artisan view:clear
 php artisan clear
 php artisan webpush:vapid
 php artisan horizon:terminate
+php artisan action daily_flux
+php artisan action monthly_bonus
+php artisan action daily_config
 chmod -R 777 storage bootstrap/cache
 
 php artisan service:unlocked

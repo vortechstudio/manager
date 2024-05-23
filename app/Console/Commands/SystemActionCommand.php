@@ -91,7 +91,7 @@ class SystemActionCommand extends Command
         (new UserAction())->sendNotificationToAdmin('Configuration quotidienne', 'Les configurations sont mis à jour.');
     }
 
-    private function dailyMarketFlux()
+    private function dailyMarketFlux(): void
     {
         RailwayFluxMarket::create([
             'amount_flux_engine' => 0,
@@ -100,7 +100,7 @@ class SystemActionCommand extends Command
             'flux_hub' => Helpers::randomFloat(-5, 5),
             'flux_engine' => Helpers::randomFloat(-5, 5),
             'flux_ligne' => Helpers::randomFloat(-5, 5),
-            "date" => Carbon::today(),
+            'date' => Carbon::today(),
         ]);
     }
 }
