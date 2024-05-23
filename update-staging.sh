@@ -10,18 +10,7 @@ git pull origin master
 composer install --prefer-dist --no-interaction
 npm install
 
-if [ "$(git diff --name-only HEAD HEAD~1 -- database/migrations)" != "" ]
-then
-    mysql -u ${DB_USERNAME} -p ${DB_PASSWORD} -e "
-
-    # Suppression de la base de données
-    DROP DATABASE IF EXISTS ${DB_RAILWAY_DATABASE};
-
-    # Création de la base de données
-    CREATE DATABASE ${DB_RAILWAY_DATABASE};
-    "
-    php artisan migrate:fresh --seed
-fi
+php artisan migrate:fresh --seed --force
 
 php artisan release:update
 php artisan cache:clear
@@ -31,6 +20,9 @@ php artisan view:clear
 php artisan clear
 php artisan webpush:vapid
 php artisan horizon:terminate
+php artisan action daily_flux
+php artisan action monthly_bonus
+php artisan action daily_config
 chmod -R 777 storage bootstrap/cache
 
 php artisan up
