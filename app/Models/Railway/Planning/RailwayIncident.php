@@ -70,9 +70,9 @@ class RailwayIncident extends Model
     public function getIncidenceAttribute()
     {
         return match ($this->niveau) {
-            1 => "Aucune incidence sur le trafic",
+            1 => 'Aucune incidence sur le trafic',
             2 => "{$this->railwayPlanning->retarded_time} min de retard sur le trajet",
-            3 => "Service supprimé"
+            3 => 'Service supprimé'
         };
     }
 }
