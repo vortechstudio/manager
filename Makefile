@@ -7,10 +7,6 @@ start:
 	npm run dev
 
 migrate:
-	mysql -u root -p  -e "\
-    	DROP DATABASE IF EXISTS railway_dev; \
-    	CREATE DATABASE railway_dev; \
-    	"
 	php artisan migrate:fresh --seed --force
 	php artisan cache:clear
 	php artisan config:clear
@@ -21,6 +17,7 @@ migrate:
 	php artisan action daily_flux
 	php artisan action monthly_bonus
 	php artisan action daily_config
+	php artisan action daily_market_flux
 	php artisan create level
 
 sync_database:
@@ -29,6 +26,12 @@ sync_database:
 	cp -r app/Enums ../dev.railway-manager/app/
 	cp -r app/Actions/Railway ../dev.railway-manager/app/Actions/
 	cp -r app/Services/Models ../dev.railway-manager/app/Services/
+
+	cp -r database/migrations ../secure.vortechstudio/database/
+	cp -r app/Models ../secure.vortechstudio/app/
+	cp -r app/Enums ../secure.vortechstudio/app/
+	cp -r app/Actions/Railway ../secure.vortechstudio/app/Actions/
+	cp -r app/Services/Models ../secure.vortechstudio/app/Services/
 
 sync_s3_beta:
 	rsync -avz --info=progress2 --delete '../s3.vortechstudio/blog' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.ovh/
