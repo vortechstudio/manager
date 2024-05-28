@@ -15,6 +15,7 @@
         "graham-campbell/github": "^12.4",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.4",
+        "itsgoingd/clockwork": "^5.2",
         "ivanomatteo/laravel-device-tracking": "^0.2.1",
         "jantinnerezo/livewire-alert": "^3.0",
         "larabug/larabug": "^3.0",

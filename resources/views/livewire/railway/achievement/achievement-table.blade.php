@@ -47,55 +47,57 @@
                     </thead>
                     <tbody>
                     @foreach($achievements as $trophy)
-                        <td>
-                            @if(!$trophy->action_function_exist)
-                                <i class="fa-solid fa-exclamation-circle text-danger fs-2 animate__animated animate__flash animate__infinite" data-bs-toggle="tooltip" data-bs-title="La fonction n'existe pas dans le code"></i>
-                            @endif
-                        </td>
-                        <td>{{ Str::ucfirst($trophy->sector->value) }}</td>
-                        <td>
-                            <div class="d-flex flex-row justify-content-between align-items-center">
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="symbol symbol-50px me-3">
-                                        <img src="{{ Storage::url('icons/railway/success/'.$trophy->level->value.'.png') }}" alt="">
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <span class="fw-bold fs-3">{{ $trophy->name }}</span>
-                                        <span class="text-gray-600">{{ $trophy->description }}</span>
-                                    </div>
-                                </div>
-                                @if($trophy->rewards->count() > 0)
-                                    @if($trophy->rewards->count() == 1)
-                                        <div class="symbol symbol-50px">
-                                            <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type_reward->value.'.png') }}" alt="">
-                                            <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->amount_reward }}</span>
-                                        </div>
-                                    @else
-                                        <div class="symbol-group symbol-hover">
-                                            @foreach($trophy->rewards as $reward)
-                                                <div class="symbol symbol-50px">
-                                                    <img src="{{ Storage::url('icons/railway/'.$reward->type_reward->value.'.png') }}" alt="">
-                                                    <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $reward->amount_reward }}</span>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endif
+                        <tr>
+                            <td>
+                                @if(!$trophy->action_function_exist)
+                                    <i class="fa-solid fa-exclamation-circle text-danger fs-2 animate__animated animate__flash animate__infinite" data-bs-toggle="tooltip" data-bs-title="La fonction n'existe pas dans le code"></i>
                                 @endif
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge badge-circle badge-primary">{{ \App\Models\User\Railway\UserRailwayAchievement::where('achievement_id', $trophy->id)->count() }}</span>
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a wire:navigate href="{{ route('railway.achievement.show', $trophy->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir le trophée">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a href="" wire:click="delete({{ $trophy->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le trophée" wire:confirm="Voulez-vous supprimer ce trophée !">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
+                            </td>
+                            <td>{{ Str::ucfirst($trophy->sector->value) }}</td>
+                            <td>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="symbol symbol-50px me-3">
+                                            <img src="{{ Storage::url('icons/railway/success/'.$trophy->level->value.'.png') }}" alt="">
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bold fs-3">{{ $trophy->name }}</span>
+                                            <span class="text-gray-600">{{ $trophy->description }}</span>
+                                        </div>
+                                    </div>
+                                    @if($trophy->rewards->count() > 0)
+                                        @if($trophy->rewards->count() == 1)
+                                            <div class="symbol symbol-50px">
+                                                <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type_reward->value.'.png') }}" alt="">
+                                                <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->amount_reward }}</span>
+                                            </div>
+                                        @else
+                                            <div class="symbol-group symbol-hover">
+                                                @foreach($trophy->rewards as $reward)
+                                                    <div class="symbol symbol-50px">
+                                                        <img src="{{ Storage::url('icons/railway/'.$reward->type_reward->value.'.png') }}" alt="">
+                                                        <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $reward->amount_reward }}</span>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    @endif
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-circle badge-primary">{{ \App\Models\User\Railway\UserRailwayAchievement::where('achievement_id', $trophy->id)->count() }}</span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a wire:navigate href="{{ route('railway.achievement.show', $trophy->id) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir le trophée">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="" wire:click="delete({{ $trophy->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le trophée" wire:confirm="Voulez-vous supprimer ce trophée !">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
