@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Railway\Ligne;
 
+use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Ligne\RailwayLigne;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class LigneTable extends Component
     public string $orderDirection = 'ASC';
 
     public int $perPage = 10;
+
+    public string $status = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -81,6 +84,42 @@ class LigneTable extends Component
         }
     }
 
+    public function export()
+    {
+        $beta_lignes = RailwayLigne::with('stations')->where('status', 'beta')->get()->toJson();
+        $prod_lignes = RailwayLigne::with('stations')->where('status', 'production')->get()->toJson();
+
+        try {
+            $filename = 'railway_lignes.json';
+            \Storage::put('data/beta/'.$filename, $beta_lignes);
+            \Storage::put('data/production/'.$filename, $prod_lignes);
+            $this->alert('success', 'Export Effectuer !');
+        } catch (\Exception $exception) {
+            (new ErrorDispatchHandle())->handle($exception);
+            $this->alert('error', 'Une erreur à eu lieu !');
+        }
+    }
+
+    public function import()
+    {
+        $lignes = $this->getLignesBasedOnStatus();
+
+        foreach ($lignes as $ligne) {
+            $l = $this->createLigne($ligne);
+            $this->createStations($l, $ligne);
+        }
+
+        $this->alert('success', 'Import Effectuer !');
+        $this->dispatch('closeModal', 'import');
+    }
+
+    private function getLignesBasedOnStatus()
+    {
+        $file = $this->status == 'beta' ? 'data/beta/railway_lignes.json' : 'data/production/railway_lignes.json';
+
+        return json_decode(\Storage::get($file), true);
+    }
+
     public function render()
     {
         return view('livewire.railway.ligne.ligne-table', [
@@ -89,5 +128,33 @@ class LigneTable extends Component
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);
+    }
+
+    private function createLigne(mixed $ligne)
+    {
+        return RailwayLigne::updateOrCreate(['id' => $ligne['id']], [
+            'name' => $ligne['name'],
+            'price' => $ligne['price'],
+            'distance' => $ligne['distance'],
+            'time_min' => $ligne['time_min'],
+            'active' => $ligne['active'],
+            'status' => $ligne['status'],
+            'type' => $ligne['type'],
+            'start_gare_id' => $ligne['start_gare_id'],
+            'end_gare_id' => $ligne['end_gare_id'],
+            'railway_hub_id' => $ligne['railway_hub_id'],
+        ]);
+    }
+
+    private function createStations(RailwayLigne $l, mixed $ligne)
+    {
+        foreach ($ligne['stations'] as $station) {
+            $l->stations()->updateOrCreate(['id' => $station['id']], [
+                'time' => $station['time'],
+                'distance' => $station['distance'],
+                'railway_gare_id' => $station['railway_gare_id'],
+                'railway_ligne_id' => $l->id,
+            ]);
+        }
     }
 }
