@@ -1,3 +1,24 @@
+# [3.12.0](https://github.com/vortechstudio/manager/compare/v3.11.0...v3.12.0) (2024-05-29)
+
+
+### Bug Fixes
+
+* **Railway:** Optimisation du calcul de temps dans LigneStationAction ([d93efe4](https://github.com/vortechstudio/manager/commit/d93efe4877c13db2a1786f75d81baa6942beaec1))
+
+
+### Features
+
+* **Models:** Amélioration des modèles Railway ([2b4e8a1](https://github.com/vortechstudio/manager/commit/2b4e8a146cb5c43aee539b10f79ea89f3e6b72be))
+* **Railway Core:** Mise à jour des Modèles et Services ([727bf30](https://github.com/vortechstudio/manager/commit/727bf30a088a79b6f04fb2ca8989d837f0a6dcaf))
+* **Railway Delivery:** Ajout de nouvelles fonctionnalités ([f9c17d8](https://github.com/vortechstudio/manager/commit/f9c17d86ed37873482e40693927d80d6648cacfe))
+* **Railway Engine:** ajout fonctionnalités d'import/export ([7456c07](https://github.com/vortechstudio/manager/commit/7456c07a6320175fcdabfc43424afd5a64e2aa82))
+* **Railway Gare:** Ajout des fonctionnalités d'import et d'export ([d4e5ac7](https://github.com/vortechstudio/manager/commit/d4e5ac728b5131a0c7b495cfefb86e101cc0f8cb))
+* **Railway Ligne:** Ajout des fonctionnalités d'import et export ([c55bce0](https://github.com/vortechstudio/manager/commit/c55bce0629728de766aa9b319ffcb573d92edf48))
+* **Railway Location:** Ajout des fonctions d'import/export et ajustement de l'interface ([5dfd319](https://github.com/vortechstudio/manager/commit/5dfd3192e07cdeb7bee6fbfbec189a7a5905cf34))
+* **Railway:** Ajout du temps de travail journalier dans les gares ([dafd05b](https://github.com/vortechstudio/manager/commit/dafd05b475fa5635c0f84577dac5b694b92c0706))
+* **UserRailwayLigne:** Ajout attribute flux_market ([e113353](https://github.com/vortechstudio/manager/commit/e1133535d2b5ec04ac38ac72b037aa1c543a5afb))
+* **UserRailwayLigne:** Ajout de nouvelles méthodes fonctionnelles ([d1a1bc0](https://github.com/vortechstudio/manager/commit/d1a1bc0754eb918add7067d7aa4a72ea1c6b7843))
+
 # [3.11.0](https://github.com/vortechstudio/manager/compare/v3.10.0...v3.11.0) (2024-05-23)
 
 
