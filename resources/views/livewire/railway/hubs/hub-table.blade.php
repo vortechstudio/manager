@@ -1,16 +1,18 @@
 <div>
-    <div class="d-flex flex-row align-items-end mb-5">
-        <div class="position-relative w-250px me-3">
+    <div class="d-flex flex-row align-items-end gap-5 mb-5">
+        <div class="position-relative w-250px">
             <i class="ki-duotone ki-magnifier fs-2 text-gray-500 position-absolute top-50 translate-middle-y ms-4"><span class="path1"></span><span class="path2"></span></i>
             <input type="text" class="form-control border-gray-200 h-40px bg-body ps-13 fs-7" wire:model.live.debounce.500ms="search" placeholder="Rechercher un évènement..." data-kt-search-element="input">
         </div>
-        <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px me-5" id="perPage">
+        <select wire:model="perPage" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-100px" id="perPage">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
         <a href="{{ route('railway.hubs.create') }}" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Création d'une gare</a>
+        <button wire:click="export" class="btn btn-outline btn-outline-secondary"><i class="fa-solid fa-file-upload me-3"></i> Exporter</button>
+        <button wire:click="import" class="btn btn-outline btn-outline-secondary"><i class="fa-solid fa-file-download me-3"></i> Importer</button>
     </div>
     <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
         <div class="table-loading-message">
