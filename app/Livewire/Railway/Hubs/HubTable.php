@@ -94,7 +94,7 @@ class HubTable extends Component
 
         foreach ($gares as $gare) {
             $e = $this->createGare($gare);
-            if ($e->type == 'large' || $e->type == 'terminus') {
+            if ($e->type->value == 'large' || $e->type->value == 'terminus') {
                 $this->createHub($e, $gare);
             }
         }
@@ -132,11 +132,11 @@ class HubTable extends Component
 
     private function createHub(RailwayGare $e, mixed $gare)
     {
-        $e->hub()->updateOrCreate(['id' => $gare['id']], [
-            'price_base' => $gare['price_base'],
-            'taxe_hub_price' => $gare['taxe_hub_price'],
-            'active' => $gare['active'],
-            'status' => $gare['status'],
+        $e->hub()->updateOrCreate(['id' => $gare['hub']['id']], [
+            'price_base' => $gare['hub']['price_base'],
+            'taxe_hub_price' => $gare['hub']['taxe_hub_price'],
+            'active' => $gare['hub']['active'],
+            'status' => $gare['hub']['status'],
             'railway_gare_id' => $e->id,
         ]);
     }
