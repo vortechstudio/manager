@@ -1,3 +1,10 @@
+## [3.12.1](https://github.com/vortechstudio/manager/compare/v3.12.0...v3.12.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* **General:** Correction & amélioration de code ([5892cf4](https://github.com/vortechstudio/manager/commit/5892cf4bfda73f08feaa69f225c2decdf030ddb1))
+
 # [3.12.0](https://github.com/vortechstudio/manager/compare/v3.11.0...v3.12.0) (2024-05-29)
 
 
