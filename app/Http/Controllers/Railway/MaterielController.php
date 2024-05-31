@@ -102,7 +102,7 @@ class MaterielController extends Controller
             }
 
             foreach (RailwayRental::all() as $rental) {
-                if (in_array(json_decode($rental->type, true), $engine->type_train->value)) {
+                if (in_array($engine->type_train->value, json_decode($rental->type, true))) {
                     $engine->rentals()->attach($rental->id);
                 }
             }
