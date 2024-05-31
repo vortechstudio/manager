@@ -28,10 +28,11 @@ class UpdateReleaseCommand extends Command
                 $releases = $response->json();
 
                 foreach ($releases as $release) {
+                    $version_int = explode('v', $release['name']);
                     $service->versions()->updateOrCreate(
-                        ['version' => $release['name']],
+                        ['version' => $version_int[1]],
                         [
-                            'version' => $release['name'],
+                            'version' => $version_int[1],
                             'title' => $release['name'],
                             'contenue' => $release['body'],
                             'created_at' => $release['created_at'],
