@@ -74,7 +74,7 @@ class HubTable extends Component
         }
     }
 
-    public function export()
+    public function export(): void
     {
         $gares = RailwayGare::with('weather', 'hub')->get()->toJson();
         try {
@@ -88,7 +88,7 @@ class HubTable extends Component
         }
     }
 
-    public function import()
+    public function import(): void
     {
         $gares = json_decode(\Storage::get('data/beta/railway_gares.json'), true);
 
@@ -130,7 +130,7 @@ class HubTable extends Component
         ]);
     }
 
-    private function createHub(RailwayGare $e, mixed $gare)
+    private function createHub(RailwayGare $e, mixed $gare): void
     {
         $e->hub()->updateOrCreate(['id' => $gare['hub']['id']], [
             'price_base' => $gare['hub']['price_base'],

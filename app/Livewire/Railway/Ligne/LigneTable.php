@@ -84,7 +84,7 @@ class LigneTable extends Component
         }
     }
 
-    public function export()
+    public function export(): void
     {
         $beta_lignes = RailwayLigne::with('stations')->where('status', 'beta')->get()->toJson();
         $prod_lignes = RailwayLigne::with('stations')->where('status', 'production')->get()->toJson();
@@ -100,7 +100,7 @@ class LigneTable extends Component
         }
     }
 
-    public function import()
+    public function import(): void
     {
         $lignes = $this->getLignesBasedOnStatus();
 
@@ -146,7 +146,7 @@ class LigneTable extends Component
         ]);
     }
 
-    private function createStations(RailwayLigne $l, mixed $ligne)
+    private function createStations(RailwayLigne $l, mixed $ligne): void
     {
         foreach ($ligne['stations'] as $station) {
             $l->stations()->updateOrCreate(['id' => $station['id']], [
