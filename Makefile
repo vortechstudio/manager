@@ -57,7 +57,7 @@ sync_s3:
 	rsync -az --info=progress2 '../s3.vortechstudio/pwa' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
 	rsync -az --info=progress2 '../s3.vortechstudio/services' -e 'ssh -p 5678' access@37.187.117.190:/www/wwwroot/s3.vortechstudio.fr/
 
-prepare: sync_s3 sync_s3_beta sync_database
+prepare: sync_database
 	npm run build
 	./vendor/bin/pint app/
 	./vendor/bin/rector process app

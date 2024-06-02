@@ -107,7 +107,7 @@ class SystemActionCommand extends Command
         ]);
     }
 
-    private function syncRentals()
+    private function syncRentals(): void
     {
         foreach (RailwayRental::all() as $rental) {
             foreach (RailwayEngine::all() as $engine) {
