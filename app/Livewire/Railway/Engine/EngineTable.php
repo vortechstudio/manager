@@ -128,7 +128,7 @@ class EngineTable extends Component
 
     private function createPrice(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
-        $e->price()->updateOrCreate(['id' => $engine['id']], [
+        $e->price()->updateOrCreate(['id' => $engine['price']['id']], [
             'achat' => $engine['price']['achat'],
             'in_reduction' => $engine['price']['in_reduction'],
             'percent_reduction' => $engine['price']['percent_reduction'],
@@ -136,13 +136,13 @@ class EngineTable extends Component
             'location' => $engine['price']['location'],
             'created_at' => $engine['price']['created_at'],
             'updated_at' => $engine['price']['updated_at'],
-            'railway_engine_id' => $e->id,
+            'railway_engine_id' => $engine['price']['railway_engine_id'],
         ]);
     }
 
     private function createTechnical(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
-        $e->technical()->updateOrCreate(['id' => $engine['id']], [
+        $e->technical()->updateOrCreate(['id' => $engine['technical']['id']], [
             'essieux' => $engine['technical']['essieux'],
             'velocity' => $engine['technical']['velocity'],
             'motor' => $engine['technical']['motor'],

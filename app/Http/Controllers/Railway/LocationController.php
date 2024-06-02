@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Railway;
 
 use App\Http\Controllers\Controller;
 use App\Models\Railway\Config\RailwayRental;
+use App\Models\Railway\Engine\RailwayEngine;
 use Exception;
 use Illuminate\Http\Request;
 use Str;
@@ -29,12 +30,18 @@ class LocationController extends Controller
         ]);
 
         try {
-            RailwayRental::create([
+            $rental = RailwayRental::create([
                 'uuid' => Str::uuid(),
                 'name' => $request->get('name'),
                 'contract_duration' => $request->get('contract_duration'),
                 'type' => json_encode($request->get('type')),
             ]);
+
+            foreach (RailwayEngine::all() as $engine) {
+                if (in_array($engine->type_transport->value, json_decode($rental->type, true))) {
+                    $engine->rentals()->attach($rental->id);
+                }
+            }
 
             toastr()
                 ->addSuccess('Le service de location a été enregistré');
