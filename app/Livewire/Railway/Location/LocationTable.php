@@ -49,8 +49,8 @@ class LocationTable extends Component
             $location = RailwayRental::find($id);
             $location->delete();
 
-            if (Storage::exists('logos/rentals/' . \Str::lower($location->name) . '.webp')) {
-                Storage::delete('logos/rentals/' . \Str::lower($location->name) . '.webp');
+            if (Storage::exists('logos/rentals/'.\Str::lower($location->name).'.webp')) {
+                Storage::delete('logos/rentals/'.\Str::lower($location->name).'.webp');
             }
 
             $this->alert('success', 'Le service de location a été supprimé');
@@ -59,13 +59,13 @@ class LocationTable extends Component
         }
     }
 
-    public function export()
+    public function export(): void
     {
         $rentals = RailwayRental::all()->toJson();
         try {
             $filename = 'railway_rentals.json';
-            \Storage::put('data/beta/' . $filename, $rentals);
-            \Storage::put('data/production/' . $filename, $rentals);
+            \Storage::put('data/beta/'.$filename, $rentals);
+            \Storage::put('data/production/'.$filename, $rentals);
             $this->alert('success', 'Export Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
@@ -73,7 +73,7 @@ class LocationTable extends Component
         }
     }
 
-    public function import()
+    public function import(): void
     {
         if (config('app.env') === 'production') {
             $rentals = json_decode(Storage::get('data/production/railway_rentals.json'), true);
@@ -96,7 +96,7 @@ class LocationTable extends Component
     public function render()
     {
         return view('livewire.railway.location.location-table', [
-            'locations' => RailwayRental::when($this->search, fn($query, $search) => $query->where('name', 'like', '%' . $search . '%'))
+            'locations' => RailwayRental::when($this->search, fn ($query, $search) => $query->where('name', 'like', '%'.$search.'%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

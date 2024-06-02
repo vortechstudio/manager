@@ -18,7 +18,7 @@ class AchievementSeeder extends Seeder
         }
 
         foreach (User::all() as $user) {
-            if ($user->services()->where('service_id', 2)->first()->exists()) {
+            if ($user->services()->where('service_id', 2)->exists()) {
                 for ($i = 0; $i <= count(Achievement::all()); $i++) {
                     $achievement = $user->railway_achievements()->create([
                         'achievement_id' => Achievement::inRandomOrder()->first()->id,

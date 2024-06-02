@@ -5,7 +5,6 @@ namespace App\Models\User\Railway;
 use App\Models\Railway\Config\RailwayLevel;
 use App\Models\Railway\Config\RailwayQuest;
 use App\Models\User\User;
-use App\Notifications\IncrementReputationNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -16,6 +15,7 @@ class UserRailway extends Model
     protected $connection = 'railway';
 
     protected $guarded = [];
+
     protected $casts = [
         'automated_planning' => 'boolean',
     ];
@@ -85,9 +85,7 @@ class UserRailway extends Model
      */
     private function calculateXpPercent(int $exp_next_level): float
     {
-        $percent_gained = ($this->xp / $exp_next_level) * 100;
-
-        return 100 - $percent_gained;
+        return ($this->xp / $exp_next_level) * 100;
     }
 
     public function addReputation(string $type, ?int $model_id)
@@ -97,15 +95,15 @@ class UserRailway extends Model
 
         $new_reputation = match ($type) {
             'engine' => $this->addReputForEngine($coefficient, $reputation),
-            'hubs' => $this->addReputForHubs($coefficient, $reputation),
+            'hub' => $this->addReputForHubs($coefficient, $reputation),
             'ligne' => $this->addReputForLigne($coefficient, $reputation),
             'quest' => $this->addReputForQuest($model_id, $coefficient, $reputation),
+            'research' => $this->addReputForResearch($coefficient, $reputation),
         };
         try {
             $this->update([
                 'reputation' => $new_reputation,
             ]);
-            $this->user->notify(new IncrementReputationNotification($reputation, $new_reputation));
         } catch (\Exception $exception) {
             \Log::emergency($exception->getMessage(), [$exception]);
         }
@@ -130,6 +128,13 @@ class UserRailway extends Model
     private function addReputForLigne(int|float $coefficient, int $reputation)
     {
         $reputation += 150 * $coefficient;
+
+        return $reputation;
+    }
+
+    private function addReputForResearch(int|float $coefficient, int $reputation)
+    {
+        $reputation += 100 * $coefficient;
 
         return $reputation;
     }

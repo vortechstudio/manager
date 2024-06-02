@@ -61,7 +61,7 @@ class EngineTable extends Component
         $this->alert('success', 'Le matériel est maintenant supprimé');
     }
 
-    public function export()
+    public function export(): void
     {
         $beta_engines = RailwayEngine::with('price', 'technical', 'shop', 'rentals')->where('status', 'beta')->get()->toJson();
         $prod_engines = RailwayEngine::where('status', 'production')->get()->toJson();
@@ -100,7 +100,7 @@ class EngineTable extends Component
         return json_decode(\Storage::get($file), true);
     }
 
-    public function import()
+    public function import(): void
     {
         $engines = $this->getEnginesBasedOnStatus();
 
@@ -126,9 +126,9 @@ class EngineTable extends Component
         ]);
     }
 
-    private function createPrice(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine)
+    private function createPrice(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
-        $e->price()->updateOrCreate(['id' => $engine['id']], [
+        $e->price()->updateOrCreate(['id' => $engine['price']['id']], [
             'achat' => $engine['price']['achat'],
             'in_reduction' => $engine['price']['in_reduction'],
             'percent_reduction' => $engine['price']['percent_reduction'],
@@ -136,13 +136,13 @@ class EngineTable extends Component
             'location' => $engine['price']['location'],
             'created_at' => $engine['price']['created_at'],
             'updated_at' => $engine['price']['updated_at'],
-            'railway_engine_id' => $e->id,
+            'railway_engine_id' => $engine['price']['railway_engine_id'],
         ]);
     }
 
-    private function createTechnical(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine)
+    private function createTechnical(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
-        $e->technical()->updateOrCreate(['id' => $engine['id']], [
+        $e->technical()->updateOrCreate(['id' => $engine['technical']['id']], [
             'essieux' => $engine['technical']['essieux'],
             'velocity' => $engine['technical']['velocity'],
             'motor' => $engine['technical']['motor'],
@@ -153,7 +153,7 @@ class EngineTable extends Component
         ]);
     }
 
-    private function createShop(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine)
+    private function createShop(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
         if ($engine['shop'] !== null) {
             $e->shop()->updateOrCreate(['id' => $engine['id']], [
@@ -166,7 +166,7 @@ class EngineTable extends Component
         }
     }
 
-    private function createRentals(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine)
+    private function createRentals(RailwayEngine|array|\LaravelIdea\Helper\App\Models\Railway\Engine\_IH_RailwayEngine_C $e, mixed $engine): void
     {
         foreach ($engine['rentals'] as $rental) {
             $e->rentals()->updateOrCreate(['id' => $engine['id']], [
