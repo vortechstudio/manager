@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Railway;
 use App\Actions\Railway\EngineAction;
 use App\Http\Controllers\Controller;
 use App\Models\Railway\Config\RailwayRental;
+use App\Models\Railway\Core\ShopItem;
 use App\Models\Railway\Engine\RailwayEngine;
+use App\Services\Models\Railway\Engine\RailwayEnginePriceAction;
 use Illuminate\Http\Request;
 
 class MaterielController extends Controller
@@ -98,6 +100,21 @@ class MaterielController extends Controller
                     'money' => $request->get('money_shop'),
                     'price' => $request->get('price_shop'),
                     'railway_engine_id' => $engine->id,
+                ]);
+
+                ShopItem::create([
+                    'name' => $engine->name,
+                    'section' => 'engine',
+                    'description' => 'https://wiki.railway-manager.fr/engine/'.slug($engine->name),
+                    'currency_type' => 'tpoint',
+                    'price' => (new RailwayEnginePriceAction($engine))->convertToTpoint(),
+                    'rarity' => 'or',
+                    'blocked' => true,
+                    'blocked_max' => 1,
+                    'qte' => 1,
+                    'shop_category_id' => 2,
+                    'model' => RailwayEngine::class,
+                    'model_id' => $engine->id,
                 ]);
             }
 
