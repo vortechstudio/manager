@@ -3,7 +3,9 @@
 namespace App\Livewire\Railway\Engine;
 
 use App\Actions\ErrorDispatchHandle;
+use App\Models\Railway\Core\ShopItem;
 use App\Models\Railway\Engine\RailwayEngine;
+use App\Services\Models\Railway\Engine\RailwayEnginePriceAction;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -162,6 +164,21 @@ class EngineTable extends Component
                 'created_at' => $engine['shop']['created_at'],
                 'updated_at' => $engine['shop']['updated_at'],
                 'railway_engine_id' => $engine['shop']['railway_engine_id'],
+            ]);
+
+            ShopItem::create([
+                'name' => $engine['name'],
+                'section' => 'engine',
+                'description' => 'https://wiki.railway-manager.fr/engine/'.slug($engine['name']),
+                'currency_type' => 'tpoint',
+                'price' => (new RailwayEnginePriceAction($engine))->convertToTpoint(),
+                'rarity' => 'or',
+                'blocked' => true,
+                'blocked_max' => 1,
+                'qte' => 1,
+                'shop_category_id' => 2,
+                'model' => RailwayEngine::class,
+                'model_id' => $engine['id'],
             ]);
         }
     }

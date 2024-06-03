@@ -88,7 +88,7 @@ class SystemActionCommand extends Command
             'value' => random_float(1, 2),
         ]);
         RailwaySetting::where('name', 'exchange_tpoint')->first()->update([
-            'value' => random_float(1, 1.2),
+            'value' => random_float(0, 1),
         ]);
 
         (new UserAction())->sendNotificationToAdmin('Configuration quotidienne', 'Les configurations sont mis à jour.');
@@ -107,7 +107,7 @@ class SystemActionCommand extends Command
         ]);
     }
 
-    private function syncRentals()
+    private function syncRentals(): void
     {
         foreach (RailwayRental::all() as $rental) {
             foreach (RailwayEngine::all() as $engine) {
