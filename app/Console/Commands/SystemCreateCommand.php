@@ -92,6 +92,12 @@ class SystemCreateCommand extends Command
             options: ['diesel', 'electrique 1500V', 'electrique 25Kv', 'electrique 1500v/25Kv', 'vapeur', 'hybride', 'autre']
         );
 
+        $puissance = text(
+            label: 'Quel est la puissance du moteur ?',
+            required: true,
+            hint: 'en Kw'
+        );
+
         $type_marchandise = select(
             label: 'Quel est le type de marchandise transporter',
             options: ['none', 'passagers', 'marchandises']
@@ -218,6 +224,7 @@ class SystemCreateCommand extends Command
             'nb_marchandise' => $nb_marchandise,
             'nb_wagon' => $nb_wagon,
             'railway_engine_id' => $engine->id,
+            'puissance' => $puissance,
         ]);
 
         foreach (RailwayRental::all() as $rental) {

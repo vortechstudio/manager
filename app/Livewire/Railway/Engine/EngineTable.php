@@ -152,6 +152,7 @@ class EngineTable extends Component
             'nb_marchandise' => $engine['technical']['nb_marchandise'],
             'nb_wagon' => $engine['technical']['nb_wagon'],
             'railway_engine_id' => $engine['technical']['railway_engine_id'],
+            'puissance' => $engine['technical']['puissance'],
         ]);
     }
 

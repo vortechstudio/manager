@@ -94,6 +94,12 @@
                             </select>
                         </div>
 
+                        <x-form.input
+                            name="puissance"
+                            label="Puissance Moteur"
+                            required="true"
+                            hint="Exprimé en KW" />
+
                         <div class="mb-10">
                             <label for="type_marchandise" class="form-label required">Type de marchandise</label>
                             <select x-model="type_marchandise" name="type_marchandise" id="type_marchandise" class="form-select" data-placeholder="---  Selectionner un type de marchandise ---" required>

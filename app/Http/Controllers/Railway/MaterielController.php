@@ -85,6 +85,7 @@ class MaterielController extends Controller
                 'nb_marchandise' => $request->get('nb_marchandise'),
                 'nb_wagon' => $request->get('nb_wagon'),
                 'railway_engine_id' => $engine->id,
+                'puissance' => $request->get('puissance'),
             ]);
 
             $engine->price()->create([
