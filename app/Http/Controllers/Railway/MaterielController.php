@@ -108,7 +108,7 @@ class MaterielController extends Controller
                     'section' => 'engine',
                     'description' => 'https://wiki.railway-manager.fr/engine/'.slug($engine->name),
                     'currency_type' => 'tpoint',
-                    'price' => (new RailwayEnginePriceAction($engine))->convertToTpoint(),
+                    'price' => (new RailwayEnginePriceAction($engine->price))->convertToTpoint(),
                     'rarity' => 'or',
                     'blocked' => true,
                     'blocked_max' => 1,
