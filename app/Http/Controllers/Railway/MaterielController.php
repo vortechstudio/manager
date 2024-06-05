@@ -85,6 +85,7 @@ class MaterielController extends Controller
                 'nb_marchandise' => $request->get('nb_marchandise'),
                 'nb_wagon' => $request->get('nb_wagon'),
                 'railway_engine_id' => $engine->id,
+                'puissance' => $request->get('puissance'),
             ]);
 
             $engine->price()->create([
@@ -107,7 +108,7 @@ class MaterielController extends Controller
                     'section' => 'engine',
                     'description' => 'https://wiki.railway-manager.fr/engine/'.slug($engine->name),
                     'currency_type' => 'tpoint',
-                    'price' => (new RailwayEnginePriceAction($engine))->convertToTpoint(),
+                    'price' => (new RailwayEnginePriceAction($engine->price))->convertToTpoint(),
                     'rarity' => 'or',
                     'blocked' => true,
                     'blocked_max' => 1,
