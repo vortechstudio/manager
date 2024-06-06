@@ -13,9 +13,9 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->realText(),
+            'title' => $this->faker->realText(190),
             'type' => collect(Options::forEnum(ArticleTypeEnum::class)->toArray())->random()['value'],
-            'description' => $this->faker->realText(255),
+            'description' => $this->faker->realText(190),
             'contenue' => $this->faker->paragraph(rand(1, 5)),
             'published' => $this->faker->boolean(),
             'published_at' => Carbon::now(),
