@@ -109,7 +109,7 @@ class LevelAction
         for ($i = 0; $i <= $niv_max; $i++) {
             RailwayLevel::create([
                 'id' => $i,
-                'exp_required' => $xp_start * ($i + config('railway.coef_level')),
+                'exp_required' => $xp_start + ($xp_start * (config('railway.coef_level') * $i)),
                 'railway_level_reward_id' => RailwayLevelReward::all()->random()->id,
             ]);
         }
