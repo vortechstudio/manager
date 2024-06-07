@@ -138,7 +138,7 @@ class EngineTable extends Component
             'location' => $engine['price']['location'],
             'created_at' => $engine['price']['created_at'],
             'updated_at' => $engine['price']['updated_at'],
-            'railway_engine_id' => $engine['price']['railway_engine_id'],
+            'railway_engine_id' => $e->id,
         ]);
     }
 
@@ -151,7 +151,7 @@ class EngineTable extends Component
             'marchandise' => $engine['technical']['marchandise'],
             'nb_marchandise' => $engine['technical']['nb_marchandise'],
             'nb_wagon' => $engine['technical']['nb_wagon'],
-            'railway_engine_id' => $engine['technical']['railway_engine_id'],
+            'railway_engine_id' => $e->id,
             'puissance' => $engine['technical']['puissance'],
         ]);
     }
@@ -164,7 +164,7 @@ class EngineTable extends Component
                 'money' => $engine['shop']['money'],
                 'created_at' => $engine['shop']['created_at'],
                 'updated_at' => $engine['shop']['updated_at'],
-                'railway_engine_id' => $engine['shop']['railway_engine_id'],
+                'railway_engine_id' => $e->id,
             ]);
 
             ShopItem::create([
@@ -179,7 +179,7 @@ class EngineTable extends Component
                 'qte' => 1,
                 'shop_category_id' => 2,
                 'model' => RailwayEngine::class,
-                'model_id' => $engine['id'],
+                'model_id' => $e->id,
             ]);
         }
     }
@@ -188,7 +188,7 @@ class EngineTable extends Component
     {
         foreach ($engine['rentals'] as $rental) {
             $e->rentals()->updateOrCreate(['id' => $engine['id']], [
-                'railway_engine_id' => $rental['railway_engine_id'],
+                'railway_engine_id' => $e->id,
                 'railway_rental_id' => $rental['railway_rental_id'],
                 'created_at' => $rental['created_at'],
                 'updated_at' => $rental['updated_at'],
