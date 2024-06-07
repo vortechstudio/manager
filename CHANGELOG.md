@@ -1,3 +1,22 @@
+# [3.13.0](https://github.com/vortechstudio/manager/compare/v3.12.1...v3.13.0) (2024-06-07)
+
+
+### Bug Fixes
+
+* **General:** corriger la casse de la variable de port de minuscules à majuscules (PORT) ([c949fa2](https://github.com/vortechstudio/manager/commit/c949fa271c87e8a587b0008bbc9a5cf8cfd0ad5f))
+* **Railway Engine:** Corrected price conversion in EngineTable and updated staging environment variables ([218c336](https://github.com/vortechstudio/manager/commit/218c336b79fe3bfcfe63668be75bc2cfe5f14e31))
+
+
+### Features
+
+* **AppServiceProvider:** Set default string length for schema to 191 ([466002e](https://github.com/vortechstudio/manager/commit/466002e4f9848c5ef59aa2a7b1e97ef4bdcf7d03))
+* **Boutique:** Ajout de la gestion des items de shop pour les engines et conversion des prix en tpoints ([5553343](https://github.com/vortechstudio/manager/commit/55533435df443b30fe0954851095b91da896f3d8))
+* **Railway Location:** ajout de la gestion des locations de locomotives et des contrats de location ([20a00bf](https://github.com/vortechstudio/manager/commit/20a00bf6a70d2b3eca1bbbb1788208bbe6fe392c))
+* **Railway Materiel:** Ajout de la gestion de la puissance du moteur dans le contrôleur MaterielController et dans la vue create.blade.php. Mise à jour des modèles UserRailwayEngineAction, UserRailwayEngine et RailwayEngineTechnicalAction pour prendre en compte la puissance. Création de la migration pour ajouter le champ 'puissance' à la table 'railway_engine_technicals'. Calcul de la consommation de puissance dans UserRailwayLigneAction. ([23cbcc3](https://github.com/vortechstudio/manager/commit/23cbcc356ef44177b783a995f024a2ab71af1310))
+* **Railway:** Ajout de la gestion des fluctuations du marché et des couleurs d'usure pour les engines, mise à jour des méthodes de calcul et ajustement des scripts de synchronisation S3 ([747e013](https://github.com/vortechstudio/manager/commit/747e0136738631fe20704b25e3ee05905bcdbc78))
+* **Shop:** Add seeder for shop categories and items in staging environment ([7861778](https://github.com/vortechstudio/manager/commit/786177864f4cae6138a36e8ee778cc8671860426))
+* **UserRailwayAction:** ajout et modification de fonctionnalités majeures ([b44c4be](https://github.com/vortechstudio/manager/commit/b44c4be717cba543a02df80525a55f6435dae1cb))
+
 ## [3.12.1](https://github.com/vortechstudio/manager/compare/v3.12.0...v3.12.1) (2024-05-31)
 
 
