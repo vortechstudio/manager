@@ -52,14 +52,14 @@ class HubController extends Controller
             'equipements' => json_encode((new GareAction)->defineEquipements($request->get('type'))),
         ]);
 
-        $wt = new Weather();
+        /*$wt = new Weather();
         $weather = $wt->getCurrentByCord($gare->latitude, $gare->longitude);
         $gare->weather()->create([
             'weather' => $weather->weather[0]->description,
             'temperature' => $weather->main->temp,
             'latest_update' => now(),
             'railway_gare_id' => $gare->id,
-        ]);
+        ]);*/
 
         if ($request->has('is_hub')) {
             $gare->hub()->create([

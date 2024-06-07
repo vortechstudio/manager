@@ -7,10 +7,12 @@ use App\Actions\Railway\EngineAction;
 use App\Actions\Railway\GareAction;
 use App\Actions\Railway\LevelAction;
 use App\Models\Railway\Config\RailwayRental;
+use App\Models\Railway\Core\ShopItem;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Gare\RailwayGare;
 use App\Models\Railway\Gare\RailwayHub;
 use App\Models\Railway\Ligne\RailwayLigne;
+use App\Services\Models\Railway\Engine\RailwayEnginePriceAction;
 use App\Services\SncfService;
 use Illuminate\Console\Command;
 use RakibDevs\Weather\Weather;
@@ -88,6 +90,12 @@ class SystemCreateCommand extends Command
         $type_motor = select(
             label: 'Quel est le type de motorisation',
             options: ['diesel', 'electrique 1500V', 'electrique 25Kv', 'electrique 1500v/25Kv', 'vapeur', 'hybride', 'autre']
+        );
+
+        $puissance = text(
+            label: 'Quel est la puissance du moteur ?',
+            required: true,
+            hint: 'en Kw'
         );
 
         $type_marchandise = select(
@@ -191,6 +199,21 @@ class SystemCreateCommand extends Command
                 'price' => $price_shop,
                 'railway_engine_id' => $engine->id,
             ]);
+
+            ShopItem::create([
+                'name' => $name,
+                'section' => 'engine',
+                'description' => 'https://wiki.railway-manager.fr/engine/'.slug($name),
+                'currency_type' => 'tpoint',
+                'price' => (new RailwayEnginePriceAction($engine))->convertToTpoint(),
+                'rarity' => 'or',
+                'blocked' => true,
+                'blocked_max' => 1,
+                'qte' => 1,
+                'shop_category_id' => 2,
+                'model' => RailwayEngine::class,
+                'model_id' => $engine->id,
+            ]);
         }
 
         $engine->technical()->create([
@@ -201,6 +224,7 @@ class SystemCreateCommand extends Command
             'nb_marchandise' => $nb_marchandise,
             'nb_wagon' => $nb_wagon,
             'railway_engine_id' => $engine->id,
+            'puissance' => $puissance,
         ]);
 
         foreach (RailwayRental::all() as $rental) {

@@ -54,22 +54,6 @@ class ServiceSeeder extends Seeder
         ]);
         \Storage::makeDirectory("services/$rw->id");
 
-        foreach (User::all() as $user) {
-            $user->services()->create([
-                'status' => true,
-                'user_id' => $user->id,
-                'service_id' => $rw->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'premium' => false,
-            ]);
-
-            $user->logs()->create([
-                'action' => 'Affiliation au service: Railway Manager',
-                'user_id' => $user->id,
-            ]);
-        }
-
         $rw->shop()->create([
             'service_id' => $rw->id,
         ]);

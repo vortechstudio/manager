@@ -7,7 +7,9 @@ use App\Enums\Railway\Config\BonusTypeEnum;
 use App\Models\Railway\Config\RailwayBanque;
 use App\Models\Railway\Config\RailwayBonus;
 use App\Models\Railway\Config\RailwayFluxMarket;
+use App\Models\Railway\Config\RailwayRental;
 use App\Models\Railway\Config\RailwaySetting;
+use App\Models\Railway\Engine\RailwayEngine;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Spatie\LaravelOptions\Options;
@@ -25,7 +27,8 @@ class SystemActionCommand extends Command
             'daily_flux' => $this->dailyFlux(),
             'monthly_bonus' => $this->monthlyBonus(),
             'daily_config' => $this->dailyConfig(),
-            'daily_market_flux' => $this->dailyMarketFlux()
+            'daily_market_flux' => $this->dailyMarketFlux(),
+            'sync_rentals' => $this->syncRentals()
         };
     }
 
@@ -85,7 +88,7 @@ class SystemActionCommand extends Command
             'value' => random_float(1, 2),
         ]);
         RailwaySetting::where('name', 'exchange_tpoint')->first()->update([
-            'value' => random_float(1, 1.2),
+            'value' => random_float(0, 1),
         ]);
 
         (new UserAction())->sendNotificationToAdmin('Configuration quotidienne', 'Les configurations sont mis à jour.');
@@ -102,5 +105,21 @@ class SystemActionCommand extends Command
             'flux_ligne' => Helpers::randomFloat(-5, 5),
             'date' => Carbon::today(),
         ]);
+    }
+
+    private function syncRentals(): void
+    {
+        foreach (RailwayRental::all() as $rental) {
+            foreach (RailwayEngine::all() as $engine) {
+                if (in_array($engine->type_transport->value, json_decode($rental->type, true))) {
+                    \DB::connection('railway')->table('railway_engine_rentals')->insert([
+                        'railway_engine_id' => $engine->id,
+                        'railway_rental_id' => $rental->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                }
+            }
+        }
     }
 }

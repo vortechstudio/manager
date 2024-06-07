@@ -110,23 +110,6 @@ if (! function_exists('generateReference')) {
     }
 }
 
-/**
- * check directory exists and try to create it
- */
-if (! function_exists('ckeckDirectory')) {
-    function checkDirectory($directory): void
-    {
-        try {
-            if (! file_exists(public_path('uploads/'.$directory))) {
-                Storage::disk('public')->makeDirectory('uploads/'.$directory);
-                Storage::disk('public')->setVisibility('uploads/'.$directory, 'public');
-            }
-        } catch (\Exception $e) {
-            exit($e->getMessage());
-        }
-    }
-}
-
 if (! function_exists('isoToEmoji')) {
     function isoToEmoji(string $code)
     {

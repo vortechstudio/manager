@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Pharaonic\Laravel\Menus\Models\Menu;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('menu_head', Menu::with('translations', 'children')->section('manager_head')->get());
             $view->with('version', \VersionBuildAction::getVersionInfo());
         });
+        Schema::defaultStringLength(191);
 
         Gate::define('viewPulse', function (User $user) {
             return $user->admin;

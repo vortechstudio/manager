@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Railway;
 use App\Actions\Railway\EngineAction;
 use App\Http\Controllers\Controller;
 use App\Models\Railway\Config\RailwayRental;
+use App\Models\Railway\Core\ShopItem;
 use App\Models\Railway\Engine\RailwayEngine;
+use App\Services\Models\Railway\Engine\RailwayEnginePriceAction;
 use Illuminate\Http\Request;
 
 class MaterielController extends Controller
@@ -83,6 +85,7 @@ class MaterielController extends Controller
                 'nb_marchandise' => $request->get('nb_marchandise'),
                 'nb_wagon' => $request->get('nb_wagon'),
                 'railway_engine_id' => $engine->id,
+                'puissance' => $request->get('puissance'),
             ]);
 
             $engine->price()->create([
@@ -99,10 +102,25 @@ class MaterielController extends Controller
                     'price' => $request->get('price_shop'),
                     'railway_engine_id' => $engine->id,
                 ]);
+
+                ShopItem::create([
+                    'name' => $engine->name,
+                    'section' => 'engine',
+                    'description' => 'https://wiki.railway-manager.fr/engine/'.slug($engine->name),
+                    'currency_type' => 'tpoint',
+                    'price' => (new RailwayEnginePriceAction($engine->price))->convertToTpoint(),
+                    'rarity' => 'or',
+                    'blocked' => true,
+                    'blocked_max' => 1,
+                    'qte' => 1,
+                    'shop_category_id' => 2,
+                    'model' => RailwayEngine::class,
+                    'model_id' => $engine->id,
+                ]);
             }
 
             foreach (RailwayRental::all() as $rental) {
-                if (in_array(json_decode($rental->type, true), $engine->type_train->value)) {
+                if (in_array($engine->type_train->value, json_decode($rental->type, true))) {
                     $engine->rentals()->attach($rental->id);
                 }
             }

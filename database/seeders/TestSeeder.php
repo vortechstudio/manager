@@ -27,7 +27,6 @@ class TestSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(ShopSeeder::class);
-        $this->call(AchievementSeeder::class);
         $this->call(EngineSeeder::class);
     }
 }
