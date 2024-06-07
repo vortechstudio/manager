@@ -24,9 +24,17 @@
                     @endforeach
                 </select>
             </div>
-            <div class="card-toolbar">
+            <div class="card-toolbar gap-5">
                 <button data-bs-toggle="modal" data-bs-target="#addTrophy" type="button" class="btn btn-sm btn-light">
                     Nouveau trophée
+                </button>
+                <button wire:click="export" class="btn btn-sm btn-light" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="export"><i class="fa-solid fa-file-upload me-3"></i> Exporter</span>
+                    <span wire:loading wire:target="export"><i class="fa-solid fa-spinner fa-spin me-3"></i> Export en cours...</span>
+                </button>
+                <button wire:click="import" class="btn btn-sm btn-light" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="import"><i class="fa-solid fa-file-download me-3"></i> Importer</span>
+                    <span wire:loading wire:target="import"><i class="fa-solid fa-spinner fa-spin me-3"></i> Export en cours...</span>
                 </button>
             </div>
         </div>
