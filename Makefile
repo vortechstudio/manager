@@ -66,3 +66,8 @@ prepare: sync_database
 	git commit -m "style(General): Correction syntaxique du programme"
 	git push origin develop
 
+helpers:
+	php artisan ide-helper:generate
+	php artisan ide-helper:models -M
+	php artisan ide-helper:meta
+
