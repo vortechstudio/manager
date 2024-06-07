@@ -18,7 +18,7 @@ class AchievementAction
     {
         if (Auth::check()) {
             $events->listen('eloquent.created: App\Models\User\Railway\UserRailwayHub', [$this, $this->checkoutHubAction()]);
-            $events->listen('App\Events\Model\User\Railway\m', [$this, $this->welcomeAction()]);
+            $events->listen('App\Events\Model\User\Railway\NewUserEvent', [$this, $this->welcomeAction()]);
             $events->listen('App\Events\Model\User\UserLevelledUp', [$this, $this->level_upAction()]);
         }
     }
@@ -49,7 +49,7 @@ class AchievementAction
     private function checkoutHubAction()
     {
         dd(auth()->user());
-        if (auth()->user()->userRailwayHub()->get()->count() == $this->achievement->goal) {
+        if (\Auth::user()->userRailwayHub()->get()->count() == $this->achievement->goal) {
             \Auth::user()->railway_achievements()->create([
                 'user_id' => auth()->id(),
                 'achievement_id' => $this->achievement->id,
