@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Railway;
 
 use App\Http\Controllers\Controller;
 use App\Models\Railway\Core\Achievement;
+use App\Models\Railway\Core\RailwayAchievement;
 
 class AchievementController extends Controller
 {
@@ -14,7 +15,7 @@ class AchievementController extends Controller
 
     public function show(int $id)
     {
-        $achievement = Achievement::find($id);
+        $achievement = RailwayAchievement::find($id);
 
         return view('railway.achievement.show', [
             'achievement' => $achievement,

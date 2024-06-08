@@ -9,5 +9,6 @@
 
         const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
         document.body.removeChild(modalsBackdrops[0]);
+        Livewire.emit('refreshComponent');
     })
 </script>

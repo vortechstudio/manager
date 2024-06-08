@@ -5,6 +5,8 @@ namespace App\Livewire\Railway\Achievement;
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Core\Achievement;
 use App\Models\Railway\Core\AchieveReward;
+use App\Models\Railway\Core\RailwayAchievement;
+use App\Models\Railway\Core\RailwayAchievementReward;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -62,12 +64,12 @@ class AchievementTable extends Component
     public function save(): void
     {
         try {
-            Achievement::create([
-                'sector' => $this->sector,
-                'level' => $this->level,
+            RailwayAchievement::create([
                 'name' => $this->name,
+                'slug' => \Str::slug($this->name),
                 'description' => $this->description,
-                'action' => $this->action,
+                'type' => $this->sector,
+                'level' => $this->level,
                 'goal' => $this->goal,
             ]);
 
@@ -81,7 +83,7 @@ class AchievementTable extends Component
     public function delete(int $trophy_id): void
     {
         try {
-            Achievement::find($trophy_id)->delete();
+            RailwayAchievement::find($trophy_id)->delete();
 
             $this->alert('success', 'Le trophée à été supprimée !');
         } catch (\Exception $exception) {
@@ -92,8 +94,8 @@ class AchievementTable extends Component
 
     public function export()
     {
-        $achievements = Achievement::all()->toJson();
-        $rewards = AchieveReward::all()->toJson();
+        $achievements = RailwayAchievement::all()->toJson();
+        $rewards = RailwayAchievementReward::all()->toJson();
 
         try {
             $achie = 'achievement.json';
@@ -150,8 +152,8 @@ class AchievementTable extends Component
     public function render()
     {
         return view('livewire.railway.achievement.achievement-table', [
-            'achievements' => Achievement::with('rewards')
-                ->when($this->bySector, fn($query) => $query->where('sector', $this->bySector))
+            'achievements' => RailwayAchievement::with('rewards')
+                ->when($this->bySector, fn($query) => $query->where('type', $this->bySector))
                 ->when($this->byLevel, fn($query) => $query->where('level', $this->byLevel))
                 ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
                 ->orderBy($this->orderField, $this->orderDirection)

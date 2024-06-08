@@ -10,8 +10,8 @@
                                     <img src="{{ $reward->icon }}" alt="">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-bold">{{ $reward->name }}</span>
-                                    <span class="text-muted">{{ $reward->description }}</span>
+                                    <span class="fw-bold">{{ $reward->type->name }}</span>
+                                    <span class="text-muted">{{ $reward->quantity }}</span>
                                 </div>
                             </div>
                             <button class="btn btn-outline btn-icon btn-outline-danger" wire:click="delete({{ $reward->id }})" wire:confirm="Supprimée cette récompense ?" wire:loading.attr="disabled">
