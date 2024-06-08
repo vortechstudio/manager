@@ -3,8 +3,6 @@
 namespace App\Livewire\Railway\Achievement;
 
 use App\Actions\ErrorDispatchHandle;
-use App\Models\Railway\Core\Achievement;
-use App\Models\Railway\Core\AchieveReward;
 use App\Models\Railway\Core\RailwayAchievement;
 use App\Models\Railway\Core\RailwayAchievementReward;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -92,7 +90,7 @@ class AchievementTable extends Component
         }
     }
 
-    public function export()
+    public function export(): void
     {
         $achievements = RailwayAchievement::all()->toJson();
         $rewards = RailwayAchievementReward::all()->toJson();
@@ -100,8 +98,8 @@ class AchievementTable extends Component
         try {
             $achie = 'achievement.json';
             $rew = 'rewards.json';
-            \Storage::put('data/' . $achie, $achievements);
-            \Storage::put('data/' . $rew, $rewards);
+            \Storage::put('data/'.$achie, $achievements);
+            \Storage::put('data/'.$rew, $rewards);
             $this->alert('success', 'Export Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
@@ -109,14 +107,14 @@ class AchievementTable extends Component
         }
     }
 
-    public function import()
+    public function import(): void
     {
         try {
             $data_achievement = json_decode(\Storage::get('data/achievement.json'), true);
             $data_reward = json_decode(\Storage::get('data/rewards.json'), true);
 
             foreach ($data_achievement as $item) {
-                RailwayAchievement::updateOrCreate(['id' => $item['id']],[
+                RailwayAchievement::updateOrCreate(['id' => $item['id']], [
                     'id' => $item['id'],
                     'type' => $item['type'],
                     'level' => $item['level'],
@@ -130,7 +128,7 @@ class AchievementTable extends Component
             }
 
             foreach ($data_reward as $item) {
-                RailwayAchievementReward::updateOrCreate(['id' => $item['id']],[
+                RailwayAchievementReward::updateOrCreate(['id' => $item['id']], [
                     'id' => $item['id'],
                     'type' => $item['type'],
                     'quantity' => $item['quantity'],
@@ -152,9 +150,9 @@ class AchievementTable extends Component
     {
         return view('livewire.railway.achievement.achievement-table', [
             'achievements' => RailwayAchievement::with('rewards')
-                ->when($this->bySector, fn($query) => $query->where('type', $this->bySector))
-                ->when($this->byLevel, fn($query) => $query->where('level', $this->byLevel))
-                ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
+                ->when($this->bySector, fn ($query) => $query->where('type', $this->bySector))
+                ->when($this->byLevel, fn ($query) => $query->where('level', $this->byLevel))
+                ->when($this->search, fn ($query) => $query->where('name', 'like', '%'.$this->search.'%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
 

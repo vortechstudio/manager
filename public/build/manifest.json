@@ -1,6 +1,6 @@
 {
-  "_axios-4d564c32.js": {
-    "file": "assets/axios-4d564c32.js"
+  "_axios-9cbf0d09.js": {
+    "file": "assets/axios-9cbf0d09.js"
   },
   "_laravel-echo-55c64d0d.js": {
     "file": "assets/laravel-echo-55c64d0d.js"
@@ -14,9 +14,9 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-e51bf6ea.js",
+    "file": "assets/app-cb793913.js",
     "imports": [
-      "_axios-4d564c32.js",
+      "_axios-9cbf0d09.js",
       "_laravel-echo-55c64d0d.js",
       "_pusher-js-403c4ed0.js"
     ],

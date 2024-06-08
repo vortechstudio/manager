@@ -26,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserLevelledUp::class => [
             UserLevelledUpListener::class,
-        ]
+        ],
     ];
 
     /**

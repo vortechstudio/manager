@@ -3,7 +3,6 @@
 namespace App\Livewire\Railway\Achievement;
 
 use App\Actions\ErrorDispatchHandle;
-use App\Models\Railway\Core\Achievement;
 use App\Models\Railway\Core\RailwayAchievement;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
