@@ -76,8 +76,8 @@
                                     @if($trophy->rewards->count() > 0)
                                         @if($trophy->rewards->count() == 1)
                                             <div class="symbol symbol-50px">
-                                                <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type_reward->value.'.png') }}" alt="">
-                                                <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->amount_reward }}</span>
+                                                <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type->value.'.png') }}" alt="">
+                                                <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->quantity }}</span>
                                             </div>
                                         @else
                                             <div class="symbol-group symbol-hover">
@@ -132,7 +132,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-12 col-lg-6 mb-5">
-                                <div class="mb-10" >
+                                <div class="mb-10" wire:ignore>
                                     <label for="sector" class="form-label required">Type de Trophée</label>
                                     <select wire:model="sector" data-control="select2" name="sector" id="sector" class="form-select" required>
                                         <option>--- Sélectionner un type de trophée ---</option>
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6 mb-5">
-                                <div class="mb-10">
+                                <div class="mb-10" wire:ignore>
                                     <label for="level" class="form-label required">Niveau du trophée</label>
                                     <select wire:model="level" name="level" data-control="select2" id="level" class="form-select" required>
                                         <option>--- Sélectionner un niveau ---</option>

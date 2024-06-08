@@ -112,33 +112,32 @@ class AchievementTable extends Component
     public function import()
     {
         try {
-            $data = json_decode(\Storage::get('data/achievement.json'), true);
+            $data_achievement = json_decode(\Storage::get('data/achievement.json'), true);
+            $data_reward = json_decode(\Storage::get('data/rewards.json'), true);
 
-            foreach ($data as $item) {
-                $achievement = Achievement::create([
+            foreach ($data_achievement as $item) {
+                RailwayAchievement::updateOrCreate(['id' => $item['id']],[
                     'id' => $item['id'],
-                    'sector' => $item['sector'],
+                    'type' => $item['type'],
                     'level' => $item['level'],
                     'name' => $item['name'],
+                    'slug' => $item['slug'],
                     'description' => $item['description'],
-                    'action' => $item['action'],
                     'goal' => $item['goal'],
+                    'created_at' => $item['created_at'],
+                    'updated_at' => $item['updated_at'],
                 ]);
+            }
 
-                foreach ($item['rewards'] as $reward) {
-                    $achieveReward = AchieveReward::create([
-                        'id' => $reward['id'],
-                        'name' => $reward['name'],
-                        'description' => $reward['description'],
-                        'type_reward' => $reward['type_reward'],
-                        'amount_reward' => $reward['amount_reward'],
-                    ]);
-
-                    \DB::connection('railway')->table('achievements_rewards')->insert([
-                        'achievement_id' => $achievement->id,
-                        'reward_id' => $achieveReward->id,
-                    ]);
-                }
+            foreach ($data_reward as $item) {
+                RailwayAchievementReward::updateOrCreate(['id' => $item['id']],[
+                    'id' => $item['id'],
+                    'type' => $item['type'],
+                    'quantity' => $item['quantity'],
+                    'railway_achievement_id' => $item['railway_achievement_id'],
+                    'created_at' => $item['created_at'],
+                    'updated_at' => $item['updated_at'],
+                ]);
             }
 
             $this->alert('success', 'Import Effectuer !');
