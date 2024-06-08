@@ -13,7 +13,7 @@
                 </select>
                 <select wire:model.live="bySector" class="form-select border-gray-200 h-40px bg-body ps-13 fs-7 w-250px me-3" id="bySector">
                     <option value="">-- Selectionner le secteur ---</option>
-                    @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\AchievementSectorEnum::class)->toArray() as $type)
+                    @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\AchievementTypeEnum::class)->toArray() as $type)
                         <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
                     @endforeach
                 </select>
@@ -24,9 +24,17 @@
                     @endforeach
                 </select>
             </div>
-            <div class="card-toolbar">
+            <div class="card-toolbar gap-5">
                 <button data-bs-toggle="modal" data-bs-target="#addTrophy" type="button" class="btn btn-sm btn-light">
                     Nouveau trophée
+                </button>
+                <button wire:click="export" class="btn btn-sm btn-light" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="export"><i class="fa-solid fa-file-upload me-3"></i> Exporter</span>
+                    <span wire:loading wire:target="export"><i class="fa-solid fa-spinner fa-spin me-3"></i> Export en cours...</span>
+                </button>
+                <button wire:click="import" class="btn btn-sm btn-light" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="import"><i class="fa-solid fa-file-download me-3"></i> Importer</span>
+                    <span wire:loading wire:target="import"><i class="fa-solid fa-spinner fa-spin me-3"></i> Export en cours...</span>
                 </button>
             </div>
         </div>
@@ -53,7 +61,7 @@
                                     <i class="fa-solid fa-exclamation-circle text-danger fs-2 animate__animated animate__flash animate__infinite" data-bs-toggle="tooltip" data-bs-title="La fonction n'existe pas dans le code"></i>
                                 @endif
                             </td>
-                            <td>{{ Str::ucfirst($trophy->sector->value) }}</td>
+                            <td>{{ Str::ucfirst($trophy->type->value) }}</td>
                             <td>
                                 <div class="d-flex flex-row justify-content-between align-items-center">
                                     <div class="d-flex flex-row align-items-center">
@@ -68,8 +76,8 @@
                                     @if($trophy->rewards->count() > 0)
                                         @if($trophy->rewards->count() == 1)
                                             <div class="symbol symbol-50px">
-                                                <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type_reward->value.'.png') }}" alt="">
-                                                <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->amount_reward }}</span>
+                                                <img src="{{ Storage::url('icons/railway/'.$trophy->rewards()->first()->type->value.'.png') }}" alt="">
+                                                <span class="symbol-badge badge badge-sm badge-primary top-100 start-100">{{ $trophy->rewards()->first()->quantity }}</span>
                                             </div>
                                         @else
                                             <div class="symbol-group symbol-hover">
@@ -85,7 +93,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="badge badge-circle badge-primary">{{ \App\Models\User\Railway\UserRailwayAchievement::where('achievement_id', $trophy->id)->count() }}</span>
+                                <span class="badge badge-circle badge-primary">{{ \App\Models\User\Railway\UserRailwayAchievement::where('railway_achievement_id', $trophy->id)->count() }}</span>
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
@@ -124,20 +132,20 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-12 col-lg-6 mb-5">
-                                <div class="mb-10">
+                                <div class="mb-10" wire:ignore>
                                     <label for="sector" class="form-label required">Type de Trophée</label>
-                                    <select wire:model="sector" name="sector" id="sector" class="form-select" required>
+                                    <select wire:model="sector" data-control="select2" name="sector" id="sector" class="form-select" required>
                                         <option>--- Sélectionner un type de trophée ---</option>
-                                        @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\AchievementSectorEnum::class)->toArray() as $sector)
+                                        @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\AchievementTypeEnum::class)->toArray() as $sector)
                                             <option value="{{ $sector['value'] }}">{{ $sector['label'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6 mb-5">
-                                <div class="mb-10">
+                                <div class="mb-10" wire:ignore>
                                     <label for="level" class="form-label required">Niveau du trophée</label>
-                                    <select wire:model="level" name="level" id="level" class="form-select" required>
+                                    <select wire:model="level" name="level" data-control="select2" id="level" class="form-select" required>
                                         <option>--- Sélectionner un niveau ---</option>
                                         @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Core\AchievementLevelEnum::class)->toArray() as $level)
                                             <option value="{{ $level['value'] }}">{{ $level['label'] }}</option>
@@ -154,13 +162,6 @@
                             name="description"
                             label="Description du trophée" />
                         <div class="row">
-                            <div class="col-sm-12 col-lg-6 mb-5">
-                                <x-form.input
-                                    name="action"
-                                    label="Action"
-                                    required="true"
-                                    hint="Cette action est le déclencheur de déblocage du trophée par le joueur" />
-                            </div>
                             <div class="col-sm-12 col-lg-6 mb-5">
                                 <x-form.input
                                     type="number"
@@ -184,6 +185,7 @@
     </div>
 </div>
 
+<x-script.pluginForm />
 @push('scripts')
     <x-base.close-modal />
 @endpush

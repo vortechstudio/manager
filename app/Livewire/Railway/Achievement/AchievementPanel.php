@@ -5,6 +5,8 @@ namespace App\Livewire\Railway\Achievement;
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Core\Achievement;
 use App\Models\Railway\Core\AchieveReward;
+use App\Models\Railway\Core\RailwayAchievement;
+use App\Models\Railway\Core\RailwayAchievementReward;
 use App\Models\User\Railway\UserRailwayAchievement;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -13,13 +15,9 @@ class AchievementPanel extends Component
 {
     use LivewireAlert;
 
-    public Achievement $achievement;
+    public RailwayAchievement $achievement;
 
     //Form
-    public string $name = '';
-
-    public string $description = '';
-
     public string $type_reward = '';
 
     public int $amount_reward = 0;
@@ -30,21 +28,23 @@ class AchievementPanel extends Component
     {
         try {
             if ($this->selectedReward != 0) {
-                $reward = AchieveReward::find($this->selectedReward);
-                if (! $this->achievement->rewards()->wherePivot('reward_id', $reward->id)->exists()) {
-                    $this->achievement->rewards()->attach($reward);
+                $reward = RailwayAchievementReward::find($this->selectedReward);
+                if (! $this->achievement->rewards()->where('id', $reward->id)->exists()) {
+                    $this->achievement->rewards()->create([
+                        'type' => $reward->type->value,
+                        'quantity' => $reward->quantity,
+                        'railway_achievement_id' => $reward->railway_achievement_id,
+                    ]);
                     $this->alert('success', 'Récompense créer !');
                 } else {
                     $this->alert('warning', 'Cette récompense est déjà existante pour ce trophée !');
                 }
             } else {
-                $reward = AchieveReward::create([
-                    'name' => $this->name,
-                    'description' => $this->description,
-                    'type_reward' => $this->type_reward,
-                    'amount_reward' => $this->amount_reward,
+                RailwayAchievementReward::create([
+                    'type' => $this->type_reward,
+                    'quantity' => $this->amount_reward,
+                    'railway_achievement_id' => $this->achievement->id
                 ]);
-                $this->achievement->rewards()->attach($reward);
                 $this->alert('success', 'Récompense créer !');
             }
 
@@ -59,7 +59,7 @@ class AchievementPanel extends Component
     {
         //dd(UserRailwayAchievement::where('achievement_id', $this->achievement->id)->get());
         return view('livewire.railway.achievement.achievement-panel', [
-            'users' => UserRailwayAchievement::where('achievement_id', $this->achievement->id),
+            'users' => UserRailwayAchievement::where('railway_achievement_id', $this->achievement->id),
         ]);
     }
 }

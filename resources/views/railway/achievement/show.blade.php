@@ -15,12 +15,12 @@
                 <img src="{{ $achievement->icon }}" class="card-img-top" alt="">
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between align-items-center border-2 border-bottom-2 border-top-0 border-left-0 border-right-0 border-gray-400 p-5 mb-5">
-                        <span class="fw-bold">Secteur</span>
+                        <span class="fw-bold">Type</span>
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-30px me-3">
-                                <img src="{{ $achievement->icon_sector }}" alt="">
+                                <img src="{{ $achievement->icon_type }}" alt="">
                             </div>
-                            <span>{{ $achievement->sector }}</span>
+                            <span>{{ $achievement->type->name }}</span>
                         </div>
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center border-2 border-bottom-2 border-top-0 border-left-0 border-right-0 border-gray-400 p-5 mb-5">
@@ -29,13 +29,13 @@
                             <div class="symbol symbol-30px me-3">
                                 <img src="{{ $achievement->icon }}" alt="">
                             </div>
-                            <span>{{ $achievement->level }}</span>
+                            <span>{{ $achievement->level->name }}</span>
                         </div>
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-5 mb-5">
                         <span class="fw-bold">Action</span>
                         <div class="d-flex align-items-center">
-                            <span>{{ $achievement->action }}</span>
+                            <span>{{ $achievement->slug }}</span>
                             <span class="badge badge-primary ms-3">{{ $achievement->goal }}</span>
                         </div>
                     </div>
