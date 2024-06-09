@@ -85,11 +85,10 @@
                                     name="blocked_max"
                                     label="Nombre d'achat possible"/>
                             @endif
-                            <x-form.input
-                                type="date"
-                                name="disponibility_end_at"
-                                label="Fin de disponibilité"
-                                hint="Supprimer de la boutique à la fin de la date" />
+                            <div class="mb-10">
+                                <label class="form-label">Disponible jusqu'au</label>
+                                <input type="text" class="form-control" data-control="datetime" id="disponibility_end_at" name="disponibility_end_at" wire:model="disponibility_end_at" />
+                            </div>
 
                             <div class="form-check form-switch form-check-custom form-check-solid mb-5">
                                 <input class="form-check-input" wire:click="$toggle('recursive')" wire:model="recursive" name="recursive" id="recursive" type="checkbox" value="true" />
@@ -136,13 +135,21 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" wire:loading.attr="disabled" wire:target="{{ $item ? 'editing' : 'save' }}">
+                        <span wire:loading.class="d-none" wire:target="{{ $item ? 'editing' : 'save' }}">Sauvegarder</span>
+                        <span class="d-none" wire:loading.class.remove="d-none" wire:target="{{ $item ? 'editing' : 'save' }}">
+                            <div class="spinner-grow me-2" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                            Chargement...
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
+<x-script.pluginForm />
 @push('scripts')
     <x-base.close-modal />
 @endpush

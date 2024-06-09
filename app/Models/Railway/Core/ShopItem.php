@@ -31,6 +31,7 @@ class ShopItem extends Model
 
     protected $appends = [
         'rarity_bg_color',
+        'rarity_border_color',
         'image',
         'price_format',
         'has_checkout',
@@ -93,9 +94,20 @@ class ShopItem extends Model
         };
     }
 
+    public function getRarityBorderColorAttribute()
+    {
+        return match ($this->rarity->value) {
+            'base' => 'border-gray-400',
+            'bronze' => 'border-brown-400',
+            'argent' => 'border-gray-600',
+            'or' => 'border-yellow-600',
+            'legendary' => 'border-orange-800'
+        };
+    }
+
     public function getPriceFormatAttribute()
     {
-        return match ($this->currency_type) {
+        return match ($this->currency_type->value) {
             'argent' => '<img src="'.\Storage::url('icons/railway/argent.png').'" alt="" class="w-30px me-2" />'.number_format($this->price, 0, ',', ' '),
             'tpoint' => '<img src="'.\Storage::url('icons/railway/tpoint.png').'" alt="" class="w-30px me-2" />'.number_format($this->price, 0, ',', ' '),
             'reel' => Helpers::eur($this->price)
