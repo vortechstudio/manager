@@ -2,8 +2,6 @@
 source ./.env
 
 DB_NAME="railway_beta"
-DB_USER="debian"
-DB_PASS="rbU89a-4"
 
 php artisan service:locked
 php artisan down
@@ -14,7 +12,8 @@ git pull origin master
 composer install --prefer-dist --no-interaction
 npm install
 
-mysql -u "$DB_USER" -p"$DB_PASS" -Nse 'show tables' "$DB_NAME" | while read table; do mysql -u "$DB_USER" -p"$DB_PASS" -e "drop table $table" "$DB_NAME"; done
+mysql --defaults-extra-file=/etc/my.cnf -Nse 'SET FOREIGN_KEY_CHECKS = 0; SHOW TABLES' "$DB_NAME" | while read table; do mysql --defaults-extra-file=/etc/my.cnf -e "DROP TABLE IF EXISTS $table" "$DB_NAME"; done
+mysql --defaults-extra-file=/etc/my.cnf -Nse 'SET FOREIGN_KEY_CHECKS = 1;' "$DB_NAME"
 
 php artisan migrate:fresh --seed --force
 
