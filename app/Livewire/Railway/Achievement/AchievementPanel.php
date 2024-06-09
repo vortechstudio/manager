@@ -4,7 +4,6 @@ namespace App\Livewire\Railway\Achievement;
 
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Core\Achievement;
-use App\Models\Railway\Core\AchieveReward;
 use App\Models\Railway\Core\RailwayAchievement;
 use App\Models\Railway\Core\RailwayAchievementReward;
 use App\Models\User\Railway\UserRailwayAchievement;
@@ -43,7 +42,7 @@ class AchievementPanel extends Component
                 RailwayAchievementReward::create([
                     'type' => $this->type_reward,
                     'quantity' => $this->amount_reward,
-                    'railway_achievement_id' => $this->achievement->id
+                    'railway_achievement_id' => $this->achievement->id,
                 ]);
                 $this->alert('success', 'Récompense créer !');
             }

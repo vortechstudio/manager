@@ -34,33 +34,32 @@ sync_database:
 	cp -r app/Services/Models ../secure.vortechstudio/app/Services
 
 sync_s3_beta:
-	rsync -avz --info=progress2 '../s3.vortechstudio/blog' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/cercles' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/data' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/engines' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/events' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/icons' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/logos' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/other' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/pwa' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
-	rsync -avz --info=progress2 '../s3.vortechstudio/services' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/blog' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/cercles' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/data' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/engines' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/events' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/icons' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/logos' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/other' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/pwa' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
+	rsync -avz --info=progress2 '../s3.vortechstudio/services' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.ovh/
 
 sync_s3:
-	rsync -az --info=progress2 '../s3.vortechstudio/blog' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/cercles' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/data' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/engines' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/events' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/icons' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/logos' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/other' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/pwa' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
-	rsync -az --info=progress2 '../s3.vortechstudio/services' -e 'ssh -p 22' freebox@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/blog' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/cercles' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/data' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/engines' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/events' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/icons' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/logos' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/other' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/pwa' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
+	rsync -az --info=progress2 '../s3.vortechstudio/services' -e 'ssh -p 5678' debian@82.64.133.182:/www/wwwroot/s3.vortechstudio.fr/
 
 prepare: sync_database
 	npm run build
 	./vendor/bin/pint app/
-	./vendor/bin/rector process app
 	make sync_database
 	git add .
 	git commit -m "style(General): Correction syntaxique du programme"
