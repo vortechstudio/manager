@@ -2,6 +2,10 @@
 
 namespace App\Models\Railway\Core;
 
+use App\Enums\Config\Shop\ShopItemCurrencyTypeEnum;
+use App\Enums\Config\Shop\ShopItemRarityEnum;
+use App\Enums\Config\Shop\ShopItemRecursivityEnum;
+use App\Enums\Config\Shop\ShopItemSectionEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +23,10 @@ class ShopItem extends Model
 
     protected $casts = [
         'disponibility_end_at' => 'datetime',
+        'section' => ShopItemSectionEnum::class,
+        'currency_type' => ShopItemCurrencyTypeEnum::class,
+        'rarity' => ShopItemRarityEnum::class,
+        'recursive_periodicity' => ShopItemRecursivityEnum::class,
     ];
 
     protected $appends = [
@@ -76,7 +84,7 @@ class ShopItem extends Model
 
     public function getRarityBgColorAttribute()
     {
-        return match ($this->rarity) {
+        return match ($this->rarity->value) {
             'base' => 'bg-gray-200',
             'bronze' => 'bg-brown-200',
             'argent' => 'bg-gray-400',
