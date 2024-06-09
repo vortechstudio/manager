@@ -34,6 +34,9 @@
                 <button data-bs-toggle="modal" data-bs-target="#addItem" type="button" class="btn btn-sm btn-light">
                     Nouveau Produit
                 </button>
+                <button data-bs-toggle="modal" data-bs-target="#addPackage" type="button" class="btn btn-sm btn-light">
+                    Nouveau Package
+                </button>
                 <button wire:click="export" class="btn btn-sm btn-light" wire:loading.attr="disabled">
                     <span wire:loading.remove wire:target="export"><i class="fa-solid fa-file-upload me-3"></i> Exporter</span>
                     <span wire:loading wire:target="export"><i class="fa-solid fa-spinner fa-spin me-3"></i> Export en cours...</span>
@@ -45,22 +48,23 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
-                <div class="table-loading-message">
-                    <span class="spinner-border spinner-border-sm align-middle me-2"></span> Chargement...
-                </div>
-                <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
-                    <thead>
-                    <tr class="fw-bold fs-3">
-                        <th></th>
-                        <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
-                        <x-base.table-header :direction="$orderDirection" name="sector" :field="$orderField">Secteur</x-base.table-header>
-                        <x-base.table-header :direction="$orderDirection" name="rarity" :field="$orderField">Rareté</x-base.table-header>
-                        <x-base.table-header :direction="$orderDirection" name="price" :field="$orderField">Tarif</x-base.table-header>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+            <div class="mb-10">
+                <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
+                    <div class="table-loading-message">
+                        <span class="spinner-border spinner-border-sm align-middle me-2"></span> Chargement...
+                    </div>
+                    <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
+                        <thead>
+                        <tr class="fw-bold fs-3">
+                            <th></th>
+                            <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
+                            <x-base.table-header :direction="$orderDirection" name="sector" :field="$orderField">Secteur</x-base.table-header>
+                            <x-base.table-header :direction="$orderDirection" name="rarity" :field="$orderField">Rareté</x-base.table-header>
+                            <x-base.table-header :direction="$orderDirection" name="price" :field="$orderField">Tarif</x-base.table-header>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         @if(count($items) == 0)
                             <tr>
                                 <td colspan="6">
@@ -96,15 +100,71 @@
                                 </tr>
                             @endforeach
                         @endif
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                {{ $items->links() }}
+            </div>
+            <div class="mb-10">
+                <div class="table-responsive" wire:loading.class="opacity-50 bg-grey-700 table-loading">
+                    <div class="table-loading-message">
+                        <span class="spinner-border spinner-border-sm align-middle me-2"></span> Chargement...
+                    </div>
+                    <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
+                        <thead>
+                        <tr class="fw-bold fs-3">
+                            <th></th>
+                            <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
+                            <x-base.table-header :direction="$orderDirection" name="price" :field="$orderField">Tarif</x-base.table-header>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($category->packages) == 0)
+                            <tr>
+                                <td colspan="6">
+                                    <x-base.is-null text="Aucun articles pour cette catégorie" />
+                                </td>
+                            </tr>
+                        @else
+                            @foreach($category->packages()->paginate($perPage) as $item)
+                                <tr>
+                                    <td>
+                                        <div class="symbol-group symbol-hover">
+                                            @foreach($item->items as $product)
+                                                <div class="symbol symbol-circle symbol-50px">
+                                                    <img src="{{ $product->image }}" class="img-fluid" alt="">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ number_format($item->price, 2, ',', ' ') }} {{ $item->currency_type->value }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ route('railway.shop.showProduct', [$category->id, $item->id]) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir le produit">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <a wire:click="delete({{ $item->id }})" class="btn btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Supprimer le produit">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+                {{ $category->packages()->paginate($perPage)->links() }}
             </div>
         </div>
         <div class="card-footer">
-            {{ $items->links() }}
+
         </div>
     </div>
     @livewire("railway.shop.shop-item-form", ["category" => $category])
+    @livewire("railway.shop.shop-package-form", ["category" => $category])
 </div>
 
 <x-script.pluginForm />
