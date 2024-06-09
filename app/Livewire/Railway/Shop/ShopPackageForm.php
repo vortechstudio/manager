@@ -12,15 +12,20 @@ use Livewire\Component;
 class ShopPackageForm extends Component
 {
     use LivewireAlert;
-    public ShopCategory $category;
-    public $products;
 
+    public ShopCategory $category;
+
+    public $products;
 
     //Form
     public array $selectedProducts = [];
+
     public string $name = '';
+
     public string $description = '';
+
     public string $currency_type = '';
+
     public int|float $price = 0;
 
     public function mount()
@@ -46,8 +51,8 @@ class ShopPackageForm extends Component
             }
 
             $this->dispatch('closeModal', 'addPackage');
-            $this->alert('success', "Le package à bien été créer");
-        }catch (\Exception $exception) {
+            $this->alert('success', 'Le package à bien été créer');
+        } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu !');
         }

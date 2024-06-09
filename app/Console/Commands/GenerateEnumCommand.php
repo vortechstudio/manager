@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Finder\Finder;
 
 class GenerateEnumCommand extends Command
 {
@@ -25,7 +24,7 @@ class GenerateEnumCommand extends Command
 
         foreach ($models as $model) {
             $modelBaseName = class_basename($model);
-            $enumClassContent .= "    case " . strtoupper($modelBaseName) . " = '" . $model ."';\n";
+            $enumClassContent .= '    case '.strtoupper($modelBaseName)." = '".$model."';\n";
         }
 
         $enumClassContent .= "}\n";
@@ -44,13 +43,13 @@ class GenerateEnumCommand extends Command
             if (in_array($file, ['.', '..'])) {
                 continue;
             }
-            $filePath = $path . '/' . $file;
+            $filePath = $path.'/'.$file;
             if (is_dir($filePath)) {
                 $classes = array_merge($classes, $this->getModelClasses($filePath));
             }
 
             if (is_file($filePath) && pathinfo($filePath, PATHINFO_EXTENSION) == 'php') {
-                $classes[] = 'App\\Models\\' . str_replace('/', '\\', Str::before(Str::after($filePath, app_path('Models/')), '.php'));
+                $classes[] = 'App\\Models\\'.str_replace('/', '\\', Str::before(Str::after($filePath, app_path('Models/')), '.php'));
             }
         }
 

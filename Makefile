@@ -60,7 +60,6 @@ sync_s3:
 prepare: sync_database
 	npm run build
 	./vendor/bin/pint app/
-	./vendor/bin/rector process app
 	make sync_database
 	git add .
 	git commit -m "style(General): Correction syntaxique du programme"

@@ -14,16 +14,24 @@ use Livewire\WithPagination;
 class ShopItemTable extends Component
 {
     use LivewireAlert, WithPagination;
+
     public ShopCategory $category;
 
     // filter
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'asc';
+
     public int $perPage = 10;
+
     public string $bySection = '';
+
     public string $byCurrencyType = '';
+
     public string $byRarity = '';
+
     public int $item_id;
 
     protected $queryString = [
@@ -71,14 +79,14 @@ class ShopItemTable extends Component
     {
         try {
             $item = ShopItem::find($this->item_id);
-            if($item->is_packager) {
+            if ($item->is_packager) {
                 $this->alert('error', "Impossible de supprimer ce produit car il fait partie d'un package", ['toast' => false]);
             }
 
-            if(\Storage::exists("icons/railway/shop/items/".\Str::slug($item->name).'.png')) {
-                \Storage::delete("icons/railway/shop/items/" . \Str::slug($item->name) . '.png');
+            if (\Storage::exists('icons/railway/shop/items/'.\Str::slug($item->name).'.png')) {
+                \Storage::delete('icons/railway/shop/items/'.\Str::slug($item->name).'.png');
             } else {
-                \Storage::delete("icons/railway/shop/items/" . \Str::slug($item->name) . '.gif');
+                \Storage::delete('icons/railway/shop/items/'.\Str::slug($item->name).'.gif');
             }
             $item->delete();
         } catch (\Exception $exception) {
@@ -90,10 +98,10 @@ class ShopItemTable extends Component
     {
         return view('livewire.railway.shop.shop-item-table', [
             'items' => ShopItem::where('shop_category_id', $this->category->id)
-                ->when($this->search, fn(Builder $query) => $query->where('name', 'like', '%' . $this->search . '%'))
-                ->when($this->bySection, fn(Builder $query) => $query->where('section', $this->bySection))
-                ->when($this->byCurrencyType, fn(Builder $query) => $query->where('currency_type', $this->byCurrencyType))
-                ->when($this->byRarity, fn(Builder $query) => $query->where('rarity', $this->byRarity))
+                ->when($this->search, fn (Builder $query) => $query->where('name', 'like', '%'.$this->search.'%'))
+                ->when($this->bySection, fn (Builder $query) => $query->where('section', $this->bySection))
+                ->when($this->byCurrencyType, fn (Builder $query) => $query->where('currency_type', $this->byCurrencyType))
+                ->when($this->byRarity, fn (Builder $query) => $query->where('rarity', $this->byRarity))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

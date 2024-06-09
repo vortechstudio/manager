@@ -4,7 +4,6 @@ namespace App\Livewire\Railway\Shop;
 
 use App\Models\Config\Service;
 use App\Models\Config\Shop;
-use App\Models\Railway\Core\ShopCategory;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;

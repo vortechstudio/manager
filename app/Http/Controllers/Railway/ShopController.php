@@ -16,12 +16,14 @@ class ShopController extends Controller
     public function category(int $category_id)
     {
         $category = ShopCategory::with('items', 'packages')->find($category_id);
+
         return view('railway.shop.category', ['category' => $category]);
     }
 
     public function showProduct(int $category_id, int $product_id)
     {
         $product = ShopItem::with('model', 'shopCategory', 'packages')->find($product_id);
+
         return view('railway.shop.product', ['product' => $product]);
     }
 }

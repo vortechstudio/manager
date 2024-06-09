@@ -12,26 +12,44 @@ use Livewire\WithFileUploads;
 class ShopItemForm extends Component
 {
     use LivewireAlert, WithFileUploads;
+
     public ShopItem $item;
+
     public ShopCategory $category;
 
     // form
     public string $name = '';
+
     public string $section = '';
+
     public string $description = '';
+
     public string $currency_type = '';
+
     public string $rarity = '';
+
     public ?string $model = '';
+
     public ?string $recursive_periodicity = null;
+
     public ?string $disponibility_end_at = null;
+
     public ?string $stripe_token = '';
+
     public float|int $price = 0;
+
     public bool $blocked = false;
+
     public bool $recursive = false;
+
     public bool $is_packager = false;
+
     public ?int $blocked_max = 0;
+
     public int $qte = 1;
+
     public ?int $model_id = 0;
+
     public $icon;
 
     public function mount()
@@ -78,14 +96,14 @@ class ShopItemForm extends Component
                 'model_id' => $this->model_id,
                 'model' => $this->model,
             ]);
-            if(isset($this->icon)) {
+            if (isset($this->icon)) {
                 $this->uploadedFile();
             }
             $this->dispatch('closeModal', 'addItem');
-            $this->alert('success', "Le produit à bien été edité !");
+            $this->alert('success', 'Le produit à bien été edité !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
-            $this->alert('error', "Une erreur à eu lieu !");
+            $this->alert('error', 'Une erreur à eu lieu !');
         }
     }
 
@@ -111,14 +129,14 @@ class ShopItemForm extends Component
                 'model_id' => $this->model_id,
                 'model' => $this->model,
             ]);
-            if(isset($this->icon)) {
+            if (isset($this->icon)) {
                 $this->uploadedFile();
             }
             $this->dispatch('closeModal', 'addItem');
-            $this->alert('success', "Le produit à bien été ajouté !");
+            $this->alert('success', 'Le produit à bien été ajouté !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
-            $this->alert('error', "Une erreur à eu lieu !");
+            $this->alert('error', 'Une erreur à eu lieu !');
         }
     }
 
@@ -129,7 +147,7 @@ class ShopItemForm extends Component
                 path: 'icons/railway/shop/items/',
                 name: \Str::slug($this->name).'.'.$this->icon->getClientOriginalExtension(),
             );
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', "Impossible d'ajouter l'image !");
         }

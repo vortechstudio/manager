@@ -8,11 +8,6 @@
   "_pusher-js-403c4ed0.js": {
     "file": "assets/pusher-js-403c4ed0.js"
   },
-  "resources/css/app.css": {
-    "file": "assets/app-de2bc52e.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
-  },
   "resources/js/app.js": {
     "file": "assets/app-cb793913.js",
     "imports": [
@@ -22,5 +17,10 @@
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-7fb11197.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
   }
 }
