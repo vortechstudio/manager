@@ -1,3 +1,19 @@
+# [3.14.0](https://github.com/vortechstudio/manager/compare/v3.13.0...v3.14.0) (2024-06-10)
+
+
+### Features
+
+* **Database:** Suppression des tables liées aux fonctionnalités du système de chemin de fer ([c9a84a2](https://github.com/vortechstudio/manager/commit/c9a84a27842326f1025d682b164396919fae8fa5))
+* **Railway Boutique:** Ajoute de nouvelles fonctionnalités pour le Shop, améliore les modèles et ajoute de nouvelles vues. Met à jour les routes. ([784b34d](https://github.com/vortechstudio/manager/commit/784b34dd22b6b913263f9d650493d0e58c4674ee))
+* **Railway Engine:** Ajoute migration et modifie modèle pour gérer montant et autres data des technicentres ([31bb507](https://github.com/vortechstudio/manager/commit/31bb50753f9a013ba6cf0d9884b1fe50b1e3434f))
+* **Railway Shop:** Ajout du formulaire d'ajout de packages et intégration à la vue shop-item-table ([f8b2842](https://github.com/vortechstudio/manager/commit/f8b2842a01ba760f621ed23b8ce3c85f433eecca))
+* **Railway Succès:** Ajout des fonctions d'exportation et d'importation des succès et récompenses ([bd1079c](https://github.com/vortechstudio/manager/commit/bd1079c3dfec58cfee36eb70f7f5ceb310a46327))
+* **Railway Succès:** Refonte de la gestion des réussites et des récompenses ([e10a5db](https://github.com/vortechstudio/manager/commit/e10a5dbaf0bfb3e12148bbd6a2c034a6fb192e9d))
+* **Railway:** Création du système de succès avec modèles, enums et migrations ([df44fc1](https://github.com/vortechstudio/manager/commit/df44fc11f823a1252dc507f903244eb60b8481fd))
+* **Shop:** Modifier le système de modification d'article, mise à jour des vues, ajout du contrôle de la date de fin de disponibilité et du panneau de produit dans la boutique, refonte de la configuration Vite. ([e8bbc18](https://github.com/vortechstudio/manager/commit/e8bbc1814d3f071428f28c114cd067c7317df2bb))
+* **update-staging:** Refactorisation de la suppression de tables dans update-staging.sh ([5efe1b2](https://github.com/vortechstudio/manager/commit/5efe1b27f07ead238307b4217adb869ad6c17a07))
+* **User, Railway:** Ajout de package et fonctions pour gestion utilisateurs ([4ebb921](https://github.com/vortechstudio/manager/commit/4ebb9210c4f61fcfdcb1309e9299d7cb5f3f58de))
+
 # [3.13.0](https://github.com/vortechstudio/manager/compare/v3.12.1...v3.13.0) (2024-06-07)
 
 
