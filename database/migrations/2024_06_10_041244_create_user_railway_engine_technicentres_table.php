@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('user_railway_engine_technicentres', function (Blueprint $table) {
+        Schema::connection('railway')->create('user_railway_engine_technicentres', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->string('status');
@@ -20,6 +20,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('user_railway_engine_technicentres');
+        Schema::connection('railway')->dropIfExists('user_railway_engine_technicentres');
     }
 };
