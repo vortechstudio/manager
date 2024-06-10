@@ -51,21 +51,12 @@
                             <label for="selectedReward" class="form-label">Récompense Existante</label>
                             <select wire:model.live="selectedReward" name="selectedReward" id="selectedReward" class="form-select">
                                 <option class="text-gray-300">-- Selectionner une récompense existante</option>
-                                @foreach(\App\Models\Railway\Core\AchieveReward::all() as $reward)
-                                    <option value="{{ $reward->id }}">{{ $reward->name }} ({{ $reward->amount_reward }})</option>
+                                @foreach(\App\Models\Railway\Core\RailwayAchievementReward::all() as $reward)
+                                    <option value="{{ $reward->id }}">{{ $reward->type->value }} ({{ $reward->quantity }})</option>
                                 @endforeach
                             </select>
                         </div>
                         <div x-show="selectedReward === ''">
-                            <x-form.input
-                                name="name"
-                                label="Nom de la récompense"
-                                required="true" />
-
-                            <x-form.textarea
-                                name="description"
-                                label="Description de la récompense" />
-
                             <div class="row">
                                 <div class="col-sm-12 col-lg-6 mb-5">
                                     <div class="mb-10">

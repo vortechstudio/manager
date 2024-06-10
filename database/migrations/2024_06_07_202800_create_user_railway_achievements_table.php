@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::connection('railway')->create('user_railway_achievements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('achievement_id')
-                ->references('id')
-                ->on('achievements')
-                ->cascadeOnDelete();
+            $table->integer('progress')->default(0);
+            $table->boolean('completed')->default(false);
+            $table->dateTime('completed_at')->nullable();
             $table->foreignId('user_id');
+            $table->dateTime('reward_claimed_at')->nullable();
+            $table->foreignId('railway_achievement_id');
             $table->timestamps();
         });
     }

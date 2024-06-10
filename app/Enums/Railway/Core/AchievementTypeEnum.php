@@ -2,7 +2,7 @@
 
 namespace App\Enums\Railway\Core;
 
-enum AchievementSectorEnum: string
+enum AchievementTypeEnum: string
 {
     case COMMUN = 'commun';
     case INFRASTRUCTURE = 'infrastructure';

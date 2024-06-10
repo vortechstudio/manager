@@ -10,6 +10,7 @@
         "anthonymartin/geo-location": "^2.0",
         "arcanedev/log-viewer": "^10.0",
         "atymic/twitter": "3.2",
+        "bjeavons/zxcvbn-php": "^1.3",
         "erlandmuchasaj/laravel-gzip": "^1.0",
         "ginocampra/laravel-leaflet": "^1.0",
         "graham-campbell/github": "^12.4",

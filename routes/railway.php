@@ -58,7 +58,9 @@ Route::prefix('railway')->as('railway.')->group(function () {
     });
 
     Route::prefix('shop')->as('shop.')->group(function () {
-
+        Route::get('/', [\App\Http\Controllers\Railway\ShopController::class, 'index'])->name('index');
+        Route::get('{category_id}', [\App\Http\Controllers\Railway\ShopController::class, 'category'])->name('category');
+        Route::get('{category_id}/{item_id}', [\App\Http\Controllers\Railway\ShopController::class, 'showProduct'])->name('showProduct');
     });
 
     Route::prefix('achievement')->as('achievement.')->group(function () {

@@ -3,7 +3,7 @@
 namespace App\Livewire\Railway\Achievement;
 
 use App\Actions\ErrorDispatchHandle;
-use App\Models\Railway\Core\Achievement;
+use App\Models\Railway\Core\RailwayAchievement;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,7 +12,9 @@ class AchievementRewardsTable extends Component
 {
     use LivewireAlert, WithPagination;
 
-    public Achievement $achievement;
+    public RailwayAchievement $achievement;
+
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function delete(int $reward_id): void
     {
