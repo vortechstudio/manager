@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->integer('level');
             $table->text('level_description')->nullable();
             $table->json('benefits')->nullable();
-            $table->foreignId('railway_research_category_id')->constrained('railway_research_categories');
-            $table->foreignId('parent_id')->nullable()->constrained('railway_researches');
+            $table->foreignId('railway_research_category_id');
+            $table->foreignId('parent_id')->nullable();
         });
     }
 

@@ -10,8 +10,8 @@ class RailwayResearchCategory extends Model
     public $timestamps = false;
     protected $connection = 'railway';
 
-    public function researches()
+    public function railwayResearches()
     {
-        $this->hasMany(RailwayResearches::class);
+        return $this->hasMany(RailwayResearches::class);
     }
 }

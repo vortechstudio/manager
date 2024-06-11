@@ -2,6 +2,7 @@
     document.addEventListener('livewire:load', function(event) {
         window.addEventListener('closeModal', (event) => {
             const modalId = event.detail[0];
+            console.log(event.detail[0])
 
             const modal = document.getElementById(modalId);
             modal.classList.remove('show')

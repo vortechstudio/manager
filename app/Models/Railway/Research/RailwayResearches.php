@@ -15,7 +15,7 @@ class RailwayResearches extends Model
         'benefits' => "array"
     ];
 
-    public function category(): BelongsTo
+    public function railwayResearchCategory(): BelongsTo
     {
         return $this->belongsTo(RailwayResearchCategory::class);
     }
