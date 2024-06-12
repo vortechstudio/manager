@@ -2,9 +2,17 @@
     <div class="card shadow-sm">
         <div class="card-header">
             <h3 class="card-title">Liste des catégories de recherche</h3>
-            <div class="card-toolbar">
+            <div class="card-toolbar gap-5">
                 <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#addCategory">
                     Nouvelle catégorie
+                </button>
+                <button wire:click="export" class="btn btn-sm btn-light" wire:loading.attr="disabled" wire:target="export">
+                    <span wire:loading.remove wire:target="export"><i class="fa-solid fa-file-export me-2"></i> Exporter</span>
+                    <span class="d-none" wire:loading.class.remove="d-none" wire:target="export"><i class="fa-solid fa-spinner fa-spin me-2"></i> Export en cours...</span>
+                </button>
+                <button wire:click="import" class="btn btn-sm btn-light" wire:loading.attr="disabled" wire:target="import">
+                    <span wire:loading.remove wire:target="import"><i class="fa-solid fa-file-import me-2"></i> Importer</span>
+                    <span class="d-none" wire:loading.class.remove="d-none" wire:target="import"><i class="fa-solid fa-spinner fa-spin me-2"></i> Import en cours...</span>
                 </button>
             </div>
         </div>

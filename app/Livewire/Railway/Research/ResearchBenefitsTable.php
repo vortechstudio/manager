@@ -6,7 +6,6 @@ use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Research\RailwayResearches;
 use App\Models\Railway\Research\RailwayResearchTrigger;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -59,7 +58,7 @@ class ResearchBenefitsTable extends Component
             ]);
 
             $this->alert('success', 'Bénéfice ajouter avec succès');
-            $this->alert('info', "Pensez à créer la classe du déclencheur dans le dossier App/Railway/ResearchTrigger/class", [
+            $this->alert('info', "Pensez à créer la classe du déclencheur dans le dossier App/Actions/Railway/ResearchTrigger/class", [
                 'toast' => false,
                 'position' => 'center',
             ]);
