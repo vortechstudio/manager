@@ -49,6 +49,12 @@ Route::prefix('railway')->as('railway.')->group(function () {
         Route::get('{banque}', [\App\Http\Controllers\Railway\FinanceController::class, 'show'])->name('show');
     });
 
+    Route::prefix('recherches')->as('researches.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Railway\ResearchController::class, 'index'])->name('index');
+        Route::get('/{category_id}', [\App\Http\Controllers\Railway\ResearchController::class, 'category'])->name('category');
+        Route::get('/{category_id}/{research_id}', [\App\Http\Controllers\Railway\ResearchController::class, 'show'])->name('show');
+    });
+
     Route::prefix('bonus')->as('bonus.')->group(function () {
         Route::get('/', \App\Http\Controllers\Railway\BonusController::class)->name('index');
     });
