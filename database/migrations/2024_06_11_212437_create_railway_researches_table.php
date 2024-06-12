@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->decimal('cost');
             $table->integer('level');
             $table->text('level_description')->nullable();
-            $table->json('benefits')->nullable();
             $table->foreignId('railway_research_category_id');
             $table->foreignId('parent_id')->nullable();
         });

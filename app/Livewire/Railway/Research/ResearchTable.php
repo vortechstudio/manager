@@ -15,6 +15,7 @@ class ResearchTable extends Component
 {
     use LivewireAlert, WithFileUploads, WithPagination;
     public RailwayResearchCategory $category;
+    public ?string $type = null;
 
     //Search & Filter
     public string $search = '';

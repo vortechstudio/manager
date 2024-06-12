@@ -206,7 +206,8 @@ class User extends Authenticatable
 
     public function railway_researches()
     {
-        return $this->belongsToMany(RailwayResearches::class, 'research_user')
+        $connection = $this->getConnection()->getDatabaseName();
+        return $this->belongsToMany(RailwayResearches::class, $connection.'.research_user', 'user_id')
             ->withPivot('is_unlocked', 'current_level')
             ->withTimestamps();
     }

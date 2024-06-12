@@ -2,6 +2,7 @@
 
 namespace App\Models\Railway\Research;
 
+use App\Models\User\User;
 use App\Services\RailwayService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,14 @@ class RailwayResearches extends Model
         return $this->belongsTo(RailwayResearchCategory::class);
     }
 
+    public function users()
+    {
+        $connection = $this->getConnection()->getDatabaseName();
+        return $this->belongsToMany(User::class, $connection.'.research_user', 'railway_research_id')
+            ->withPivot('is_unlocked', 'current_level')
+            ->withTimestamps();
+    }
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');
@@ -33,6 +42,11 @@ class RailwayResearches extends Model
     public function childrens()
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function triggers()
+    {
+        return $this->hasMany(RailwayResearchTrigger::class);
     }
 
     public function getImageAttribute()

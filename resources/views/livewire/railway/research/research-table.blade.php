@@ -23,55 +23,84 @@
                     <tr>
                         <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
                         <th>Nb de niveau</th>
-                        <th>Bénéfices</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($researches as $research)
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-50px me-3">
-                                        <img src="{{ $research->image }}" alt="">
+                    @if($type == 'childrens')
+                        @foreach($researches as $research)
+                            @foreach($research->childrens as $research)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-50px me-3">
+                                                <img src="{{ $research->image }}" alt="">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <span class="fs-3 fw-bold">{{ $research->name }}</span>
+                                                <span class="fs-5 text-muted fst-italic">{{ $research->description }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ $research->level }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('railway.researches.show', [$research->railwayResearchCategory->id, $research->id]) }}" class="btn btn-sm btn-icon btn-secondary" data-bs-toggle="tooltip" title="Voir la recherche">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <button wire:click="delete({{ $research->id }})" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer la recherche" wire:confirm="Est-vous sur ?" wire:loading.attr="disabled" wire:target="delete({{ $research->id }})">
+                                                <span wire:loading.remove><i class="fa-solid fa-trash"></i> </span>
+                                                <span class="d-none" wire:loading.class.remove="d-none"><i class="fa-solid fa-spinner fa-spin"></i> </span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if($research->hasChildrens())
+                                            <button class="btn btn-icon btn-sm" wire:click="$toggle('node')">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        @foreach($researches as $research)
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="symbol symbol-50px me-3">
+                                            <img src="{{ $research->image }}" alt="">
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span class="fs-3 fw-bold">{{ $research->name }}</span>
+                                            <span class="fs-5 text-muted fst-italic">{{ $research->description }}</span>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        <span class="fs-3 fw-bold">{{ $research->name }}</span>
-                                        <span class="fs-5 text-muted fst-italic">{{ $research->description }}</span>
+                                </td>
+                                <td>{{ $research->level }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ route('railway.researches.show', [$research->railwayResearchCategory->id, $research->id]) }}" class="btn btn-sm btn-icon btn-secondary" data-bs-toggle="tooltip" title="Voir la recherche">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <button wire:click="delete({{ $research->id }})" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer la recherche" wire:confirm="Est-vous sur ?" wire:loading.attr="disabled" wire:target="delete({{ $research->id }})">
+                                            <span wire:loading.remove><i class="fa-solid fa-trash"></i> </span>
+                                            <span class="d-none" wire:loading.class.remove="d-none"><i class="fa-solid fa-spinner fa-spin"></i> </span>
+                                        </button>
                                     </div>
-                                </div>
-                            </td>
-                            <td>{{ $research->level }}</td>
-                            <td>
-                                <ul>
-                                    @if($research->benefits)
-                                        @foreach(json_decode($research->benefits, true) as $benefit)
-                                            <li>{{ $benefit['designation'] }}</li>
-                                        @endforeach
+                                </td>
+                                <td>
+                                    @if($research->hasChildrens())
+                                        <button class="btn btn-icon btn-sm" wire:click="$toggle('node')">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
                                     @endif
-                                </ul>
-                            </td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <a href="" class="btn btn-sm btn-icon btn-secondary" data-bs-toggle="tooltip" title="Voir la recherche">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <button wire:click="delete({{ $research->id }})" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer la recherche" wire:confirm="Est-vous sur ?" wire:loading.attr="disabled" wire:target="delete({{ $research->id }})">
-                                        <span wire:loading.remove><i class="fa-solid fa-trash"></i> </span>
-                                        <span class="d-none" wire:loading.class.remove="d-none"><i class="fa-solid fa-spinner fa-spin"></i> </span>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                @if($research->hasChildrens())
-                                    <button class="btn btn-icon btn-sm" wire:click="$toggle('node')">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         @endif
