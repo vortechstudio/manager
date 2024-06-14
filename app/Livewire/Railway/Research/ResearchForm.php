@@ -14,20 +14,27 @@ use Livewire\WithFileUploads;
 class ResearchForm extends Component
 {
     use LivewireAlert, WithFileUploads;
+
     public RailwayResearchCategory $category;
+
     public RailwayResearches $researches;
 
     // Form
     public string $name = '';
+
     public ?string $description = null;
+
     public int $level = 0;
+
     public int $cost = 0;
+
     public int $time_base = 0;
+
     public ?int $parent_id = null;
 
     public function mount()
     {
-        if(isset($this->researches)) {
+        if (isset($this->researches)) {
             $this->name = $this->researches->name;
             $this->description = $this->researches->description;
             $this->level = $this->researches->level;
@@ -55,9 +62,9 @@ class ResearchForm extends Component
                     'user_railway_id' => $user->id,
                     'railway_research_id' => $research->id,
                     'current_level' => 0,
-                    'is_unlocked' => !$research->parent_id,
+                    'is_unlocked' => ! $research->parent_id,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
                 ]);
             }
 

@@ -29,13 +29,13 @@ class RailwayResearchAction
             <div class="separator my-5"></div>
             <div class="d-flex flex-wrap w-100 fs-7 fst-italic"><?= $this->researches->description ?></div>
             <div class="d-flex flex-column">
-                <?php foreach($triggers as $k => $trigger): ?>
-                    <div class="d-flex align-items-center py-2 <?= $k+1 <= $current_level ? 'text-blue-300' : 'text-gray-800' ?>">
-                        <span class="bullet <?= $k+1 <= $current_level ? 'bg-green-500' : 'bg-gray-800' ?> me-5"></span> <?= $trigger->name ?>
+                <?php foreach ($triggers as $k => $trigger) { ?>
+                    <div class="d-flex align-items-center py-2 <?= $k + 1 <= $current_level ? 'text-blue-300' : 'text-gray-800' ?>">
+                        <span class="bullet <?= $k + 1 <= $current_level ? 'bg-green-500' : 'bg-gray-800' ?> me-5"></span> <?= $trigger->name ?>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
-            <?php if ($current_level <= $this->researches->level): ?>
+            <?php if ($current_level <= $this->researches->level) { ?>
                 <div class="separator my-5"></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
@@ -47,7 +47,7 @@ class RailwayResearchAction
                         <span><?= \Helpers::minToHours($this->researches->time_base) ?></span>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </div>
         <?php
         return ob_get_clean();

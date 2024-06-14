@@ -13,17 +13,23 @@ use Livewire\WithPagination;
 class ResearchBenefitsTable extends Component
 {
     use LivewireAlert, WithPagination;
+
     public RailwayResearches $researches;
 
     //filter
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'asc';
+
     public int $perPage = 10;
 
     //form
     public string $name = '';
+
     public string $action = '';
+
     public int|float $action_count = 0;
 
     protected $queryString = [
@@ -54,11 +60,11 @@ class ResearchBenefitsTable extends Component
                 'name' => $this->name,
                 'action' => $this->action,
                 'action_count' => $this->action_count,
-                'railway_researches_id' => $this->researches->id
+                'railway_researches_id' => $this->researches->id,
             ]);
 
             $this->alert('success', 'Bénéfice ajouter avec succès');
-            $this->alert('info', "Pensez à créer la classe du déclencheur dans le dossier App/Actions/Railway/ResearchTrigger/class", [
+            $this->alert('info', 'Pensez à créer la classe du déclencheur dans le dossier App/Actions/Railway/ResearchTrigger/class', [
                 'toast' => false,
                 'position' => 'center',
             ]);
@@ -86,7 +92,7 @@ class ResearchBenefitsTable extends Component
         //dd($this->benefits);
         return view('livewire.railway.research.research-benefits-table', [
             'benefits' => RailwayResearchTrigger::where('railway_researches_id', $this->researches->id)
-                ->when($this->search, fn (Builder $query) => $query->where('name', 'like', '%' . $this->search . '%'))
+                ->when($this->search, fn (Builder $query) => $query->where('name', 'like', '%'.$this->search.'%'))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

@@ -23,7 +23,7 @@ class ResearchCategoryTable extends Component
             }
 
             $category->delete();
-            $this->alert('success', "La Catégorie à été supprimé");
+            $this->alert('success', 'La Catégorie à été supprimé');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu');
@@ -84,7 +84,7 @@ class ResearchCategoryTable extends Component
                 ]);
             }
 
-            $this->alert('success', "Import Effectuer !");
+            $this->alert('success', 'Import Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu !');

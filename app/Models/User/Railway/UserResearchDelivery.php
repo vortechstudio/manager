@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserResearchDelivery extends Model
 {
     protected $guarded = [];
+
     public $timestamps = false;
+
     protected $connection = 'railway';
 
     protected $casts = [
@@ -18,7 +20,7 @@ class UserResearchDelivery extends Model
     ];
 
     protected $appends = [
-        'diff_in_second'
+        'diff_in_second',
     ];
 
     public function researchUser(): BelongsTo

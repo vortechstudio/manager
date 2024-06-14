@@ -23,6 +23,7 @@ class CheckoutAction
         } else {
             auth()->user()->railway->research -= $amount;
             auth()->user()->railway->save();
+
             return true;
         }
     }

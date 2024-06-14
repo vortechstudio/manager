@@ -35,6 +35,7 @@ class UserRailway extends Model
     public function railway_researches()
     {
         $connection = $this->getConnection()->getDatabaseName();
+
         return $this->belongsToMany(RailwayResearches::class, $connection.'.research_user', 'user_railway_id')
             ->withPivot('is_unlocked', 'current_level')
             ->withTimestamps();
