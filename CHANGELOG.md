@@ -1,3 +1,15 @@
+# [3.15.0](https://github.com/vortechstudio/manager/compare/v3.14.0...v3.15.0) (2024-06-14)
+
+
+### Features
+
+* **Railway R&D:** Ajout de la page de vue et de gestion d'une recherche. ([58ee322](https://github.com/vortechstudio/manager/commit/58ee3222125edb687afaa7adbc26d31ae1028484))
+* **Railway R&D:** Ajout export/import ([5fb1477](https://github.com/vortechstudio/manager/commit/5fb1477ae2f06a4cf4e543e3baf5433fcd3d7383))
+* **Railway R&D:** Ajout fonctionnalités gestion des recherches ([70057ae](https://github.com/vortechstudio/manager/commit/70057aef5d4bacdc68fac53234b29d014a3a24d3))
+* **Railway R&D:** Ajoute gestion de catégories ([62d199e](https://github.com/vortechstudio/manager/commit/62d199e39c94ebc39052c0502bffb2d8580b840f))
+* **Railway R&D:** Mise à jour du système de recherche ([d911eb2](https://github.com/vortechstudio/manager/commit/d911eb2633da5a38abd73f1e1d13e9616f87d1a8))
+* **Railway R&D:** Refactorise la recherche ferroviaire ([c739c1b](https://github.com/vortechstudio/manager/commit/c739c1beaa5559144292c85bfdf051fb65b89909))
+
 # [3.14.0](https://github.com/vortechstudio/manager/compare/v3.13.0...v3.14.0) (2024-06-10)
 
 
