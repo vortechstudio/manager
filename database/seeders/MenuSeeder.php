@@ -66,10 +66,10 @@ class MenuSeeder extends Seeder
         Menu::set('railway_manager_app', 'Matériels', '/train', 44);
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Gestion de la compagnie', '#', 'fa-solid fa-building');
-        Menu::set('railway_manager_app', 'Customisation', '/company/customize', 48);
         Menu::set('railway_manager_app', 'Profil', '/company/profile', 48);
         Menu::set('railway_manager_app', 'Classement', '/company/rank', 48);
         Menu::set('railway_manager_app', 'Compagnie', '/company', 48);
+        Menu::set('railway_manager_app', 'contrat', '/company/contrat', 48);
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Centre de compétence', '#', 'fa-solid fa-flask-vial');
         Menu::set('railway_manager_app', 'Général', '/research', 53);

@@ -46,7 +46,7 @@
             @endif
             @isset($actions)
                 @foreach($actions as $action)
-                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" @else href="{{ $action['link'] }}" wire:navigate @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
+                    <a @if(isset($action['wire'])) wire:click="{{ $action['wire'] }}" wire:navigate @else href="{{ $action['link'] }}" @endif @if(isset($action['modal'])) data-bs-toggle="modal" @endif class="btn btn-outline btn-outline-{{ $action['color'] }} me-3">{!! $action['text'] !!}</a>
                 @endforeach
             @endisset
             @if($submit)

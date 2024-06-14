@@ -6,6 +6,7 @@ namespace App\Models\User;
 use App\Models\Railway\Planning\RailwayIncident;
 use App\Models\Railway\Planning\RailwayPlanning;
 use App\Models\Railway\Planning\RailwayPlanningConstructor;
+use App\Models\Railway\Research\RailwayResearches;
 use App\Models\Social\Article;
 use App\Models\Social\Event;
 use App\Models\Social\Post\Post;
