@@ -35,10 +35,10 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="symbol symbol-30px symbol-circle me-3">
-                                        <img src="{{ $user->avatar }}" alt="">
+                                        <img src="{{ $user->user->socials()->first()->avatar }}" alt="">
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <span>{{ $user->name }}</span>
+                                        <span>{{ $user->user->name }}</span>
                                         <span>{{ $user->uuid }}</span>
                                     </div>
                                 </div>

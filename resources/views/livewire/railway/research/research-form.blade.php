@@ -23,21 +23,28 @@
                         label="Description de la recherche" />
 
                     <div class="row">
-                        <div class="col-sm-12 col-lg-4 mb-5">
+                        <div class="col-sm-12 col-lg-3 mb-5">
                             <x-form.input
                                 name="level"
                                 type="number"
                                 label="Combien de niveau"
                                 required="true" />
                         </div>
-                        <div class="col-sm-12 col-lg-4 mb-5">
+                        <div class="col-sm-12 col-lg-3 mb-5">
                             <x-form.input
                                 name="cost"
                                 type="number"
                                 label="Cout de base de la recherche"
                                 required="true" />
                         </div>
-                        <div class="col-sm-12 col-lg-4 mb-5">
+                        <div class="col-sm-12 col-lg-3 mb-5">
+                            <x-form.input
+                                name="time_base"
+                                type="number"
+                                label="Nombre de minute de base"
+                                required="true" />
+                        </div>
+                        <div class="col-sm-12 col-lg-3 mb-5">
                             <div class="mb-10">
                                 <label for="parent_id" class="form-label">Parent</label>
                                 <select name="parent_id" id="parent_id" wire:model="parent_id" class="form-select" data-control="select2" data-placeholder="---  Selectionner un type de matériel ---">

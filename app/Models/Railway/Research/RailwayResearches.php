@@ -2,6 +2,7 @@
 
 namespace App\Models\Railway\Research;
 
+use App\Models\User\Railway\UserRailway;
 use App\Models\User\User;
 use App\Services\RailwayService;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +30,7 @@ class RailwayResearches extends Model
     public function users()
     {
         $connection = $this->getConnection()->getDatabaseName();
-        return $this->belongsToMany(User::class, $connection.'.research_user', 'railway_research_id')
+        return $this->belongsToMany(UserRailway::class, $connection.'.research_user', 'railway_research_id')
             ->withPivot('is_unlocked', 'current_level')
             ->withTimestamps();
     }
@@ -47,6 +48,15 @@ class RailwayResearches extends Model
     public function triggers()
     {
         return $this->hasMany(RailwayResearchTrigger::class);
+    }
+
+    public function isUnlockedForUser(int $user_railway_id)
+    {
+        return \DB::connection('railway')->table('research_user')
+            ->where('user_railway_id', $user_railway_id)
+            ->where('railway_research_id', $this->id)
+            ->where('is_unlocked', true)
+            ->exists();
     }
 
     public function getImageAttribute()

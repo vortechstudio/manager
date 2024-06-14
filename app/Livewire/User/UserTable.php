@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\User\Railway\UserRailway;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -42,9 +43,8 @@ class UserTable extends Component
     public function render()
     {
         $users = match ($this->type) {
-            'research' => User::join(config('database.connections.railway.database').'.research_user', 'users.id', config('database.connections.railway.database').'.research_user.user_id')
-                ->join('user_socials', 'users.id', 'user_socials.user_id')
-                ->join(config('database.connections.railway.database').'.user_railways', 'users.id', config('database.connections.railway.database').'.user_railways.user_id')
+            'research' => UserRailway::with('user')
+                ->join('research_user', 'user_railways.id', 'research_user.user_railway_id')
                 ->paginate($this->perPage),
         };
 //        dd($users);
