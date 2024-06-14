@@ -5,6 +5,8 @@ namespace App\Livewire\Railway\Research;
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Research\RailwayResearchCategory;
 use App\Models\Railway\Research\RailwayResearches;
+use App\Models\User\Railway\UserRailway;
+use App\Models\User\ResearchUser;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -20,6 +22,7 @@ class ResearchForm extends Component
     public ?string $description = null;
     public int $level = 0;
     public int $cost = 0;
+    public int $time_base = 0;
     public ?int $parent_id = null;
 
     public function mount()
@@ -30,20 +33,34 @@ class ResearchForm extends Component
             $this->level = $this->researches->level;
             $this->cost = $this->researches->cost;
             $this->parent_id = $this->researches->parent_id;
+            $this->time_base = $this->researches->time_base;
         }
     }
 
     public function save()
     {
         try {
-            RailwayResearches::create([
+            $research = RailwayResearches::create([
                 'name' => $this->name,
                 'description' => $this->description,
                 'level' => $this->level,
                 'cost' => $this->cost,
                 'railway_research_category_id' => $this->category->id,
                 'parent_id' => $this->parent_id,
+                'time_base' => $this->time_base,
             ]);
+
+            foreach (UserRailway::all() as $user) {
+                ResearchUser::create([
+                    'user_railway_id' => $user->id,
+                    'railway_research_id' => $research->id,
+                    'current_level' => 0,
+                    'is_unlocked' => !$research->parent_id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+
             $this->dispatch('closeModal', 'addResearch');
             $this->alert('success', 'La recherche à été ajouté !');
         } catch (\Exception $exception) {
@@ -62,6 +79,7 @@ class ResearchForm extends Component
                 'cost' => $this->cost,
                 'railway_research_category_id' => $this->category->id,
                 'parent_id' => $this->parent_id,
+                'time_base' => $this->time_base,
             ]);
 
             $this->dispatch('closeModal', 'addResearch');
