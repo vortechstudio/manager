@@ -50,6 +50,7 @@ class HubController extends Controller
             'hab_city' => (new GareAction())->getHabitant($request->get('type'), $sncf->searchFreq($request->get('name'))['freq']),
             'transports' => json_encode($request->get('transports')),
             'equipements' => json_encode((new GareAction)->defineEquipements($request->get('type'))),
+            'nb_quai' => $request->get('nb_quai'),
         ]);
 
         /*$wt = new Weather();
@@ -62,9 +63,10 @@ class HubController extends Controller
         ]);*/
 
         if ($request->has('is_hub')) {
+            $price_base = (new GareAction)->definePrice($request->get('type'), $request->get('nb_quai'));
             $gare->hub()->create([
-                'price_base' => (new GareAction)->definePrice($request->get('type'), $request->get('nb_quai')),
-                'taxe_hub_price' => (new GareAction)->defineTaxeHub((new GareAction)->definePrice($request->get('type'), $request->get('nb_quai')), $request->get('nb_quai')),
+                'price_base' => $price_base,
+                'taxe_hub_price' => (new GareAction)->defineTaxeHub($price_base, $request->get('nb_quai')),
                 'active' => $request->has('active'),
                 'status' => $request->get('status'),
                 'railway_gare_id' => $gare->id,
