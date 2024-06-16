@@ -119,5 +119,6 @@ Route::get('/offline', function () {
     return view('laravelpwa::offline');
 });
 Route::get('/test', function () {
-    dd(auth()->user()->railway->xp_percent);
+    $ligne = \App\Models\User\Railway\UserRailwayLigne::find(1);
+    dd((new \App\Services\Models\User\Railway\UserRailwayLigneAction($ligne))->calcDemande());
 });

@@ -6,6 +6,8 @@ use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Research\RailwayResearchCategory;
 use App\Models\Railway\Research\RailwayResearches;
 use App\Models\Railway\Research\RailwayResearchTrigger;
+use App\Models\User\Railway\UserRailway;
+use App\Models\User\ResearchUser;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -23,7 +25,7 @@ class ResearchCategoryTable extends Component
             }
 
             $category->delete();
-            $this->alert('success', "La Catégorie à été supprimé");
+            $this->alert('success', 'La Catégorie à été supprimé');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu');
@@ -62,7 +64,7 @@ class ResearchCategoryTable extends Component
             }
 
             foreach ($researches as $research) {
-                RailwayResearches::updateOrCreate(['id' => $research['id']], [
+                $r = RailwayResearches::updateOrCreate(['id' => $research['id']], [
                     'id' => $research['id'],
                     'name' => $research['name'],
                     'description' => $research['description'],
@@ -72,6 +74,15 @@ class ResearchCategoryTable extends Component
                     'level_description' => $research['level_description'],
                     'railway_research_category_id' => $research['railway_research_category_id'],
                 ]);
+                foreach (UserRailway::all() as $user) {
+                    if (! ResearchUser::where('user_railway_id', $user->id)->where('railway_research_id', $r->id)->exists()) {
+                        ResearchUser::create([
+                            'user_railway_id' => $user->id,
+                            'railway_research_id' => $r->id,
+                            'is_unlocked' => ! $r->parent_id,
+                        ]);
+                    }
+                }
             }
 
             foreach ($triggers as $trigger) {
@@ -84,7 +95,7 @@ class ResearchCategoryTable extends Component
                 ]);
             }
 
-            $this->alert('success', "Import Effectuer !");
+            $this->alert('success', 'Import Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu !');

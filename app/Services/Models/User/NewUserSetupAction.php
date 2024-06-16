@@ -63,13 +63,13 @@ class NewUserSetupAction
             }
 
             foreach (RailwayResearches::all() as $research) {
-                ResearchUser::updateOrCreate(['user_railway_id' => $this->user->railway->id], [
+                ResearchUser::updateOrCreate(['railway_research_id' => $research->id], [
                     'user_railway_id' => $this->user->railway->id,
                     'railway_research_id' => $research->id,
                     'current_level' => 0,
-                    'is_unlocked' => !$research->parent_id,
+                    'is_unlocked' => ! $research->parent_id,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
                 ]);
             }
 

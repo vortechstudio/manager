@@ -16,6 +16,15 @@ class CheckoutAction
         }
     }
 
+    public function checkoutArgent(int $amount)
+    {
+        if ($amount >= auth()->user()->railway->argent) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function checkoutResearch(int $amount)
     {
         if ($amount >= auth()->user()->railway->research) {
@@ -23,6 +32,7 @@ class CheckoutAction
         } else {
             auth()->user()->railway->research -= $amount;
             auth()->user()->railway->save();
+
             return true;
         }
     }

@@ -3,7 +3,6 @@
 namespace App\Models\Railway\Research;
 
 use App\Models\User\Railway\UserRailway;
-use App\Models\User\User;
 use App\Services\RailwayService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,15 +10,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class RailwayResearches extends Model
 {
     protected $guarded = [];
+
     public $timestamps = false;
+
     protected $connection = 'railway';
 
     protected $casts = [
-        'benefits' => "array"
+        'benefits' => 'array',
     ];
 
     protected $appends = [
-        'image'
+        'image',
     ];
 
     public function railwayResearchCategory(): BelongsTo
@@ -30,6 +31,7 @@ class RailwayResearches extends Model
     public function users()
     {
         $connection = $this->getConnection()->getDatabaseName();
+
         return $this->belongsToMany(UserRailway::class, $connection.'.research_user', 'railway_research_id')
             ->withPivot('is_unlocked', 'current_level')
             ->withTimestamps();
@@ -62,6 +64,7 @@ class RailwayResearches extends Model
     public function getImageAttribute()
     {
         $service = (new RailwayService())->getRailwayService();
+
         return \Cache::remember('getImageAttribute:'.$this->id, 1440, function () use ($service) {
             return \Storage::exists("services/{$service->id}/game/icons/research/".$this->id.'.png') ? \Storage::url("services/{$service->id}/game/icons/research/".$this->id.'.png') : \Storage::url("services/{$service->id}/game/icons/research/default.png");
         });
