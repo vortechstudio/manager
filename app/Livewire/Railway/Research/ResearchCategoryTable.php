@@ -75,11 +75,11 @@ class ResearchCategoryTable extends Component
                     'railway_research_category_id' => $research['railway_research_category_id'],
                 ]);
                 foreach (UserRailway::all() as $user) {
-                    if (!ResearchUser::where('user_railway_id', $user->id)->where('railway_research_id', $r->id)->exists()) {
+                    if (! ResearchUser::where('user_railway_id', $user->id)->where('railway_research_id', $r->id)->exists()) {
                         ResearchUser::create([
                             'user_railway_id' => $user->id,
                             'railway_research_id' => $r->id,
-                            'is_unlocked' => !$r->parent_id,
+                            'is_unlocked' => ! $r->parent_id,
                         ]);
                     }
                 }

@@ -3,12 +3,10 @@
 namespace App\Livewire\Railway\Engine;
 
 use App\Actions\ErrorDispatchHandle;
-use App\Models\Railway\Core\ShopItem;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Engine\RailwayEnginePrice;
 use App\Models\Railway\Engine\RailwayEngineShop;
 use App\Models\Railway\Engine\RailwayEngineTechnical;
-use App\Services\Models\Railway\Engine\RailwayEnginePriceAction;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -55,10 +53,10 @@ class EngineTable extends Component
         $engine = RailwayEngine::find($engine_id);
         if ($engine->type_train->value == 'automotrice') {
             for ($i = 0; $i <= $engine->technical->nb_wagon; $i++) {
-                \Storage::delete('engines/automotrice/' . $engine->slug . '-' . $i . '.gif');
+                \Storage::delete('engines/automotrice/'.$engine->slug.'-'.$i.'.gif');
             }
         } else {
-            \Storage::delete('engines/' . $engine->type_train->value . '/' . $engine->slug . '.gif');
+            \Storage::delete('engines/'.$engine->type_train->value.'/'.$engine->slug.'.gif');
         }
 
         $engine->delete();
@@ -99,6 +97,7 @@ class EngineTable extends Component
         \Storage::put('data/beta/railway_engine_shops.json', $shops->toJson());
         \Storage::put('data/beta/railway_engine_rentals.json', $rentals->toJson());
     }
+
     public function exportProdEngine()
     {
         $engines = RailwayEngine::where('status', 'prod')->get();
@@ -124,18 +123,19 @@ class EngineTable extends Component
     public function import()
     {
         try {
-            if($this->status == 'beta') {
+            if ($this->status == 'beta') {
                 $this->importBetaEngine();
             } else {
                 $this->importProdEngine();
             }
             $this->alert('success', "L'import à été effectué");
             $this->dispatch('closeModal', 'import');
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu');
         }
     }
+
     public function render()
     {
         return view('livewire.railway.engine.engine-table', [
@@ -166,7 +166,7 @@ class EngineTable extends Component
                 'active' => $engine['active'],
                 'in_shop' => $engine['in_shop'],
                 'in_game' => $engine['in_game'],
-                'status' => $engine['status']
+                'status' => $engine['status'],
             ]);
         }
 
@@ -178,7 +178,7 @@ class EngineTable extends Component
                 'percent_reduction' => $price['percent_reduction'],
                 'maintenance' => $price['maintenance'],
                 'location' => $price['location'],
-                'railway_engine_id' => $price['railway_engine_id']
+                'railway_engine_id' => $price['railway_engine_id'],
             ]);
         }
 
@@ -192,11 +192,11 @@ class EngineTable extends Component
                 'nb_marchandise' => $technical['nb_marchandise'],
                 'nb_wagon' => $technical['nb_wagon'],
                 'puissance' => $technical['puissance'],
-                'railway_engine_id' => $technical['railway_engine_id']
+                'railway_engine_id' => $technical['railway_engine_id'],
             ]);
         }
 
-        if(count($shops) > 0) {
+        if (count($shops) > 0) {
             foreach ($shops as $shop) {
                 RailwayEngineShop::updateOrCreate(['id' => $shop['id']], [
                     'id' => $shop['id'],
@@ -204,7 +204,7 @@ class EngineTable extends Component
                     'money' => $shop['money'],
                     'railway_engine_id' => $shop['railway_engine_id'],
                     'created_at' => $shop['created_at'],
-                    'updated_at' => $shop['updated_at']
+                    'updated_at' => $shop['updated_at'],
                 ]);
             }
         }
@@ -216,7 +216,7 @@ class EngineTable extends Component
                     'railway_engine_id' => $rental['railway_engine_id'],
                     'railway_rental_id' => $rental['railway_rental_id'],
                     'created_at' => $rental['created_at'],
-                    'updated_at' => $rental['updated_at']
+                    'updated_at' => $rental['updated_at'],
                 ]);
         }
     }
