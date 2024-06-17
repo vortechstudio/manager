@@ -2,6 +2,7 @@
 
 namespace App\Models\Railway\Config;
 
+use App\Enums\Railway\Config\RailwayBanqueBlockedEnum;
 use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,7 @@ class RailwayBanque extends Model
 
     protected $casts = [
         'uuid' => 'string',
+        'blocked_by' => RailwayBanqueBlockedEnum::class,
     ];
 
     protected $appends = [
