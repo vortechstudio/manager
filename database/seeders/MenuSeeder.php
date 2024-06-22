@@ -80,7 +80,7 @@ class MenuSeeder extends Seeder
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Finances', '#', 'fa-solid fa-building-columns');
         Menu::set('railway_manager_app', 'Banques', '/finance/bank', 59);
-        Menu::set('railway_manager_app', 'Compatibilite', '/finance/compatibility', 59);
+        Menu::set('railway_manager_app', 'Comptabilité', '/finance/comptability', 59);
         Menu::set('railway_manager_app', 'Finance', '/finance', 59);
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Bureau du marketing', '#', 'fa-solid fa-lightbulb');
