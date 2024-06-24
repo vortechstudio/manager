@@ -162,7 +162,7 @@ class UserRailwayLigneAction
 
     public function createTarif(): void
     {
-        match ($this->ligne->userRailwayEngine->railwayEngine->type_transport->value) {
+        match ($this->ligne->railwayLigne->type->value) {
             'ter', 'other' => $this->generateTarifTer(),
             'tgv', 'intercity' => $this->generateTarifTGV(),
         };

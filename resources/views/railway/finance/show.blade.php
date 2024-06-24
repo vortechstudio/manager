@@ -33,7 +33,7 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <span class="fw-bold me-2">Interet Actuel:</span>
-                                <span class="badge badge-primary">{{ number_format($banque->latest_flux->interest, 2, '.', ' ')." %" }}</span>
+                                <span class="badge badge-primary">{{ number_format($banque->latest_flux, 2, '.', ' ')." %" }}</span>
                             </div>
                             @if($banque->blocked_by)
                             <div class="d-flex justify-content-end">

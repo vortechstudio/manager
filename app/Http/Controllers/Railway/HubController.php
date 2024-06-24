@@ -31,6 +31,13 @@ class HubController extends Controller
 
         $sncf = new SncfService();
 
+        if(RailwayGare::where('name', 'like', "%{$request->get('name')}%")->exists()) {
+            toastr()
+                ->addError("La gare existe déjà !");
+
+            return redirect()->back();
+        }
+
         if ($sncf->searchGare($request->get('name')) === null) {
             toastr()
                 ->addError("La gare n'existe pas");

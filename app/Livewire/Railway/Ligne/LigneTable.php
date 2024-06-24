@@ -4,6 +4,7 @@ namespace App\Livewire\Railway\Ligne;
 
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Ligne\RailwayLigne;
+use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,6 +20,9 @@ class LigneTable extends Component
     public string $orderDirection = 'ASC';
 
     public int $perPage = 10;
+
+    public int $railway_hub_id = 0;
+    public string $type_ligne = '';
 
     public string $status = '';
 
@@ -125,6 +129,8 @@ class LigneTable extends Component
         return view('livewire.railway.ligne.ligne-table', [
             'lignes' => RailwayLigne::with('start', 'end', 'stations', 'hub')
                 ->when($this->search, fn ($query, $search) => $query->where('name', 'like', "%{$search}%"))
+                ->when($this->railway_hub_id, fn(Builder $query) => $query->where('railway_hub_id', $this->railway_hub_id))
+                ->when($this->type_ligne, fn(Builder $query) => $query->where('type', $this->type_ligne))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

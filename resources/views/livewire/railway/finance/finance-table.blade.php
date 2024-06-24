@@ -62,27 +62,27 @@
                                 <td>
                                     <div class="d-flex flex-row justify-content-between align-items-center">
                                         <div class="d-flex flex-column">
-                                            <div class="d-flex flex-row mb-2">
-                                                <span class="fw-bold">Interet Min</span>
+                                            <div class="d-flex flex-row justify-content-between mb-2">
+                                                <span class="fw-bold me-5">Interet Min</span>
                                                 <span>{{ number_format($bank->interest_min, 2, ',', ' ') }} %</span>
                                             </div>
-                                            <div class="d-flex flex-row mb-2">
-                                                <span class="fw-bold">Interet Max</span>
+                                            <div class="d-flex flex-row justify-content-between mb-2">
+                                                <span class="fw-bold me-5">Interet Max</span>
                                                 <span>{{ number_format($bank->interest_max, 2, ',', ' ') }} %</span>
                                             </div>
                                         </div>
-                                        <span class="badge badge-info">{{ number_format($bank->latest_flux->interest, 2, ',', ' ') }} %</span>
+                                        <span class="badge badge-info">{{ $bank->latest_flux }} %</span>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row justify-content-between align-items-center">
                                         <div class="d-flex flex-column">
-                                            <div class="d-flex flex-row mb-2">
-                                                <span class="fw-bold">Emprunt express</span>
+                                            <div class="d-flex flex-row justify-content-between mb-2">
+                                                <span class="fw-bold me-5">Emprunt express</span>
                                                 <span>{{ eur($bank->express_base) }}</span>
                                             </div>
-                                            <div class="d-flex flex-row mb-2">
-                                                <span class="fw-bold">Emprunt marché financier</span>
+                                            <div class="d-flex flex-row justify-content-between mb-2">
+                                                <span class="fw-bold me-5">Emprunt marché financier</span>
                                                 <span>{{ eur($bank->public_base) }}</span>
                                             </div>
                                         </div>
