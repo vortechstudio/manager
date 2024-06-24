@@ -53,18 +53,13 @@ class EngineAction extends EngineSelectAction
     /**
      * Calculates the price of maintenance based on the duration and the value of essieux.
      *
-     * @param  int  $duration  The duration of maintenance in months.
-     * @param  float|int  $val_essieux  The value of essieux.
+     * @param int $duration The duration of maintenance in months.
+     * @param float|int $price_achat
      * @return float|int The calculated price of maintenance.
      */
-    public function calcPriceMaintenance(int $duration, float|int $val_essieux): float|int
+    public function calcPriceMaintenance(int $duration, float|int $price_achat): float|int
     {
-        $calc = $duration * $val_essieux;
-        if ($calc >= 100) {
-            return $calc / 10;
-        }
-
-        return $calc;
+        return $price_achat / $duration;
     }
 
     /**

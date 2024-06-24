@@ -165,7 +165,7 @@ class SystemCreateCommand extends Command
 
         $price_maintenance = (new EngineAction)->calcPriceMaintenance(
             (new EngineAction())->calcDurationMaintenance($essieux)->diffInMinutes(now()->startOfDay()),
-            $val_essieux
+            $price_achat
         );
 
         $price_location = (new EngineAction)->calcPriceLocation($price_achat);

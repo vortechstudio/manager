@@ -152,7 +152,7 @@ class EngineSelectAction
             'value' => 'Monnaie Virtuel',
         ]);
         $argc->push([
-            'id' => 'euro',
+            'id' => 'reel',
             'value' => 'Monnaie Réel',
         ]);
 

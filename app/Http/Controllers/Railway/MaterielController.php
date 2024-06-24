@@ -58,7 +58,8 @@ class MaterielController extends Controller
         );
 
         $price_maintenance = (new EngineAction())->calcPriceMaintenance(
-            duration: (new EngineAction())->calcDurationMaintenance($request->get('essieux'))->diffInMinutes(now()->startOfDay()), val_essieux: $valeurEssieux
+            duration: (new EngineAction())->calcDurationMaintenance($request->get('essieux'))->diffInMinutes(now()->startOfDay()),
+            price_achat: $price_achat,
         );
 
         $price_location = (new EngineAction())->calcPriceLocation($price_achat);
