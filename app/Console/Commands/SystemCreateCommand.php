@@ -164,8 +164,9 @@ class SystemCreateCommand extends Command
         );
 
         $price_maintenance = (new EngineAction)->calcPriceMaintenance(
-            (new EngineAction())->calcDurationMaintenance($essieux)->diffInMinutes(now()->startOfDay()),
-            $price_achat
+            type_transport: $type_transport,
+            type_train: $type_train,
+            type_motor: $type_motor,
         );
 
         $price_location = (new EngineAction)->calcPriceLocation($price_achat);

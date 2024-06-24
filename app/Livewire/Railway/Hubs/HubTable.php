@@ -4,6 +4,7 @@ namespace App\Livewire\Railway\Hubs;
 
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Gare\RailwayGare;
+use App\Models\Railway\Gare\RailwayHub;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -76,11 +77,14 @@ class HubTable extends Component
 
     public function export(): void
     {
-        $gares = RailwayGare::with('weather', 'hub')->get()->toJson();
+        $gares = RailwayGare::all()->toJson();
+        $hubs_beta = RailwayHub::where('status', 'beta')->get()->toJson();
+        $hubs_prod = RailwayHub::where('status', 'production')->get()->toJson();
+
         try {
-            $filename = 'railway_gares.json';
-            \Storage::put('data/beta/'.$filename, $gares);
-            \Storage::put('data/production/'.$filename, $gares);
+            \Storage::put('data/railway_gares.json', $gares);
+            \Storage::put('data/beta/railway_hubs.json', $hubs_beta);
+            \Storage::put('data/production/railway_hubs.json', $hubs_prod);
             $this->alert('success', 'Export Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
@@ -90,13 +94,15 @@ class HubTable extends Component
 
     public function import(): void
     {
-        $gares = json_decode(\Storage::get('data/beta/railway_gares.json'), true);
+        $gares = json_decode(\Storage::get('data/railway_gares.json'), true);
+        $hubs = json_decode(\Storage::get('data/beta/railway_hubs.json'), true);
 
         foreach ($gares as $gare) {
-            $e = $this->createGare($gare);
-            if ($e->type->value == 'large' || $e->type->value == 'terminus') {
-                $this->createHub($e, $gare);
-            }
+            $this->createGare($gare);
+        }
+
+        foreach ($hubs as $hub) {
+            $this->createHub($hub);
         }
 
         $this->alert('success', 'Import Effectuer !');
@@ -130,14 +136,15 @@ class HubTable extends Component
         ]);
     }
 
-    private function createHub(RailwayGare $e, mixed $gare): void
+    private function createHub(mixed $hub): void
     {
-        $e->hub()->updateOrCreate(['id' => $gare['hub']['id']], [
-            'price_base' => $gare['hub']['price_base'],
-            'taxe_hub_price' => $gare['hub']['taxe_hub_price'],
-            'active' => $gare['hub']['active'],
-            'status' => $gare['hub']['status'],
-            'railway_gare_id' => $e->id,
+        RailwayHub::updateOrCreate(['id' => $hub['id']], [
+            'id' => $hub['id'],
+            'status' => $hub['status'],
+            'active' => $hub['active'],
+            'price_base' => $hub['price_base'],
+            'taxe_hub_price' => $hub['taxe_hub_price'],
+            'railway_gare_id' => $hub['railway_gare_id']
         ]);
     }
 }
