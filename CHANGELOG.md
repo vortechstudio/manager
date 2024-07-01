@@ -1,3 +1,20 @@
+# [3.16.0](https://github.com/vortechstudio/manager/compare/v3.15.0...v3.16.0) (2024-07-01)
+
+
+### Features
+
+* **Railway Engine:** Refactorise l'import/export de moteurs ferroviaires, suppression/modif méthodes ([d508926](https://github.com/vortechstudio/manager/commit/d5089262d9cadc0f8695499dc78226fe4d455241))
+* **Railway Finance:** Crée des classes et migrations pour gérer les emprunts des utilisateurs ([9e2a0ae](https://github.com/vortechstudio/manager/commit/9e2a0ae6401a06e1fc2d1c6df2dff7f9eb3cab15))
+* **Railway Finances:** Mise à jour fonctionnalités et gestionnaire banques ([617e434](https://github.com/vortechstudio/manager/commit/617e4348c790cd378da0e18831102f3c6fb75568))
+* **Railway:** Ajout colonne 'nb_quai', corrections diverses ([7af621c](https://github.com/vortechstudio/manager/commit/7af621cc468dfd0b9c29078265b0e1c73350f965))
+* **Railway:** Ajout gestion niveaux de distraction et calcul demande basé sur distraction ([7131e35](https://github.com/vortechstudio/manager/commit/7131e354807843e867716e5d4325f3e8bbb8ba8f))
+* **Railway:** Ajout niveau pour UserRailwayHubs et UserRailwayLignes, refonte calcule demande, maj coef distraction et confort ([5fb82e2](https://github.com/vortechstudio/manager/commit/5fb82e224792d755ddcec87247e873aa8fb8546e))
+* **Railway:** Ajoute colonnes 'research_mat' et 'siege', améliore ShopItem, met à jour ShopItemSectionEnum ([37251ec](https://github.com/vortechstudio/manager/commit/37251ec601da32e92f5154ecf806040982ea944d))
+* **Railway:** Ajoute la calculatrice tarifaire de ligne, modifie la génération de demande, et améliore les vues et migration DB ([a88f693](https://github.com/vortechstudio/manager/commit/a88f6935c0a072e601545fd59e58974c7a478b5c))
+* **Railway:** Ajustement calcul prix maintenance et ID monnaie ([2764060](https://github.com/vortechstudio/manager/commit/27640600e9fc27a3c38101bac889d7935670170f))
+* **Railway:** Déplace la notification de succès débloqué dans RailwayAchievement ([751f7e5](https://github.com/vortechstudio/manager/commit/751f7e592ef4c08ef3a402b93207b96c01def773))
+* **UserRailwayHub:** Ajoute relations Commerces et Publicités, crée migrations et modèles correspondants ([9451ec4](https://github.com/vortechstudio/manager/commit/9451ec49b0f2d77ebc371dd5474a581c10783c0f))
+
 # [3.15.0](https://github.com/vortechstudio/manager/compare/v3.14.0...v3.15.0) (2024-06-14)
 
 
