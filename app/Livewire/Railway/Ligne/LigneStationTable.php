@@ -84,6 +84,7 @@ class LigneStationTable extends Component
                 ]);
             }
 
+            $this->dispatch('closeModal', 'addStation');
             $this->alert('success', 'Station ajoutée avec succès');
         } catch (\Exception $exception) {
             $this->alert('error', 'Une erreur est survenue');

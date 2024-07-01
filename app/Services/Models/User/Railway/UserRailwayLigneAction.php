@@ -162,9 +162,28 @@ class UserRailwayLigneAction
 
     public function createTarif(): void
     {
-        match ($this->ligne->userRailwayEngine->railwayEngine->type_transport->value) {
+        match ($this->ligne->railwayLigne->type->value) {
             'ter', 'other' => $this->generateTarifTer(),
             'tgv', 'intercity' => $this->generateTarifTGV(),
+        };
+    }
+
+    public function consommationPuissance()
+    {
+        return round(floatval($this->ligne->userRailwayEngine->railwayEngine->technical->puissance / Helpers::minToHoursDecimal($this->ligne->railwayLigne->time_min)), 2);
+    }
+
+    public function getLevelNextStatus(string $status)
+    {
+        return match ($status) {
+            'nb_depart_jour' => $this->ligne->nb_depart_jour + ($this->ligne->nb_depart_jour * $this->getLevelingLigneCoef('nb_depart_jour') / 100),
+        };
+    }
+
+    private function getLevelingLigneCoef(string $system)
+    {
+        return match ($system) {
+            'nb_depart_jour' => $this->ligne->level <= 10 ? 30 : ($this->ligne->level <= 20 ? 25 : ($this->ligne->level <= 30 ? 17 : ($this->ligne->level <= 40 ? 12 : 5))),
         };
     }
 
@@ -175,7 +194,7 @@ class UserRailwayLigneAction
             'type_tarif' => 'unique',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifSecond(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('unique'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
     }
@@ -187,7 +206,7 @@ class UserRailwayLigneAction
             'type_tarif' => 'first',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifFirst(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('first'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
         $this->ligne->tarifs()->create([
@@ -195,21 +214,19 @@ class UserRailwayLigneAction
             'type_tarif' => 'second',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifSecond(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('second'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
     }
 
-    private function calcDemande()
+    public function calcDemande()
     {
-        $calc = ($this->ligne->userRailwayHub->railwayHub->gare->freq_base / 365) / $this->ligne->userRailwayHub->railwayHub->gare->time_day_work;
-
-        return intval($calc);
+        return rand($this->ligne->min_passengers, $this->ligne->max_passengers);
     }
 
     private function calcOffre()
     {
-        return $this->ligne->userRailwayEngine->railwayEngine->technical->nb_marchandise;
+        return $this->ligne->userRailwayEngine->siege;
     }
 
     private function calcTarifFirst()
@@ -217,6 +234,9 @@ class UserRailwayLigneAction
         $price_kilometer = RailwaySetting::where('name', 'price_kilometer')->first()->value;
         $price_electricity = RailwaySetting::where('name', 'price_electricity')->first()->value;
         $calc = ($price_kilometer * $this->ligne->railwayLigne->distance) * ($this->ligne->railwayLigne->distance * ($price_electricity / 3)) / 10;
+        if($calc >= 100) {
+            $calc = $calc / 100;
+        }
 
         return round(floatval($calc * 60 / 100), 2);
     }
@@ -227,11 +247,10 @@ class UserRailwayLigneAction
         $price_electricity = RailwaySetting::where('name', 'price_electricity')->first()->value;
         $calc = ($price_kilometer * $this->ligne->railwayLigne->distance) * ($this->ligne->railwayLigne->distance * ($price_electricity / 3)) / 10;
 
-        return round(floatval($calc * 40 / 100), 2);
-    }
+        if($calc >= 100) {
+            $calc = $calc / 100;
+        }
 
-    public function consommationPuissance()
-    {
-        return round(floatval($this->ligne->userRailwayEngine->railwayEngine->technical->puissance / Helpers::minToHoursDecimal($this->ligne->railwayLigne->time_min)), 2);
+        return round(floatval($calc * 40 / 100), 2);
     }
 }

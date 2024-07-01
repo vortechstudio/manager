@@ -14,13 +14,18 @@ use Livewire\WithPagination;
 class ResearchTable extends Component
 {
     use LivewireAlert, WithFileUploads, WithPagination;
+
     public RailwayResearchCategory $category;
+
     public ?string $type = null;
 
     //Search & Filter
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'asc';
+
     public int $perPage = 10;
 
     protected $queryString = [
@@ -30,7 +35,6 @@ class ResearchTable extends Component
     ];
 
     // Form
-
 
     public function setOrderField(string $name): void
     {
@@ -62,7 +66,7 @@ class ResearchTable extends Component
     {
         return view('livewire.railway.research.research-table', [
             'researches' => $this->category->railwayResearches()->with('parent', 'childrens')
-                ->when($this->search, fn(Builder $query) => $query->where('name', 'like', "%{$this->search}%"))
+                ->when($this->search, fn (Builder $query) => $query->where('name', 'like', "%{$this->search}%"))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);

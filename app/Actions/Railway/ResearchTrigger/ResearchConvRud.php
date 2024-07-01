@@ -9,7 +9,7 @@ class ResearchConvRud
 {
     public function handle(RailwayResearchTrigger $trigger, int $current_level)
     {
-        $lvl = $current_level+1;
+        $lvl = $current_level + 1;
         match ($lvl) {
             1 => auth()->user()->railway_company->update(['research_coast_max' => 35000]),
             2 => auth()->user()->railway_company->update(['research_coast_max' => 50000]),
@@ -22,7 +22,7 @@ class ResearchConvRud
             ->where('user_railway_id', auth()->user()->railway->id)
             ->first()
             ->update([
-                'current_level' => $lvl
+                'current_level' => $lvl,
             ]);
     }
 }

@@ -10,13 +10,14 @@ use Livewire\Component;
 class ResearchCategoryForm extends Component
 {
     use LivewireAlert;
+
     public RailwayResearchCategory $category;
 
     public string $name = '';
 
     public function mount()
     {
-        if(isset($this->category)) {
+        if (isset($this->category)) {
             $this->name = $this->category->name;
         } else {
             $this->name = '';
@@ -27,7 +28,7 @@ class ResearchCategoryForm extends Component
     {
         try {
             RailwayResearchCategory::create([
-                'name' => $this->name
+                'name' => $this->name,
             ]);
 
             $this->dispatch('closeModal', 'addCategory')->self();
@@ -42,7 +43,7 @@ class ResearchCategoryForm extends Component
     {
         try {
             $this->category->update([
-                'name' => $this->name
+                'name' => $this->name,
             ]);
 
             $this->dispatch('closeModal', 'addCategory')->self();

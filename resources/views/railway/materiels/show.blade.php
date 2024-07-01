@@ -72,7 +72,7 @@
         </div>
         <div class="col-sm-12 col-lg-9">
             <div class="rounded-3 shadow-lg bg-white p-5 mb-10">
-                <div class="d-flex flex-wrap justify-content-center align-items-baseline w-1200px scroll scroll-x">
+                <div class="d-flex align-items-baseline  scroll-x">
                     @if($engine->type_train->value == 'automotrice')
                         @for($i=0; $i <= $engine->technical->nb_wagon -1; $i++)
                             <img src="{{ Storage::url("engines/automotrice/{$engine->slug}-{$i}.gif") }}" alt="">
@@ -83,8 +83,8 @@
                 </div>
             </div>
             <div class="card shadow-sm" x-data="{card_title: 'Technique'}">
-                <div class="card-header bg-bluegrey-600">
-                    <h3 class="card-title text-white fs-2 fw-semibold" x-text="card_title"></h3>
+                <div class="card-header bg-color-{{ $engine->type_transport->value }}">
+                    <h3 class="card-title text-white fs-2 fw-semibold text-white" x-text="card_title"></h3>
                     <div class="card-toolbar">
                         <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
                             <li class="nav-item">

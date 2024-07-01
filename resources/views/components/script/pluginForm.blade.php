@@ -1,23 +1,6 @@
 @push("scripts")
     <script>
         document.addEventListener('livewire:init', () => {
-            document.querySelectorAll('[data-control="datetime"]').forEach(dateTime => {
-                let el = $(`#${dateTime.getAttribute('id')}`);
-                initDateTime();
-
-                el.on('change', function (e) {
-                    console.log(`id: ${dateTime.getAttribute('id')}, value: ${el.val()}`);
-                    @this.set(`${dateTime.getAttribute('id')}`, el.val())
-                })
-
-                function initDateTime() {
-                    el.flatpickr({
-                        enableTime: true,
-                        dateFormat: "Y-m-d H:i",
-                    });
-                }
-            });
-
             document.querySelectorAll('[data-control="time"]').forEach(input => {
                 let el = $(`#${input.getAttribute('id')}`);
                 initTime();
@@ -34,8 +17,7 @@
                         dateFormat: "H:i",
                     });
                 }
-            });
-
+            })
             document.querySelectorAll('[data-control="select2"]').forEach(select => {
                 console.log(select.getAttribute('id'))
                 let el = $(`#${select.getAttribute('id')}`)
@@ -51,6 +33,22 @@
                         allowClear: !el.attr('required'),
                     })
                 }
+            })
+            document.querySelectorAll('[data-control="uiSlider"]').forEach(slider => {
+                noUiSlider.create(slider, {
+                    start: [0],
+                    tooltips: [true],
+                    step: parseInt(slider.dataset.pan),
+                    range: {
+                        "min": parseInt(slider.dataset.min),
+                        "max": parseInt(slider.dataset.max)
+                    }
+                })
+
+                slider.noUiSlider.on('set', values => {
+                    Livewire.dispatch(`${slider.getAttribute('id')}Updated`, values)
+                })
+
             })
         })
     </script>

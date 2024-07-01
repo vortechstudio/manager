@@ -3,20 +3,24 @@
 namespace App\Livewire\User;
 
 use App\Models\User\Railway\UserRailway;
-use App\Models\User\User;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class UserTable extends Component
 {
     use WithPagination;
+
     public bool $action = true;
+
     public string $type = '';
+
     //filter
     public string $search = '';
+
     public string $orderField = 'name';
+
     public string $orderDirection = 'asc';
+
     public int $perPage = 10;
 
     protected $queryString = [
@@ -47,7 +51,8 @@ class UserTable extends Component
                 ->join('research_user', 'user_railways.id', 'research_user.user_railway_id')
                 ->paginate($this->perPage),
         };
-//        dd($users);
+
+        //        dd($users);
         return view('livewire.user.user-table', [
             'users' => $users,
         ]);
