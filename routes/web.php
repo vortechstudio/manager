@@ -120,5 +120,5 @@ Route::get('/offline', function () {
 });
 Route::get('/test', function () {
     $ligne = \App\Models\User\Railway\UserRailwayLigne::find(1);
-    dd((new \App\Services\Models\User\Railway\UserRailwayLigneAction($ligne))->calcDemande());
+    dd((new \App\Services\Models\User\Railway\UserRailwayLigneTarifAction(null, $ligne))->infraCoast());
 });

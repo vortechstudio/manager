@@ -22,7 +22,7 @@
                     <div class="separator separator-2 border-gray-300 my-3"></div>
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         <span class="fw-bold">Intêret</span>
-                        <div class="d-flex flex-column">
+                        <div class="d-flex flex-column gap-2">
                             <div class="d-flex justify-content-end">
                                 <span class="fw-bold me-2">Interet Min:</span>
                                 <span>{{ number_format($banque->interest_min, 2, '.', ' ')." %" }}</span>
@@ -33,8 +33,14 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <span class="fw-bold me-2">Interet Actuel:</span>
-                                <span class="badge badge-primary">{{ number_format($banque->latest_flux->interest, 2, '.', ' ')." %" }}</span>
+                                <span class="badge badge-primary">{{ number_format($banque->latest_flux, 2, '.', ' ')." %" }}</span>
                             </div>
+                            @if($banque->blocked_by)
+                            <div class="d-flex justify-content-end">
+                                <span class="fw-bold me-2">Blocage:</span>
+                                <span class="badge badge-primary">{{ $banque->blocked_by->name }} ({{ $banque->blocked_by_id }})</span>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="separator separator-2 border-gray-300 my-3"></div>
@@ -71,7 +77,7 @@
                 </div>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="update" role="tabpanel">
-                        <form action="{{ route('upload', ['type' => 'banque', 'model' => $banque]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('upload', ['type' => 'banque', 'model' => $banque]) }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <x-form.image-input

@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::connection('railway')->table('railway_gares', function (Blueprint $table) {
-            $table->integer('nb_quai')->nullable();
+        Schema::connection('railway')->table('user_railways', function (Blueprint $table) {
+            $table->integer('bank_note')->default(33);
         });
     }
 
     public function down(): void
     {
-        Schema::connection('railway')->table('railway_gares', function (Blueprint $table) {
-            $table->dropColumn('nb_quai');
+        Schema::connection('railway')->table('user_railways', function (Blueprint $table) {
+            $table->dropColumn('bank_note');
         });
     }
 };

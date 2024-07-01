@@ -198,26 +198,17 @@ class EngineTable extends Component
 
         if (count($shops) > 0) {
             foreach ($shops as $shop) {
-                RailwayEngineShop::updateOrCreate(['id' => $shop['id']], [
-                    'id' => $shop['id'],
-                    'price' => $shop['price'],
-                    'money' => $shop['money'],
-                    'railway_engine_id' => $shop['railway_engine_id'],
-                    'created_at' => $shop['created_at'],
-                    'updated_at' => $shop['updated_at'],
-                ]);
+                if($shop != null) {
+                    RailwayEngineShop::updateOrCreate(['id' => $shop['id']], [
+                        'id' => $shop['id'],
+                        'price' => $shop['price'],
+                        'money' => $shop['money'],
+                        'railway_engine_id' => $shop['railway_engine_id'],
+                        'created_at' => $shop['created_at'],
+                        'updated_at' => $shop['updated_at'],
+                    ]);
+                }
             }
-        }
-
-        foreach ($rentals as $rental) {
-            \DB::connection('railway')->table('railway_engine_rentals')
-                ->updateOrInsert(['id' => $rental['id']], [
-                    'id' => $rental['id'],
-                    'railway_engine_id' => $rental['railway_engine_id'],
-                    'railway_rental_id' => $rental['railway_rental_id'],
-                    'created_at' => $rental['created_at'],
-                    'updated_at' => $rental['updated_at'],
-                ]);
         }
     }
 }

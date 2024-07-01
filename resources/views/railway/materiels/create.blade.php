@@ -174,9 +174,9 @@
                                 <label for="money_shop" class="form-label">Type de Monnaie</label>
                                 <select name="money_shop" id="money_shop" class="form-select" data-control="select2" data-placeholder="---  Selectionner un type de money ---">
                                     <option></option>
-                                    <option value="tpoint">T point</option>
-                                    <option value="argent">Argent</option>
-                                    <option value="euro">Argent Réel</option>
+                                    @foreach(\Spatie\LaravelOptions\Options::forEnum(\App\Enums\Railway\Engine\EngineMoneyEnum::class)->toArray() as $item)
+                                        <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <x-form.input

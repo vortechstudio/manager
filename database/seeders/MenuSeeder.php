@@ -76,33 +76,29 @@ class MenuSeeder extends Seeder
         Menu::set('railway_manager_app', 'Infrastructure', '/research/infrastructure', 53);
         Menu::set('railway_manager_app', 'Matériels', '/research/train', 53);
 
-        \App\Models\Config\Menu::set('railway_manager_app', 'Services', '#', 'fa-solid fa-bell-concierge');
-        Menu::set('railway_manager_app', 'Partenariat', '/services/partner', 58);
-        Menu::set('railway_manager_app', 'Infrastructures', '/services/infrastructure', 58);
-        Menu::set('railway_manager_app', 'Service à bord', '/services/board', 58);
-        Menu::set('railway_manager_app', 'Service en gare', '/services/station', 58);
+        \App\Models\Config\Menu::set('railway_manager_app', 'Services', '/services', 'fa-solid fa-bell-concierge');
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Finances', '#', 'fa-solid fa-building-columns');
-        Menu::set('railway_manager_app', 'Banques', '/finance/bank', 62);
-        Menu::set('railway_manager_app', 'Compatibilite', '/finance/compatibility', 62);
-        Menu::set('railway_manager_app', 'Finance', '/finance', 62);
+        Menu::set('railway_manager_app', 'Banques', '/finance/bank', 58);
+        Menu::set('railway_manager_app', 'Comptabilité', '/finance/comptabilite', 58);
+        Menu::set('railway_manager_app', 'Finance', '/finance', 58);
 
         \App\Models\Config\Menu::set('railway_manager_app', 'Bureau du marketing', '#', 'fa-solid fa-lightbulb');
-        Menu::set('railway_manager_app', 'Audit Interne', '/marketing/internalaudit', 66);
-        Menu::set('railway_manager_app', 'Gestion des tarifs', '/marketing/pricing', 66);
-        Menu::set('railway_manager_app', 'Marketing', '/marketing', 66);
+        Menu::set('railway_manager_app', 'Audit Interne', '/marketing/internalaudit', 62);
+        Menu::set('railway_manager_app', 'Gestion des tarifs', '/marketing/pricing', 62);
+        Menu::set('railway_manager_app', 'Marketing', '/marketing', 62);
 
         \App\Models\Config\Menu::set('account_head', 'Accueil', '/', 'fa-solid fa-house');
 
         \App\Models\Config\Menu::set('account_head', 'Comptes', '#', 'fa-regular fa-circle-user');
-        Menu::set('account_head', 'Informations de compte', '/account', 71);
-        Menu::set('account_head', 'Historique du compte', '/account/history', 71);
-        Menu::set('account_head', 'Historique de connexion', '/account/loginStatus', 71);
-        Menu::set('account_head', 'Mes données personnels', '/account/rgpd', 71);
+        Menu::set('account_head', 'Informations de compte', '/account', 67);
+        Menu::set('account_head', 'Historique du compte', '/account/history', 67);
+        Menu::set('account_head', 'Historique de connexion', '/account/loginStatus', 67);
+        Menu::set('account_head', 'Mes données personnels', '/account/rgpd', 67);
 
         \App\Models\Config\Menu::set('account_head', 'Services & Options', '#', 'fa-solid fa-gear');
-        Menu::set('account_head', 'Etat des services & Options', '/services', 76);
-        Menu::set('account_head', 'Sécuriser mon compte (MFA)', '/services/mfa', 76);
+        Menu::set('account_head', 'Etat des services & Options', '/services', 72);
+        Menu::set('account_head', 'Sécuriser mon compte (MFA)', '/services/mfa', 72);
 
         \App\Models\Config\Menu::set('account_head', 'Centre de support', '#', 'fa-solid fa-headset');
 

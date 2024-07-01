@@ -40,6 +40,7 @@ class SystemCreateCommand extends Command
             'ligne' => $this->createLigne(),
             'level' => $this->generateLevel(),
             'card' => $this->createCard(),
+            'stations' => $this->exctractStation()
         };
     }
 
@@ -164,8 +165,9 @@ class SystemCreateCommand extends Command
         );
 
         $price_maintenance = (new EngineAction)->calcPriceMaintenance(
-            (new EngineAction())->calcDurationMaintenance($essieux)->diffInMinutes(now()->startOfDay()),
-            $val_essieux
+            type_transport: $type_transport,
+            type_train: $type_train,
+            type_motor: $type_motor,
         );
 
         $price_location = (new EngineAction)->calcPriceLocation($price_achat);
@@ -412,5 +414,19 @@ class SystemCreateCommand extends Command
     private function createCard(): void
     {
         (new AdvantageCardAction())->generate();
+    }
+
+    private function exctractStation()
+    {
+        $file_url = \Storage::url('data/stations.csv');
+        $file = fopen($file_url, 'r');
+        $csv = [];
+        while(($line = fgetcsv($file)) !== FALSE) {
+            $csv[] = $line;
+        }
+
+        fclose($file);
+        $json = json_encode($csv);
+        \Storage::put('data/stations.json', $json);
     }
 }

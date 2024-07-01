@@ -4,6 +4,8 @@ namespace App\Livewire\Railway\Ligne;
 
 use App\Actions\ErrorDispatchHandle;
 use App\Models\Railway\Ligne\RailwayLigne;
+use App\Models\Railway\Ligne\RailwayLigneStation;
+use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,6 +21,9 @@ class LigneTable extends Component
     public string $orderDirection = 'ASC';
 
     public int $perPage = 10;
+
+    public int $railway_hub_id = 0;
+    public string $type_ligne = '';
 
     public string $status = '';
 
@@ -86,13 +91,12 @@ class LigneTable extends Component
 
     public function export(): void
     {
-        $beta_lignes = RailwayLigne::with('stations')->where('status', 'beta')->get()->toJson();
-        $prod_lignes = RailwayLigne::with('stations')->where('status', 'production')->get()->toJson();
+        $lignes = RailwayLigne::all()->toJson();
+        $stations = RailwayLigneStation::all()->toJson();
 
         try {
-            $filename = 'railway_lignes.json';
-            \Storage::put('data/beta/'.$filename, $beta_lignes);
-            \Storage::put('data/production/'.$filename, $prod_lignes);
+            \Storage::put('data/railway_lignes.json', $lignes);
+            \Storage::put('data/railway_ligne_stations.json', $stations);
             $this->alert('success', 'Export Effectuer !');
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
@@ -102,22 +106,19 @@ class LigneTable extends Component
 
     public function import(): void
     {
-        $lignes = $this->getLignesBasedOnStatus();
+        $lignes = json_decode(\Storage::get('data/railway_lignes.json'), true);
+        $stations = json_decode(\Storage::get('data/railway_ligne_stations.json'), true);
 
         foreach ($lignes as $ligne) {
-            $l = $this->createLigne($ligne);
-            $this->createStations($l, $ligne);
+            $this->createLigne($ligne);
+        }
+
+        foreach ($stations as $station) {
+            $this->createStations($station);
         }
 
         $this->alert('success', 'Import Effectuer !');
         $this->dispatch('closeModal', 'import');
-    }
-
-    private function getLignesBasedOnStatus()
-    {
-        $file = $this->status == 'beta' ? 'data/beta/railway_lignes.json' : 'data/production/railway_lignes.json';
-
-        return json_decode(\Storage::get($file), true);
     }
 
     public function render()
@@ -125,14 +126,16 @@ class LigneTable extends Component
         return view('livewire.railway.ligne.ligne-table', [
             'lignes' => RailwayLigne::with('start', 'end', 'stations', 'hub')
                 ->when($this->search, fn ($query, $search) => $query->where('name', 'like', "%{$search}%"))
+                ->when($this->railway_hub_id, fn(Builder $query) => $query->where('railway_hub_id', $this->railway_hub_id))
+                ->when($this->type_ligne, fn(Builder $query) => $query->where('type', $this->type_ligne))
                 ->orderBy($this->orderField, $this->orderDirection)
                 ->paginate($this->perPage),
         ]);
     }
 
-    private function createLigne(mixed $ligne)
+    private function createLigne(mixed $ligne): void
     {
-        return RailwayLigne::updateOrCreate(['id' => $ligne['id']], [
+        RailwayLigne::updateOrCreate(['id' => $ligne['id']], [
             'name' => $ligne['name'],
             'price' => $ligne['price'],
             'distance' => $ligne['distance'],
@@ -146,15 +149,14 @@ class LigneTable extends Component
         ]);
     }
 
-    private function createStations(RailwayLigne $l, mixed $ligne): void
+    private function createStations(mixed $station): void
     {
-        foreach ($ligne['stations'] as $station) {
-            $l->stations()->updateOrCreate(['id' => $station['id']], [
-                'time' => $station['time'],
-                'distance' => $station['distance'],
-                'railway_gare_id' => $station['railway_gare_id'],
-                'railway_ligne_id' => $l->id,
-            ]);
-        }
+        RailwayLigneStation::updateOrCreate(['id' => $station['id']], [
+            'id' => $station['id'],
+            'distance' => $station['distance'],
+            'time' => $station['time'],
+            'railway_gare_id' => $station['railway_gare_id'],
+            'railway_ligne_id' => $station['railway_ligne_id']
+        ]);
     }
 }
