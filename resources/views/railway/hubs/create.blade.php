@@ -4,7 +4,7 @@
 @endsection
 
 @section("content")
-    <form action="{{ route('railway.hubs.store') }}" method="POST" x-data="{hub_show: ''}">
+    <form action="{{ route('railway.hubs.store') }}" method="POST" x-data="{hub_show: '', manual: false}">
         @csrf
         <x-base.toolbar
             title="Création d'une Gare"
@@ -38,6 +38,33 @@
                             name="nb_quai"
                             label="Nombre de quai"
                             required="true" />
+
+                        <div class="row" x-show="manual">
+                            <div class="col-6">
+                                <div class="mb-10">
+                                    <label class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude" wire:model="latitude" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-10">
+                                    <label class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude" wire:model="longitude" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-10">
+                                    <label class="form-label">Ville</label>
+                                    <input type="text" class="form-control" id="city" name="city" wire:model="city" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-10">
+                                    <label class="form-label">Pays</label>
+                                    <input type="text" class="form-control" id="pays" name="pays" wire:model="pays" />
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="d-flex flex-column">
                             <span class="form-label mb-2">Transport accepté</span>
@@ -74,6 +101,12 @@
             <div class="col-sm-12 col-lg-3">
                 <div class="card shadow-sm">
                     <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="manual" x-model="manual" value="true" id="manual" />
+                            <label class="form-check-label" for="manual">
+                                Mode Manuel
+                            </label>
+                        </div>
                         <div class="" x-show="hub_show === 'large' || hub_show === 'terminus'">
                             <x-form.switches
                                 name="is_hub"

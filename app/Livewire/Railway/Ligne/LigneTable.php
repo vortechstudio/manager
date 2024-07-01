@@ -151,7 +151,7 @@ class LigneTable extends Component
 
     private function createStations(mixed $station): void
     {
-        RailwayLigneStation::updateOrCreate(['id', $station['id']], [
+        RailwayLigneStation::updateOrCreate(['id' => $station['id']], [
             'id' => $station['id'],
             'distance' => $station['distance'],
             'time' => $station['time'],

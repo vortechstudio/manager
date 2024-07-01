@@ -194,7 +194,7 @@ class UserRailwayLigneAction
             'type_tarif' => 'unique',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifSecond(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('unique'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
     }
@@ -206,7 +206,7 @@ class UserRailwayLigneAction
             'type_tarif' => 'first',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifFirst(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('first'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
         $this->ligne->tarifs()->create([
@@ -214,35 +214,19 @@ class UserRailwayLigneAction
             'type_tarif' => 'second',
             'demande' => $this->calcDemande(),
             'offre' => $this->calcOffre(),
-            'price' => $this->calcTarifSecond(),
+            'price' => (new UserRailwayLigneTarifAction(null, $this->ligne))->calculatePriceDaily('second'),
             'user_railway_ligne_id' => $this->ligne->id,
         ]);
     }
 
     public function calcDemande()
     {
-        $latestTarif = $this->ligne->tarifs()->orderBy('date_tarif', 'desc');
-        if($latestTarif->exists()) {
-            if(fake()->boolean()) {
-                $sum_offer = $latestTarif->sum('demande') + rand(1,100);
-            } else {
-                $sum_offer = $latestTarif->sum('demande') - rand(1,100);
-            }
-        } else {
-            $sum_offer = rand(100,600);
-        }
-
-        $prix_kilometer = RailwaySetting::where('name', 'price_kilometer')->first()->value;
-        $prix_electrique = RailwaySetting::where('name', 'price_electricity')->first()->value;
-        $energie = ($this->ligne->railwayLigne->distance * $prix_kilometer) + ($this->ligne->railwayLigne->time_min / 60) * ($prix_electrique) / $this->ligne->user->railway_company->frais;
-        $demande = ($sum_offer * $this->ligne->user->railway_company->tarification) * ($energie / 5) / $this->ligne->railwayLigne->stations()->count();
-
-        return intval($demande);
+        return rand($this->ligne->min_passengers, $this->ligne->max_passengers);
     }
 
     private function calcOffre()
     {
-        return $this->ligne->userRailwayEngine->railwayEngine->technical->nb_marchandise;
+        return $this->ligne->userRailwayEngine->siege;
     }
 
     private function calcTarifFirst()

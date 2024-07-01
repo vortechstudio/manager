@@ -29,36 +29,53 @@ class HubController extends Controller
             'nb_quai' => 'required',
         ]);
 
-        $sncf = new SncfService();
+        if($request->has('manual')) {
+            $gare = RailwayGare::create([
+                'uuid' => \Str::uuid(),
+                'name' => $request->get('name'),
+                'type' => $request->get('type'),
+                'latitude' => $request->get('latitude'),
+                'longitude' => $request->get('longitude'),
+                'city' => $request->get('city'),
+                'pays' => $request->get('pays'),
+                'freq_base' => (new GareAction())->getFrequence($request->get('type')),
+                'hab_city' => (new GareAction())->getHabitant($request->get('type'), (new GareAction())->getFrequence($request->get('type'))),
+                'transports' => json_encode($request->get('transports')),
+                'equipements' => json_encode((new GareAction)->defineEquipements($request->get('type'))),
+                'nb_quai' => $request->get('nb_quai'),
+            ]);
+        } else {
+            $sncf = new SncfService();
 
-        if(RailwayGare::where('name', 'like', "%{$request->get('name')}%")->exists()) {
-            toastr()
-                ->addError("La gare existe déjà !");
+            if(RailwayGare::where('name', 'like', "%{$request->get('name')}%")->exists()) {
+                toastr()
+                    ->addError("La gare existe déjà !");
 
-            return redirect()->back();
+                return redirect()->back();
+            }
+
+            if ($sncf->searchGare($request->get('name')) === null) {
+                toastr()
+                    ->addError("La gare n'existe pas");
+
+                return redirect()->back();
+            }
+
+            $gare = RailwayGare::create([
+                'uuid' => \Str::uuid(),
+                'name' => $request->get('name'),
+                'type' => $request->get('type'),
+                'latitude' => $sncf->searchGare($request->get('name'))['latitude'],
+                'longitude' => $sncf->searchGare($request->get('name'))['longitude'],
+                'city' => $sncf->searchGare($request->get('name'))['city'],
+                'pays' => $sncf->searchGare($request->get('name'))['pays'],
+                'freq_base' => $sncf->searchFreq($request->get('name'))['freq'] ?? 0,
+                'hab_city' => (new GareAction())->getHabitant($request->get('type'), $sncf->searchFreq($request->get('name'))['freq']),
+                'transports' => json_encode($request->get('transports')),
+                'equipements' => json_encode((new GareAction)->defineEquipements($request->get('type'))),
+                'nb_quai' => $request->get('nb_quai'),
+            ]);
         }
-
-        if ($sncf->searchGare($request->get('name')) === null) {
-            toastr()
-                ->addError("La gare n'existe pas");
-
-            return redirect()->back();
-        }
-
-        $gare = RailwayGare::create([
-            'uuid' => \Str::uuid(),
-            'name' => $request->get('name'),
-            'type' => $request->get('type'),
-            'latitude' => $sncf->searchGare($request->get('name'))['latitude'],
-            'longitude' => $sncf->searchGare($request->get('name'))['longitude'],
-            'city' => $sncf->searchGare($request->get('name'))['city'],
-            'pays' => $sncf->searchGare($request->get('name'))['pays'],
-            'freq_base' => $sncf->searchFreq($request->get('name'))['freq'],
-            'hab_city' => (new GareAction())->getHabitant($request->get('type'), $sncf->searchFreq($request->get('name'))['freq']),
-            'transports' => json_encode($request->get('transports')),
-            'equipements' => json_encode((new GareAction)->defineEquipements($request->get('type'))),
-            'nb_quai' => $request->get('nb_quai'),
-        ]);
 
         /*$wt = new Weather();
         $weather = $wt->getCurrentByCord($gare->latitude, $gare->longitude);
