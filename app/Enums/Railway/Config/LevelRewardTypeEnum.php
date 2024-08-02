@@ -53,7 +53,7 @@ enum LevelRewardTypeEnum: string
             self::ARGENT => \Storage::url('icons/railway/argent.png'),
             self::TPOINT => \Storage::url('icons/railway/tpoint.png'),
             self::RD_RATE => \Storage::url('icons/railway/rate_research.png'),
-            self::RD_COAST => \Storage::url('icons/railway/research.png'),
+            self::RD_COAST => \Storage::url('icons/railway/coast_research.png'),
             self::AUDIT_INT => \Storage::url('icons/railway/audit_int.png'),
             self::AUDIT_EXT => \Storage::url('icons/railway/audit_ext.png'),
             self::SIMULATION => \Storage::url('icons/railway/simulation.png'),

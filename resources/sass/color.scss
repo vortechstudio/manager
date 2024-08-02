@@ -5,6 +5,7 @@ $transilien-color: #83BF00;
 $eva-color: #010830;
 $eva-color-arrival: #08CF85;
 $eva-color-departure: #1C3A83;
+$other-color: #333333;
 
 $ter-color-inverse: #013672;
 $tgv-color-inverse: #701c30;
@@ -13,12 +14,14 @@ $transilien-color-inverse: #557c01;
 $eva-color-inverse: #011379;
 $eva-color-arrival-inverse: #068d5b;
 $eva-color-departure-inverse: #102048;
+$other-color-inverse: #bdbdbd;
 
 $type_colors: info, primary, success, danger;
 $types: ter $ter-color $ter-color-inverse,
 tgv $tgv-color $tgv-color-inverse,
 intercity $ic-color $ic-color-inverse,
-transilien $transilien-color $transilien-color-inverse;
+transilien $transilien-color $transilien-color-inverse,
+other $other-color $other-color-inverse;
 
 @each $type in $type_colors {
     .bg-#{$type} {

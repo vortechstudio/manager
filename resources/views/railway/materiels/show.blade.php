@@ -24,7 +24,7 @@
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <span class="fw-bold">Type de Transport</span>
                             <div class="d-flex flex-row align-items-center">
-                                <div class="symbol symbol-25px symbol-2by3 me-2">
+                                <div class="symbol symbol-25px me-2">
                                     <img
                                         src="{{ (new \App\Actions\Railway\EngineSelectAction())->selectorTypeTransport($engine->type_transport->value, 'image') }}"
                                         alt="{{ (new \App\Actions\Railway\EngineSelectAction())->selectorTypeTransport($engine->type_transport->value, 'value') }}">

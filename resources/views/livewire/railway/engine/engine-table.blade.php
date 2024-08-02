@@ -13,6 +13,7 @@
         <a href="{{ route('railway.materiels.create') }}" class="btn btn-outline btn-outline-primary"><i class="fa-solid fa-plus-circle me-3"></i> Nouveau Matériel</a>
         <a wire:click="export" class="btn btn-outline btn-outline-secondary "><i class="fa-solid fa-file-upload me-3"></i> Exporter</a>
         <a data-bs-toggle="modal" href="#import" class="btn btn-outline btn-outline-secondary"><i class="fa-solid fa-file-download me-3"></i> Importer</a>
+        <a wire:click="remapPrice" class="btn btn-outline btn-outline-secondary"><i class="fa-solid fa-refresh me-3"></i> Rafraichir les tarifs</a>
     </div>
     <div class="table-responsive">
         <table class="table table-row-bordered table-row-gray-300 shadow-lg bg-info text-light rounded-4 table-striped gap-5 gs-5 gy-5 gx-5 align-middle">
@@ -22,6 +23,7 @@
                 <x-base.table-header :direction="$orderDirection" name="name" :field="$orderField">Désignation</x-base.table-header>
                 <x-base.table-header :direction="$orderDirection" name="type_train" :field="$orderField">Type de matériel</x-base.table-header>
                 <x-base.table-header :direction="$orderDirection" name="active" :field="$orderField">Status</x-base.table-header>
+                <x-base.table-header :direction="$orderDirection" name="achat" :field="$orderField">Prix d'achat</x-base.table-header>
                 <th></th>
             </tr>
             </thead>
@@ -33,9 +35,7 @@
                         <td>{{ $engine->id }}</td>
                         <td>
                             <div class="d-flex flex-row align-items-center">
-                                <div class="symbol symbol-30px symbol-2by3 me-5">
-                                    <img src="{{ $engine->getFirstImage($engine->id) }}" alt="{{ $engine->name }}">
-                                </div>
+                                <img src="{{ $engine->getFirstImage($engine->id) }}" class="img-fluid w-70px me-3" alt="{{ $engine->name }}">
                                 <div class="d-flex flex-column">
                                     <span class="fw-bolder">{{ $engine->name }}</span>
                                 </div>
@@ -45,6 +45,7 @@
                         <td>
                             <span class="badge badge-light-{{ $engine->active ? 'success' : 'danger' }}">{{ $engine->active ? 'Active' : 'Inactif' }}</span>
                         </td>
+                        <td>{{ eur($engine->price->achat) }}</td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('railway.materiels.show', $engine) }}" class="btn btn-icon btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Gérer le matériel">
