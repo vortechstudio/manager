@@ -3,6 +3,7 @@
 namespace App\Livewire\Railway\Engine;
 
 use App\Actions\ErrorDispatchHandle;
+use App\Actions\Railway\EngineAction;
 use App\Models\Railway\Engine\RailwayEngine;
 use App\Models\Railway\Engine\RailwayEnginePrice;
 use App\Models\Railway\Engine\RailwayEngineShop;
@@ -133,6 +134,30 @@ class EngineTable extends Component
         } catch (\Exception $exception) {
             (new ErrorDispatchHandle())->handle($exception);
             $this->alert('error', 'Une erreur à eu lieu');
+        }
+    }
+
+    public function remapPrice()
+    {
+        foreach (RailwayEngine::all() as $engine) {
+            $valeurEssieux = (new EngineAction())->getDataCalcForEssieux(
+                essieux: $engine->technical->essieux,
+                automotrice: $engine->type_train->value == 'automotrice',
+                nbWagon: $engine->technical->nb_wagon
+            );
+            $calcPrice = (new EngineAction)->calcTarifAchat(
+                type_train: $engine->type_train->value,
+                type_energy: $engine->type_energy->value,
+                type_motor: $engine->technical->motor->value,
+                type_marchandise: $engine->technical->marchandise->value,
+                valEssieux: $valeurEssieux,
+                nbWagon: $engine->technical->nb_wagon,
+                nb_marchandise: $engine->technical->nb_marchandise
+            );
+
+            $engine->price->update(['achat' => $calcPrice]);
+
+            $this->alert('success', "Rafraichissement terminer");
         }
     }
 

@@ -18,7 +18,7 @@ class EngineAction extends EngineSelectAction
      * @param  int  $nbWagon  The number of wagons (default: 1)
      * @return float|int The calculated purchase price
      */
-    public function calcTarifAchat(string $type_train, string $type_energy, string $type_motor, string $type_marchandise, float|int $valEssieux, int $nbWagon = 1): float|int
+    public function calcTarifAchat(string $type_train, string $type_energy, string $type_motor, string $type_marchandise, float|int $valEssieux, int $nbWagon = 1, int $nb_marchandise = 0): float|int
     {
         $train = match ($type_train) {
             'motrice' => 10000,
@@ -41,11 +41,19 @@ class EngineAction extends EngineSelectAction
             $wagon = 0;
         }
 
+        if($nb_marchandise >= 0 && $nb_marchandise <= 99) {
+            $coef_marchandise = $nb_marchandise / 10;
+        } elseif($nb_marchandise >= 100 && $nb_marchandise <= 999) {
+            $coef_marchandise = $nb_marchandise / 100;
+        } else {
+            $coef_marchandise = $nb_marchandise / 1000;
+        }
+
         $calc = ($train + $energy + $wagon + $valEssieux) *
             self::selectorTypeTrain($type_train, 'coef') *
             self::selectorTypeEnergy($type_energy, 'coef') *
             self::selectorTypeMotor($type_motor, 'coef') *
-            self::selectorTypeMarchandise($type_marchandise, 'coef');
+            self::selectorTypeMarchandise($type_marchandise, 'coef') / $coef_marchandise;
 
         return $calc;
     }

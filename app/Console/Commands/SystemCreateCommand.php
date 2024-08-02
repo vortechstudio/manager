@@ -161,7 +161,8 @@ class SystemCreateCommand extends Command
             $type_motor,
             $type_marchandise,
             (new EngineAction)->getDataCalcForEssieux($essieux, $type_train == 'automotrice', $type_train == 'automotrice' ? $nb_wagon : 1),
-            $nb_wagon
+            $nb_wagon,
+            $nb_marchandise
         );
 
         $price_maintenance = (new EngineAction)->calcPriceMaintenance(

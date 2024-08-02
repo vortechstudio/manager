@@ -54,7 +54,8 @@ class MaterielController extends Controller
             type_motor: $request->get('type_motor'),
             type_marchandise: $request->get('type_marchandise'),
             valEssieux: $valeurEssieux,
-            nbWagon: $request->get('type_train') == 'automotrice' ? $request->get('nb_wagon') : 1
+            nbWagon: $request->get('type_train') == 'automotrice' ? $request->get('nb_wagon') : 1,
+            nb_marchandise: $request->get('nb_marchandise'),
         );
 
         $price_maintenance = (new EngineAction())->calcPriceMaintenance(
